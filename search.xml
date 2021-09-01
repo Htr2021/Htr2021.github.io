@@ -6,9 +6,9 @@
     <content><![CDATA[<h2 id="Hexo在github上建站"><a href="#Hexo在github上建站" class="headerlink" title="Hexo在github上建站"></a>Hexo在github上建站</h2><h3 id="建站缘由"><a href="#建站缘由" class="headerlink" title="建站缘由"></a>建站缘由</h3><blockquote>
 <p>故事的起因是这样的，本本嘛，作为一个刚入职的程序猿，在查阅资料的时候，邂逅了<a href="https://www.cnblogs.com/wmyskxz/">我没有三颗心脏</a>的博客，当场就被博客首页的效果吸引住了，然后就有了一种我也想拥有这么优美的界面的想法。</p>
 <p>幸运的是，我在博客里找到了是个开源项目，开源项目我熟呀，clone一下不就可以膜拜大佬的代码了么（可以直接运行了么）然后我到了<a href="https://volantis.js.org/">Volantis官网</a></p>
-<p>那个时候的我，还是不太清楚hexo和主题的关系的，在没有看明白hexo是个什么东西的情况下运行了volantis，然后…，噩梦开始：node一直报错，我开始怀疑github仓库是不是少文件。。。</p>
+<p>那个时候的我，还是不太清楚hexo和主题的关系的，在没有看明白hexo是个什么东西的情况下运行了volantis，然后…，噩梦开始：node一直报错，我开始怀疑我clone的github仓库是不是少文件。。。</p>
 <p>花了好久，我才知道主题的文档需要先阅读<a href="https://hexo.io/zh-cn/docs/">Hexo文档</a>的，毕竟主题依赖于hexo…</p>
-<p>再然后，我就用了<a href="https://github.com/Shen-Yu/hexo-theme-ayer">Ayer主题</a>一切顺利，成功搭建起来，我写下了我的第一篇博客。</p>
+<p>再然后，我就用了<a href="https://github.com/Shen-Yu/hexo-theme-ayer">Ayer主题</a>一切顺利，成功搭建起来，于是我写下了我的第一篇博客。</p>
 </blockquote>
 <h3 id="建站过程"><a href="#建站过程" class="headerlink" title="建站过程"></a>建站过程</h3><p><a href="https://www.cnblogs.com/trista222/p/8017300.html">搭建过程</a></p>
 <p><a href="https://hexo.io/zh-cn/docs/">Hexo文档</a></p>
@@ -32,8 +32,20 @@
 </blockquote>
 </li>
 </ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">leancloud:  </span><br><span class="line">    enable: true  </span><br><span class="line">    app_id:  # </span><br><span class="line">    app_key: #</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">leancloud:</span><br><span class="line">    enable: true</span><br><span class="line">    app_id:  # </span><br><span class="line">    app_key: #</span><br></pre></td></tr></table></figure>
 <p>嗯，问题找到了，然后就需要去<a href="https://github.com/xCss/Valine">Valine</a>去注册用户，按照<a href="https://valine.js.org/quickstart.html">文档</a>的操作，把<strong>app_id</strong>和<strong>app_key</strong>填上就好了</p>
 ]]></content>
+      <categories>
+        <category>建站</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>ayer</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>test</title>
+    <url>/2021/09/01/test/</url>
+    <content><![CDATA[]]></content>
   </entry>
 </search>

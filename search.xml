@@ -34,6 +34,12 @@
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">leancloud:</span><br><span class="line">    enable: true</span><br><span class="line">    app_id:  # </span><br><span class="line">    app_key: #</span><br></pre></td></tr></table></figure>
 <p>嗯，问题找到了，然后就需要去<a href="https://github.com/xCss/Valine">Valine</a>去注册用户，按照<a href="https://valine.js.org/quickstart.html">文档</a>的操作，把<strong>app_id</strong>和<strong>app_key</strong>填上就好了</p>
+<ol start="4">
+<li><p>hexo默认的文章全部存在\source_posts\一个文件夹下面，文章一多就不方便管理。<br>解决方法<a href="https://blog.waitung.cn/2018/06/18/hexo-arrange.html">对hexo的文章整理</a></p>
+</li>
+<li><p>hexo+markdown 导入图片失败<br>解决方法<a href="https://blog.csdn.net/qq_43401552/article/details/104805466">Hexo+markdown之引用图片方法汇集</a></p>
+</li>
+</ol>
 ]]></content>
       <categories>
         <category>建站</category>
@@ -41,6 +47,77 @@
       <tags>
         <tag>hexo</tag>
         <tag>ayer</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>RabbitMQ入门-2</title>
+    <url>/2021/09/02/RabbitMQ%E5%85%A5%E9%97%A8-2/</url>
+    <content><![CDATA[<h3 id="RabbitMQ整体模型"><a href="#RabbitMQ整体模型" class="headerlink" title="RabbitMQ整体模型"></a>RabbitMQ整体模型</h3><p>RabbitMQ整体上说，是一个生产者消费者模型，负责接收，存储和转发消息，从计算机的角度来说，更像一个交换机模型</p>
+<blockquote>
+<p><img src="img.png" alt="RabbitMQ整体模型"></p>
+</blockquote>
+<h3 id="RabbitMQ概念介绍"><a href="#RabbitMQ概念介绍" class="headerlink" title="RabbitMQ概念介绍"></a>RabbitMQ概念介绍</h3><p>Producer(生产者):生产者创建消息，发送消息体(payload)和标签(label)</p>
+<blockquote>
+<p>消息体：一般是带有业务逻辑的json<br>标签：交换器名称和路由键</p>
+</blockquote>
+<p>Consumer(消费者)：消费者值消费消息体，消息路由的时候，标签会被丢弃，消费者不知道消息的生产者是谁<br>Broker(消息队列的服务节点)：对外就是消息队列</p>
+<blockquote>
+<p><img src="img_1.png" alt="消息队列的运转过程"></p>
+</blockquote>
+<p>Queue(队列)：RabbitMQ内部对象，存储信息</p>
+<blockquote>
+<p>RabbitMQ 的生产者生产消息并最终投递到队列中，消费者可以从队列中获取消息并消费。<br>多个消费者可以订阅同一个队列，这时队列中的消息会被平均分摊（Round-Robin，即轮询）<br>RabbitMQ 不支持队列层面的广播消费，如果需要广播消费，需要在其上进行二次开发，处理逻辑会变得异常复杂，同时也不建议这么做</p>
+</blockquote>
+<p>Exchange(交换器)：</p>
+<blockquote>
+<p>生产者将消息发送到 Exchange，由交换器将消息路由到一个或者多个队列中。如果路由不到，或许会返回给生产者，或许直接丢弃。<br><img src="img_1.png" alt="交换器"></p>
+</blockquote>
+<p>Binding</p>
+<h4 id="交换器类型"><a href="#交换器类型" class="headerlink" title="交换器类型"></a>交换器类型</h4><p>RabbitMQ 常用的交换器类型有 fanout、direct、topic、headers 这四种。AMQP 协议里还提到另外两种类型：System 和自定义，这里不予描述。</p>
+<ol>
+<li>fanout<br>它会把所有发送到该交换器的消息路由到所有与该交换器绑定的队列中。</li>
+<li>direct</li>
+<li>topic</li>
+<li>headers</li>
+</ol>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>RabbitMQ</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>RabbitMQ初体验-1</title>
+    <url>/2021/09/02/RabbitMQ%E5%88%9D%E4%BD%93%E9%AA%8C-1/</url>
+    <content><![CDATA[<h3 id="什么是消息中间件"><a href="#什么是消息中间件" class="headerlink" title="什么是消息中间件"></a>什么是消息中间件</h3><p>分布式系统中的一种消息传递装置</p>
+<h4 id="传递模式"><a href="#传递模式" class="headerlink" title="传递模式"></a>传递模式</h4><p>发送者将消息发送给消息服务器，消息服务器将消息存放在若干队列中，在合适的时候再将消息转发给接收者。</p>
+<ol>
+<li>点对点模式<blockquote>
+<p>点对点模式是基于队列的，生产者发送信息到队列，消费者从队列接受消息!<br><img src="iqlde9d8x0.jpg" alt="点对点"><br><strong>特点</strong>： 不可重复消费</p>
+</blockquote>
+</li>
+<li>发布/订阅模式<blockquote>
+<p>消息发布者把消息发布到某个主题，消息订阅者从主题获取消息<br><img src="k1o8gjrymm.jpg" alt="多订阅"><br><strong>特点</strong>：可重复消费</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h4><ol>
+<li><strong>解耦</strong>：在编辑代码的时候，不需要考虑另一边怎么设计，直接和消息队列交互就可以</li>
+<li><strong>冗余（存储）</strong>：需要处理系统明确的表示消息被处理之后，消息才能被消息队列删除</li>
+<li><strong>拓展性</strong>：解耦之后拓展性自然提高</li>
+<li><strong>削峰</strong>：起到缓冲的作用，降低服务器的峰值的需求</li>
+<li><strong>可恢复性</strong>：生产者或消费者失效时，其它系统任然可以运行</li>
+<li><strong>顺序保证</strong>：消息队列确保一定程度上的顺序性</li>
+<li><strong>异步通信</strong>：后台任务或者异步任务，起到监听的效果</li>
+</ol>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>RabbitMQ</tag>
       </tags>
   </entry>
 </search>

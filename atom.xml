@@ -3,11 +3,11 @@
   <title>光阴碎片</title>
   
   
-  <link href="http://example.com/atom.xml" rel="self"/>
+  <link href="https://htr2021.github.io/atom.xml" rel="self"/>
   
-  <link href="http://example.com/"/>
-  <updated>2021-09-01T08:57:37.909Z</updated>
-  <id>http://example.com/</id>
+  <link href="https://htr2021.github.io/"/>
+  <updated>2021-09-01T09:00:20.359Z</updated>
+  <id>https://htr2021.github.io/</id>
   
   <author>
     <name>Htr</name>
@@ -17,22 +17,9 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>test</title>
-    <link href="http://example.com/2021/09/01/test/"/>
-    <id>http://example.com/2021/09/01/test/</id>
-    <published>2021-09-01T08:57:37.000Z</published>
-    <updated>2021-09-01T08:57:37.909Z</updated>
-    
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
     <title>Hello World</title>
-    <link href="http://example.com/2021/09/01/hello-world/"/>
-    <id>http://example.com/2021/09/01/hello-world/</id>
+    <link href="https://htr2021.github.io/2021/09/01/hello-world/"/>
+    <id>https://htr2021.github.io/2021/09/01/hello-world/</id>
     <published>2021-09-01T08:57:37.000Z</published>
     <updated>2021-09-01T09:00:20.359Z</updated>
     
@@ -47,12 +34,12 @@
     
     
     
-    <category term="建站" scheme="http://example.com/categories/%E5%BB%BA%E7%AB%99/"/>
+    <category term="建站" scheme="https://htr2021.github.io/categories/%E5%BB%BA%E7%AB%99/"/>
     
     
-    <category term="hexo" scheme="http://example.com/tags/hexo/"/>
+    <category term="hexo" scheme="https://htr2021.github.io/tags/hexo/"/>
     
-    <category term="ayer" scheme="http://example.com/tags/ayer/"/>
+    <category term="ayer" scheme="https://htr2021.github.io/tags/ayer/"/>
     
   </entry>
   

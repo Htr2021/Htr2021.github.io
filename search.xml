@@ -56,29 +56,59 @@
 <blockquote>
 <p><img src="img.png" alt="RabbitMQ整体模型"></p>
 </blockquote>
-<h3 id="RabbitMQ概念介绍"><a href="#RabbitMQ概念介绍" class="headerlink" title="RabbitMQ概念介绍"></a>RabbitMQ概念介绍</h3><p>Producer(生产者):生产者创建消息，发送消息体(payload)和标签(label)</p>
+<h3 id="RabbitMQ概念介绍"><a href="#RabbitMQ概念介绍" class="headerlink" title="RabbitMQ概念介绍"></a>RabbitMQ概念介绍</h3><p>**Producer(生产者):**生产者创建消息，发送消息体(payload)和标签(label)</p>
 <blockquote>
 <p>消息体：一般是带有业务逻辑的json<br>标签：交换器名称和路由键</p>
 </blockquote>
-<p>Consumer(消费者)：消费者值消费消息体，消息路由的时候，标签会被丢弃，消费者不知道消息的生产者是谁<br>Broker(消息队列的服务节点)：对外就是消息队列</p>
+<p><strong>Consumer(消费者)：</strong>消费者值消费消息体，消息路由的时候，标签会被丢弃，消费者不知道消息的生产者是谁<br><strong>Broker(消息队列的服务节点)：</strong>对外就是消息队列</p>
 <blockquote>
 <p><img src="img_1.png" alt="消息队列的运转过程"></p>
 </blockquote>
-<p>Queue(队列)：RabbitMQ内部对象，存储信息</p>
+<p><strong>Queue(队列)：</strong>RabbitMQ内部对象，存储信息</p>
 <blockquote>
 <p>RabbitMQ 的生产者生产消息并最终投递到队列中，消费者可以从队列中获取消息并消费。<br>多个消费者可以订阅同一个队列，这时队列中的消息会被平均分摊（Round-Robin，即轮询）<br>RabbitMQ 不支持队列层面的广播消费，如果需要广播消费，需要在其上进行二次开发，处理逻辑会变得异常复杂，同时也不建议这么做</p>
 </blockquote>
-<p>Exchange(交换器)：</p>
+<p><strong>Exchange(交换器)：</strong></p>
 <blockquote>
 <p>生产者将消息发送到 Exchange，由交换器将消息路由到一个或者多个队列中。如果路由不到，或许会返回给生产者，或许直接丢弃。<br><img src="img_1.png" alt="交换器"></p>
 </blockquote>
-<p>Binding</p>
-<h4 id="交换器类型"><a href="#交换器类型" class="headerlink" title="交换器类型"></a>交换器类型</h4><p>RabbitMQ 常用的交换器类型有 fanout、direct、topic、headers 这四种。AMQP 协议里还提到另外两种类型：System 和自定义，这里不予描述。</p>
+<p><strong>RoutingKey(路由键):</strong></p>
+<blockquote>
+<p>生产者把消息发送给交换机的时候指定的字段，通过这个字段决定与消息发送到哪个队列(BindingKey)</p>
+</blockquote>
+<p><strong>Binding(绑定):</strong></p>
+<blockquote>
+<p>将交换器和队列关联起来</p>
+</blockquote>
+<h4 id="交换器类型"><a href="#交换器类型" class="headerlink" title="交换器类型"></a>交换器类型</h4><p>RabbitMQ 常用的交换器类型有 fanout、direct、topic、headers 这四种。AMQP 协议里还提到另外两种类型：System 和自定义，这里不予描述。不同的类型绑定时具有不同的策略</p>
 <ol>
-<li>fanout<br>它会把所有发送到该交换器的消息路由到所有与该交换器绑定的队列中。</li>
-<li>direct</li>
-<li>topic</li>
-<li>headers</li>
+<li>fanout<br>和RoutingKey,BindingKey无关，消息发送到与交换机绑定的所有队列中</li>
+<li>direct<br>消息发送到和RoutingKey和BindingKey完全匹配的队列中</li>
+<li>topic<br>在前者的基础上做了类似正则表达式的拓展，用规则匹配取代了完全匹配</li>
+<li>headers<br>和RoutingKey,BindingKey无关，根据发送的消息内容中的 headers 属性进行匹配，性能较差，不实用</li>
+</ol>
+<h3 id="RabbitMQ-运转流程"><a href="#RabbitMQ-运转流程" class="headerlink" title="RabbitMQ 运转流程"></a>RabbitMQ 运转流程</h3><p><strong>生产者发送消息的时候：</strong></p>
+<ol>
+<li>生产者连接到 RabbitMQ Broker，建立一个连接（Connection），开启一个信道（Channel）</li>
+<li>生产者声明一个交换器，并设置相关属性，比如交换机类型、是否持久化等（详细内</li>
+<li>生产者声明一个队列并设置相关属性，比如是否排他、是否持久化、是否自动删除等</li>
+<li>生产者通过路由键将交换器和队列绑定起来</li>
+<li>生产者发送消息至 RabbitMQ Broker，其中包含路由键、交换器等信息</li>
+<li>相应的交换器根据接收到的路由键查找相匹配的队列。</li>
+<li>如果找到，则将从生产者发送过来的消息存入相应的队列中。</li>
+<li>如果没有找到，则根据生产者配置的属性选择丢弃还是回退给生产者</li>
+<li>关闭信道。</li>
+<li>关闭连接。</li>
+</ol>
+<p><strong>消费者接收消息的过程：</strong></p>
+<ol>
+<li>消费者连接到 RabbitMQ Broker，建立一个连接（Connection），开启一个信道（Channel）。</li>
+<li>消费者向 RabbitMQ Broker 请求消费相应队列中的消息，可能会设置相应的回调函数,以及做一些准备工作</li>
+<li>等待 RabbitMQ Broker 回应并投递相应队列中的消息，消费者接收消息。</li>
+<li>消费者确认（ack）接收到的消息。</li>
+<li>RabbitMQ 从队列中删除相应已经被确认的消息。</li>
+<li>关闭信道。</li>
+<li>关闭连接。</li>
 </ol>
 ]]></content>
       <categories>

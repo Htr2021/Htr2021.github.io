@@ -150,4 +150,29 @@
         <tag>RabbitMQ</tag>
       </tags>
   </entry>
+  <entry>
+    <title>linux安装docker</title>
+    <url>/2021/09/03/linux%E5%AE%89%E8%A3%85docker/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>windows安装Hyper-V+ubuntu</title>
+    <url>/2021/09/03/windows%E5%AE%89%E8%A3%85Hyper-V+ubuntu/</url>
+    <content><![CDATA[<h3 id="Windows10家庭版安装ubuntu"><a href="#Windows10家庭版安装ubuntu" class="headerlink" title="Windows10家庭版安装ubuntu"></a>Windows10家庭版安装ubuntu</h3><h4 id="安装Hyper-V"><a href="#安装Hyper-V" class="headerlink" title="安装Hyper-V"></a>安装Hyper-V</h4><p><a href="https://blog.csdn.net/yuyuking/article/details/103890195">安装Hyper-V</a><br>把下面代码保存为.bat文件，用管理员运行，重启之后，就可以在win+S 中搜索到Hyper-V</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pushd &quot;%~dp0&quot;</span><br><span class="line"></span><br><span class="line">dir /b %SystemRoot%\servicing\Packages\*Hyper-V*.mum &gt;hyper-v.txt</span><br><span class="line"></span><br><span class="line">for /f %%i in (&#x27;findstr /i . hyper-v.txt 2^&gt;nul&#x27;) do dism /online /norestart /add-package:&quot;%SystemRoot%\servicing\Packages\%%i&quot;</span><br><span class="line"></span><br><span class="line">del hyper-v.txt</span><br><span class="line"></span><br><span class="line">Dism /online /enable-feature /featurename:Microsoft-Hyper-V-All /LimitAccess /ALL</span><br></pre></td></tr></table></figure>
+<h4 id="安装Ubuntu"><a href="#安装Ubuntu" class="headerlink" title="安装Ubuntu"></a>安装Ubuntu</h4><p><a href="https://zhuanlan.zhihu.com/p/128640396">Hyper-V安装ubuntu操作</a><br>基本就是按照操作一步一步点下来。<br>MSDN好像没有ubuntu的镜像了，可以点击<a href="http://mirrors.163.com/ubuntu-releases">网易开源镜像站</a>下载<br>启动之后，会遇到这样的问题，</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Hyper-V™</span><br><span class="line">Uirtual Machine Boot Su_ary</span><br><span class="line"></span><br><span class="line">1.SCSI Disk (0,0)No UEFI-compatible file system uas found.</span><br><span class="line"></span><br><span class="line">2.Network Adapter (OO155DO6E40O) DHCP failed.</span><br><span class="line"></span><br><span class="line">3.SCSI DUD (0,1)No UEFI-compatible file system uas found.</span><br><span class="line"></span><br><span class="line">No operating system was loaded. Press a Key to retry the boot sequence...</span><br><span class="line">Note： Configuration changes nay require the virtual Machine to be reset.</span><br></pre></td></tr></table></figure>
+
+<p>把虚拟机启动时启用安全启动的勾去掉。<a href="https://tieba.baidu.com/p/5587795237?red_tag=0742118433">解决方法</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>虚拟机</tag>
+        <tag>运维</tag>
+        <tag>Hyper-V</tag>
+        <tag>linux</tag>
+      </tags>
+  </entry>
 </search>

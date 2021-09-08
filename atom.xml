@@ -6,7 +6,7 @@
   <link href="https://htr2021.github.io/atom.xml" rel="self"/>
   
   <link href="https://htr2021.github.io/"/>
-  <updated>2021-09-08T07:40:46.317Z</updated>
+  <updated>2021-09-08T09:18:55.089Z</updated>
   <id>https://htr2021.github.io/</id>
   
   <author>
@@ -17,11 +17,58 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>服务器信息</title>
+    <link href="https://htr2021.github.io/2021/09/08/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BF%A1%E6%81%AF/"/>
+    <id>https://htr2021.github.io/2021/09/08/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BF%A1%E6%81%AF/</id>
+    <published>2021-09-08T09:12:47.000Z</published>
+    <updated>2021-09-08T09:18:55.089Z</updated>
+    
+    
+    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
+    
+    
+    
+    <category term="备忘" scheme="https://htr2021.github.io/categories/%E5%A4%87%E5%BF%98/"/>
+    
+    
+    <category term="运维" scheme="https://htr2021.github.io/tags/%E8%BF%90%E7%BB%B4/"/>
+    
+    <category term="备忘" scheme="https://htr2021.github.io/tags/%E5%A4%87%E5%BF%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>dockerfile</title>
+    <link href="https://htr2021.github.io/2021/09/08/dockerfile/"/>
+    <id>https://htr2021.github.io/2021/09/08/dockerfile/</id>
+    <published>2021-09-08T07:48:19.000Z</published>
+    <updated>2021-09-08T07:48:19.830Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>docker网络模式</title>
+    <link href="https://htr2021.github.io/2021/09/08/docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%BC%8F/"/>
+    <id>https://htr2021.github.io/2021/09/08/docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%BC%8F/</id>
+    <published>2021-09-08T07:46:27.000Z</published>
+    <updated>2021-09-08T07:46:27.269Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>docker部署vsftpd</title>
     <link href="https://htr2021.github.io/2021/09/08/docker%E9%83%A8%E7%BD%B2vsftpd/"/>
     <id>https://htr2021.github.io/2021/09/08/docker%E9%83%A8%E7%BD%B2vsftpd/</id>
     <published>2021-09-08T02:13:24.000Z</published>
-    <updated>2021-09-08T07:40:46.317Z</updated>
+    <updated>2021-09-08T07:45:49.759Z</updated>
     
     
       
@@ -37,15 +84,15 @@
     <category term="技术" scheme="https://htr2021.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
+    <category term="运维" scheme="https://htr2021.github.io/tags/%E8%BF%90%E7%BB%B4/"/>
+    
     <category term="docker" scheme="https://htr2021.github.io/tags/docker/"/>
     
-    <category term="运维" scheme="https://htr2021.github.io/tags/%E8%BF%90%E7%BB%B4/"/>
+    <category term="docker-compose" scheme="https://htr2021.github.io/tags/docker-compose/"/>
     
     <category term="ftp" scheme="https://htr2021.github.io/tags/ftp/"/>
     
     <category term="vsftpd" scheme="https://htr2021.github.io/tags/vsftpd/"/>
-    
-    <category term="docker-compose" scheme="https://htr2021.github.io/tags/docker-compose/"/>
     
   </entry>
   
@@ -54,14 +101,14 @@
     <link href="https://htr2021.github.io/2021/09/06/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
     <id>https://htr2021.github.io/2021/09/06/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</id>
     <published>2021-09-06T07:01:11.000Z</published>
-    <updated>2021-09-08T07:39:35.575Z</updated>
+    <updated>2021-09-08T08:40:09.510Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h2 id=&quot;docker使用命令&quot;&gt;&lt;a href=&quot;#docker使用命令&quot; class=&quot;headerlink&quot; title=&quot;docker使用命令&quot;&gt;&lt;/a&gt;docker使用命令&lt;/h2&gt;&lt;h3 id=&quot;在部署docker主要使用的命令&quot;&gt;&lt;a</summary>
+    <summary type="html">&lt;h2 id=&quot;docker使用命令&quot;&gt;&lt;a href=&quot;#docker使用命令&quot; class=&quot;headerlink&quot; title=&quot;docker使用命令&quot;&gt;&lt;/a&gt;docker使用命令&lt;/h2&gt;&lt;h3 id=&quot;常规指令&quot;&gt;&lt;a href=&quot;#常规指令&quot;</summary>
         
       
     
@@ -79,7 +126,7 @@
     <link href="https://htr2021.github.io/2021/09/06/docker-compose-yml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/"/>
     <id>https://htr2021.github.io/2021/09/06/docker-compose-yml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/</id>
     <published>2021-09-06T06:59:14.000Z</published>
-    <updated>2021-09-06T06:59:33.250Z</updated>
+    <updated>2021-09-08T08:46:55.749Z</updated>
     
     
     
@@ -88,6 +135,8 @@
     
     
     <category term="docker" scheme="https://htr2021.github.io/tags/docker/"/>
+    
+    <category term="docker-compose" scheme="https://htr2021.github.io/tags/docker-compose/"/>
     
   </entry>
   
@@ -112,17 +161,17 @@
     <category term="技术" scheme="https://htr2021.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-    <category term="docker" scheme="https://htr2021.github.io/tags/docker/"/>
+    <category term="虚拟机" scheme="https://htr2021.github.io/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
     
     <category term="运维" scheme="https://htr2021.github.io/tags/%E8%BF%90%E7%BB%B4/"/>
-    
-    <category term="docker-compose" scheme="https://htr2021.github.io/tags/docker-compose/"/>
-    
-    <category term="虚拟机" scheme="https://htr2021.github.io/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
     
     <category term="Hyper-V" scheme="https://htr2021.github.io/tags/Hyper-V/"/>
     
     <category term="linux" scheme="https://htr2021.github.io/tags/linux/"/>
+    
+    <category term="docker" scheme="https://htr2021.github.io/tags/docker/"/>
+    
+    <category term="docker-compose" scheme="https://htr2021.github.io/tags/docker-compose/"/>
     
   </entry>
   

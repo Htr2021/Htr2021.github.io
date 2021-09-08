@@ -42,7 +42,7 @@
 </ol>
 ]]></content>
       <categories>
-        <category>建站</category>
+        <category>本站搭建</category>
       </categories>
       <tags>
         <tag>hexo</tag>
@@ -151,28 +151,116 @@
       </tags>
   </entry>
   <entry>
-    <title>linux安装docker</title>
-    <url>/2021/09/03/linux%E5%AE%89%E8%A3%85docker/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>windows安装Hyper-V+ubuntu</title>
-    <url>/2021/09/03/windows%E5%AE%89%E8%A3%85Hyper-V+ubuntu/</url>
-    <content><![CDATA[<h3 id="Windows10家庭版安装ubuntu"><a href="#Windows10家庭版安装ubuntu" class="headerlink" title="Windows10家庭版安装ubuntu"></a>Windows10家庭版安装ubuntu</h3><h4 id="安装Hyper-V"><a href="#安装Hyper-V" class="headerlink" title="安装Hyper-V"></a>安装Hyper-V</h4><p><a href="https://blog.csdn.net/yuyuking/article/details/103890195">安装Hyper-V</a><br>把下面代码保存为.bat文件，用管理员运行，重启之后，就可以在win+S 中搜索到Hyper-V</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pushd &quot;%~dp0&quot;</span><br><span class="line"></span><br><span class="line">dir /b %SystemRoot%\servicing\Packages\*Hyper-V*.mum &gt;hyper-v.txt</span><br><span class="line"></span><br><span class="line">for /f %%i in (&#x27;findstr /i . hyper-v.txt 2^&gt;nul&#x27;) do dism /online /norestart /add-package:&quot;%SystemRoot%\servicing\Packages\%%i&quot;</span><br><span class="line"></span><br><span class="line">del hyper-v.txt</span><br><span class="line"></span><br><span class="line">Dism /online /enable-feature /featurename:Microsoft-Hyper-V-All /LimitAccess /ALL</span><br></pre></td></tr></table></figure>
-<h4 id="安装Ubuntu"><a href="#安装Ubuntu" class="headerlink" title="安装Ubuntu"></a>安装Ubuntu</h4><p><a href="https://zhuanlan.zhihu.com/p/128640396">Hyper-V安装ubuntu操作</a><br>基本就是按照操作一步一步点下来。<br>MSDN好像没有ubuntu的镜像了，可以点击<a href="http://mirrors.163.com/ubuntu-releases">网易开源镜像站</a>下载<br>启动之后，会遇到这样的问题，</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Hyper-V™</span><br><span class="line">Uirtual Machine Boot Su_ary</span><br><span class="line"></span><br><span class="line">1.SCSI Disk (0,0)No UEFI-compatible file system uas found.</span><br><span class="line"></span><br><span class="line">2.Network Adapter (OO155DO6E40O) DHCP failed.</span><br><span class="line"></span><br><span class="line">3.SCSI DUD (0,1)No UEFI-compatible file system uas found.</span><br><span class="line"></span><br><span class="line">No operating system was loaded. Press a Key to retry the boot sequence...</span><br><span class="line">Note： Configuration changes nay require the virtual Machine to be reset.</span><br></pre></td></tr></table></figure>
-
-<p>把虚拟机启动时启用安全启动的勾去掉。<a href="https://tieba.baidu.com/p/5587795237?red_tag=0742118433">解决方法</a></p>
+    <title>docker常用命令</title>
+    <url>/2021/09/06/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<h2 id="docker使用命令"><a href="#docker使用命令" class="headerlink" title="docker使用命令"></a>docker使用命令</h2><h3 id="在部署docker主要使用的命令"><a href="#在部署docker主要使用的命令" class="headerlink" title="在部署docker主要使用的命令"></a>在部署docker主要使用的命令</h3><p>docker network ls<br>docker exec -it 775c7c9ee1e1 /bin/bash  </p>
 ]]></content>
       <categories>
         <category>技术</category>
       </categories>
       <tags>
-        <tag>虚拟机</tag>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>docker部署vsftpd</title>
+    <url>/2021/09/08/docker%E9%83%A8%E7%BD%B2vsftpd/</url>
+    <content><![CDATA[<h2 id="docker-compose-部署vsftpd"><a href="#docker-compose-部署vsftpd" class="headerlink" title="docker-compose 部署vsftpd"></a>docker-compose 部署vsftpd</h2><p>这里使用<a href="https://hub.docker.com/r/fauria/vsftpd">fauria/vsftpd</a></p>
+<h3 id="docker-run运行"><a href="#docker-run运行" class="headerlink" title="docker run运行"></a>docker run运行</h3><p>使用 <code>docker pull fauria/vsftpd</code>拉取镜像</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -d -v /data/docker/ftp3/vsftpd:/home/vsftpd -p 20:20 -p 21:21 -p 8430-8440:8430-8440 -e </span><br><span class="line">FTP_USER=test -e FTP_PASS=test -e PASV_ADDRESS=x.x.x.x -e PASV_MIN_PORT=8430 -e PASV_MAX_PORT=8440 --name </span><br><span class="line">vsftpd --restart=always fauria/vsftpd</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>成功之后使用浏览器访问<a href="ftp://test:test@x.x.x.x:x">ftp://test:test@x.x.x.x:21</a>其中x.x.x.x是自己的IP，test,test分别是账号和密码<br>或者使用ftp客户端工具选择FTP协议，取消使用被动模式即可访问<br>如果希望修改端口，请看下面</p>
+</blockquote>
+<h3 id="docker-compose-up运行"><a href="#docker-compose-up运行" class="headerlink" title="docker-compose up运行"></a>docker-compose up运行</h3><p>docker-compose 就没什么好说的,运行就完事</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">version: &quot;3&quot;</span><br><span class="line">services:          </span><br><span class="line">    ftp:</span><br><span class="line">        image: fauria/vsftpd</span><br><span class="line">        container_name: vsftpd</span><br><span class="line">        restart: always </span><br><span class="line">        networks:</span><br><span class="line">            mynetwork:</span><br><span class="line">                ipv4_address: 172.18.0.8</span><br><span class="line">        ports:</span><br><span class="line">             - &quot;8420:8420&quot;</span><br><span class="line">             - &quot;8421:8421&quot;</span><br><span class="line">             - &quot;8430-8440:8430-8440&quot;</span><br><span class="line">        volumes:</span><br><span class="line">            - /data/docker/ftp3/vsftpd:/home/vsftpd</span><br><span class="line">            - /data/docker/ftp3/conf/vsftpd.conf:/etc/vsftpd/vsftpd.conf</span><br><span class="line">            - /data/docker/ftp3/conf/services:/etc/services:ro</span><br><span class="line">        environment:</span><br><span class="line">            FTP_USER: test </span><br><span class="line">            FTP_PASS: test </span><br><span class="line">            PASV_ADDRESS: x.x.x.x</span><br><span class="line">            PASV_MIN_PORT: 8430 </span><br><span class="line">            PASV_MAX_PORT: 8440 </span><br><span class="line">         </span><br><span class="line">networks:</span><br><span class="line">  mynetwork:</span><br><span class="line">    external: true</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>和docker run的方法相比，这里修改了端口号，所以把容器内的vsftpd.conf和services文件映射出来方便修改<br>在vsftpd.conf文件中需要增加 <code>listen_port=8421 pasv_enable=YES</code>两行<br>在services文件中需要将 ftp 21/tcp 改为 ftp 801/tcp , ftp 21/udp 改为 ftp 801/udp<br>之后启动即可<br>常规下21端口容易遭到别人的扫描、带来了一定程度的不安全。所以，最好的就是把21端口修改掉。<br>将docker-compose修改的内容对应带docker run的参数就可以了 </p>
+</blockquote>
+<h2 id="有时间补充"><a href="#有时间补充" class="headerlink" title="有时间补充"></a>有时间补充</h2><ul>
+<li>可以看看ftp使用相关内容</li>
+<li>可以看看ftp用户创建文件夹和相关映射的添加</li>
+<li><a href="https://hub.docker.com/r/fauria/vsftpd">官网</a>上参数的作用</li>
+</ul>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
         <tag>运维</tag>
+        <tag>ftp</tag>
+        <tag>vsftpd</tag>
+        <tag>docker-compose</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Windows安装Hyper-V并搭建docker+php+nginx+mysql</title>
+    <url>/2021/09/03/windows%E5%AE%89%E8%A3%85Hyper-V+ubuntu/</url>
+    <content><![CDATA[<h2 id="Windows10家庭版安装ubuntu"><a href="#Windows10家庭版安装ubuntu" class="headerlink" title="Windows10家庭版安装ubuntu"></a>Windows10家庭版安装ubuntu</h2><h3 id="安装Hyper-V"><a href="#安装Hyper-V" class="headerlink" title="安装Hyper-V"></a>安装Hyper-V</h3><p><a href="https://blog.csdn.net/yuyuking/article/details/103890195">参考博文</a><br>把下面代码保存为.bat文件，用管理员运行，重启之后，就可以在win+S 中搜索到Hyper-V</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pushd &quot;%~dp0&quot;</span><br><span class="line"></span><br><span class="line">dir /b %SystemRoot%\servicing\Packages\*Hyper-V*.mum &gt;hyper-v.txt</span><br><span class="line"></span><br><span class="line">for /f %%i in (&#x27;findstr /i . hyper-v.txt 2^&gt;nul&#x27;) do dism /online /norestart /add-package:&quot;%SystemRoot%\servicing\Packages\%%i&quot;</span><br><span class="line"></span><br><span class="line">del hyper-v.txt</span><br><span class="line"></span><br><span class="line">Dism /online /enable-feature /featurename:Microsoft-Hyper-V-All /LimitAccess /ALL</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装Ubuntu"><a href="#安装Ubuntu" class="headerlink" title="安装Ubuntu"></a>安装Ubuntu</h3><p><a href="https://zhuanlan.zhihu.com/p/128640396">参考博文</a><br>基本就是按照操作一步一步点下来。<br>MSDN好像没有ubuntu的镜像了，可以点击<a href="http://mirrors.163.com/ubuntu-releases">网易开源镜像站</a>下载<br>启动之后，会遇到这样的问题，</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Hyper-V™</span><br><span class="line">Uirtual Machine Boot Su_ary</span><br><span class="line"></span><br><span class="line">1.SCSI Disk (0,0)No UEFI-compatible file system uas found.</span><br><span class="line"></span><br><span class="line">2.Network Adapter (OO155DO6E40O) DHCP failed.</span><br><span class="line"></span><br><span class="line">3.SCSI DUD (0,1)No UEFI-compatible file system uas found.</span><br><span class="line"></span><br><span class="line">No operating system was loaded. Press a Key to retry the boot sequence...</span><br><span class="line">Note： Configuration changes nay require the virtual Machine to be reset.</span><br></pre></td></tr></table></figure>
+
+<p>把虚拟机启动时启用安全启动的勾去掉。<a href="https://tieba.baidu.com/p/5587795237?red_tag=0742118433">解决方法</a></p>
+<h2 id="linux安装docker"><a href="#linux安装docker" class="headerlink" title="linux安装docker"></a>linux安装docker</h2><p>安装方法<a href="https://www.cnblogs.com/kingsonfu/p/11576797.html">参考博文</a><br>使用的yum源安装</p>
+<ol>
+<li>查看是否已安装docker<br><code>yum list installed | grep docker</code></li>
+<li>安装docker<br><code>yum -y install docker</code></li>
+<li>启动docker<br><code>systemctl start docker</code></li>
+<li>查看docker状态<br><code> systemctl status docker</code><br>如果出现下面代表安装成功<br><img src="img.png" alt="安装成功"></li>
+<li>可以将docker设置为开机自启动<br><code>systemctl enable docker;</code></li>
+</ol>
+<blockquote>
+<p>建议使用<a href="https://docs.docker.com/engine/install/centos/">官网安装</a></p>
+</blockquote>
+<h2 id="docker-安装php-nginx-mysql"><a href="#docker-安装php-nginx-mysql" class="headerlink" title="docker 安装php+nginx+mysql"></a>docker 安装php+nginx+mysql</h2><h3 id="获取镜像image"><a href="#获取镜像image" class="headerlink" title="获取镜像image"></a>获取镜像image</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker pull mysql:5.7      # 拉取 mysql 5.7</span><br><span class="line">docker nginx               # 拉取 nginx </span><br><span class="line">docker pull php:5.6-fpm    # 拉取 php </span><br></pre></td></tr></table></figure>
+<p>docker images              # 查看安装镜像</p>
+<h3 id="普通运行"><a href="#普通运行" class="headerlink" title="普通运行"></a>普通运行</h3><p><code>docker run -p 对外暴露的端口:容器内的端口 --name 容器名 -e 配置信息=内容 -v 主机目录:容器目录 -d 镜像名</code><br>使用 <code>docker ps</code> || <code>docker ps -a</code> 查看运行||全部容器</p>
+<h3 id="docker-compose运行"><a href="#docker-compose运行" class="headerlink" title="docker-compose运行"></a>docker-compose运行</h3><p>文件模板如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">version: &#x27;2.0&#x27;</span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  nginx:</span><br><span class="line">    restart: always</span><br><span class="line">    image: nginx:1.11.6-alpine</span><br><span class="line">    ports:</span><br><span class="line">      - 8080:80</span><br><span class="line">      - 80:80</span><br><span class="line">      - 443:443</span><br><span class="line">    volumes:</span><br><span class="line">      - ./conf.d:/etc/nginx/conf.d</span><br><span class="line">      - ./log:/var/log/nginx</span><br><span class="line">      - ./www:/var/www</span><br><span class="line">      - /etc/letsencrypt:/etc/letsencrypt</span><br></pre></td></tr></table></figure>
+<p><strong>参数说明：</strong><br><strong>version</strong>：版本号</p>
+<p><strong>service</strong>：就是要定义的docker容器</p>
+<p><strong>nginx</strong>:容器的名称</p>
+<p><strong>restart</strong>：设置为always，表明此容器应该在停止的情况下总是重启，比如，服务器启动时，这个容器就跟着启动，不用手动启动，服务器启动之后，进入到docker-compose.yml文件路径下，执行docker-compose ps可以看到，该容器正在运行。</p>
+<p><strong>image</strong>：这个是需要依赖的容器，也就是nginx软件，可以到docker官方镜像上找到最新版的镜像。</p>
+<p><strong>ports</strong>：端口映射。比如： - 8080:80，表示容器内运行着的端口是80，把端口暴露给8080端口，从外面访问的是8080端口，就能自动映射到80端口上。</p>
+<p><strong>volumes</strong>:文件映射。表示数据、配置文件等存放的位置。（- . 这个表示docker-compose.yml当前目录位置开始创建这个文件</p>
+<h3 id="可能的问题"><a href="#可能的问题" class="headerlink" title="可能的问题"></a>可能的问题</h3><p>如果你的容器运行正常，但是无法访问到MySQL，一般有以下几个可能的原因：</p>
+<ul>
+<li>防火墙拦截<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 开放端口：</span><br><span class="line">$ systemctl status firewalld</span><br><span class="line">$ firewall-cmd  --zone=public --add-port=3306/tcp -permanent</span><br><span class="line">$ firewall-cmd  --reload</span><br><span class="line"># 关闭防火墙：</span><br><span class="line">$ sudo systemctl stop firewalld</span><br></pre></td></tr></table></figure></li>
+<li>需要在docker本地客户端设置远程访问账号<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ sudo docker exec -it mysql bash</span><br><span class="line">$ mysql -uroot -p123456</span><br><span class="line">mysql&gt; grant all privileges on *.* to root@&#x27;%&#x27; identified by &quot;password&quot;;</span><br></pre></td></tr></table></figure>
+原理：<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># mysql使用mysql数据库中的user表来管理权限，修改user表就可以修改权限（只有root账号可以修改）</span><br><span class="line"></span><br><span class="line">mysql&gt; use mysql;</span><br><span class="line">Database changed</span><br><span class="line"></span><br><span class="line">mysql&gt; select host,user,password from user;</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">| host                    | user      | password                                                                 |</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">| localhost              | root     | *A731AEBFB621E354CD41BAF207D884A609E81F5E      |</span><br><span class="line">| 192.168.1.1            | root     | *A731AEBFB621E354CD41BAF207D884A609E81F5E      |</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">2 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; grant all privileges  on *.* to root@&#x27;%&#x27; identified by &quot;password&quot;;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; flush privileges;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select host,user,password from user;</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">| host                    | user      | password                                                                 |</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">| localhost              | root      | *A731AEBFB621E354CD41BAF207D884A609E81F5E     |</span><br><span class="line">| 192.168.1.1            | root      | *A731AEBFB621E354CD41BAF207D884A609E81F5E     |</span><br><span class="line">| %                       | root      | *A731AEBFB621E354CD41BAF207D884A609E81F5E     |</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">3 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<h2 id="安装docker-compose"><a href="#安装docker-compose" class="headerlink" title="安装docker-compose"></a>安装docker-compose</h2><del>第一步下载：</del><br><del><code>curl -L https://get.daocloud.io/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` &gt;  /usr/local/bin/docker-compose</code></del><br><del>第二步赋权：</del><br><del><code>chmod a+x /usr/local/bin/docker-compose</code></del><br><del>第三步查看版本：</del><br><del><code>docker-compose --version</code></del><blockquote>
+<p>上面的方法在部署之后，使用docker-compose部署会出现端口占用的错误，且物理机，虚拟机端口并没有被占用<br>在一段时间的问题定位之后，发现是安装的docker-compose有问题，所以建议使官网安装<a href="https://docs.docker.com/compose/install/">安装地址</a><br>步骤和上方基本相同，第一步下载的地址发生了改变</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose</span><br><span class="line">sudo chmod +x /usr/local/bin/docker-compose</span><br><span class="line">docker-compose --version</span><br></pre></td></tr></table></figure>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>安装netstat<br><code>yum -y install net-tools </code><br><a href="https://hub.docker.com/">docker-hub地址</a><br><a href="https://docs.docker.com/">docker-文档地址</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>运维</tag>
+        <tag>docker-compose</tag>
+        <tag>虚拟机</tag>
         <tag>Hyper-V</tag>
         <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>docker-compose.yml配置文件详解</title>
+    <url>/2021/09/06/docker-compose-yml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
       </tags>
   </entry>
 </search>

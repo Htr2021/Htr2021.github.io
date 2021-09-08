@@ -151,6 +151,108 @@
       </tags>
   </entry>
   <entry>
+    <title>docker-compose.yml配置文件详解</title>
+    <url>/2021/09/06/docker-compose-yml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>docker-compose</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>dockerfile</title>
+    <url>/2021/09/08/dockerfile/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>docker常用命令</title>
+    <url>/2021/09/06/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<h2 id="docker使用命令"><a href="#docker使用命令" class="headerlink" title="docker使用命令"></a>docker使用命令</h2><h3 id="常规指令"><a href="#常规指令" class="headerlink" title="常规指令"></a>常规指令</h3><h4 id="启动docker"><a href="#启动docker" class="headerlink" title="启动docker"></a>启动docker</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">systemctl start docker</span><br></pre></td></tr></table></figure>
+<h4 id="停止docker"><a href="#停止docker" class="headerlink" title="停止docker"></a>停止docker</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">systemctl stop docker</span><br></pre></td></tr></table></figure>
+<h4 id="重启docker"><a href="#重启docker" class="headerlink" title="重启docker"></a>重启docker</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure>
+<h4 id="开机自启"><a href="#开机自启" class="headerlink" title="开机自启"></a>开机自启</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">systemctl enable docker</span><br></pre></td></tr></table></figure>
+<h4 id="查看版本"><a href="#查看版本" class="headerlink" title="查看版本"></a>查看版本</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker version</span><br></pre></td></tr></table></figure>
+<h4 id="查看docker信息"><a href="#查看docker信息" class="headerlink" title="查看docker信息"></a>查看docker信息</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker info</span><br></pre></td></tr></table></figure>
+<h4 id="查看帮助"><a href="#查看帮助" class="headerlink" title="查看帮助"></a>查看帮助</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker --help</span><br></pre></td></tr></table></figure>
+<h3 id="镜像命令"><a href="#镜像命令" class="headerlink" title="镜像命令"></a>镜像命令</h3><h4 id="查看已安装的镜像"><a href="#查看已安装的镜像" class="headerlink" title="查看已安装的镜像"></a>查看已安装的镜像</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
+<h4 id="搜索docker-hub上的镜像"><a href="#搜索docker-hub上的镜像" class="headerlink" title="搜索docker hub上的镜像"></a>搜索docker hub上的镜像</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># tomcat为例</span><br><span class="line">docker serch nginx</span><br></pre></td></tr></table></figure>
+<h4 id="下载镜像"><a href="#下载镜像" class="headerlink" title="下载镜像"></a>下载镜像</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker pull nginx[:version]</span><br></pre></td></tr></table></figure>
+<h4 id="删除镜像"><a href="#删除镜像" class="headerlink" title="删除镜像"></a>删除镜像</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 删除单个/多个镜像</span><br><span class="line">docker rmi tomcat[:version]</span><br><span class="line">docker rmi -f 镜像ID</span><br><span class="line">docker rmi -f 镜像名1:TAG 镜像名2:TAG </span><br><span class="line"># 删除全部镜像</span><br><span class="line"># docker images -qa 获取全部镜像id</span><br><span class="line">docker rmi -f $(docker images -qa)</span><br></pre></td></tr></table></figure>
+<h3 id="容器命令"><a href="#容器命令" class="headerlink" title="容器命令"></a>容器命令</h3><h4 id="启动命令"><a href="#启动命令" class="headerlink" title="启动命令"></a>启动命令</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run [options] image [command] [arg...]</span><br></pre></td></tr></table></figure>
+<h5 id="常用参数"><a href="#常用参数" class="headerlink" title="常用参数"></a>常用参数</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-d: 后台运行容器,并返回容器ID</span><br><span class="line"></span><br><span class="line">-i: 以交互式运行容器,通常与-t同时使用</span><br><span class="line"></span><br><span class="line">-p: 端口映射,格式为 主机(宿主)端口:容器端口</span><br><span class="line"></span><br><span class="line">-t: 为容器重新分配一个伪输入终端,通常与-i同时使用</span><br><span class="line"></span><br><span class="line">--name=&quot;name&quot;: 为容器指定一个名称</span><br><span class="line"></span><br><span class="line">--dns 8.8.8.8: 为容器指定一个dns服务器,默认与宿主一致</span><br><span class="line"></span><br><span class="line">--dns-search domain:为容器指定一个DNS域名,默认与宿主一致</span><br><span class="line"></span><br><span class="line">-h &quot;hostname&quot;: 指定容器的hostname</span><br><span class="line"></span><br><span class="line">-e arg=&quot;value&quot;: 设置环境变量</span><br><span class="line"></span><br><span class="line">-env-file=[]:从指定文件读入环境变量</span><br><span class="line"></span><br><span class="line">--cpuset=&quot;0-2&quot; or --cpuset=&quot;0,1,2&quot;: 绑定容器到指定的cpu运行</span><br><span class="line"></span><br><span class="line">-m: 设置容器使用内存最大值</span><br><span class="line"></span><br><span class="line">--net=&quot;bridge&quot;: 指定容器的网络连接类型,支持bridge/host/none/container四种类型</span><br><span class="line"></span><br><span class="line">--link=[]:添加链接到另外一个容器</span><br><span class="line"></span><br><span class="line">--expose=[]:开放一个端口或一组端口,宿主机使用随机端口映射到开放的端口</span><br></pre></td></tr></table></figure>
+<h5 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -d -v /my/data/directory:/home/vsftpd -p 20:20 -p 21:21 -p 21100-21110:21100-21110 -e FTP_USER=myuser -e FTP_PASS=mypass -e PASV_ADDRESS=127.0.0.1 -e PASV_MIN_PORT=21100 -e PASV_MAX_PORT=21110 --name vsftpd --restart=always vsftpd</span><br></pre></td></tr></table></figure>
+<h4 id="查看运行的docker容器"><a href="#查看运行的docker容器" class="headerlink" title="查看运行的docker容器"></a>查看运行的docker容器</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+<h5 id="常用参数-1"><a href="#常用参数-1" class="headerlink" title="常用参数"></a>常用参数</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 显示所有容器，包括当前没有运行的容器</span><br><span class="line">-a</span><br><span class="line"># 显示最近创建的容器</span><br><span class="line">-l</span><br><span class="line"># 显示最近创建的N个容器</span><br><span class="line">-n</span><br><span class="line"># 静默模式,只显示容器ID</span><br><span class="line">-q</span><br><span class="line"># 不截断输出</span><br><span class="line">--no-trunc</span><br></pre></td></tr></table></figure>
+<h4 id="进入容器"><a href="#进入容器" class="headerlink" title="进入容器"></a>进入容器</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker exec -it 容器名称 /bin/bash</span><br></pre></td></tr></table></figure>
+<h4 id="退出容器"><a href="#退出容器" class="headerlink" title="退出容器"></a>退出容器</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 退出并停止</span><br><span class="line">exit</span><br><span class="line"># 容器不停止退出</span><br><span class="line">ctrl+P+Q</span><br></pre></td></tr></table></figure>
+<h4 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker start 容器ID或容器name</span><br></pre></td></tr></table></figure>
+<h4 id="重启容器"><a href="#重启容器" class="headerlink" title="重启容器"></a>重启容器</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker restart 容器ID或容器name</span><br></pre></td></tr></table></figure>
+<h4 id="停止容器"><a href="#停止容器" class="headerlink" title="停止容器"></a>停止容器</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker stop 容器ID或容器name</span><br></pre></td></tr></table></figure>
+<h4 id="强制停止容器"><a href="#强制停止容器" class="headerlink" title="强制停止容器"></a>强制停止容器</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker kill 容器ID或容器name</span><br></pre></td></tr></table></figure>
+<h4 id="删除容器"><a href="#删除容器" class="headerlink" title="删除容器"></a>删除容器</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 删除已经停止的容器</span><br><span class="line">docker rm 容器ID或容器name </span><br><span class="line"># 强制删除已经停止或正在运行的容器</span><br><span class="line">docker rm -f  容器ID或容器name </span><br><span class="line">#一次性删除所有正在运行的容器</span><br><span class="line">docker rm -f $(docker ps -qa)</span><br></pre></td></tr></table></figure>
+<h4 id="将文件从容器中拷贝到宿主机"><a href="#将文件从容器中拷贝到宿主机" class="headerlink" title="将文件从容器中拷贝到宿主机"></a>将文件从容器中拷贝到宿主机</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker cp 容器ID或容器名称:/文件路径与文件名 宿主机地址</span><br></pre></td></tr></table></figure>
+<h5 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">拷贝容器coco的tmp文件夹下的info.txt到宿主机的当前位置</span><br><span class="line">docker cp coco:/tmp/info.txt .</span><br></pre></td></tr></table></figure>
+<h4 id="日志命令"><a href="#日志命令" class="headerlink" title="日志命令"></a>日志命令</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker logs -f -t --tail 10 容器ID或容器名称</span><br></pre></td></tr></table></figure>
+<h5 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 加入时间戳</span><br><span class="line">-t</span><br><span class="line"># 跟随最新的日志打印</span><br><span class="line">-f</span><br><span class="line"># 输出最后几行的日志</span><br><span class="line">--tail 行数</span><br></pre></td></tr></table></figure>
+<h5 id="实例-2"><a href="#实例-2" class="headerlink" title="实例"></a>实例</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker logs -f -t --tail 10 5b66c8ab957e</span><br></pre></td></tr></table></figure>
+<h3 id="docker-network-常用指令"><a href="#docker-network-常用指令" class="headerlink" title="docker network 常用指令"></a>docker network 常用指令</h3><h4 id="查看网络"><a href="#查看网络" class="headerlink" title="查看网络"></a>查看网络</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker network ls</span><br></pre></td></tr></table></figure>
+<h4 id="创建网络"><a href="#创建网络" class="headerlink" title="创建网络"></a>创建网络</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker network create 网络名称</span><br></pre></td></tr></table></figure>
+<h4 id="把其它容器添加到网络"><a href="#把其它容器添加到网络" class="headerlink" title="把其它容器添加到网络"></a>把其它容器添加到网络</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker network connect 网络名称 容器名称</span><br></pre></td></tr></table></figure>
+<h4 id="断开网络"><a href="#断开网络" class="headerlink" title="断开网络"></a>断开网络</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker network disconnet 网络名称 容器名称</span><br></pre></td></tr></table></figure>
+<h4 id="移除网络"><a href="#移除网络" class="headerlink" title="移除网络"></a>移除网络</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker network rm 网络名称</span><br></pre></td></tr></table></figure>
+<h4 id="查看网络内部信息"><a href="#查看网络内部信息" class="headerlink" title="查看网络内部信息"></a>查看网络内部信息</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker network inspect 网络名称</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>docker网络模式</title>
+    <url>/2021/09/08/docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>docker部署vsftpd</title>
+    <url>/2021/09/08/docker%E9%83%A8%E7%BD%B2vsftpd/</url>
+    <content><![CDATA[<h2 id="docker-compose-部署vsftpd"><a href="#docker-compose-部署vsftpd" class="headerlink" title="docker-compose 部署vsftpd"></a>docker-compose 部署vsftpd</h2><p>这里使用<a href="https://hub.docker.com/r/fauria/vsftpd">fauria/vsftpd</a></p>
+<h3 id="docker-run运行"><a href="#docker-run运行" class="headerlink" title="docker run运行"></a>docker run运行</h3><p>使用 <code>docker pull fauria/vsftpd</code>拉取镜像</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -d -v /data/docker/ftp3/vsftpd:/home/vsftpd -p 20:20 -p 21:21 -p 8430-8440:8430-8440 -e </span><br><span class="line">FTP_USER=test -e FTP_PASS=test -e PASV_ADDRESS=x.x.x.x -e PASV_MIN_PORT=8430 -e PASV_MAX_PORT=8440 --name </span><br><span class="line">vsftpd --restart=always fauria/vsftpd</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>成功之后使用浏览器访问<a href="ftp://test:test@x.x.x.x:x">ftp://test:test@x.x.x.x:21</a>其中x.x.x.x是自己的IP，test,test分别是账号和密码<br>或者使用ftp客户端工具选择FTP协议，取消使用被动模式即可访问<br>如果希望修改端口，请看下面</p>
+</blockquote>
+<h3 id="docker-compose-up运行"><a href="#docker-compose-up运行" class="headerlink" title="docker-compose up运行"></a>docker-compose up运行</h3><p>docker-compose 就没什么好说的,运行就完事</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">version: &quot;3&quot;</span><br><span class="line">services:          </span><br><span class="line">    ftp:</span><br><span class="line">        image: fauria/vsftpd</span><br><span class="line">        container_name: vsftpd</span><br><span class="line">        restart: always </span><br><span class="line">        networks:</span><br><span class="line">            mynetwork:</span><br><span class="line">                ipv4_address: 172.18.0.8</span><br><span class="line">        ports:</span><br><span class="line">             - &quot;8420:8420&quot;</span><br><span class="line">             - &quot;8421:8421&quot;</span><br><span class="line">             - &quot;8430-8440:8430-8440&quot;</span><br><span class="line">        volumes:</span><br><span class="line">            - /data/docker/ftp3/vsftpd:/home/vsftpd</span><br><span class="line">            - /data/docker/ftp3/conf/vsftpd.conf:/etc/vsftpd/vsftpd.conf</span><br><span class="line">            - /data/docker/ftp3/conf/services:/etc/services:ro</span><br><span class="line">        environment:</span><br><span class="line">            FTP_USER: test </span><br><span class="line">            FTP_PASS: test </span><br><span class="line">            PASV_ADDRESS: x.x.x.x</span><br><span class="line">            PASV_MIN_PORT: 8430 </span><br><span class="line">            PASV_MAX_PORT: 8440 </span><br><span class="line">         </span><br><span class="line">networks:</span><br><span class="line">  mynetwork:</span><br><span class="line">    external: true</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>和docker run的方法相比，这里修改了端口号，所以把容器内的vsftpd.conf和services文件映射出来方便修改<br>在vsftpd.conf文件中需要增加 <code>listen_port=8421 pasv_enable=YES</code>两行<br>在services文件中需要将 ftp 21/tcp 改为 ftp 801/tcp , ftp 21/udp 改为 ftp 801/udp<br>之后启动即可<br>常规下21端口容易遭到别人的扫描、带来了一定程度的不安全。所以，最好的就是把21端口修改掉。<br>将docker-compose修改的内容对应带docker run的参数就可以了 </p>
+</blockquote>
+<h2 id="有时间补充"><a href="#有时间补充" class="headerlink" title="有时间补充"></a>有时间补充</h2><ul>
+<li>ftp使用相关内容</li>
+<li>vsftpd原理</li>
+<li>ftp用户创建文件夹和相关映射的添加</li>
+<li><a href="https://hub.docker.com/r/fauria/vsftpd">官网</a>上参数的作用</li>
+<li>在启动的时候分配了一个子网是干什么的</li>
+</ul>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>docker-compose</tag>
+        <tag>运维</tag>
+        <tag>ftp</tag>
+        <tag>vsftpd</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Windows安装Hyper-V并搭建docker+php+nginx+mysql</title>
     <url>/2021/09/03/windows%E5%AE%89%E8%A3%85Hyper-V+ubuntu/</url>
     <content><![CDATA[<h2 id="Windows10家庭版安装ubuntu"><a href="#Windows10家庭版安装ubuntu" class="headerlink" title="Windows10家庭版安装ubuntu"></a>Windows10家庭版安装ubuntu</h2><h3 id="安装Hyper-V"><a href="#安装Hyper-V" class="headerlink" title="安装Hyper-V"></a>安装Hyper-V</h3><p><a href="https://blog.csdn.net/yuyuking/article/details/103890195">参考博文</a><br>把下面代码保存为.bat文件，用管理员运行，重启之后，就可以在win+S 中搜索到Hyper-V</p>
@@ -200,121 +302,19 @@
         <category>技术</category>
       </categories>
       <tags>
-        <tag>虚拟机</tag>
+        <tag>docker</tag>
+        <tag>docker-compose</tag>
         <tag>运维</tag>
+        <tag>虚拟机</tag>
         <tag>Hyper-V</tag>
         <tag>linux</tag>
-        <tag>docker</tag>
-        <tag>docker-compose</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>docker-compose.yml配置文件详解</title>
-    <url>/2021/09/06/docker-compose-yml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-        <tag>docker-compose</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>docker常用命令</title>
-    <url>/2021/09/06/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<h2 id="docker使用命令"><a href="#docker使用命令" class="headerlink" title="docker使用命令"></a>docker使用命令</h2><h3 id="常规指令"><a href="#常规指令" class="headerlink" title="常规指令"></a>常规指令</h3><h4 id="启动docker"><a href="#启动docker" class="headerlink" title="启动docker"></a>启动docker</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">systemctl start docker</span><br></pre></td></tr></table></figure>
-<h4 id="停止docker"><a href="#停止docker" class="headerlink" title="停止docker"></a>停止docker</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">systemctl stop docker</span><br></pre></td></tr></table></figure>
-<h4 id="重启docker"><a href="#重启docker" class="headerlink" title="重启docker"></a>重启docker</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure>
-<h4 id="开机自启"><a href="#开机自启" class="headerlink" title="开机自启"></a>开机自启</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">systemctl enable docker</span><br></pre></td></tr></table></figure>
-<h4 id="查看版本"><a href="#查看版本" class="headerlink" title="查看版本"></a>查看版本</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker version</span><br></pre></td></tr></table></figure>
-<h4 id="查看docker信息"><a href="#查看docker信息" class="headerlink" title="查看docker信息"></a>查看docker信息</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker info</span><br></pre></td></tr></table></figure>
-<h4 id="查看帮助"><a href="#查看帮助" class="headerlink" title="查看帮助"></a>查看帮助</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker --help</span><br></pre></td></tr></table></figure>
-<h3 id="镜像命令"><a href="#镜像命令" class="headerlink" title="镜像命令"></a>镜像命令</h3><h4 id="查看已安装的镜像"><a href="#查看已安装的镜像" class="headerlink" title="查看已安装的镜像"></a>查看已安装的镜像</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
-<h4 id="搜索docker-hub上的镜像"><a href="#搜索docker-hub上的镜像" class="headerlink" title="搜索docker hub上的镜像"></a>搜索docker hub上的镜像</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># tomcat为例</span><br><span class="line">docker serch nginx</span><br></pre></td></tr></table></figure>
-<h4 id="下载镜像"><a href="#下载镜像" class="headerlink" title="下载镜像"></a>下载镜像</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker pull nginx[:version]</span><br></pre></td></tr></table></figure>
-<h4 id="删除镜像"><a href="#删除镜像" class="headerlink" title="删除镜像"></a>删除镜像</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 删除单个/多个镜像</span><br><span class="line">docker rmi tomcat[:version]</span><br><span class="line">docker rmi -f 镜像ID</span><br><span class="line">docker rmi -f 镜像名1:TAG 镜像名2:TAG </span><br><span class="line"># 删除全部镜像</span><br><span class="line"># docker images -qa 获取全部镜像id</span><br><span class="line">docker rmi -f $(docker images -qa)</span><br></pre></td></tr></table></figure>
-<h3 id="容器命令"><a href="#容器命令" class="headerlink" title="容器命令"></a>容器命令</h3><h4 id="启动命令"><a href="#启动命令" class="headerlink" title="启动命令"></a>启动命令</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run [options] image [command] [arg...]</span><br></pre></td></tr></table></figure>
-<h5 id="常用参数"><a href="#常用参数" class="headerlink" title="常用参数"></a>常用参数</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-d: 后台运行容器,并返回容器ID</span><br><span class="line"></span><br><span class="line">-i: 以交互式运行容器,通常与-t同时使用</span><br><span class="line"></span><br><span class="line">-p: 端口映射,格式为 主机(宿主)端口:容器端口</span><br><span class="line"></span><br><span class="line">-t: 为容器重新分配一个伪输入终端,通常与-i同时使用</span><br><span class="line"></span><br><span class="line">--name=&quot;name&quot;: 为容器指定一个名称</span><br><span class="line"></span><br><span class="line">--dns 8.8.8.8: 为容器指定一个dns服务器,默认与宿主一致</span><br><span class="line"></span><br><span class="line">--dns-search domain:为容器指定一个DNS域名,默认与宿主一致</span><br><span class="line"></span><br><span class="line">-h &quot;hostname&quot;: 指定容器的hostname</span><br><span class="line"></span><br><span class="line">-e arg=&quot;value&quot;: 设置环境变量</span><br><span class="line"></span><br><span class="line">-env-file=[]:从指定文件读入环境变量</span><br><span class="line"></span><br><span class="line">--cpuset=&quot;0-2&quot; or --cpuset=&quot;0,1,2&quot;: 绑定容器到指定的cpu运行</span><br><span class="line"></span><br><span class="line">-m: 设置容器使用内存最大值</span><br><span class="line"></span><br><span class="line">--net=&quot;bridge&quot;: 指定容器的网络连接类型,支持bridge/host/none/container四种类型</span><br><span class="line"></span><br><span class="line">--link=[]:添加链接到另外一个容器</span><br><span class="line"></span><br><span class="line">--expose=[]:开放一个端口或一组端口,宿主机使用随机端口映射到开放的端口</span><br></pre></td></tr></table></figure>
-<h5 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -d -v /my/data/directory:/home/vsftpd -p 20:20 -p 21:21 -p 21100-21110:21100-21110 -e FTP_USER=myuser -e FTP_PASS=mypass -e PASV_ADDRESS=127.0.0.1 -e PASV_MIN_PORT=21100 -e PASV_MAX_PORT=21110 --name vsftpd --restart=always vsftpd</span><br></pre></td></tr></table></figure>
-<h4 id="查看运行的docker容器"><a href="#查看运行的docker容器" class="headerlink" title="查看运行的docker容器"></a>查看运行的docker容器</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
-<h5 id="常用参数-1"><a href="#常用参数-1" class="headerlink" title="常用参数"></a>常用参数</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 显示所有容器，包括当前没有运行的容器</span><br><span class="line">-a</span><br><span class="line"># 显示最近创建的容器</span><br><span class="line">-l</span><br><span class="line"># 显示最近创建的N个容器</span><br><span class="line">-n</span><br><span class="line"># 静默模式,只显示容器ID</span><br><span class="line">-q</span><br><span class="line"># 不截断输出</span><br><span class="line">--no-trunc</span><br></pre></td></tr></table></figure>
-<h4 id="进入容器"><a href="#进入容器" class="headerlink" title="进入容器"></a>进入容器</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker exec -it 容器名称 /bin/bash</span><br></pre></td></tr></table></figure>
-<h4 id="退出容器"><a href="#退出容器" class="headerlink" title="退出容器"></a>退出容器</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 退出并停止</span><br><span class="line">exit</span><br><span class="line"># 容器不停止退出</span><br><span class="line">ctrl+P+Q</span><br></pre></td></tr></table></figure>
-<h4 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker start 容器ID或容器name</span><br></pre></td></tr></table></figure>
-<h4 id="重启容器"><a href="#重启容器" class="headerlink" title="重启容器"></a>重启容器</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker restart 容器ID或容器name</span><br></pre></td></tr></table></figure>
-<h4 id="停止容器"><a href="#停止容器" class="headerlink" title="停止容器"></a>停止容器</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker stop 容器ID或容器name</span><br></pre></td></tr></table></figure>
-<h4 id="强制停止容器"><a href="#强制停止容器" class="headerlink" title="强制停止容器"></a>强制停止容器</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker kill 容器ID或容器name</span><br></pre></td></tr></table></figure>
-<h4 id="删除容器"><a href="#删除容器" class="headerlink" title="删除容器"></a>删除容器</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 删除已经停止的容器</span><br><span class="line">docker rm 容器ID或容器name </span><br><span class="line"># 强制删除已经停止或正在运行的容器</span><br><span class="line">docker rm -f  容器ID或容器name </span><br><span class="line">#一次性删除所有正在运行的容器</span><br><span class="line">docker rm -f $(docker ps -qa)</span><br></pre></td></tr></table></figure>
-<h4 id="将文件从容器中拷贝到宿主机"><a href="#将文件从容器中拷贝到宿主机" class="headerlink" title="将文件从容器中拷贝到宿主机"></a>将文件从容器中拷贝到宿主机</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker cp 容器ID或容器名称:/文件路径与文件名 宿主机地址</span><br></pre></td></tr></table></figure>
-<h5 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">拷贝容器coco的tmp文件夹下的info.txt到宿主机的当前位置</span><br><span class="line">docker cp coco:/tmp/info.txt .</span><br></pre></td></tr></table></figure>
-<h4 id="日志命令"><a href="#日志命令" class="headerlink" title="日志命令"></a>日志命令</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker logs -f -t --tail 10 容器ID或容器名称</span><br></pre></td></tr></table></figure>
-<h5 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 加入时间戳</span><br><span class="line">-t</span><br><span class="line"># 跟随最新的日志打印</span><br><span class="line">-f</span><br><span class="line"># 输出最后几行的日志</span><br><span class="line">--tail 行数</span><br></pre></td></tr></table></figure>
-<h5 id="实例-2"><a href="#实例-2" class="headerlink" title="实例"></a>实例</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker logs -f -t --tail 10 5b66c8ab957e</span><br></pre></td></tr></table></figure>
-<h3 id="docker-network-常用指令"><a href="#docker-network-常用指令" class="headerlink" title="docker network 常用指令"></a>docker network 常用指令</h3><h4 id="查看网络"><a href="#查看网络" class="headerlink" title="查看网络"></a>查看网络</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker network ls</span><br></pre></td></tr></table></figure>
-<h4 id="创建网络"><a href="#创建网络" class="headerlink" title="创建网络"></a>创建网络</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker network create 网络名称</span><br></pre></td></tr></table></figure>
-<h4 id="把其它容器添加到网络"><a href="#把其它容器添加到网络" class="headerlink" title="把其它容器添加到网络"></a>把其它容器添加到网络</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker network connect 网络名称 容器名称</span><br></pre></td></tr></table></figure>
-<h4 id="断开网络"><a href="#断开网络" class="headerlink" title="断开网络"></a>断开网络</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker network disconnet 网络名称 容器名称</span><br></pre></td></tr></table></figure>
-<h4 id="移除网络"><a href="#移除网络" class="headerlink" title="移除网络"></a>移除网络</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker network rm 网络名称</span><br></pre></td></tr></table></figure>
-<h4 id="查看网络内部信息"><a href="#查看网络内部信息" class="headerlink" title="查看网络内部信息"></a>查看网络内部信息</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker network inspect 网络名称</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>docker部署vsftpd</title>
-    <url>/2021/09/08/docker%E9%83%A8%E7%BD%B2vsftpd/</url>
-    <content><![CDATA[<h2 id="docker-compose-部署vsftpd"><a href="#docker-compose-部署vsftpd" class="headerlink" title="docker-compose 部署vsftpd"></a>docker-compose 部署vsftpd</h2><p>这里使用<a href="https://hub.docker.com/r/fauria/vsftpd">fauria/vsftpd</a></p>
-<h3 id="docker-run运行"><a href="#docker-run运行" class="headerlink" title="docker run运行"></a>docker run运行</h3><p>使用 <code>docker pull fauria/vsftpd</code>拉取镜像</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -d -v /data/docker/ftp3/vsftpd:/home/vsftpd -p 20:20 -p 21:21 -p 8430-8440:8430-8440 -e </span><br><span class="line">FTP_USER=test -e FTP_PASS=test -e PASV_ADDRESS=x.x.x.x -e PASV_MIN_PORT=8430 -e PASV_MAX_PORT=8440 --name </span><br><span class="line">vsftpd --restart=always fauria/vsftpd</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>成功之后使用浏览器访问<a href="ftp://test:test@x.x.x.x:x">ftp://test:test@x.x.x.x:21</a>其中x.x.x.x是自己的IP，test,test分别是账号和密码<br>或者使用ftp客户端工具选择FTP协议，取消使用被动模式即可访问<br>如果希望修改端口，请看下面</p>
-</blockquote>
-<h3 id="docker-compose-up运行"><a href="#docker-compose-up运行" class="headerlink" title="docker-compose up运行"></a>docker-compose up运行</h3><p>docker-compose 就没什么好说的,运行就完事</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">version: &quot;3&quot;</span><br><span class="line">services:          </span><br><span class="line">    ftp:</span><br><span class="line">        image: fauria/vsftpd</span><br><span class="line">        container_name: vsftpd</span><br><span class="line">        restart: always </span><br><span class="line">        networks:</span><br><span class="line">            mynetwork:</span><br><span class="line">                ipv4_address: 172.18.0.8</span><br><span class="line">        ports:</span><br><span class="line">             - &quot;8420:8420&quot;</span><br><span class="line">             - &quot;8421:8421&quot;</span><br><span class="line">             - &quot;8430-8440:8430-8440&quot;</span><br><span class="line">        volumes:</span><br><span class="line">            - /data/docker/ftp3/vsftpd:/home/vsftpd</span><br><span class="line">            - /data/docker/ftp3/conf/vsftpd.conf:/etc/vsftpd/vsftpd.conf</span><br><span class="line">            - /data/docker/ftp3/conf/services:/etc/services:ro</span><br><span class="line">        environment:</span><br><span class="line">            FTP_USER: test </span><br><span class="line">            FTP_PASS: test </span><br><span class="line">            PASV_ADDRESS: x.x.x.x</span><br><span class="line">            PASV_MIN_PORT: 8430 </span><br><span class="line">            PASV_MAX_PORT: 8440 </span><br><span class="line">         </span><br><span class="line">networks:</span><br><span class="line">  mynetwork:</span><br><span class="line">    external: true</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>和docker run的方法相比，这里修改了端口号，所以把容器内的vsftpd.conf和services文件映射出来方便修改<br>在vsftpd.conf文件中需要增加 <code>listen_port=8421 pasv_enable=YES</code>两行<br>在services文件中需要将 ftp 21/tcp 改为 ftp 801/tcp , ftp 21/udp 改为 ftp 801/udp<br>之后启动即可<br>常规下21端口容易遭到别人的扫描、带来了一定程度的不安全。所以，最好的就是把21端口修改掉。<br>将docker-compose修改的内容对应带docker run的参数就可以了 </p>
-</blockquote>
-<h2 id="有时间补充"><a href="#有时间补充" class="headerlink" title="有时间补充"></a>有时间补充</h2><ul>
-<li>ftp使用相关内容</li>
-<li>vsftpd原理</li>
-<li>ftp用户创建文件夹和相关映射的添加</li>
-<li><a href="https://hub.docker.com/r/fauria/vsftpd">官网</a>上参数的作用</li>
-<li>在启动的时候分配了一个子网是干什么的</li>
-</ul>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>运维</tag>
-        <tag>docker</tag>
-        <tag>docker-compose</tag>
-        <tag>ftp</tag>
-        <tag>vsftpd</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>docker网络模式</title>
-    <url>/2021/09/08/docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%BC%8F/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>dockerfile</title>
-    <url>/2021/09/08/dockerfile/</url>
-    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>服务器信息</title>
     <url>/2021/09/08/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BF%A1%E6%81%AF/</url>
     <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="a193a46fba43a71ba602f198ae2c7713b24ee3a90525c801e0ef046aefcbfa71">3a95fb666f02ae47f982517cac03a2888b6a9957cb53ca047dddfb4cc0b4d2c727c58e25d79269d67fc7ff66e45bdd4e9b87adf3a5f846e653e01608686f8dac0f4a0678c23299c078e366afd60139a2cdfcb271ad509436534c33d9d00c86cc3d738f75f10767a09e9e956e39f6a1a955c1de0d4762107bad2c46576ee46f7a8fb7fe64ae7e4fd49f0a069183a27cddce28da3a106b215a6e5b5d2faa37328d</script>
+  <script id="hbeData" type="hbeData" data-hmacdigest="ea27cc29abfbb24a19257b86cef35be4431ce7e46c2153a7cda9984cab28a85d">3a95fb666f02ae47f982517cac03a2888b6a9957cb53ca047dddfb4cc0b4d2c727c58e25d79269d67fc7ff66e45bdd4e9b87adf3a5f846e653e01608686f8dac0f4a0678c23299c078e366afd60139a2cdfcb271ad509436534c33d9d00c86cc3d738f75f10767a09e9e956e39f6a1a955c1de0d4762107bad2c46576ee46f7a8fb7fe64ae7e4fd49f0a069183a27cddaa1eb33c71112b8dc9ff62b1e987eaa5649cf69871a6c59791131b1a174ca5b2ad819321336c05058041122d8a212abc1bb5a7c0dc6d5e4b61571520afb5919bf1a142f7dfef7b650f977e5e0f407401cff0dacca181769afc1df79706f216c798f950bc65bf4c7e7b52878012491457e2deb6f934ee7bfbf0252fdaaede339369d48a503d624e0be9d854801a941bc93f04f04d963526a2bf31f798424d81b1684bfe5552263651cf65e2c9f7aa8db7f4f7935f642335652551818ced1676ab9cf1e5434d1df0ff8ccffd575c450538bbbc6b75900fb8ea7db44857194e341dfea55a88e97e4699d4a583bc0356ba864b64d9803f50fad0a7e93ef416b8aeb2</script>
   <div class="hbe hbe-content">
     <div class="hbe hbe-input hbe-input-default">
       <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">

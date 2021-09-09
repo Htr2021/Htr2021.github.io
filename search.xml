@@ -153,19 +153,61 @@
   <entry>
     <title>docker-compose.yml配置文件详解</title>
     <url>/2021/09/06/docker-compose-yml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<h2 id="常用的docker-compose-命令"><a href="#常用的docker-compose-命令" class="headerlink" title="常用的docker-compose 命令"></a>常用的docker-compose 命令</h2><h3 id="部署compose应用"><a href="#部署compose应用" class="headerlink" title="部署compose应用"></a>部署compose应用</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose up </span><br></pre></td></tr></table></figure>
+<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><p>-f + compose文件名<br>-d 后台运行</p>
+<h3 id="停止docker-compose相关的容器"><a href="#停止docker-compose相关的容器" class="headerlink" title="停止docker-compose相关的容器"></a>停止docker-compose相关的容器</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose stop </span><br><span class="line"># 容器不会被删除，停止的容器可以通过docker-compose restart 重新启动</span><br></pre></td></tr></table></figure>
+<h3 id="删除停止的compose应用"><a href="#删除停止的compose应用" class="headerlink" title="删除停止的compose应用"></a>删除停止的compose应用</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose rm </span><br><span class="line"># 删除容器和网络，不会删除文件映射和各个容器</span><br></pre></td></tr></table></figure>
+<h3 id="重启停止的compose应用"><a href="#重启停止的compose应用" class="headerlink" title="重启停止的compose应用"></a>重启停止的compose应用</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose restart </span><br><span class="line"># 如果用户在停止该应用后对其进行了变更，那么变更的内容不会反映在重启后的应用中，这时需要重新部署应用使变更生效。</span><br></pre></td></tr></table></figure>
+<h3 id="列出compose应用中的各个容器"><a href="#列出compose应用中的各个容器" class="headerlink" title="列出compose应用中的各个容器"></a>列出compose应用中的各个容器</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose ps</span><br><span class="line"># 输出内容包括当前状态，容器运行的命令和网络端口</span><br></pre></td></tr></table></figure>
+<h3 id="停止并删除运行的compose应用"><a href="#停止并删除运行的compose应用" class="headerlink" title="停止并删除运行的compose应用"></a>停止并删除运行的compose应用</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compse down</span><br><span class="line"># 会删除容器和网络，但不会删除文件映射和镜像</span><br></pre></td></tr></table></figure>
+]]></content>
       <categories>
         <category>技术</category>
       </categories>
       <tags>
         <tag>docker</tag>
         <tag>docker-compose</tag>
+        <tag>运维</tag>
       </tags>
   </entry>
   <entry>
     <title>dockerfile</title>
     <url>/2021/09/08/dockerfile/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<h2 id="docker-build介绍"><a href="#docker-build介绍" class="headerlink" title="docker build介绍"></a>docker build介绍</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>docker build [OPTIONS]  PATH | URL | -</p>
+<h3 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h3><ul>
+<li>–build-arg=[] :设置镜像创建时的变量；</li>
+<li>–cpu-shares :设置 cpu 使用权重；</li>
+<li>–cpu-period :限制 CPU CFS周期；</li>
+<li>–cpu-quota :限制 CPU CFS配额；</li>
+<li>–cpuset-cpus :指定使用的CPU id；</li>
+<li>–cpuset-mems :指定使用的内存 id；</li>
+<li>–disable-content-trust :忽略校验，默认开启；</li>
+<li><strong>-f</strong> :指定要使用的Dockerfile路径；</li>
+<li>–force-rm :设置镜像过程中删除中间容器；</li>
+<li>–isolation :使用容器隔离技术；</li>
+<li>–label=[] :设置镜像使用的元数据；</li>
+<li>-m :设置内存最大值；</li>
+<li>–memory-swap :设置Swap的最大值为内存+swap，”-1”表示不限swap；</li>
+<li>–no-cache :创建镜像的过程不使用缓存；</li>
+<li>–pull :尝试去更新镜像的新版本；</li>
+<li>–quiet, -q :安静模式，成功后只输出镜像 ID；</li>
+<li>–rm :设置镜像成功后删除中间容器；</li>
+<li>–shm-size :设置/dev/shm的大小，默认值是64M；</li>
+<li>–ulimit :Ulimit配置。</li>
+<li>–squash :将 Dockerfile 中所有的操作压缩为一层。</li>
+<li><strong>–tag</strong>, -t: 镜像的名字及标签，通常 name:tag 或者 name 格式；可以在一次构建中为一个镜像设置多个标签。</li>
+<li><strong>–network</strong>: 默认 default。在构建期间设置RUN指令的网络模式<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><code>docker build -f Dockerfile -t my/php:5.6-fpm-alpine .</code><h2 id="dockerfile-语法"><a href="#dockerfile-语法" class="headerlink" title="dockerfile 语法"></a>dockerfile 语法</h2></li>
+</ul>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>运维</tag>
+        <tag>docker build</tag>
+        <tag>dockerfile</tag>
+      </tags>
   </entry>
   <entry>
     <title>docker常用命令</title>
@@ -198,7 +240,7 @@
 <h4 id="日志命令"><a href="#日志命令" class="headerlink" title="日志命令"></a>日志命令</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker logs -f -t --tail 10 容器ID或容器名称</span><br></pre></td></tr></table></figure>
 <h5 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 加入时间戳</span><br><span class="line">-t</span><br><span class="line"># 跟随最新的日志打印</span><br><span class="line">-f</span><br><span class="line"># 输出最后几行的日志</span><br><span class="line">--tail 行数</span><br></pre></td></tr></table></figure>
 <h5 id="实例-2"><a href="#实例-2" class="headerlink" title="实例"></a>实例</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker logs -f -t --tail 10 5b66c8ab957e</span><br></pre></td></tr></table></figure>
-<h3 id="docker-network-常用指令"><a href="#docker-network-常用指令" class="headerlink" title="docker network 常用指令"></a>docker network 常用指令</h3><h4 id="查看网络"><a href="#查看网络" class="headerlink" title="查看网络"></a>查看网络</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker network ls</span><br></pre></td></tr></table></figure>
+<h3 id="network命令"><a href="#network命令" class="headerlink" title="network命令"></a>network命令</h3><h4 id="查看网络"><a href="#查看网络" class="headerlink" title="查看网络"></a>查看网络</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker network ls</span><br></pre></td></tr></table></figure>
 <h4 id="创建网络"><a href="#创建网络" class="headerlink" title="创建网络"></a>创建网络</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker network create 网络名称</span><br></pre></td></tr></table></figure>
 <h4 id="把其它容器添加到网络"><a href="#把其它容器添加到网络" class="headerlink" title="把其它容器添加到网络"></a>把其它容器添加到网络</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker network connect 网络名称 容器名称</span><br></pre></td></tr></table></figure>
 <h4 id="断开网络"><a href="#断开网络" class="headerlink" title="断开网络"></a>断开网络</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker network disconnet 网络名称 容器名称</span><br></pre></td></tr></table></figure>
@@ -211,12 +253,55 @@
       </categories>
       <tags>
         <tag>docker</tag>
+        <tag>运维</tag>
       </tags>
   </entry>
   <entry>
     <title>docker网络模式</title>
     <url>/2021/09/08/docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%BC%8F/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<h2 id="docker四种网络模式"><a href="#docker四种网络模式" class="headerlink" title="docker四种网络模式"></a>docker四种网络模式</h2><table>
+<thead>
+<tr>
+<th>Docker网络模式</th>
+<th>配置</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>bridge</td>
+<td>–net=bridge</td>
+<td>默认</td>
+</tr>
+<tr>
+<td>host</td>
+<td>–net=host</td>
+<td>容器和宿主机共享Network namespace</td>
+</tr>
+<tr>
+<td>container</td>
+<td>net=container:NAME_or_ID</td>
+<td>容器和另外一个容器共享Network namespace。 kubernetes中的pod就是多个容器共享一个Network namespace。</td>
+</tr>
+<tr>
+<td>none</td>
+<td>–net=none</td>
+<td>容器有独立的Network namespace，但并没有对其进行任何网络设置，如分配veth pair 和网桥连接，配置IP等</td>
+</tr>
+</tbody></table>
+<h3 id="bridge模式"><a href="#bridge模式" class="headerlink" title="bridge模式"></a>bridge模式</h3><p>Docker进程启动时，会在主机上创建一个docker0的虚拟网桥，然后再把主机上启动的docker容器链接到虚拟网桥上，从docker0子网分配一个ip给容器使用，并设置docker0的ip为容器默认网关<br>bridge模式如下图所示：<br><img src="13618762-f1643a51d313a889.png" alt="bridge模式"></p>
+<h3 id="host模式"><a href="#host模式" class="headerlink" title="host模式"></a>host模式</h3><p>容器和数组及使用一个Network namespace 容器不会虚拟出自己的网卡和ip，而是使用宿主机的IP和端口，容器的文件系统，进程还是和外部隔离的<br>优点：网络性能比较好 缺点：用过的端口不能复用，网络隔离性不好<br>host模式如下图所示：<br><img src="13618762-a892da42b8ff9342.webp" alt="host模式"></p>
+<h3 id="container模式"><a href="#container模式" class="headerlink" title="container模式"></a>container模式</h3><p>新创建的容器和指定的容器共用一个namespace，而不是和宿主机共享，两个容器只是网络共享，文件系统，进程还是隔离的<br>container模式如下图所示：<br><img src="13618762-790a69a562a5b358.webp" alt="container模式"></p>
+<h3 id="none模式"><a href="#none模式" class="headerlink" title="none模式"></a>none模式</h3><p>不为容器进行任何网络设置，封闭的网络能很好的保证容器的安全<br><img src="13618762-3fd41778faebcef5.webp" alt="none模式"></p>
+<p><a href="https://www.jianshu.com/p/22a7032bb7bd">参考博文：https://www.jianshu.com/p/22a7032bb7bd</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>运维</tag>
+        <tag>network</tag>
+      </tags>
   </entry>
   <entry>
     <title>docker部署vsftpd</title>
@@ -233,6 +318,8 @@
 <blockquote>
 <p>和docker run的方法相比，这里修改了端口号，所以把容器内的vsftpd.conf和services文件映射出来方便修改<br>在vsftpd.conf文件中需要增加 <code>listen_port=8421 pasv_enable=YES</code>两行<br>在services文件中需要将 ftp 21/tcp 改为 ftp 801/tcp , ftp 21/udp 改为 ftp 801/udp<br>之后启动即可<br>常规下21端口容易遭到别人的扫描、带来了一定程度的不安全。所以，最好的就是把21端口修改掉。<br>将docker-compose修改的内容对应带docker run的参数就可以了 </p>
 </blockquote>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>如果无法访问，可以关闭端口防火墙</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#查看防火墙状态=》使用root的身份=》结果为running</span><br><span class="line">firewall-cmd --state</span><br><span class="line">#永久性的开放8421端口</span><br><span class="line">firewall-cmd --add-port=8421/tcp permanent</span><br><span class="line">#重载生效刚才的端口设置</span><br><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
 <h2 id="有时间补充"><a href="#有时间补充" class="headerlink" title="有时间补充"></a>有时间补充</h2><ul>
 <li>ftp使用相关内容</li>
 <li>vsftpd原理</li>
@@ -308,29 +395,6 @@
         <tag>虚拟机</tag>
         <tag>Hyper-V</tag>
         <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>服务器信息</title>
-    <url>/2021/09/08/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BF%A1%E6%81%AF/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="ea27cc29abfbb24a19257b86cef35be4431ce7e46c2153a7cda9984cab28a85d">3a95fb666f02ae47f982517cac03a2888b6a9957cb53ca047dddfb4cc0b4d2c727c58e25d79269d67fc7ff66e45bdd4e9b87adf3a5f846e653e01608686f8dac0f4a0678c23299c078e366afd60139a2cdfcb271ad509436534c33d9d00c86cc3d738f75f10767a09e9e956e39f6a1a955c1de0d4762107bad2c46576ee46f7a8fb7fe64ae7e4fd49f0a069183a27cddaa1eb33c71112b8dc9ff62b1e987eaa5649cf69871a6c59791131b1a174ca5b2ad819321336c05058041122d8a212abc1bb5a7c0dc6d5e4b61571520afb5919bf1a142f7dfef7b650f977e5e0f407401cff0dacca181769afc1df79706f216c798f950bc65bf4c7e7b52878012491457e2deb6f934ee7bfbf0252fdaaede339369d48a503d624e0be9d854801a941bc93f04f04d963526a2bf31f798424d81b1684bfe5552263651cf65e2c9f7aa8db7f4f7935f642335652551818ced1676ab9cf1e5434d1df0ff8ccffd575c450538bbbc6b75900fb8ea7db44857194e341dfea55a88e97e4699d4a583bc0356ba864b64d9803f50fad0a7e93ef416b8aeb2</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">请不要看文章</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      <categories>
-        <category>备忘</category>
-      </categories>
-      <tags>
-        <tag>运维</tag>
-        <tag>备忘</tag>
       </tags>
   </entry>
 </search>

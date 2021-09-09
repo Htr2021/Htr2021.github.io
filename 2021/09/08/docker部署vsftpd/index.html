@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">435</span>
+            <span class="post-count">501</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">2 分钟</span>
         </span>
     </span>
 </div>
@@ -125,6 +125,8 @@
 <blockquote>
 <p>和docker run的方法相比，这里修改了端口号，所以把容器内的vsftpd.conf和services文件映射出来方便修改<br>在vsftpd.conf文件中需要增加 <code>listen_port=8421 pasv_enable=YES</code>两行<br>在services文件中需要将 ftp 21/tcp 改为 ftp 801/tcp , ftp 21/udp 改为 ftp 801/udp<br>之后启动即可<br>常规下21端口容易遭到别人的扫描、带来了一定程度的不安全。所以，最好的就是把21端口修改掉。<br>将docker-compose修改的内容对应带docker run的参数就可以了 </p>
 </blockquote>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>如果无法访问，可以关闭端口防火墙</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#查看防火墙状态=》使用root的身份=》结果为running</span><br><span class="line">firewall-cmd --state</span><br><span class="line">#永久性的开放8421端口</span><br><span class="line">firewall-cmd --add-port=8421/tcp permanent</span><br><span class="line">#重载生效刚才的端口设置</span><br><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
 <h2 id="有时间补充"><a href="#有时间补充" class="headerlink" title="有时间补充"></a>有时间补充</h2><ul>
 <li>ftp使用相关内容</li>
 <li>vsftpd原理</li>

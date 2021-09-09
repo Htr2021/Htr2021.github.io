@@ -79,13 +79,17 @@
     <div class="article-meta">
       <a href="/2021/09/08/docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%BC%8F/" class="article-date">
   <time datetime="2021-09-08T07:46:27.000Z" itemprop="datePublished">2021-09-08</time>
-</a>   
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+  </div>
+  
 <div class="word_count">
     <span class="post-time">
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">370</span>
         </span>
     </span>
 
@@ -101,13 +105,49 @@
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <h2 id="docker四种网络模式"><a href="#docker四种网络模式" class="headerlink" title="docker四种网络模式"></a>docker四种网络模式</h2><table>
+<thead>
+<tr>
+<th>Docker网络模式</th>
+<th>配置</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>bridge</td>
+<td>–net=bridge</td>
+<td>默认</td>
+</tr>
+<tr>
+<td>host</td>
+<td>–net=host</td>
+<td>容器和宿主机共享Network namespace</td>
+</tr>
+<tr>
+<td>container</td>
+<td>net=container:NAME_or_ID</td>
+<td>容器和另外一个容器共享Network namespace。 kubernetes中的pod就是多个容器共享一个Network namespace。</td>
+</tr>
+<tr>
+<td>none</td>
+<td>–net=none</td>
+<td>容器有独立的Network namespace，但并没有对其进行任何网络设置，如分配veth pair 和网桥连接，配置IP等</td>
+</tr>
+</tbody></table>
+<h3 id="bridge模式"><a href="#bridge模式" class="headerlink" title="bridge模式"></a>bridge模式</h3><p>Docker进程启动时，会在主机上创建一个docker0的虚拟网桥，然后再把主机上启动的docker容器链接到虚拟网桥上，从docker0子网分配一个ip给容器使用，并设置docker0的ip为容器默认网关<br>bridge模式如下图所示：<br><img src="13618762-f1643a51d313a889.png" alt="bridge模式"></p>
+<h3 id="host模式"><a href="#host模式" class="headerlink" title="host模式"></a>host模式</h3><p>容器和数组及使用一个Network namespace 容器不会虚拟出自己的网卡和ip，而是使用宿主机的IP和端口，容器的文件系统，进程还是和外部隔离的<br>优点：网络性能比较好 缺点：用过的端口不能复用，网络隔离性不好<br>host模式如下图所示：<br><img src="13618762-a892da42b8ff9342.webp" alt="host模式"></p>
+<h3 id="container模式"><a href="#container模式" class="headerlink" title="container模式"></a>container模式</h3><p>新创建的容器和指定的容器共用一个namespace，而不是和宿主机共享，两个容器只是网络共享，文件系统，进程还是隔离的<br>container模式如下图所示：<br><img src="13618762-790a69a562a5b358.webp" alt="container模式"></p>
+<h3 id="none模式"><a href="#none模式" class="headerlink" title="none模式"></a>none模式</h3><p>不为容器进行任何网络设置，封闭的网络能很好的保证容器的安全<br><img src="13618762-3fd41778faebcef5.webp" alt="none模式"></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/22a7032bb7bd">参考博文：https://www.jianshu.com/p/22a7032bb7bd</a></p>
+ 
       <!-- reward -->
       
       <div id="reword-out">
@@ -182,6 +222,8 @@
 </div>
 
 <div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/network/" rel="tag">network</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%90%E7%BB%B4/" rel="tag">运维</a></li></ul>
+
     </footer>
   </div>
 

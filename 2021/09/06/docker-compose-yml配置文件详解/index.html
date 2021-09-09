@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">220</span>
         </span>
     </span>
 
@@ -105,13 +105,22 @@
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <h2 id="常用的docker-compose-命令"><a href="#常用的docker-compose-命令" class="headerlink" title="常用的docker-compose 命令"></a>常用的docker-compose 命令</h2><h3 id="部署compose应用"><a href="#部署compose应用" class="headerlink" title="部署compose应用"></a>部署compose应用</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up </span><br></pre></td></tr></table></figure>
+<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><p>-f + compose文件名<br>-d 后台运行</p>
+<h3 id="停止docker-compose相关的容器"><a href="#停止docker-compose相关的容器" class="headerlink" title="停止docker-compose相关的容器"></a>停止docker-compose相关的容器</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker-compose stop </span><br><span class="line"># 容器不会被删除，停止的容器可以通过docker-compose restart 重新启动</span><br></pre></td></tr></table></figure>
+<h3 id="删除停止的compose应用"><a href="#删除停止的compose应用" class="headerlink" title="删除停止的compose应用"></a>删除停止的compose应用</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker-compose rm </span><br><span class="line"># 删除容器和网络，不会删除文件映射和各个容器</span><br></pre></td></tr></table></figure>
+<h3 id="重启停止的compose应用"><a href="#重启停止的compose应用" class="headerlink" title="重启停止的compose应用"></a>重启停止的compose应用</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker-compose restart </span><br><span class="line"># 如果用户在停止该应用后对其进行了变更，那么变更的内容不会反映在重启后的应用中，这时需要重新部署应用使变更生效。</span><br></pre></td></tr></table></figure>
+<h3 id="列出compose应用中的各个容器"><a href="#列出compose应用中的各个容器" class="headerlink" title="列出compose应用中的各个容器"></a>列出compose应用中的各个容器</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker-compose ps</span><br><span class="line"># 输出内容包括当前状态，容器运行的命令和网络端口</span><br></pre></td></tr></table></figure>
+<h3 id="停止并删除运行的compose应用"><a href="#停止并删除运行的compose应用" class="headerlink" title="停止并删除运行的compose应用"></a>停止并删除运行的compose应用</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker-compse down</span><br><span class="line"># 会删除容器和网络，但不会删除文件映射和镜像</span><br></pre></td></tr></table></figure>
+ 
       <!-- reward -->
       
       <div id="reword-out">
@@ -186,7 +195,7 @@
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%90%E7%BB%B4/" rel="tag">运维</a></li></ul>
 
     </footer>
   </div>

@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>Windows安装Hyper-V并搭建docker+php+nginx+mysql |  时光荏苒</title>
+      <title>RabbitMQ初闻-1 |  时光荏苒</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -58,7 +58,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-windows安装Hyper-V+ubuntu"
+  id="post-RabbitMQ初闻-1"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -69,7 +69,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Windows安装Hyper-V并搭建docker+php+nginx+mysql
+  RabbitMQ初闻-1
 </h1>
  
 
@@ -77,8 +77,8 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2021/09/03/windows%E5%AE%89%E8%A3%85Hyper-V+ubuntu/" class="article-date">
-  <time datetime="2021-09-03T02:48:04.000Z" itemprop="datePublished">2021-09-03</time>
+      <a href="/2021/09/02/RabbitMQ%E5%88%9D%E9%97%BB-1/" class="article-date">
+  <time datetime="2021-09-02T01:16:22.000Z" itemprop="datePublished">2021-09-02</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">1.1k</span>
+            <span class="post-count">1.2k</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">5 分钟</span>
+            <span class="post-count">4 分钟</span>
         </span>
     </span>
 </div>
@@ -113,48 +113,85 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="Windows10家庭版安装ubuntu"><a href="#Windows10家庭版安装ubuntu" class="headerlink" title="Windows10家庭版安装ubuntu"></a>Windows10家庭版安装ubuntu</h2><h3 id="安装Hyper-V"><a href="#安装Hyper-V" class="headerlink" title="安装Hyper-V"></a>安装Hyper-V</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yuyuking/article/details/103890195">参考博文</a><br>把下面代码保存为.bat文件，用管理员运行，重启之后，就可以在win+S 中搜索到Hyper-V</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">pushd &quot;%~dp0&quot;</span><br><span class="line"></span><br><span class="line">dir /b %SystemRoot%\servicing\Packages\*Hyper-V*.mum &gt;hyper-v.txt</span><br><span class="line"></span><br><span class="line">for /f %%i in (&#x27;findstr /i . hyper-v.txt 2^&gt;nul&#x27;) do dism /online /norestart /add-package:&quot;%SystemRoot%\servicing\Packages\%%i&quot;</span><br><span class="line"></span><br><span class="line">del hyper-v.txt</span><br><span class="line"></span><br><span class="line">Dism /online /enable-feature /featurename:Microsoft-Hyper-V-All /LimitAccess /ALL</span><br></pre></td></tr></table></figure>
-
-<h3 id="安装Ubuntu"><a href="#安装Ubuntu" class="headerlink" title="安装Ubuntu"></a>安装Ubuntu</h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/128640396">参考博文</a><br>基本就是按照操作一步一步点下来。<br>MSDN好像没有ubuntu的镜像了，可以点击<a target="_blank" rel="noopener" href="http://mirrors.163.com/ubuntu-releases">网易开源镜像站</a>下载<br>启动之后，会遇到这样的问题，</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Hyper-V™</span><br><span class="line">Uirtual Machine Boot Su_ary</span><br><span class="line"></span><br><span class="line">1.SCSI Disk (0,0)No UEFI-compatible file system uas found.</span><br><span class="line"></span><br><span class="line">2.Network Adapter (OO155DO6E40O) DHCP failed.</span><br><span class="line"></span><br><span class="line">3.SCSI DUD (0,1)No UEFI-compatible file system uas found.</span><br><span class="line"></span><br><span class="line">No operating system was loaded. Press a Key to retry the boot sequence...</span><br><span class="line">Note： Configuration changes nay require the virtual Machine to be reset.</span><br></pre></td></tr></table></figure>
-
-<p>把虚拟机启动时启用安全启动的勾去掉。<a target="_blank" rel="noopener" href="https://tieba.baidu.com/p/5587795237?red_tag=0742118433">解决方法</a></p>
-<h2 id="linux安装docker"><a href="#linux安装docker" class="headerlink" title="linux安装docker"></a>linux安装docker</h2><p>安装方法<a target="_blank" rel="noopener" href="https://www.cnblogs.com/kingsonfu/p/11576797.html">参考博文</a><br>使用的yum源安装</p>
+  <h3 id="什么是消息中间件"><a href="#什么是消息中间件" class="headerlink" title="什么是消息中间件"></a>什么是消息中间件</h3><p>分布式系统中的一种消息传递装置</p>
+<h4 id="传递模式"><a href="#传递模式" class="headerlink" title="传递模式"></a>传递模式</h4><p>发送者将消息发送给消息服务器，消息服务器将消息存放在若干队列中，在合适的时候再将消息转发给接收者。</p>
 <ol>
-<li>查看是否已安装docker<br><code>yum list installed | grep docker</code></li>
-<li>安装docker<br><code>yum -y install docker</code></li>
-<li>启动docker<br><code>systemctl start docker</code></li>
-<li>查看docker状态<br><code> systemctl status docker</code><br>如果出现下面代表安装成功<br><img src="img.png" alt="安装成功"></li>
-<li>可以将docker设置为开机自启动<br><code>systemctl enable docker;</code></li>
-</ol>
-<blockquote>
-<p>建议使用<a target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/centos/">官网安装</a></p>
-</blockquote>
-<h2 id="docker-安装php-nginx-mysql"><a href="#docker-安装php-nginx-mysql" class="headerlink" title="docker 安装php+nginx+mysql"></a>docker 安装php+nginx+mysql</h2><h3 id="获取镜像image"><a href="#获取镜像image" class="headerlink" title="获取镜像image"></a>获取镜像image</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql:5.7      # 拉取 mysql 5.7</span><br><span class="line">docker nginx               # 拉取 nginx </span><br><span class="line">docker pull php:5.6-fpm    # 拉取 php </span><br></pre></td></tr></table></figure>
-<p>docker images              # 查看安装镜像</p>
-<h3 id="普通运行"><a href="#普通运行" class="headerlink" title="普通运行"></a>普通运行</h3><p><code>docker run -p 对外暴露的端口:容器内的端口 --name 容器名 -e 配置信息=内容 -v 主机目录:容器目录 -d 镜像名</code><br>使用 <code>docker ps</code> || <code>docker ps -a</code> 查看运行||全部容器</p>
-<h3 id="docker-compose运行"><a href="#docker-compose运行" class="headerlink" title="docker-compose运行"></a>docker-compose运行</h3><p>文件模板如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">version: &#x27;2.0&#x27;</span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  nginx:</span><br><span class="line">    restart: always</span><br><span class="line">    image: nginx:1.11.6-alpine</span><br><span class="line">    ports:</span><br><span class="line">      - 8080:80</span><br><span class="line">      - 80:80</span><br><span class="line">      - 443:443</span><br><span class="line">    volumes:</span><br><span class="line">      - ./conf.d:/etc/nginx/conf.d</span><br><span class="line">      - ./log:/var/log/nginx</span><br><span class="line">      - ./www:/var/www</span><br><span class="line">      - /etc/letsencrypt:/etc/letsencrypt</span><br></pre></td></tr></table></figure>
-<p><strong>参数说明：</strong><br><strong>version</strong>：版本号</p>
-<p><strong>service</strong>：就是要定义的docker容器</p>
-<p><strong>nginx</strong>:容器的名称</p>
-<p><strong>restart</strong>：设置为always，表明此容器应该在停止的情况下总是重启，比如，服务器启动时，这个容器就跟着启动，不用手动启动，服务器启动之后，进入到docker-compose.yml文件路径下，执行docker-compose ps可以看到，该容器正在运行。</p>
-<p><strong>image</strong>：这个是需要依赖的容器，也就是nginx软件，可以到docker官方镜像上找到最新版的镜像。</p>
-<p><strong>ports</strong>：端口映射。比如： - 8080:80，表示容器内运行着的端口是80，把端口暴露给8080端口，从外面访问的是8080端口，就能自动映射到80端口上。</p>
-<p><strong>volumes</strong>:文件映射。表示数据、配置文件等存放的位置。（- . 这个表示docker-compose.yml当前目录位置开始创建这个文件</p>
-<h3 id="可能的问题"><a href="#可能的问题" class="headerlink" title="可能的问题"></a>可能的问题</h3><p>如果你的容器运行正常，但是无法访问到MySQL，一般有以下几个可能的原因：</p>
-<ul>
-<li>防火墙拦截<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 开放端口：</span><br><span class="line">$ systemctl status firewalld</span><br><span class="line">$ firewall-cmd  --zone=public --add-port=3306/tcp -permanent</span><br><span class="line">$ firewall-cmd  --reload</span><br><span class="line"># 关闭防火墙：</span><br><span class="line">$ sudo systemctl stop firewalld</span><br></pre></td></tr></table></figure></li>
-<li>需要在docker本地客户端设置远程访问账号<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker exec -it mysql bash</span><br><span class="line">$ mysql -uroot -p123456</span><br><span class="line">mysql&gt; grant all privileges on *.* to root@&#x27;%&#x27; identified by &quot;password&quot;;</span><br></pre></td></tr></table></figure>
-原理：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"># mysql使用mysql数据库中的user表来管理权限，修改user表就可以修改权限（只有root账号可以修改）</span><br><span class="line"></span><br><span class="line">mysql&gt; use mysql;</span><br><span class="line">Database changed</span><br><span class="line"></span><br><span class="line">mysql&gt; select host,user,password from user;</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">| host                    | user      | password                                                                 |</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">| localhost              | root     | *A731AEBFB621E354CD41BAF207D884A609E81F5E      |</span><br><span class="line">| 192.168.1.1            | root     | *A731AEBFB621E354CD41BAF207D884A609E81F5E      |</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">2 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; grant all privileges  on *.* to root@&#x27;%&#x27; identified by &quot;password&quot;;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; flush privileges;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select host,user,password from user;</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">| host                    | user      | password                                                                 |</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">| localhost              | root      | *A731AEBFB621E354CD41BAF207D884A609E81F5E     |</span><br><span class="line">| 192.168.1.1            | root      | *A731AEBFB621E354CD41BAF207D884A609E81F5E     |</span><br><span class="line">| %                       | root      | *A731AEBFB621E354CD41BAF207D884A609E81F5E     |</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">3 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
-<h2 id="安装docker-compose"><a href="#安装docker-compose" class="headerlink" title="安装docker-compose"></a>安装docker-compose</h2><del>第一步下载：</del><br><del><code>curl -L https://get.daocloud.io/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` &gt;  /usr/local/bin/docker-compose</code></del><br><del>第二步赋权：</del><br><del><code>chmod a+x /usr/local/bin/docker-compose</code></del><br><del>第三步查看版本：</del><br><del><code>docker-compose --version</code></del><blockquote>
-<p>上面的方法在部署之后，使用docker-compose部署会出现端口占用的错误，且物理机，虚拟机端口并没有被占用<br>在一段时间的问题定位之后，发现是安装的docker-compose有问题，所以建议使官网安装<a target="_blank" rel="noopener" href="https://docs.docker.com/compose/install/">安装地址</a><br>步骤和上方基本相同，第一步下载的地址发生了改变</p>
+<li>点对点模式<blockquote>
+<p>点对点模式是基于队列的，生产者发送信息到队列，消费者从队列接受消息!<br><img src="iqlde9d8x0.jpg" alt="点对点"><br><strong>特点</strong>： 不可重复消费</p>
 </blockquote>
 </li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose</span><br><span class="line">sudo chmod +x /usr/local/bin/docker-compose</span><br><span class="line">docker-compose --version</span><br></pre></td></tr></table></figure>
-<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>安装netstat<br><code>yum -y install net-tools </code><br><a target="_blank" rel="noopener" href="https://hub.docker.com/">docker-hub地址</a><br><a target="_blank" rel="noopener" href="https://docs.docker.com/">docker-文档地址</a></p>
+<li>发布/订阅模式<blockquote>
+<p>消息发布者把消息发布到某个主题，消息订阅者从主题获取消息<br><img src="k1o8gjrymm.jpg" alt="多订阅"><br><strong>特点</strong>：可重复消费</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h4><ol>
+<li><strong>解耦</strong>：在编辑代码的时候，不需要考虑另一边怎么设计，直接和消息队列交互就可以</li>
+<li><strong>冗余（存储）</strong>：需要处理系统明确的表示消息被处理之后，消息才能被消息队列删除</li>
+<li><strong>拓展性</strong>：解耦之后拓展性自然提高</li>
+<li><strong>削峰</strong>：起到缓冲的作用，降低服务器的峰值的需求</li>
+<li><strong>可恢复性</strong>：生产者或消费者失效时，其它系统任然可以运行</li>
+<li><strong>顺序保证</strong>：消息队列确保一定程度上的顺序性</li>
+<li><strong>异步通信</strong>：后台任务或者异步任务，起到监听的效果</li>
+</ol>
+<h3 id="RabbitMQ整体模型"><a href="#RabbitMQ整体模型" class="headerlink" title="RabbitMQ整体模型"></a>RabbitMQ整体模型</h3><p>RabbitMQ整体上说，是一个生产者消费者模型，负责接收，存储和转发消息，从计算机的角度来说，更像一个交换机模型</p>
+<blockquote>
+<p><img src="img.png" alt="RabbitMQ整体模型"></p>
+</blockquote>
+<h3 id="RabbitMQ概念介绍"><a href="#RabbitMQ概念介绍" class="headerlink" title="RabbitMQ概念介绍"></a>RabbitMQ概念介绍</h3><p>**Producer(生产者):**生产者创建消息，发送消息体(payload)和标签(label)</p>
+<blockquote>
+<p>消息体：一般是带有业务逻辑的json<br>标签：交换器名称和路由键</p>
+</blockquote>
+<p><strong>Consumer(消费者)：</strong>消费者值消费消息体，消息路由的时候，标签会被丢弃，消费者不知道消息的生产者是谁<br><strong>Broker(消息队列的服务节点)：</strong>对外就是消息队列</p>
+<blockquote>
+<p><img src="img_1.png" alt="消息队列的运转过程"></p>
+</blockquote>
+<p><strong>Queue(队列)：</strong>RabbitMQ内部对象，存储信息</p>
+<blockquote>
+<p>RabbitMQ 的生产者生产消息并最终投递到队列中，消费者可以从队列中获取消息并消费。<br>多个消费者可以订阅同一个队列，这时队列中的消息会被平均分摊（Round-Robin，即轮询）<br>RabbitMQ 不支持队列层面的广播消费，如果需要广播消费，需要在其上进行二次开发，处理逻辑会变得异常复杂，同时也不建议这么做</p>
+</blockquote>
+<p><strong>Exchange(交换器)：</strong></p>
+<blockquote>
+<p>生产者将消息发送到 Exchange，由交换器将消息路由到一个或者多个队列中。如果路由不到，或许会返回给生产者，或许直接丢弃。<br><img src="img_1.png" alt="交换器"></p>
+</blockquote>
+<p><strong>RoutingKey(路由键):</strong></p>
+<blockquote>
+<p>生产者把消息发送给交换机的时候指定的字段，通过这个字段决定与消息发送到哪个队列(BindingKey)</p>
+</blockquote>
+<p><strong>Binding(绑定):</strong></p>
+<blockquote>
+<p>将交换器和队列关联起来</p>
+</blockquote>
+<h4 id="交换器类型"><a href="#交换器类型" class="headerlink" title="交换器类型"></a>交换器类型</h4><p>RabbitMQ 常用的交换器类型有 fanout、direct、topic、headers 这四种。AMQP 协议里还提到另外两种类型：System 和自定义，这里不予描述。不同的类型绑定时具有不同的策略</p>
+<ol>
+<li><strong>fanout</strong><br>和RoutingKey,BindingKey无关，消息发送到与交换机绑定的所有队列中</li>
+<li><strong>direct</strong><br>消息发送到和RoutingKey和BindingKey完全匹配的队列中</li>
+<li><strong>topic</strong><br>在前者的基础上做了类似正则表达式的拓展，用规则匹配取代了完全匹配</li>
+<li><strong>headers</strong><br>和RoutingKey,BindingKey无关，根据发送的消息内容中的 headers 属性进行匹配，性能较差，不实用</li>
+</ol>
+<h3 id="RabbitMQ-运转流程"><a href="#RabbitMQ-运转流程" class="headerlink" title="RabbitMQ 运转流程"></a>RabbitMQ 运转流程</h3><p><strong>生产者发送消息的时候：</strong></p>
+<ol>
+<li>生产者连接到 RabbitMQ Broker，建立一个连接（Connection），开启一个信道（Channel）</li>
+<li>生产者声明一个交换器，并设置相关属性，比如交换机类型、是否持久化等（详细内</li>
+<li>生产者声明一个队列并设置相关属性，比如是否排他、是否持久化、是否自动删除等</li>
+<li>生产者通过路由键将交换器和队列绑定起来</li>
+<li>生产者发送消息至 RabbitMQ Broker，其中包含路由键、交换器等信息</li>
+<li>相应的交换器根据接收到的路由键查找相匹配的队列。</li>
+<li>如果找到，则将从生产者发送过来的消息存入相应的队列中。</li>
+<li>如果没有找到，则根据生产者配置的属性选择丢弃还是回退给生产者</li>
+<li>关闭信道。</li>
+<li>关闭连接。</li>
+</ol>
+<p><strong>消费者接收消息的过程：</strong></p>
+<ol>
+<li>消费者连接到 RabbitMQ Broker，建立一个连接（Connection），开启一个信道（Channel）。</li>
+<li>消费者向 RabbitMQ Broker 请求消费相应队列中的消息，可能会设置相应的回调函数,以及做一些准备工作</li>
+<li>等待 RabbitMQ Broker 回应并投递相应队列中的消息，消费者接收消息。</li>
+<li>消费者确认（ack）接收到的消息。</li>
+<li>RabbitMQ 从队列中删除相应已经被确认的消息。</li>
+<li>关闭信道。</li>
+<li>关闭连接。</li>
+</ol>
  
       <!-- reward -->
       
@@ -225,12 +262,12 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://htr2021.github.io/2021/09/03/windows%E5%AE%89%E8%A3%85Hyper-V+ubuntu/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://htr2021.github.io/2021/09/02/RabbitMQ%E5%88%9D%E9%97%BB-1/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hyper-V/" rel="tag">Hyper-V</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">虚拟机</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%90%E7%BB%B4/" rel="tag">运维</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RabbitMQ/" rel="tag">RabbitMQ</a></li></ul>
 
     </footer>
   </div>
@@ -238,19 +275,19 @@
    
   <nav class="article-nav">
     
-      <a href="/2021/09/06/docker-compose-yml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/" class="article-nav-link">
+      <a href="/2021/09/03/windows%E5%AE%89%E8%A3%85Hyper-V+ubuntu/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            docker-compose.yml配置文件详解
+            Windows安装Hyper-V并搭建docker+php+nginx+mysql
           
         </div>
       </a>
     
     
-      <a href="/2021/09/02/RabbitMQ%E5%88%9D%E9%97%BB-1/" class="article-nav-link">
+      <a href="/2021/09/01/hello-world/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">RabbitMQ初闻-1</div>
+        <div class="article-nav-title">Hello World</div>
       </a>
     
   </nav>

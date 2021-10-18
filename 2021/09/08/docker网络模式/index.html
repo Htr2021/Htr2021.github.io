@@ -81,7 +81,7 @@
   <time datetime="2021-09-08T07:46:27.000Z" itemprop="datePublished">2021-09-08</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a> / <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/docker/">docker</a>
   </div>
   
 <div class="word_count">
@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">370</span>
+            <span class="post-count">465</span>
         </span>
     </span>
 
@@ -146,7 +146,7 @@
 <h3 id="host模式"><a href="#host模式" class="headerlink" title="host模式"></a>host模式</h3><p>容器和数组及使用一个Network namespace 容器不会虚拟出自己的网卡和ip，而是使用宿主机的IP和端口，容器的文件系统，进程还是和外部隔离的<br>优点：网络性能比较好 缺点：用过的端口不能复用，网络隔离性不好<br>host模式如下图所示：<br><img src="13618762-a892da42b8ff9342.webp" alt="host模式"></p>
 <h3 id="container模式"><a href="#container模式" class="headerlink" title="container模式"></a>container模式</h3><p>新创建的容器和指定的容器共用一个namespace，而不是和宿主机共享，两个容器只是网络共享，文件系统，进程还是隔离的<br>container模式如下图所示：<br><img src="13618762-790a69a562a5b358.webp" alt="container模式"></p>
 <h3 id="none模式"><a href="#none模式" class="headerlink" title="none模式"></a>none模式</h3><p>不为容器进行任何网络设置，封闭的网络能很好的保证容器的安全<br><img src="13618762-3fd41778faebcef5.webp" alt="none模式"></p>
-<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/22a7032bb7bd">参考博文：https://www.jianshu.com/p/22a7032bb7bd</a></p>
+<h2 id="docker-network-create"><a href="#docker-network-create" class="headerlink" title="docker network create"></a>docker network create</h2><p>–subnet=192.168.200.0/24命令指定该网络模式网段范围，其中24代表该网段前24位相同，后8位不同，即该网段范围为：192.168.200.1~192.168.200.254，若该命令改为–subnet=192.168.200.0.16，即该网段范围为：192.168.0.1-192.168.255.254，这个范围就变的很大了。<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhizhuodewo6/article/details/87706638">参考博文</a><br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/22a7032bb7bd">参考博文：https://www.jianshu.com/p/22a7032bb7bd</a></p>
  
       <!-- reward -->
       

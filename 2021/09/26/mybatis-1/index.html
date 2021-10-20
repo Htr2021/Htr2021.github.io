@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">84</span>
+            <span class="post-count">143</span>
         </span>
     </span>
 
@@ -116,7 +116,7 @@
   <h2 id="MyBatis-是如何解决SQL注入问题的"><a href="#MyBatis-是如何解决SQL注入问题的" class="headerlink" title="MyBatis 是如何解决SQL注入问题的"></a>MyBatis 是如何解决SQL注入问题的</h2><p>在使用mybatis编写SQL时，会遇到<code>#&#123;&#125;</code> 和<code>$&#123;&#125;</code></p>
 <ul>
 <li><code>#&#123;&#125;</code>在预处理时，会把参数用占位符替代，在预编译之后传入参数(不存在SQL注入)</li>
-<li><code>$&#123;&#125;</code>不做预处理，将参数不加修饰放到sql语句中(会产生注入)</li>
+<li><code>$&#123;&#125;</code>不做预处理，将参数不加修饰放到sql语句中(会产生注入)<br>MyBatis 默认对所有sql进行预编译，底层使用PreparedStatement,先将带有占位符的sql模板发送到mysql服务器，由服务器编译并保留编译结果，然后执行带有真实参数的sql</li>
 <li></li>
 </ul>
  

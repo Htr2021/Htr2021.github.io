@@ -141,6 +141,27 @@
       </tags>
   </entry>
   <entry>
+    <title>docker-compose.yml配置文件</title>
+    <url>/2021/09/06/docker-compose-yml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[<h2 id="常用的docker-compose-命令"><a href="#常用的docker-compose-命令" class="headerlink" title="常用的docker-compose 命令"></a>常用的docker-compose 命令</h2><h3 id="部署compose应用"><a href="#部署compose应用" class="headerlink" title="部署compose应用"></a>部署compose应用</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose up </span><br></pre></td></tr></table></figure>
+<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><p>-f + compose文件名<br>-d 后台运行</p>
+<h3 id="停止docker-compose相关的容器"><a href="#停止docker-compose相关的容器" class="headerlink" title="停止docker-compose相关的容器"></a>停止docker-compose相关的容器</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose stop </span><br><span class="line"># 容器不会被删除，停止的容器可以通过docker-compose restart 重新启动</span><br></pre></td></tr></table></figure>
+<h3 id="删除停止的compose应用"><a href="#删除停止的compose应用" class="headerlink" title="删除停止的compose应用"></a>删除停止的compose应用</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose rm </span><br><span class="line"># 删除容器和网络，不会删除文件映射和各个容器</span><br></pre></td></tr></table></figure>
+<h3 id="重启停止的compose应用"><a href="#重启停止的compose应用" class="headerlink" title="重启停止的compose应用"></a>重启停止的compose应用</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose restart </span><br><span class="line"># 如果用户在停止该应用后对其进行了变更，那么变更的内容不会反映在重启后的应用中，这时需要重新部署应用使变更生效。</span><br></pre></td></tr></table></figure>
+<h3 id="列出compose应用中的各个容器"><a href="#列出compose应用中的各个容器" class="headerlink" title="列出compose应用中的各个容器"></a>列出compose应用中的各个容器</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose ps</span><br><span class="line"># 输出内容包括当前状态，容器运行的命令和网络端口</span><br></pre></td></tr></table></figure>
+<h3 id="停止并删除运行的compose应用"><a href="#停止并删除运行的compose应用" class="headerlink" title="停止并删除运行的compose应用"></a>停止并删除运行的compose应用</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compse down</span><br><span class="line"># 会删除容器和网络，但不会删除文件映射和镜像</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>技术</category>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>docker-compose</tag>
+        <tag>运维</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>dockerfile</title>
     <url>/2021/09/08/dockerfile/</url>
     <content><![CDATA[<h2 id="docker-build介绍"><a href="#docker-build介绍" class="headerlink" title="docker build介绍"></a>docker build介绍</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>docker build [OPTIONS]  PATH | URL | -</p>
@@ -175,30 +196,9 @@
       </categories>
       <tags>
         <tag>docker</tag>
+        <tag>运维</tag>
         <tag>docker build</tag>
         <tag>dockerfile</tag>
-        <tag>运维</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>docker-compose.yml配置文件</title>
-    <url>/2021/09/06/docker-compose-yml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/</url>
-    <content><![CDATA[<h2 id="常用的docker-compose-命令"><a href="#常用的docker-compose-命令" class="headerlink" title="常用的docker-compose 命令"></a>常用的docker-compose 命令</h2><h3 id="部署compose应用"><a href="#部署compose应用" class="headerlink" title="部署compose应用"></a>部署compose应用</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose up </span><br></pre></td></tr></table></figure>
-<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><p>-f + compose文件名<br>-d 后台运行</p>
-<h3 id="停止docker-compose相关的容器"><a href="#停止docker-compose相关的容器" class="headerlink" title="停止docker-compose相关的容器"></a>停止docker-compose相关的容器</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose stop </span><br><span class="line"># 容器不会被删除，停止的容器可以通过docker-compose restart 重新启动</span><br></pre></td></tr></table></figure>
-<h3 id="删除停止的compose应用"><a href="#删除停止的compose应用" class="headerlink" title="删除停止的compose应用"></a>删除停止的compose应用</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose rm </span><br><span class="line"># 删除容器和网络，不会删除文件映射和各个容器</span><br></pre></td></tr></table></figure>
-<h3 id="重启停止的compose应用"><a href="#重启停止的compose应用" class="headerlink" title="重启停止的compose应用"></a>重启停止的compose应用</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose restart </span><br><span class="line"># 如果用户在停止该应用后对其进行了变更，那么变更的内容不会反映在重启后的应用中，这时需要重新部署应用使变更生效。</span><br></pre></td></tr></table></figure>
-<h3 id="列出compose应用中的各个容器"><a href="#列出compose应用中的各个容器" class="headerlink" title="列出compose应用中的各个容器"></a>列出compose应用中的各个容器</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose ps</span><br><span class="line"># 输出内容包括当前状态，容器运行的命令和网络端口</span><br></pre></td></tr></table></figure>
-<h3 id="停止并删除运行的compose应用"><a href="#停止并删除运行的compose应用" class="headerlink" title="停止并删除运行的compose应用"></a>停止并删除运行的compose应用</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compse down</span><br><span class="line"># 会删除容器和网络，但不会删除文件映射和镜像</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>技术</category>
-        <category>docker</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-        <tag>运维</tag>
-        <tag>docker-compose</tag>
       </tags>
   </entry>
   <entry>
@@ -320,21 +320,6 @@
       </tags>
   </entry>
   <entry>
-    <title>mybatis-SQL注入</title>
-    <url>/2021/09/26/mybatis-1/</url>
-    <content><![CDATA[<h2 id="MyBatis-是如何解决SQL注入问题的"><a href="#MyBatis-是如何解决SQL注入问题的" class="headerlink" title="MyBatis 是如何解决SQL注入问题的"></a>MyBatis 是如何解决SQL注入问题的</h2><p>在使用mybatis编写SQL时，会遇到<code>#&#123;&#125;</code> 和<code>$&#123;&#125;</code></p>
-<ul>
-<li><code>#&#123;&#125;</code>在预处理时，会把参数用占位符替代，在预编译之后传入参数(不存在SQL注入)</li>
-<li><code>$&#123;&#125;</code>不做预处理，将参数不加修饰放到sql语句中(会产生注入)</li>
-<li></li>
-</ul>
-]]></content>
-      <categories>
-        <category>技术</category>
-        <category>mybatis</category>
-      </categories>
-  </entry>
-  <entry>
     <title>docker部署vsftpd</title>
     <url>/2021/09/08/docker%E9%83%A8%E7%BD%B2vsftpd/</url>
     <content><![CDATA[<h2 id="docker-compose-部署vsftpd"><a href="#docker-compose-部署vsftpd" class="headerlink" title="docker-compose 部署vsftpd"></a>docker-compose 部署vsftpd</h2><p>这里使用<a href="https://hub.docker.com/r/fauria/vsftpd">fauria/vsftpd</a></p>
@@ -365,125 +350,48 @@
       </categories>
       <tags>
         <tag>docker</tag>
-        <tag>运维</tag>
         <tag>docker-compose</tag>
+        <tag>运维</tag>
         <tag>ftp</tag>
         <tag>vsftpd</tag>
       </tags>
   </entry>
   <entry>
-    <title>mycat入门-目录</title>
-    <url>/2021/09/24/mycat%E5%85%A5%E9%97%A8-2/</url>
-    <content><![CDATA[<h2 id="MyCat目录结构"><a href="#MyCat目录结构" class="headerlink" title="MyCat目录结构"></a>MyCat目录结构</h2><p><img src="image004.png"><br>目录解释如下：<br><strong>bin 程序目录</strong>，存放了window版本和linux版本，除了提供封装成服务的版本之外，也提供了nowrap的shell脚本命令，方便大家选择和修改，进入到bin目录：<br>Linux下运行：./mycat console,首先要chmod +x *<br>注：mycat支持的命令{ console | start | stop | restart | status | dump }<br><strong>conf目录下存放配置文件</strong>，server.xml是Mycat服务器参数调整和用户授权的配置文件，schema.xml是逻辑库定义和表以及分片定义的配置文件，rule.xml是分片规则的配置文件，分片规则的具体一些参数信息单独存放为文件，也在这个目录下，配置文件修改，需要重启Mycat或者通过9066端口reload.<br><strong>lib目录下主要存放mycat依赖的一些jar文件.</strong><br><strong>日志存放在logs/mycat.log中</strong>，每天一个文件，日志的配置是在conf/log4j.xml中，根据自己的需要，可以调整输出级别为debug，debug级别下，会输出更多的信息，方便排查问题.<br>注意：Linux下部署安装MySQL，默认不忽略表名大小写，需要手动到/etc/my.cnf 下配置 lower_case_table_names=1 使Linux环境下MySQL忽略表名大小写，否则使用MyCAT的时候会提示找不到表的错误！</p>
-<h2 id="schema-xml"><a href="#schema-xml" class="headerlink" title="schema.xml"></a>schema.xml</h2>]]></content>
+    <title>encrypt</title>
+    <url>/2021/09/09/encrypt/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="e1a81976191c8e6eb021fbc9e7ad666f044f32a369f256494c040c60b3d42fc3">bd25ed9264b080267271e137e33d0ce18f3dbb41a8a4203af98a09ddcdccf6d3</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
       <categories>
-        <category>技术</category>
-        <category>MyCat</category>
+        <category>本站搭建</category>
       </categories>
       <tags>
-        <tag>mycat</tag>
-        <tag>数据库</tag>
-        <tag>mysql</tag>
+        <tag>encrypt</tag>
       </tags>
   </entry>
   <entry>
-    <title>WebSocket-简介</title>
-    <url>/2021/09/13/webSocket/</url>
-    <content><![CDATA[<h1 id="WebSocket"><a href="#WebSocket" class="headerlink" title="WebSocket"></a>WebSocket</h1><p>WebSocket 是 HTML5 开始提供的一种在单个 TCP 连接上进行全双工通讯的协议。</p>
-<h2 id="知识回顾"><a href="#知识回顾" class="headerlink" title="知识回顾"></a>知识回顾</h2><h3 id="计算机网络层次划分"><a href="#计算机网络层次划分" class="headerlink" title="计算机网络层次划分"></a>计算机网络层次划分</h3><p>国际标准化住址(ISO)在1979年提出OSI七层模型，常见的网络层次划分还有TCP/IP四层协议和TCP/IP五层协议，对应关系如下<br><img src="%E9%9A%8F%E7%AC%94-%E6%95%B0%E6%8D%AE%E5%BA%93/img.png"></p>
-<h4 id="OSI七层网络模型"><a href="#OSI七层网络模型" class="headerlink" title="OSI七层网络模型"></a>OSI七层网络模型</h4><p>TCP/IP协议是互联网的基础协议，没有它就根本不可能上网，任何和互联网有关的操作都离不开TCP/IP协议。不管是OSI七层模型还是TCP/IP的四层、五层模型，每一层中都有自己的专属协议，完成自己相应的工作以及与上下层级之间进行沟通。由于OSI七层模型为网络的标准层次划分，所以我以OSI七层模型为例从上向下进行一一介绍 </p>
-<h5 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h5><p>应用层是操作系统或网络应用程序提供访问网络服务的接口。</p>
-<h5 id="表示层"><a href="#表示层" class="headerlink" title="表示层"></a>表示层</h5><p>表示层对上层数据或信息进行变换，保证一个主机应用层信息可以被另一个主机的应用程序理解。表示层的数据转换包括数据的加密、压缩、格式转换等。</p>
-<h5 id="会话层"><a href="#会话层" class="headerlink" title="会话层"></a>会话层</h5><p>会话层管理主机之间的会话进程，负责建立、管理、终止进程之间的会话。会话层还利用在数据中插入校验点来实现数据的同步。</p>
-<p>会话层、表示层、应用层重点：</p>
-<p>数据传输基本单位为报文<br>包含的主要协议：FTP（文件传输协议）、Telnet（远程登陆协议）、DNS（域名解析协议）、SMTP（邮件传送协议）、POP3协议（邮局协议）、HTTP协议（Hyper Text Transfer Protocol） </p>
-<h5 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h5><p>第一个端到端（主机到主机）的层次。传输层负责将上层数据分段并提供端到端的、可靠的或不可靠的传输。此外，传输层还要处理端到端的差错控制和流量控制问题。<br>传输层的任务是根据通信子网的特性，利用最佳的网络资源，为两个端系统的会话层之间提供建立、维护和取消传输连接的功能，负责端到端的可靠数据传输。在这一层，信息传送的协议数据单元称为段或报文。</p>
-<p>有关传输层的重点：</p>
-<p>包含的主要协议：TCP协议（Transmission Control Protocol，传输控制协议）、UDP协议（User Datagram Protocol，用户数据报协议）<br>重要设备：网关</p>
-<h5 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h5><p>网络层的目的是实现两端系统之间的数据透明传送，具体功能包括寻址和路由选择、连接的建立、保持和终止等。</p>
-<p>它提供的服务使传输层不需要了解网络中的数据传输和交换技术。用少量的词来记忆网络层，那就是“路径选择，路由及逻辑寻址”。</p>
-<p>网络层涉及众多的协议，其中包括最重要的协议，也是TCP/IP的核心协议——IP协议。IP协议仅仅提供不可靠、无连接的传送服务。IP协议的主要功能有：无连接数据报传输、数据报路由选择和差错控制。与IP协议配套使用实现其功能的还有地址解析协议ARP、逆地址解析协议RARP、因特网报文协议ICMP、因特网组管理协议IGMP</p>
-<h3 id="半双工-全双工-单工"><a href="#半双工-全双工-单工" class="headerlink" title="半双工 全双工 单工"></a>半双工 全双工 单工</h3><h4 id="全双工"><a href="#全双工" class="headerlink" title="全双工"></a>全双工</h4><p>双向同时传递消息</p>
-<h4 id="半双工"><a href="#半双工" class="headerlink" title="半双工"></a>半双工</h4><p>双向不同时传递消息</p>
-<h4 id="单向"><a href="#单向" class="headerlink" title="单向"></a>单向</h4><p>单向传递消息</p>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>websocket是一个基于应用层的网络协议，建于tcp协议之上。相当于在http连接之后，将服务器请求升级为websocket协议。<br>和Http协议对比，最大的区别就是服务器可以主动向客户端推送信息，客户端也可以主动向服务器发送信息，是真正的双向平等对话，属于服务器推送技术的一种。</p>
-]]></content>
-      <categories>
-        <category>技术</category>
-        <category>webSocket</category>
-      </categories>
-      <tags>
-        <tag>WebSocket</tag>
-        <tag>计算机网络</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>docker || docker-compose-安装</title>
-    <url>/2021/09/03/windows%E5%AE%89%E8%A3%85Hyper-V+ubuntu/</url>
-    <content><![CDATA[<h2 id="Windows10家庭版安装ubuntu"><a href="#Windows10家庭版安装ubuntu" class="headerlink" title="Windows10家庭版安装ubuntu"></a>Windows10家庭版安装ubuntu</h2><h3 id="安装Hyper-V"><a href="#安装Hyper-V" class="headerlink" title="安装Hyper-V"></a>安装Hyper-V</h3><p><a href="https://blog.csdn.net/yuyuking/article/details/103890195">参考博文</a><br>把下面代码保存为.bat文件，用管理员运行，重启之后，就可以在win+S 中搜索到Hyper-V</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pushd &quot;%~dp0&quot;</span><br><span class="line"></span><br><span class="line">dir /b %SystemRoot%\servicing\Packages\*Hyper-V*.mum &gt;hyper-v.txt</span><br><span class="line"></span><br><span class="line">for /f %%i in (&#x27;findstr /i . hyper-v.txt 2^&gt;nul&#x27;) do dism /online /norestart /add-package:&quot;%SystemRoot%\servicing\Packages\%%i&quot;</span><br><span class="line"></span><br><span class="line">del hyper-v.txt</span><br><span class="line"></span><br><span class="line">Dism /online /enable-feature /featurename:Microsoft-Hyper-V-All /LimitAccess /ALL</span><br></pre></td></tr></table></figure>
-
-<h3 id="安装Ubuntu"><a href="#安装Ubuntu" class="headerlink" title="安装Ubuntu"></a>安装Ubuntu</h3><p><a href="https://zhuanlan.zhihu.com/p/128640396">参考博文</a><br>基本就是按照操作一步一步点下来。<br>MSDN好像没有ubuntu的镜像了，可以点击<a href="http://mirrors.163.com/ubuntu-releases">网易开源镜像站</a>下载<br>启动之后，会遇到这样的问题，</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Hyper-V™</span><br><span class="line">Uirtual Machine Boot Su_ary</span><br><span class="line"></span><br><span class="line">1.SCSI Disk (0,0)No UEFI-compatible file system uas found.</span><br><span class="line"></span><br><span class="line">2.Network Adapter (OO155DO6E40O) DHCP failed.</span><br><span class="line"></span><br><span class="line">3.SCSI DUD (0,1)No UEFI-compatible file system uas found.</span><br><span class="line"></span><br><span class="line">No operating system was loaded. Press a Key to retry the boot sequence...</span><br><span class="line">Note： Configuration changes nay require the virtual Machine to be reset.</span><br></pre></td></tr></table></figure>
-
-<p>把虚拟机启动时启用安全启动的勾去掉。<a href="https://tieba.baidu.com/p/5587795237?red_tag=0742118433">解决方法</a></p>
-<h2 id="linux安装docker"><a href="#linux安装docker" class="headerlink" title="linux安装docker"></a>linux安装docker</h2><h3 id="在线安装"><a href="#在线安装" class="headerlink" title="在线安装"></a>在线安装</h3><p>安装方法<a href="https://www.cnblogs.com/kingsonfu/p/11576797.html">参考博文</a><br>使用的yum源安装</p>
-<ol>
-<li>查看是否已安装docker<br><code>yum list installed | grep docker</code></li>
-<li>安装docker<br><code>yum -y install docker</code></li>
-<li>启动docker<br><code>systemctl start docker</code></li>
-<li>查看docker状态<br><code> systemctl status docker</code><br>如果出现下面代表安装成功<br><img src="%E9%9A%8F%E7%AC%94-%E6%95%B0%E6%8D%AE%E5%BA%93/img.png" alt="安装成功"></li>
-<li>可以将docker设置为开机自启动<br><code>systemctl enable docker;</code><h3 id="离线安装"><a href="#离线安装" class="headerlink" title="离线安装"></a>离线安装</h3></li>
-<li>下载docker压缩包<br><a href="https://download.docker.com/linux/static/stable/x86_64/">下载地址</a><br>笔者下载的是docker-18.06.3-ce.tgz</li>
-<li>运行脚本<br><code>./install_docker.sh docker-18.06.3-ce.tgz</code><br>脚本代码如下：<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line">usage()&#123;</span><br><span class="line">  echo &quot;使用方法: $0 FILE_NAME_DOCKER_CE_TAR_GZ&quot;</span><br><span class="line">  echo &quot;             $0 docker-18.06.3-ce.tgz&quot;</span><br><span class="line">  echo &quot;Get docker-ce binary from: https://download.docker.com/linux/static/stable/x86_64/&quot;</span><br><span class="line">  echo &quot;eg: wget https://download.docker.com/linux/static/stable/x86_64/docker-18.06.3-ce.tgz&quot;</span><br><span class="line">  echo &quot;&quot;</span><br><span class="line">&#125;</span><br><span class="line">SYSTEMDDIR=/usr/lib/systemd/system</span><br><span class="line">SERVICEFILE=docker.service</span><br><span class="line">DOCKERDIR=/usr/bin</span><br><span class="line">DOCKERBIN=docker</span><br><span class="line">SERVICENAME=docker</span><br><span class="line"></span><br><span class="line">if [ $# -ne 1 ]; then</span><br><span class="line">  usage</span><br><span class="line">  exit 1</span><br><span class="line">else</span><br><span class="line">  FILETARGZ=&quot;$1&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [ ! -f $&#123;FILETARGZ&#125; ]; then</span><br><span class="line">  echo &quot;Docker binary tgz files does not exist, please check it&quot;</span><br><span class="line">  echo &quot;Get docker-ce binary from: https://download.docker.com/linux/static/stable/x86_64/&quot;</span><br><span class="line">  echo &quot;eg: wget https://download.docker.com/linux/static/stable/x86_64/docker-18.06.3-ce.tgz&quot;</span><br><span class="line">  exit 1</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">echo &quot;##unzip : tar xvpf $&#123;FILETARGZ&#125;&quot;</span><br><span class="line">tar xvpf $&#123;FILETARGZ&#125;</span><br><span class="line">echo</span><br><span class="line"></span><br><span class="line">echo &quot;##binary : $&#123;DOCKERBIN&#125; copy to $&#123;DOCKERDIR&#125;&quot;</span><br><span class="line">cp -p $&#123;DOCKERBIN&#125;/* $&#123;DOCKERDIR&#125; &gt;/dev/null 2&gt;&amp;1</span><br><span class="line">which $&#123;DOCKERBIN&#125;</span><br><span class="line"></span><br><span class="line">echo &quot;##systemd service: $&#123;SERVICEFILE&#125;&quot;</span><br><span class="line">echo &quot;##docker.service: create docker systemd file&quot;</span><br><span class="line">cat &gt;$&#123;SYSTEMDDIR&#125;/$&#123;SERVICEFILE&#125; &lt;&lt;EOF</span><br><span class="line">[Unit]</span><br><span class="line">Description=Docker Application Container Engine</span><br><span class="line">Documentation=http://docs.docker.com</span><br><span class="line">After=network.target docker.socket</span><br><span class="line">[Service]</span><br><span class="line">Type=notify</span><br><span class="line">EnvironmentFile=-/run/flannel/docker</span><br><span class="line">WorkingDirectory=/usr/local/bin</span><br><span class="line">ExecStart=/usr/bin/dockerd \</span><br><span class="line">                -H tcp://0.0.0.0:4243 \</span><br><span class="line">                -H unix:///var/run/docker.sock \</span><br><span class="line">                --selinux-enabled=false \</span><br><span class="line">                --log-opt max-size=1g</span><br><span class="line">ExecReload=/bin/kill -s HUP $MAINPID</span><br><span class="line"><span class="meta">#</span><span class="bash"> Having non-zero Limit*s causes performance problems due to accounting overhead</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">in</span> the kernel. We recommend using cgroups to <span class="keyword">do</span> container-local accounting.</span></span><br><span class="line">LimitNOFILE=infinity</span><br><span class="line">LimitNPROC=infinity</span><br><span class="line">LimitCORE=infinity</span><br><span class="line"><span class="meta">#</span><span class="bash"> Uncomment TasksMax <span class="keyword">if</span> your systemd version supports it.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Only systemd 226 and above support this version.</span></span><br><span class="line"><span class="meta">#</span><span class="bash">TasksMax=infinity</span></span><br><span class="line">TimeoutStartSec=0</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">set</span> delegate yes so that systemd does not reset the cgroups of docker containers</span></span><br><span class="line">Delegate=yes</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">kill</span> only the docker process, not all processes <span class="keyword">in</span> the cgroup</span></span><br><span class="line">KillMode=process</span><br><span class="line">Restart=on-failure</span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">echo &quot;&quot;</span><br><span class="line"></span><br><span class="line">systemctl daemon-reload</span><br><span class="line">echo &quot;##Service status: $&#123;SERVICENAME&#125;&quot;</span><br><span class="line">systemctl status $&#123;SERVICENAME&#125;</span><br><span class="line">echo &quot;##Service restart: $&#123;SERVICENAME&#125;&quot;</span><br><span class="line">systemctl restart $&#123;SERVICENAME&#125;</span><br><span class="line">echo &quot;##Service status: $&#123;SERVICENAME&#125;&quot;</span><br><span class="line">systemctl status $&#123;SERVICENAME&#125;</span><br><span class="line"></span><br><span class="line">echo &quot;##Service enabled: $&#123;SERVICENAME&#125;&quot;</span><br><span class="line">systemctl enable $&#123;SERVICENAME&#125;</span><br><span class="line">cat &gt;/etc/docker/daemon.json &lt;&lt;EOF</span><br><span class="line">&#123;</span><br><span class="line">  &quot;registry-mirrors&quot;: [&quot;http://hub-mirror.c.163.com&quot;]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">swapoff -a</span><br><span class="line">iptables -P FORWARD ACCEPT</span><br><span class="line">sysctl --system</span><br><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl restart docker.service</span><br><span class="line"></span><br><span class="line">echo &quot;## docker version&quot;</span><br><span class="line">docker version</span><br></pre></td></tr></table></figure>
-如果有坏的解释器报错 则<code>sed -i &#39;s/\r$//&#39;  install_docker.sh</code><br>如果有权限问题可 可<code>chmod 777 /data/install_docker.sh</code><h2 id="docker换源"><a href="#docker换源" class="headerlink" title="docker换源"></a>docker换源</h2><a href="https://www.cnblogs.com/wpwen/p/12652665.html">docker换源</a><br>换源的方法是编辑/etc/docker/daemon.json（如果不存在则创建）:<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;registry-mirrors&quot;</span>:[</span><br><span class="line">         <span class="string">&quot;http://docker.mirrors.ustc.edu.cn&quot;</span>,</span><br><span class="line">         <span class="string">&quot;http://hub-mirror.c.163.com&quot;</span>,</span><br><span class="line">         <span class="string">&quot;http://registry.docker-cn.com&quot;</span></span><br><span class="line">    ] ,</span><br><span class="line">    <span class="attr">&quot;insecure-registries&quot;</span>:[</span><br><span class="line">       <span class="string">&quot;docker.mirrors.ustc.edu.cn&quot;</span>,</span><br><span class="line">         <span class="string">&quot;registry.docker-cn.com&quot;</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>建议使用<a href="https://docs.docker.com/engine/install/centos/">官网安装</a></p>
-</blockquote>
-<h2 id="docker-安装php-nginx-mysql"><a href="#docker-安装php-nginx-mysql" class="headerlink" title="docker 安装php+nginx+mysql"></a>docker 安装php+nginx+mysql</h2><h3 id="获取镜像image"><a href="#获取镜像image" class="headerlink" title="获取镜像image"></a>获取镜像image</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker pull mysql:5.7      # 拉取 mysql 5.7</span><br><span class="line">docker nginx               # 拉取 nginx </span><br><span class="line">docker pull php:5.6-fpm    # 拉取 php </span><br></pre></td></tr></table></figure>
-docker images              # 查看安装镜像</li>
-</ol>
-<h3 id="普通运行"><a href="#普通运行" class="headerlink" title="普通运行"></a>普通运行</h3><p><code>docker run -p 对外暴露的端口:容器内的端口 --name 容器名 -e 配置信息=内容 -v 主机目录:容器目录 -d 镜像名</code><br>使用 <code>docker ps</code> || <code>docker ps -a</code> 查看运行||全部容器</p>
-<h3 id="docker-compose运行"><a href="#docker-compose运行" class="headerlink" title="docker-compose运行"></a>docker-compose运行</h3><p>文件模板如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">version: &#x27;2.0&#x27;</span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  nginx:</span><br><span class="line">    restart: always</span><br><span class="line">    image: nginx:1.11.6-alpine</span><br><span class="line">    ports:</span><br><span class="line">      - 8080:80</span><br><span class="line">      - 80:80</span><br><span class="line">      - 443:443</span><br><span class="line">    volumes:</span><br><span class="line">      - ./conf.d:/etc/nginx/conf.d</span><br><span class="line">      - ./log:/var/log/nginx</span><br><span class="line">      - ./www:/var/www</span><br><span class="line">      - /etc/letsencrypt:/etc/letsencrypt</span><br></pre></td></tr></table></figure>
-<p><strong>参数说明：</strong><br><strong>version</strong>：版本号</p>
-<p><strong>service</strong>：就是要定义的docker容器</p>
-<p><strong>nginx</strong>:容器的名称</p>
-<p><strong>restart</strong>：设置为always，表明此容器应该在停止的情况下总是重启，比如，服务器启动时，这个容器就跟着启动，不用手动启动，服务器启动之后，进入到docker-compose.yml文件路径下，执行docker-compose ps可以看到，该容器正在运行。</p>
-<p><strong>image</strong>：这个是需要依赖的容器，也就是nginx软件，可以到docker官方镜像上找到最新版的镜像。</p>
-<p><strong>ports</strong>：端口映射。比如： - 8080:80，表示容器内运行着的端口是80，把端口暴露给8080端口，从外面访问的是8080端口，就能自动映射到80端口上。</p>
-<p><strong>volumes</strong>:文件映射。表示数据、配置文件等存放的位置。（- . 这个表示docker-compose.yml当前目录位置开始创建这个文件</p>
-<h3 id="可能的问题"><a href="#可能的问题" class="headerlink" title="可能的问题"></a>可能的问题</h3><p>如果你的容器运行正常，但是无法访问到MySQL，一般有以下几个可能的原因：</p>
+    <title>mybatis-SQL注入</title>
+    <url>/2021/09/26/mybatis-1/</url>
+    <content><![CDATA[<h2 id="MyBatis-是如何解决SQL注入问题的"><a href="#MyBatis-是如何解决SQL注入问题的" class="headerlink" title="MyBatis 是如何解决SQL注入问题的"></a>MyBatis 是如何解决SQL注入问题的</h2><p>在使用mybatis编写SQL时，会遇到<code>#&#123;&#125;</code> 和<code>$&#123;&#125;</code></p>
 <ul>
-<li>防火墙拦截<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 开放端口：</span><br><span class="line">$ systemctl status firewalld</span><br><span class="line">$ firewall-cmd  --zone=public --add-port=3306/tcp -permanent</span><br><span class="line">$ firewall-cmd  --reload</span><br><span class="line"># 关闭防火墙：</span><br><span class="line">$ sudo systemctl stop firewalld</span><br></pre></td></tr></table></figure></li>
-<li>需要在docker本地客户端设置远程访问账号<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ sudo docker exec -it mysql bash</span><br><span class="line">$ mysql -uroot -p123456</span><br><span class="line">mysql&gt; grant all privileges on *.* to root@&#x27;%&#x27; identified by &quot;password&quot;;</span><br></pre></td></tr></table></figure>
-原理：<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># mysql使用mysql数据库中的user表来管理权限，修改user表就可以修改权限（只有root账号可以修改）</span><br><span class="line"></span><br><span class="line">mysql&gt; use mysql;</span><br><span class="line">Database changed</span><br><span class="line"></span><br><span class="line">mysql&gt; select host,user,password from user;</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">| host                    | user      | password                                                                 |</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">| localhost              | root     | *A731AEBFB621E354CD41BAF207D884A609E81F5E      |</span><br><span class="line">| 192.168.1.1            | root     | *A731AEBFB621E354CD41BAF207D884A609E81F5E      |</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">2 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; grant all privileges  on *.* to root@&#x27;%&#x27; identified by &quot;password&quot;;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; flush privileges;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select host,user,password from user;</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">| host                    | user      | password                                                                 |</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">| localhost              | root      | *A731AEBFB621E354CD41BAF207D884A609E81F5E     |</span><br><span class="line">| 192.168.1.1            | root      | *A731AEBFB621E354CD41BAF207D884A609E81F5E     |</span><br><span class="line">| %                       | root      | *A731AEBFB621E354CD41BAF207D884A609E81F5E     |</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">3 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
-<h2 id="安装docker-compose"><a href="#安装docker-compose" class="headerlink" title="安装docker-compose"></a>安装docker-compose</h2><h3 id="在线安装-1"><a href="#在线安装-1" class="headerlink" title="在线安装"></a>在线安装</h3><del>第一步下载：</del><br><del><code>curl -L https://get.daocloud.io/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` &gt;  /usr/local/bin/docker-compose</code></del><br><del>第二步赋权：</del><br><del><code>chmod a+x /usr/local/bin/docker-compose</code></del><br><del>第三步查看版本：</del><br><del><code>docker-compose --version</code></del><blockquote>
-<p>上面的方法在部署之后，使用docker-compose部署会出现端口占用的错误，且物理机，虚拟机端口并没有被占用<br>在一段时间的问题定位之后，发现是安装的docker-compose有问题，所以建议使官网安装<a href="https://docs.docker.com/compose/install/">安装地址</a><br>步骤和上方基本相同，第一步下载的地址发生了改变</p>
-</blockquote>
-</li>
+<li><code>#&#123;&#125;</code>在预处理时，会把参数用占位符替代，在预编译之后传入参数(不存在SQL注入)</li>
+<li><code>$&#123;&#125;</code>不做预处理，将参数不加修饰放到sql语句中(会产生注入)<br>MyBatis 默认对所有sql进行预编译，底层使用PreparedStatement,先将带有占位符的sql模板发送到mysql服务器，由服务器编译并保留编译结果，然后执行带有真实参数的sql</li>
+<li></li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose</span><br><span class="line">sudo chmod +x /usr/local/bin/docker-compose</span><br><span class="line">docker-compose --version</span><br></pre></td></tr></table></figure>
-<h3 id="离线安装-1"><a href="#离线安装-1" class="headerlink" title="离线安装"></a>离线安装</h3><p>操作同上</p>
-<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>安装netstat<br><code>yum -y install net-tools </code><br><a href="https://hub.docker.com/">docker-hub地址</a><br><a href="https://docs.docker.com/">docker-文档地址</a></p>
 ]]></content>
       <categories>
         <category>技术</category>
-        <category>docker</category>
+        <category>mybatis</category>
       </categories>
-      <tags>
-        <tag>docker</tag>
-        <tag>运维</tag>
-        <tag>docker-compose</tag>
-        <tag>虚拟机</tag>
-        <tag>Hyper-V</tag>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>指令仓库</title>
-    <url>/2021/09/23/%E6%8C%87%E4%BB%A4%E4%BB%93%E5%BA%93/</url>
-    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>MyCat入门-基础知识</title>
@@ -627,10 +535,192 @@ docker images              # 查看安装镜像</li>
         <category>MyCat</category>
       </categories>
       <tags>
+        <tag>MyCat</tag>
         <tag>数据库</tag>
         <tag>mysql</tag>
-        <tag>MyCat</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>mycat入门-目录</title>
+    <url>/2021/09/24/mycat%E5%85%A5%E9%97%A8-2/</url>
+    <content><![CDATA[<h2 id="MyCat目录结构"><a href="#MyCat目录结构" class="headerlink" title="MyCat目录结构"></a>MyCat目录结构</h2><p><img src="image004.png"><br>目录解释如下：<br><strong>bin 程序目录</strong>，存放了window版本和linux版本，除了提供封装成服务的版本之外，也提供了nowrap的shell脚本命令，方便大家选择和修改，进入到bin目录：<br>Linux下运行：./mycat console,首先要chmod +x *<br>注：mycat支持的命令{ console | start | stop | restart | status | dump }<br><strong>conf目录下存放配置文件</strong>，server.xml是Mycat服务器参数调整和用户授权的配置文件，schema.xml是逻辑库定义和表以及分片定义的配置文件，rule.xml是分片规则的配置文件，分片规则的具体一些参数信息单独存放为文件，也在这个目录下，配置文件修改，需要重启Mycat或者通过9066端口reload.<br><strong>lib目录下主要存放mycat依赖的一些jar文件.</strong><br><strong>日志存放在logs/mycat.log中</strong>，每天一个文件，日志的配置是在conf/log4j.xml中，根据自己的需要，可以调整输出级别为debug，debug级别下，会输出更多的信息，方便排查问题.<br>注意：Linux下部署安装MySQL，默认不忽略表名大小写，需要手动到/etc/my.cnf 下配置 lower_case_table_names=1 使Linux环境下MySQL忽略表名大小写，否则使用MyCAT的时候会提示找不到表的错误！</p>
+<h2 id="schema-xml"><a href="#schema-xml" class="headerlink" title="schema.xml"></a>schema.xml</h2>]]></content>
+      <categories>
+        <category>技术</category>
+        <category>MyCat</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+        <tag>mysql</tag>
+        <tag>mycat</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>WebSocket-简介</title>
+    <url>/2021/09/13/webSocket/</url>
+    <content><![CDATA[<h1 id="WebSocket"><a href="#WebSocket" class="headerlink" title="WebSocket"></a>WebSocket</h1><p>WebSocket 是 HTML5 开始提供的一种在单个 TCP 连接上进行全双工通讯的协议。</p>
+<h2 id="知识回顾"><a href="#知识回顾" class="headerlink" title="知识回顾"></a>知识回顾</h2><h3 id="计算机网络层次划分"><a href="#计算机网络层次划分" class="headerlink" title="计算机网络层次划分"></a>计算机网络层次划分</h3><p>国际标准化住址(ISO)在1979年提出OSI七层模型，常见的网络层次划分还有TCP/IP四层协议和TCP/IP五层协议，对应关系如下<br><img src="%E9%9A%8F%E7%AC%94-%E6%95%B0%E6%8D%AE%E5%BA%93/img.png"></p>
+<h4 id="OSI七层网络模型"><a href="#OSI七层网络模型" class="headerlink" title="OSI七层网络模型"></a>OSI七层网络模型</h4><p>TCP/IP协议是互联网的基础协议，没有它就根本不可能上网，任何和互联网有关的操作都离不开TCP/IP协议。不管是OSI七层模型还是TCP/IP的四层、五层模型，每一层中都有自己的专属协议，完成自己相应的工作以及与上下层级之间进行沟通。由于OSI七层模型为网络的标准层次划分，所以我以OSI七层模型为例从上向下进行一一介绍 </p>
+<h5 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h5><p>应用层是操作系统或网络应用程序提供访问网络服务的接口。</p>
+<h5 id="表示层"><a href="#表示层" class="headerlink" title="表示层"></a>表示层</h5><p>表示层对上层数据或信息进行变换，保证一个主机应用层信息可以被另一个主机的应用程序理解。表示层的数据转换包括数据的加密、压缩、格式转换等。</p>
+<h5 id="会话层"><a href="#会话层" class="headerlink" title="会话层"></a>会话层</h5><p>会话层管理主机之间的会话进程，负责建立、管理、终止进程之间的会话。会话层还利用在数据中插入校验点来实现数据的同步。</p>
+<p>会话层、表示层、应用层重点：</p>
+<p>数据传输基本单位为报文<br>包含的主要协议：FTP（文件传输协议）、Telnet（远程登陆协议）、DNS（域名解析协议）、SMTP（邮件传送协议）、POP3协议（邮局协议）、HTTP协议（Hyper Text Transfer Protocol） </p>
+<h5 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h5><p>第一个端到端（主机到主机）的层次。传输层负责将上层数据分段并提供端到端的、可靠的或不可靠的传输。此外，传输层还要处理端到端的差错控制和流量控制问题。<br>传输层的任务是根据通信子网的特性，利用最佳的网络资源，为两个端系统的会话层之间提供建立、维护和取消传输连接的功能，负责端到端的可靠数据传输。在这一层，信息传送的协议数据单元称为段或报文。</p>
+<p>有关传输层的重点：</p>
+<p>包含的主要协议：TCP协议（Transmission Control Protocol，传输控制协议）、UDP协议（User Datagram Protocol，用户数据报协议）<br>重要设备：网关</p>
+<h5 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h5><p>网络层的目的是实现两端系统之间的数据透明传送，具体功能包括寻址和路由选择、连接的建立、保持和终止等。</p>
+<p>它提供的服务使传输层不需要了解网络中的数据传输和交换技术。用少量的词来记忆网络层，那就是“路径选择，路由及逻辑寻址”。</p>
+<p>网络层涉及众多的协议，其中包括最重要的协议，也是TCP/IP的核心协议——IP协议。IP协议仅仅提供不可靠、无连接的传送服务。IP协议的主要功能有：无连接数据报传输、数据报路由选择和差错控制。与IP协议配套使用实现其功能的还有地址解析协议ARP、逆地址解析协议RARP、因特网报文协议ICMP、因特网组管理协议IGMP</p>
+<h3 id="半双工-全双工-单工"><a href="#半双工-全双工-单工" class="headerlink" title="半双工 全双工 单工"></a>半双工 全双工 单工</h3><h4 id="全双工"><a href="#全双工" class="headerlink" title="全双工"></a>全双工</h4><p>双向同时传递消息</p>
+<h4 id="半双工"><a href="#半双工" class="headerlink" title="半双工"></a>半双工</h4><p>双向不同时传递消息</p>
+<h4 id="单向"><a href="#单向" class="headerlink" title="单向"></a>单向</h4><p>单向传递消息</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>websocket是一个基于应用层的网络协议，建于tcp协议之上。相当于在http连接之后，将服务器请求升级为websocket协议。<br>和Http协议对比，最大的区别就是服务器可以主动向客户端推送信息，客户端也可以主动向服务器发送信息，是真正的双向平等对话，属于服务器推送技术的一种。</p>
+]]></content>
+      <categories>
+        <category>技术</category>
+        <category>webSocket</category>
+      </categories>
+      <tags>
+        <tag>WebSocket</tag>
+        <tag>计算机网络</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>docker || docker-compose-安装</title>
+    <url>/2021/09/03/windows%E5%AE%89%E8%A3%85Hyper-V+ubuntu/</url>
+    <content><![CDATA[<h2 id="Windows10家庭版安装ubuntu"><a href="#Windows10家庭版安装ubuntu" class="headerlink" title="Windows10家庭版安装ubuntu"></a>Windows10家庭版安装ubuntu</h2><h3 id="安装Hyper-V"><a href="#安装Hyper-V" class="headerlink" title="安装Hyper-V"></a>安装Hyper-V</h3><p><a href="https://blog.csdn.net/yuyuking/article/details/103890195">参考博文</a><br>把下面代码保存为.bat文件，用管理员运行，重启之后，就可以在win+S 中搜索到Hyper-V</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pushd &quot;%~dp0&quot;</span><br><span class="line"></span><br><span class="line">dir /b %SystemRoot%\servicing\Packages\*Hyper-V*.mum &gt;hyper-v.txt</span><br><span class="line"></span><br><span class="line">for /f %%i in (&#x27;findstr /i . hyper-v.txt 2^&gt;nul&#x27;) do dism /online /norestart /add-package:&quot;%SystemRoot%\servicing\Packages\%%i&quot;</span><br><span class="line"></span><br><span class="line">del hyper-v.txt</span><br><span class="line"></span><br><span class="line">Dism /online /enable-feature /featurename:Microsoft-Hyper-V-All /LimitAccess /ALL</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装Ubuntu"><a href="#安装Ubuntu" class="headerlink" title="安装Ubuntu"></a>安装Ubuntu</h3><p><a href="https://zhuanlan.zhihu.com/p/128640396">参考博文</a><br>基本就是按照操作一步一步点下来。<br>MSDN好像没有ubuntu的镜像了，可以点击<a href="http://mirrors.163.com/ubuntu-releases">网易开源镜像站</a>下载<br>启动之后，会遇到这样的问题，</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Hyper-V™</span><br><span class="line">Uirtual Machine Boot Su_ary</span><br><span class="line"></span><br><span class="line">1.SCSI Disk (0,0)No UEFI-compatible file system uas found.</span><br><span class="line"></span><br><span class="line">2.Network Adapter (OO155DO6E40O) DHCP failed.</span><br><span class="line"></span><br><span class="line">3.SCSI DUD (0,1)No UEFI-compatible file system uas found.</span><br><span class="line"></span><br><span class="line">No operating system was loaded. Press a Key to retry the boot sequence...</span><br><span class="line">Note： Configuration changes nay require the virtual Machine to be reset.</span><br></pre></td></tr></table></figure>
+
+<p>把虚拟机启动时启用安全启动的勾去掉。<a href="https://tieba.baidu.com/p/5587795237?red_tag=0742118433">解决方法</a></p>
+<h2 id="linux安装docker"><a href="#linux安装docker" class="headerlink" title="linux安装docker"></a>linux安装docker</h2><h3 id="在线安装"><a href="#在线安装" class="headerlink" title="在线安装"></a>在线安装</h3><p>安装方法<a href="https://www.cnblogs.com/kingsonfu/p/11576797.html">参考博文</a><br>使用的yum源安装</p>
+<ol>
+<li>查看是否已安装docker<br><code>yum list installed | grep docker</code></li>
+<li>安装docker<br><code>yum -y install docker</code></li>
+<li>启动docker<br><code>systemctl start docker</code></li>
+<li>查看docker状态<br><code> systemctl status docker</code><br>如果出现下面代表安装成功<br><img src="%E9%9A%8F%E7%AC%94-%E6%95%B0%E6%8D%AE%E5%BA%93/img.png" alt="安装成功"></li>
+<li>可以将docker设置为开机自启动<br><code>systemctl enable docker;</code><h3 id="离线安装"><a href="#离线安装" class="headerlink" title="离线安装"></a>离线安装</h3></li>
+<li>下载docker压缩包<br><a href="https://download.docker.com/linux/static/stable/x86_64/">下载地址</a><br>笔者下载的是docker-18.06.3-ce.tgz</li>
+<li>运行脚本<br><code>./install_docker.sh docker-18.06.3-ce.tgz</code><br>脚本代码如下：<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line">usage()&#123;</span><br><span class="line">  echo &quot;使用方法: $0 FILE_NAME_DOCKER_CE_TAR_GZ&quot;</span><br><span class="line">  echo &quot;             $0 docker-18.06.3-ce.tgz&quot;</span><br><span class="line">  echo &quot;Get docker-ce binary from: https://download.docker.com/linux/static/stable/x86_64/&quot;</span><br><span class="line">  echo &quot;eg: wget https://download.docker.com/linux/static/stable/x86_64/docker-18.06.3-ce.tgz&quot;</span><br><span class="line">  echo &quot;&quot;</span><br><span class="line">&#125;</span><br><span class="line">SYSTEMDDIR=/usr/lib/systemd/system</span><br><span class="line">SERVICEFILE=docker.service</span><br><span class="line">DOCKERDIR=/usr/bin</span><br><span class="line">DOCKERBIN=docker</span><br><span class="line">SERVICENAME=docker</span><br><span class="line"></span><br><span class="line">if [ $# -ne 1 ]; then</span><br><span class="line">  usage</span><br><span class="line">  exit 1</span><br><span class="line">else</span><br><span class="line">  FILETARGZ=&quot;$1&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [ ! -f $&#123;FILETARGZ&#125; ]; then</span><br><span class="line">  echo &quot;Docker binary tgz files does not exist, please check it&quot;</span><br><span class="line">  echo &quot;Get docker-ce binary from: https://download.docker.com/linux/static/stable/x86_64/&quot;</span><br><span class="line">  echo &quot;eg: wget https://download.docker.com/linux/static/stable/x86_64/docker-18.06.3-ce.tgz&quot;</span><br><span class="line">  exit 1</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">echo &quot;##unzip : tar xvpf $&#123;FILETARGZ&#125;&quot;</span><br><span class="line">tar xvpf $&#123;FILETARGZ&#125;</span><br><span class="line">echo</span><br><span class="line"></span><br><span class="line">echo &quot;##binary : $&#123;DOCKERBIN&#125; copy to $&#123;DOCKERDIR&#125;&quot;</span><br><span class="line">cp -p $&#123;DOCKERBIN&#125;/* $&#123;DOCKERDIR&#125; &gt;/dev/null 2&gt;&amp;1</span><br><span class="line">which $&#123;DOCKERBIN&#125;</span><br><span class="line"></span><br><span class="line">echo &quot;##systemd service: $&#123;SERVICEFILE&#125;&quot;</span><br><span class="line">echo &quot;##docker.service: create docker systemd file&quot;</span><br><span class="line">cat &gt;$&#123;SYSTEMDDIR&#125;/$&#123;SERVICEFILE&#125; &lt;&lt;EOF</span><br><span class="line">[Unit]</span><br><span class="line">Description=Docker Application Container Engine</span><br><span class="line">Documentation=http://docs.docker.com</span><br><span class="line">After=network.target docker.socket</span><br><span class="line">[Service]</span><br><span class="line">Type=notify</span><br><span class="line">EnvironmentFile=-/run/flannel/docker</span><br><span class="line">WorkingDirectory=/usr/local/bin</span><br><span class="line">ExecStart=/usr/bin/dockerd \</span><br><span class="line">                -H tcp://0.0.0.0:4243 \</span><br><span class="line">                -H unix:///var/run/docker.sock \</span><br><span class="line">                --selinux-enabled=false \</span><br><span class="line">                --log-opt max-size=1g</span><br><span class="line">ExecReload=/bin/kill -s HUP $MAINPID</span><br><span class="line"><span class="meta">#</span><span class="bash"> Having non-zero Limit*s causes performance problems due to accounting overhead</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">in</span> the kernel. We recommend using cgroups to <span class="keyword">do</span> container-local accounting.</span></span><br><span class="line">LimitNOFILE=infinity</span><br><span class="line">LimitNPROC=infinity</span><br><span class="line">LimitCORE=infinity</span><br><span class="line"><span class="meta">#</span><span class="bash"> Uncomment TasksMax <span class="keyword">if</span> your systemd version supports it.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Only systemd 226 and above support this version.</span></span><br><span class="line"><span class="meta">#</span><span class="bash">TasksMax=infinity</span></span><br><span class="line">TimeoutStartSec=0</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">set</span> delegate yes so that systemd does not reset the cgroups of docker containers</span></span><br><span class="line">Delegate=yes</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">kill</span> only the docker process, not all processes <span class="keyword">in</span> the cgroup</span></span><br><span class="line">KillMode=process</span><br><span class="line">Restart=on-failure</span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">echo &quot;&quot;</span><br><span class="line"></span><br><span class="line">systemctl daemon-reload</span><br><span class="line">echo &quot;##Service status: $&#123;SERVICENAME&#125;&quot;</span><br><span class="line">systemctl status $&#123;SERVICENAME&#125;</span><br><span class="line">echo &quot;##Service restart: $&#123;SERVICENAME&#125;&quot;</span><br><span class="line">systemctl restart $&#123;SERVICENAME&#125;</span><br><span class="line">echo &quot;##Service status: $&#123;SERVICENAME&#125;&quot;</span><br><span class="line">systemctl status $&#123;SERVICENAME&#125;</span><br><span class="line"></span><br><span class="line">echo &quot;##Service enabled: $&#123;SERVICENAME&#125;&quot;</span><br><span class="line">systemctl enable $&#123;SERVICENAME&#125;</span><br><span class="line">cat &gt;/etc/docker/daemon.json &lt;&lt;EOF</span><br><span class="line">&#123;</span><br><span class="line">  &quot;registry-mirrors&quot;: [&quot;http://hub-mirror.c.163.com&quot;]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">swapoff -a</span><br><span class="line">iptables -P FORWARD ACCEPT</span><br><span class="line">sysctl --system</span><br><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl restart docker.service</span><br><span class="line"></span><br><span class="line">echo &quot;## docker version&quot;</span><br><span class="line">docker version</span><br></pre></td></tr></table></figure>
+如果有坏的解释器报错 则<code>sed -i &#39;s/\r$//&#39;  install_docker.sh</code><br>如果有权限问题可 可<code>chmod 777 /data/install_docker.sh</code><h2 id="docker换源"><a href="#docker换源" class="headerlink" title="docker换源"></a>docker换源</h2><a href="https://www.cnblogs.com/wpwen/p/12652665.html">docker换源</a><br>换源的方法是编辑/etc/docker/daemon.json（如果不存在则创建）:<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;registry-mirrors&quot;</span>:[</span><br><span class="line">         <span class="string">&quot;http://docker.mirrors.ustc.edu.cn&quot;</span>,</span><br><span class="line">         <span class="string">&quot;http://hub-mirror.c.163.com&quot;</span>,</span><br><span class="line">         <span class="string">&quot;http://registry.docker-cn.com&quot;</span></span><br><span class="line">    ] ,</span><br><span class="line">    <span class="attr">&quot;insecure-registries&quot;</span>:[</span><br><span class="line">       <span class="string">&quot;docker.mirrors.ustc.edu.cn&quot;</span>,</span><br><span class="line">         <span class="string">&quot;registry.docker-cn.com&quot;</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>建议使用<a href="https://docs.docker.com/engine/install/centos/">官网安装</a></p>
+</blockquote>
+<h2 id="docker-安装php-nginx-mysql"><a href="#docker-安装php-nginx-mysql" class="headerlink" title="docker 安装php+nginx+mysql"></a>docker 安装php+nginx+mysql</h2><h3 id="获取镜像image"><a href="#获取镜像image" class="headerlink" title="获取镜像image"></a>获取镜像image</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker pull mysql:5.7      # 拉取 mysql 5.7</span><br><span class="line">docker nginx               # 拉取 nginx </span><br><span class="line">docker pull php:5.6-fpm    # 拉取 php </span><br></pre></td></tr></table></figure>
+docker images              # 查看安装镜像</li>
+</ol>
+<h3 id="普通运行"><a href="#普通运行" class="headerlink" title="普通运行"></a>普通运行</h3><p><code>docker run -p 对外暴露的端口:容器内的端口 --name 容器名 -e 配置信息=内容 -v 主机目录:容器目录 -d 镜像名</code><br>使用 <code>docker ps</code> || <code>docker ps -a</code> 查看运行||全部容器</p>
+<h3 id="docker-compose运行"><a href="#docker-compose运行" class="headerlink" title="docker-compose运行"></a>docker-compose运行</h3><p>文件模板如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">version: &#x27;2.0&#x27;</span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  nginx:</span><br><span class="line">    restart: always</span><br><span class="line">    image: nginx:1.11.6-alpine</span><br><span class="line">    ports:</span><br><span class="line">      - 8080:80</span><br><span class="line">      - 80:80</span><br><span class="line">      - 443:443</span><br><span class="line">    volumes:</span><br><span class="line">      - ./conf.d:/etc/nginx/conf.d</span><br><span class="line">      - ./log:/var/log/nginx</span><br><span class="line">      - ./www:/var/www</span><br><span class="line">      - /etc/letsencrypt:/etc/letsencrypt</span><br></pre></td></tr></table></figure>
+<p><strong>参数说明：</strong><br><strong>version</strong>：版本号</p>
+<p><strong>service</strong>：就是要定义的docker容器</p>
+<p><strong>nginx</strong>:容器的名称</p>
+<p><strong>restart</strong>：设置为always，表明此容器应该在停止的情况下总是重启，比如，服务器启动时，这个容器就跟着启动，不用手动启动，服务器启动之后，进入到docker-compose.yml文件路径下，执行docker-compose ps可以看到，该容器正在运行。</p>
+<p><strong>image</strong>：这个是需要依赖的容器，也就是nginx软件，可以到docker官方镜像上找到最新版的镜像。</p>
+<p><strong>ports</strong>：端口映射。比如： - 8080:80，表示容器内运行着的端口是80，把端口暴露给8080端口，从外面访问的是8080端口，就能自动映射到80端口上。</p>
+<p><strong>volumes</strong>:文件映射。表示数据、配置文件等存放的位置。（- . 这个表示docker-compose.yml当前目录位置开始创建这个文件</p>
+<h3 id="可能的问题"><a href="#可能的问题" class="headerlink" title="可能的问题"></a>可能的问题</h3><p>如果你的容器运行正常，但是无法访问到MySQL，一般有以下几个可能的原因：</p>
+<ul>
+<li>防火墙拦截<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 开放端口：</span><br><span class="line">$ systemctl status firewalld</span><br><span class="line">$ firewall-cmd  --zone=public --add-port=3306/tcp -permanent</span><br><span class="line">$ firewall-cmd  --reload</span><br><span class="line"># 关闭防火墙：</span><br><span class="line">$ sudo systemctl stop firewalld</span><br></pre></td></tr></table></figure></li>
+<li>需要在docker本地客户端设置远程访问账号<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ sudo docker exec -it mysql bash</span><br><span class="line">$ mysql -uroot -p123456</span><br><span class="line">mysql&gt; grant all privileges on *.* to root@&#x27;%&#x27; identified by &quot;password&quot;;</span><br></pre></td></tr></table></figure>
+原理：<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># mysql使用mysql数据库中的user表来管理权限，修改user表就可以修改权限（只有root账号可以修改）</span><br><span class="line"></span><br><span class="line">mysql&gt; use mysql;</span><br><span class="line">Database changed</span><br><span class="line"></span><br><span class="line">mysql&gt; select host,user,password from user;</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">| host                    | user      | password                                                                 |</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">| localhost              | root     | *A731AEBFB621E354CD41BAF207D884A609E81F5E      |</span><br><span class="line">| 192.168.1.1            | root     | *A731AEBFB621E354CD41BAF207D884A609E81F5E      |</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">2 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; grant all privileges  on *.* to root@&#x27;%&#x27; identified by &quot;password&quot;;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; flush privileges;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select host,user,password from user;</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">| host                    | user      | password                                                                 |</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">| localhost              | root      | *A731AEBFB621E354CD41BAF207D884A609E81F5E     |</span><br><span class="line">| 192.168.1.1            | root      | *A731AEBFB621E354CD41BAF207D884A609E81F5E     |</span><br><span class="line">| %                       | root      | *A731AEBFB621E354CD41BAF207D884A609E81F5E     |</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">3 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<h2 id="安装docker-compose"><a href="#安装docker-compose" class="headerlink" title="安装docker-compose"></a>安装docker-compose</h2><h3 id="在线安装-1"><a href="#在线安装-1" class="headerlink" title="在线安装"></a>在线安装</h3><del>第一步下载：</del><br><del><code>curl -L https://get.daocloud.io/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` &gt;  /usr/local/bin/docker-compose</code></del><br><del>第二步赋权：</del><br><del><code>chmod a+x /usr/local/bin/docker-compose</code></del><br><del>第三步查看版本：</del><br><del><code>docker-compose --version</code></del><blockquote>
+<p>上面的方法在部署之后，使用docker-compose部署会出现端口占用的错误，且物理机，虚拟机端口并没有被占用<br>在一段时间的问题定位之后，发现是安装的docker-compose有问题，所以建议使官网安装<a href="https://docs.docker.com/compose/install/">安装地址</a><br>步骤和上方基本相同，第一步下载的地址发生了改变</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose</span><br><span class="line">sudo chmod +x /usr/local/bin/docker-compose</span><br><span class="line">docker-compose --version</span><br></pre></td></tr></table></figure>
+<h3 id="离线安装-1"><a href="#离线安装-1" class="headerlink" title="离线安装"></a>离线安装</h3><p>操作同上</p>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>安装netstat<br><code>yum -y install net-tools </code><br><a href="https://hub.docker.com/">docker-hub地址</a><br><a href="https://docs.docker.com/">docker-文档地址</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>docker-compose</tag>
+        <tag>运维</tag>
+        <tag>虚拟机</tag>
+        <tag>Hyper-V</tag>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基于STOMP协议整合WebSocket</title>
+    <url>/2021/09/14/%E5%9F%BA%E4%BA%8ESTOMP%E5%8D%8F%E8%AE%AE%E6%95%B4%E5%90%88WebSocket/</url>
+    <content><![CDATA[<h2 id="基于STOMP协议整合WebSocket"><a href="#基于STOMP协议整合WebSocket" class="headerlink" title="基于STOMP协议整合WebSocket"></a>基于STOMP协议整合WebSocket</h2><p>模拟过程-客户端和服务端长连接，客户端发送消息，服务端对消息处理返回给全部客户端<br><a href="https://zhuanlan.zhihu.com/p/58311007">原文地址</a><br>核心原理：</p>
+<ol>
+<li>实现WebSocketMessageBrokerConfigurer接口，覆盖registerStompEndpoints方法，并注册一个节点<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">registerStompEndpoints</span><span class="params">(StompEndpointRegistry registry)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//注册一个名为 /endpointNasus 的 Stomp 节点(endpoint),并指定使用 SockJS 协议。</span></span><br><span class="line">    registry.addEndpoint(<span class="string">&quot;/endpointNasus&quot;</span>).withSockJS();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>客户端连接之后，向连接指定路由发送请求,服务端接收请求 发送到注解SendTo指定位置<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">connect</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 连接 SockJs 的 endpoint 名称为 &quot;/endpointNasus&quot;</span></span><br><span class="line">    <span class="keyword">var</span> socket = <span class="keyword">new</span> SockJS(<span class="string">&#x27;/endpointNasus&#x27;</span>);</span><br><span class="line">    <span class="comment">// 使用 STOMP 子协议的 WebSocket 客户端</span></span><br><span class="line">    stompClient = Stomp.over(socket);</span><br><span class="line">    stompClient.connect(&#123;&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">frame</span>) </span>&#123;</span><br><span class="line">        setConnected(<span class="literal">true</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;Connected: &#x27;</span> + frame);</span><br><span class="line">        <span class="comment">// 通过 stompClient.subscribe 订阅 /nasus/getResponse 目标发送的信息，对应控制器的 SendTo 定义</span></span><br><span class="line">        stompClient.subscribe(<span class="string">&#x27;/nasus/getResponse&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">respnose</span>)</span>&#123;</span><br><span class="line">        <span class="comment">// 展示返回的信息，只要订阅了 /nasus/getResponse 目标，都可以接收到服务端返回的信息</span></span><br><span class="line">        showResponse(<span class="built_in">JSON</span>.parse(respnose.body).responseMessage);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sendName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 向服务端发送消息</span></span><br><span class="line">    <span class="keyword">var</span> name = $(<span class="string">&#x27;#name&#x27;</span>).val();</span><br><span class="line">    <span class="comment">// 通过 stompClient.send 向 /hello （服务端）发送信息，对应控制器 @MessageMapping 中的定义</span></span><br><span class="line">    stompClient.send(<span class="string">&quot;/hello&quot;</span>, &#123;&#125;, <span class="built_in">JSON</span>.stringify(&#123; <span class="string">&#x27;name&#x27;</span>: name &#125;));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@MessageMapping(&quot;/hello&quot;)</span> <span class="comment">// @MessageMapping 和 @RequestMapping 功能类似，浏览器向服务器发起请求时，映射到该地址。</span></span><br><span class="line"><span class="meta">@SendTo(&quot;/nasus/getResponse&quot;)</span> <span class="comment">//如果服务器接受到了消息，就会对订阅了 @SendTo 括号中的地址的浏览器发送消息。</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Server2ClientMessage <span class="title">say</span><span class="params">(Client2ServerMessage message)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    Thread.sleep(<span class="number">3000</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Server2ClientMessage(<span class="string">&quot;Hello,&quot;</span> + message.getName() + <span class="string">&quot;!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>客户端绑定SendTo位置的会收到信息<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configureMessageBroker</span><span class="params">(MessageBrokerRegistry registry)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 广播式配置名为 /nasus 消息代理 , 这个消息代理必须和 controller 中的 @SendTo 配置的地址前缀一样或者全匹配</span></span><br><span class="line">    <span class="comment">// 点对点增加一个 /queue 消息代理</span></span><br><span class="line">    registry.enableSimpleBroker(<span class="string">&quot;/queue&quot;</span>,<span class="string">&quot;/nasus/getResponse&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function connect() &#123;</span><br><span class="line">    // 连接 SockJs 的 endpoint 名称为 &quot;/endpointNasus&quot;</span><br><span class="line">    var socket = new SockJS(&#x27;/endpointNasus&#x27;);</span><br><span class="line">    // 使用 STOMP 子协议的 WebSocket 客户端</span><br><span class="line">    stompClient = Stomp.over(socket);</span><br><span class="line">    stompClient.connect(&#123;&#125;, function(frame) &#123;</span><br><span class="line">        setConnected(true);</span><br><span class="line">        console.log(&#x27;Connected: &#x27; + frame);</span><br><span class="line">        // 通过 stompClient.subscribe 订阅 /nasus/getResponse 目标发送的信息，对应控制器的 SendTo 定义</span><br><span class="line">        stompClient.subscribe(&#x27;/nasus/getResponse&#x27;, function(respnose)&#123;</span><br><span class="line">        // 展示返回的信息，只要订阅了 /nasus/getResponse 目标，都可以接收到服务端返回的信息</span><br><span class="line">        showResponse(JSON.parse(respnose.body).responseMessage);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+依赖：<br>前端：<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;script th:src=<span class="string">&quot;@&#123;sockjs.min.js&#125;&quot;</span>&gt;&lt;/script&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">th:src</span>=<span class="string">&quot;@&#123;stomp.min.js&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">th:src</span>=<span class="string">&quot;@&#123;jquery.js&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!-- web 启动类 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;!-- WebSocket 依赖 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-websocket&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></li>
+</ol>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>websocket</tag>
+        <tag>springCloud</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>指令仓库</title>
+    <url>/2021/09/23/%E6%8C%87%E4%BB%A4%E4%BB%93%E5%BA%93/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>随笔-数据库</title>
+    <url>/2021/09/30/%E9%9A%8F%E7%AC%94-%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
+    <content><![CDATA[<h2 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h2><h3 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysqldump -h 114.116.223.109 -P 3306 -u root -pcyf123456 nethos_med --default-character-set=utf8 -R --disable-keys &gt; C:\nethos_med.sql</span><br></pre></td></tr></table></figure>
+<p>-R 导出存储过程以及自定义函数<br><a href="https://www.cnblogs.com/qq78292959/p/3637135.html">更多参数说明</a></p>
+<h3 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql -h 192.168.1.43 -P3306 -uroot -pcyf@7923 nethos_core  --default-character-set=utf8  &lt; /home/nethos_core.sql</span><br></pre></td></tr></table></figure>
+<p>-f 遇到错误后继续</p>
+<h3 id="添加order-by-null"><a href="#添加order-by-null" class="headerlink" title="添加order by null"></a>添加order by null</h3><p>作用: 在使用group by的时候会默认排序,order by null 会取消排序</p>
+<h3 id="sql-将字段复制到另一个字段"><a href="#sql-将字段复制到另一个字段" class="headerlink" title="sql 将字段复制到另一个字段"></a>sql 将字段复制到另一个字段</h3><p><code>update table  set  test2  =  test1</code></p>
+<h2 id="数据库报错"><a href="#数据库报错" class="headerlink" title="数据库报错"></a>数据库报错</h2><h3 id="mysql-1055"><a href="#mysql-1055" class="headerlink" title="mysql 1055"></a>mysql 1055</h3><p>mysql版本导致默认配置修改,ONLY_FULL_GROUP_BY：对于GROUP BY聚合操作，若select中的列没有在group by中出现，那么这句SQL是不合法的。<br>修改mysql配置(windows安装路径,Linux/etc/mysql)<br><code>sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION</code><br>sql_mode常用值</p>
+<ul>
+<li>ONLY_FULL_GROUP_BY<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">对于GROUP BY聚合操作，如果在SELECT中的列，没有在GROUP BY中出现，那么这个SQL是不合法的，因为列不在GROUP BY从句中。</span><br><span class="line">在严格模式下，不要让GROUP BY部分中的查询指向未选择的列，否则报错。</span><br></pre></td></tr></table></figure></li>
+<li>NO_AUTO_VALUE_ON_ZERO<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">该值影响自增长列的插入。默认设置下，插入0或NULL代表生成下一个自增长值。如果用户 希望插入的值为0，而该列又是自增长的，那么这个选项就有用了。</span><br></pre></td></tr></table></figure></li>
+<li>STRICT_TRANS_TABLES<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">在该模式下，如果一个值不能插入到一个事务表中，则中断当前的操作，对非事务表不做限制</span><br></pre></td></tr></table></figure></li>
+<li>NO_ZERO_IN_DATE<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">在严格模式下，不允许日期和月份为零</span><br></pre></td></tr></table></figure></li>
+<li>NO_ZERO_DATE<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">设置该值，mysql数据库不允许插入零日期，插入零日期会抛出错误而不是警告。</span><br></pre></td></tr></table></figure></li>
+<li>ERROR_FOR_DIVISION_BY_ZERO<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">在INSERT或UPDATE过程中，如果数据被零除，则产生错误而非警告。如 果未给出该模式，那么数据被零除时MySQL返回NULL</span><br></pre></td></tr></table></figure></li>
+<li>NO_AUTO_CREATE_USER<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">禁止GRANT创建密码为空的用户</span><br></pre></td></tr></table></figure></li>
+<li>NO_ENGINE_SUBSTITUTION<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">如果需要的存储引擎被禁用或未编译，那么抛出错误。不设置此值时，用默认的存储引擎替代，并抛出一个异常</span><br></pre></td></tr></table></figure></li>
+<li>PIPES_AS_CONCAT<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">将&quot;||&quot;视为字符串的连接操作符而非或运算符，这和Oracle数据库是一样的，也和字符串的拼接函数Concat相类似</span><br></pre></td></tr></table></figure></li>
+<li>ANSI_QUOTES<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">启用ANSI_QUOTES后，不能用双引号来引用字符串，因为它被解释为识别符；</span><br><span class="line">ORACLE的sql_mode设置等同：PIPES_AS_CONCAT, ANSI_QUOTES, IGNORE_SPACE, NO_KEY_OPTIONS, NO_TABLE_OPTIONS, NO_FIELD_OPTIONS, NO_AUTO_CREATE_USER.</span><br></pre></td></tr></table></figure>
+<h3 id="MySQL-server-has-gone-away"><a href="#MySQL-server-has-gone-away" class="headerlink" title="MySQL server has gone away"></a>MySQL server has gone away</h3>问题再现：mysql导入大文件报错<br>出现原因：Mysql配置项max_allowed_packet过小<br>问题解析：max_allowed_packet项控制mysql服务端接收的包的大小<br>问题解决：<br>查看max_allowed_packet<br><code>show global variables like &#39;max_allowed_packet&#39;;</code><br><img src="img.png" alt="max_allowed_packet默认值.png"><br>将默认值修改为150M<br><code>set global max_allowed_packet=157286400;</code><br>注意：修改旨在当前设置中生效，重启mysql后恢复默认值，永久生效可以通过my.cnf中添加<code>max_allowed_packet=150M</code>即可<h2 id="mysql解析过程"><a href="#mysql解析过程" class="headerlink" title="mysql解析过程"></a>mysql解析过程</h2><a href="https://zhuanlan.zhihu.com/p/354255965">参考1</a><br><a href="https://www.cnblogs.com/fanguangdexiaoyuer/p/10268570.html">参考2</a><br><a href="https://www.php.cn/mysql-tutorials-483021.html">参考3</a><blockquote>
+<p>最宏观的来看，一个系统分为JAVA端和MYSQL端<br>看作<code>JAVA-&gt;MYSQL</code></p>
+<p>但连接数据库的操作往往都是固定的，于是有人封装这些代码，称之为数据库驱动<br>这时<code>JAVA业务-&gt;MYSQL驱动-&gt;MYSQL</code></p>
+<p>在向MYSQL发送请求的时候，如果每次都新建，删除连接，会造成性能的浪费和下降，通常会提供固定数量连接的线程，数据库连接池<br>现在<code>JAVA业务-&gt;数据库连接池-&gt;MYSQL驱动-&gt;MYSQL</code></p>
+<p>同理，MYSQL接收发送请求的线程也是一个连接池<br><code>JAVA业务-&gt;数据库发送池-&gt;MYSQL驱动-&gt;数据库接收池-&gt;MYSQL</code></p>
+<p>在进入MYSQL服务之后，如果查询缓存是打开的(默认关闭)，mysql会优先检查查询是否命中缓存，通过一个对大小写敏感的哈希查找实现</p>
+<ul>
+<li>只要有一个表的更新，缓存清空</li>
+<li>SQL上任何字符不同，例如空格，注释，缓存都不会命中<br><code>JAVA业务-&gt;数据库发送池-&gt;MYSQL驱动-&gt;数据库接收池-&gt;查询缓存-&gt;</code></li>
+</ul>
+<p>之后MYSQL对传递过来的SQL语句进行解析，和检查<br>词法解析：将完整的SQL语句打散成单词 语法分析：引号有没有闭合 语义分析：表名和字段是否存在<br><code>JAVA业务-&gt;数据库发送池-&gt;MYSQL驱动-&gt;数据库接收池-&gt;查询缓存-&gt;解析器-&gt;</code></p>
+<p>解析过后，会由优化器将解析之后的语法树转化成执行计划，查询优化器找到最好的执行计划，通过存储引擎执行并返回结果<br>使用EXPlain可以看到执行计划的信息<br><code>JAVA业务-&gt;数据库发送池-&gt;MYSQL驱动-&gt;数据库接收池-&gt;查询缓存-&gt;解析器-&gt;查询优化-&gt;存储引擎(执行器)</code></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="MyCat-Limit操作"><a href="#MyCat-Limit操作" class="headerlink" title="MyCat Limit操作"></a>MyCat Limit操作</h2><ul>
+<li>无offset 无order by<br>取决于哪个节点先返回数据(同一个SQL会有不同的结果)</li>
+<li>无offset 有order by<br>对每个节点返回的数据进行最小堆计算，计算所有结果的最小记录返回给应用</li>
+<li>有offset，有order by<br>limit m,n 会被改写为limit 0,m+n 对性能的消耗大幅度增加</li>
+</ul>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
   </entry>
   <entry>
     <title>随笔-运维(Windows||Linux)</title>
@@ -644,7 +734,8 @@ docker images              # 查看安装镜像</li>
 <h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><h3 id="防火墙操作"><a href="#防火墙操作" class="headerlink" title="防火墙操作"></a>防火墙操作</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">systemctl status firewalld.service   #查看状态</span><br><span class="line">systemctl stop firewalld.service     #停止</span><br><span class="line">systemctl disable firewalld.service  #禁止</span><br><span class="line">systemctl restart firewalld.service  #重启</span><br><span class="line">systemctl start firewalld.service    #启动</span><br></pre></td></tr></table></figure>
 <h3 id="查看端口使用"><a href="#查看端口使用" class="headerlink" title="查看端口使用"></a>查看端口使用</h3><ol>
 <li><code>netstat  -anp  |grep   端口号</code> </li>
-<li><code>netstat   -nultp</code> 查看当前已使用的端口<h3 id="bin-bash-M-坏的解释器-没有那个文件或目录"><a href="#bin-bash-M-坏的解释器-没有那个文件或目录" class="headerlink" title="/bin/bash^M: 坏的解释器: 没有那个文件或目录"></a>/bin/bash^M: 坏的解释器: 没有那个文件或目录</h3>这跟系统有关。脚本文件在windows下编辑过，windows下每一行的结尾是\n\r，而在linux下文件的结尾是\n，那么你在windows下编辑过的文件在linux下打开看的时候每一行的结尾就会多出来一个字符\r,<br>用cat -A filename时你可以看到这个\r字符被显示为^M</li>
+<li><code>netstat   -nultp</code> 查看当前已使用的端口<h3 id="添加用户到docker用户组"><a href="#添加用户到docker用户组" class="headerlink" title="添加用户到docker用户组"></a>添加用户到docker用户组</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 添加用户(默认会在/home/下创建你的文件夹)</span></span><br><span class="line">useradd htr</span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置用户密码</span></span><br><span class="line">passwd htr</span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加docker用户组，一般已存在，不需要执行</span></span><br><span class="line">cat /etc/group</span><br><span class="line">sudo groupadd docker</span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加用户到工作组</span></span><br><span class="line">usermod -a -G docker htr</span><br><span class="line"><span class="meta">#</span><span class="bash"> 测试是否可以使用docker(需要重新登陆用户)</span></span><br><span class="line">docker version</span><br></pre></td></tr></table></figure>
+<h3 id="bin-bash-M-坏的解释器-没有那个文件或目录"><a href="#bin-bash-M-坏的解释器-没有那个文件或目录" class="headerlink" title="/bin/bash^M: 坏的解释器: 没有那个文件或目录"></a>/bin/bash^M: 坏的解释器: 没有那个文件或目录</h3>这跟系统有关。脚本文件在windows下编辑过，windows下每一行的结尾是\n\r，而在linux下文件的结尾是\n，那么你在windows下编辑过的文件在linux下打开看的时候每一行的结尾就会多出来一个字符\r,<br>用cat -A filename时你可以看到这个\r字符被显示为^M</li>
 </ol>
 <p>使用<code>sed -i &#39;s/\r$//&#39; filename</code>删掉就可以</p>
 <h3 id="Linux-ls-l-文件颜色和意义"><a href="#Linux-ls-l-文件颜色和意义" class="headerlink" title="Linux ls -l 文件颜色和意义"></a>Linux ls -l 文件颜色和意义</h3><p>白色：表示普通文件<br>蓝色：表示目录<br>绿色：表示可执行文件<br>红色：表示压缩文件<br>浅蓝色：链接文件<br>红色闪烁：表示链接的文件有问题<br>黄色：表示设备文件<br>灰色：表示其他文件</p>
@@ -678,71 +769,21 @@ docker images              # 查看安装镜像</li>
         <category>MyCat</category>
       </categories>
       <tags>
+        <tag>MyCat</tag>
         <tag>数据库</tag>
         <tag>mysql</tag>
-        <tag>MyCat</tag>
       </tags>
   </entry>
   <entry>
-    <title>基于STOMP协议整合WebSocket</title>
-    <url>/2021/09/14/%E5%9F%BA%E4%BA%8ESTOMP%E5%8D%8F%E8%AE%AE%E6%95%B4%E5%90%88WebSocket/</url>
-    <content><![CDATA[<h2 id="基于STOMP协议整合WebSocket"><a href="#基于STOMP协议整合WebSocket" class="headerlink" title="基于STOMP协议整合WebSocket"></a>基于STOMP协议整合WebSocket</h2><p>模拟过程-客户端和服务端长连接，客户端发送消息，服务端对消息处理返回给全部客户端<br><a href="https://zhuanlan.zhihu.com/p/58311007">原文地址</a><br>核心原理：</p>
-<ol>
-<li>实现WebSocketMessageBrokerConfigurer接口，覆盖registerStompEndpoints方法，并注册一个节点<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">registerStompEndpoints</span><span class="params">(StompEndpointRegistry registry)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//注册一个名为 /endpointNasus 的 Stomp 节点(endpoint),并指定使用 SockJS 协议。</span></span><br><span class="line">    registry.addEndpoint(<span class="string">&quot;/endpointNasus&quot;</span>).withSockJS();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>客户端连接之后，向连接指定路由发送请求,服务端接收请求 发送到注解SendTo指定位置<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">connect</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 连接 SockJs 的 endpoint 名称为 &quot;/endpointNasus&quot;</span></span><br><span class="line">    <span class="keyword">var</span> socket = <span class="keyword">new</span> SockJS(<span class="string">&#x27;/endpointNasus&#x27;</span>);</span><br><span class="line">    <span class="comment">// 使用 STOMP 子协议的 WebSocket 客户端</span></span><br><span class="line">    stompClient = Stomp.over(socket);</span><br><span class="line">    stompClient.connect(&#123;&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">frame</span>) </span>&#123;</span><br><span class="line">        setConnected(<span class="literal">true</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;Connected: &#x27;</span> + frame);</span><br><span class="line">        <span class="comment">// 通过 stompClient.subscribe 订阅 /nasus/getResponse 目标发送的信息，对应控制器的 SendTo 定义</span></span><br><span class="line">        stompClient.subscribe(<span class="string">&#x27;/nasus/getResponse&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">respnose</span>)</span>&#123;</span><br><span class="line">        <span class="comment">// 展示返回的信息，只要订阅了 /nasus/getResponse 目标，都可以接收到服务端返回的信息</span></span><br><span class="line">        showResponse(<span class="built_in">JSON</span>.parse(respnose.body).responseMessage);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sendName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 向服务端发送消息</span></span><br><span class="line">    <span class="keyword">var</span> name = $(<span class="string">&#x27;#name&#x27;</span>).val();</span><br><span class="line">    <span class="comment">// 通过 stompClient.send 向 /hello （服务端）发送信息，对应控制器 @MessageMapping 中的定义</span></span><br><span class="line">    stompClient.send(<span class="string">&quot;/hello&quot;</span>, &#123;&#125;, <span class="built_in">JSON</span>.stringify(&#123; <span class="string">&#x27;name&#x27;</span>: name &#125;));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@MessageMapping(&quot;/hello&quot;)</span> <span class="comment">// @MessageMapping 和 @RequestMapping 功能类似，浏览器向服务器发起请求时，映射到该地址。</span></span><br><span class="line"><span class="meta">@SendTo(&quot;/nasus/getResponse&quot;)</span> <span class="comment">//如果服务器接受到了消息，就会对订阅了 @SendTo 括号中的地址的浏览器发送消息。</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Server2ClientMessage <span class="title">say</span><span class="params">(Client2ServerMessage message)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    Thread.sleep(<span class="number">3000</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Server2ClientMessage(<span class="string">&quot;Hello,&quot;</span> + message.getName() + <span class="string">&quot;!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>客户端绑定SendTo位置的会收到信息<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configureMessageBroker</span><span class="params">(MessageBrokerRegistry registry)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 广播式配置名为 /nasus 消息代理 , 这个消息代理必须和 controller 中的 @SendTo 配置的地址前缀一样或者全匹配</span></span><br><span class="line">    <span class="comment">// 点对点增加一个 /queue 消息代理</span></span><br><span class="line">    registry.enableSimpleBroker(<span class="string">&quot;/queue&quot;</span>,<span class="string">&quot;/nasus/getResponse&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function connect() &#123;</span><br><span class="line">    // 连接 SockJs 的 endpoint 名称为 &quot;/endpointNasus&quot;</span><br><span class="line">    var socket = new SockJS(&#x27;/endpointNasus&#x27;);</span><br><span class="line">    // 使用 STOMP 子协议的 WebSocket 客户端</span><br><span class="line">    stompClient = Stomp.over(socket);</span><br><span class="line">    stompClient.connect(&#123;&#125;, function(frame) &#123;</span><br><span class="line">        setConnected(true);</span><br><span class="line">        console.log(&#x27;Connected: &#x27; + frame);</span><br><span class="line">        // 通过 stompClient.subscribe 订阅 /nasus/getResponse 目标发送的信息，对应控制器的 SendTo 定义</span><br><span class="line">        stompClient.subscribe(&#x27;/nasus/getResponse&#x27;, function(respnose)&#123;</span><br><span class="line">        // 展示返回的信息，只要订阅了 /nasus/getResponse 目标，都可以接收到服务端返回的信息</span><br><span class="line">        showResponse(JSON.parse(respnose.body).responseMessage);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-依赖：<br>前端：<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;script th:src=<span class="string">&quot;@&#123;sockjs.min.js&#125;&quot;</span>&gt;&lt;/script&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">th:src</span>=<span class="string">&quot;@&#123;stomp.min.js&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">th:src</span>=<span class="string">&quot;@&#123;jquery.js&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!-- web 启动类 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;!-- WebSocket 依赖 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-websocket&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></li>
-</ol>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>websocket</tag>
-        <tag>springCloud</tag>
-      </tags>
+    <title>php-fpm简介</title>
+    <url>/2021/10/18/php-fpm%E7%AE%80%E4%BB%8B/</url>
+    <content><![CDATA[]]></content>
   </entry>
   <entry>
-    <title>随笔-数据库</title>
-    <url>/2021/09/30/%E9%9A%8F%E7%AC%94-%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
-    <content><![CDATA[<h2 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h2><h3 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysqldump -h 114.116.223.109 -P 3306 -u root -pcyf123456 nethos_med --default-character-set=utf8 -R --disable-keys &gt; C:\nethos_med.sql</span><br></pre></td></tr></table></figure>
-<p>-R 导出存储过程以及自定义函数<br><a href="https://www.cnblogs.com/qq78292959/p/3637135.html">更多参数说明</a></p>
-<h3 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql -h 192.168.1.43 -P3306 -uroot -pcyf@7923 nethos_core  --default-character-set=utf8  &lt; /home/nethos_core.sql</span><br></pre></td></tr></table></figure>
-<p>-f 遇到错误后继续</p>
-<h3 id="添加order-by-null"><a href="#添加order-by-null" class="headerlink" title="添加order by null"></a>添加order by null</h3><p>作用: 在使用group by的时候会默认排序,order by null 会取消排序</p>
-<h3 id="sql-将字段复制到另一个字段"><a href="#sql-将字段复制到另一个字段" class="headerlink" title="sql 将字段复制到另一个字段"></a>sql 将字段复制到另一个字段</h3><p><code>update table  set  test2  =  test1</code></p>
-<h2 id="数据库报错"><a href="#数据库报错" class="headerlink" title="数据库报错"></a>数据库报错</h2><h3 id="mysql-1055"><a href="#mysql-1055" class="headerlink" title="mysql 1055"></a>mysql 1055</h3><p>mysql版本导致默认配置修改,ONLY_FULL_GROUP_BY：对于GROUP BY聚合操作，若select中的列没有在group by中出现，那么这句SQL是不合法的。<br>修改mysql配置(windows安装路径,Linux/etc/mysql)<br><code>sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION</code><br>sql_mode常用值</p>
-<ul>
-<li>ONLY_FULL_GROUP_BY<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">对于GROUP BY聚合操作，如果在SELECT中的列，没有在GROUP BY中出现，那么这个SQL是不合法的，因为列不在GROUP BY从句中。</span><br><span class="line">在严格模式下，不要让GROUP BY部分中的查询指向未选择的列，否则报错。</span><br></pre></td></tr></table></figure></li>
-<li>NO_AUTO_VALUE_ON_ZERO<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">该值影响自增长列的插入。默认设置下，插入0或NULL代表生成下一个自增长值。如果用户 希望插入的值为0，而该列又是自增长的，那么这个选项就有用了。</span><br></pre></td></tr></table></figure></li>
-<li>STRICT_TRANS_TABLES<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">在该模式下，如果一个值不能插入到一个事务表中，则中断当前的操作，对非事务表不做限制</span><br></pre></td></tr></table></figure></li>
-<li>NO_ZERO_IN_DATE<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">在严格模式下，不允许日期和月份为零</span><br></pre></td></tr></table></figure></li>
-<li>NO_ZERO_DATE<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">设置该值，mysql数据库不允许插入零日期，插入零日期会抛出错误而不是警告。</span><br></pre></td></tr></table></figure></li>
-<li>ERROR_FOR_DIVISION_BY_ZERO<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">在INSERT或UPDATE过程中，如果数据被零除，则产生错误而非警告。如 果未给出该模式，那么数据被零除时MySQL返回NULL</span><br></pre></td></tr></table></figure></li>
-<li>NO_AUTO_CREATE_USER<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">禁止GRANT创建密码为空的用户</span><br></pre></td></tr></table></figure></li>
-<li>NO_ENGINE_SUBSTITUTION<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">如果需要的存储引擎被禁用或未编译，那么抛出错误。不设置此值时，用默认的存储引擎替代，并抛出一个异常</span><br></pre></td></tr></table></figure></li>
-<li>PIPES_AS_CONCAT<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">将&quot;||&quot;视为字符串的连接操作符而非或运算符，这和Oracle数据库是一样的，也和字符串的拼接函数Concat相类似</span><br></pre></td></tr></table></figure></li>
-<li>ANSI_QUOTES<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">启用ANSI_QUOTES后，不能用双引号来引用字符串，因为它被解释为识别符；</span><br><span class="line">ORACLE的sql_mode设置等同：PIPES_AS_CONCAT, ANSI_QUOTES, IGNORE_SPACE, NO_KEY_OPTIONS, NO_TABLE_OPTIONS, NO_FIELD_OPTIONS, NO_AUTO_CREATE_USER.</span><br></pre></td></tr></table></figure>
-<h3 id="MySQL-server-has-gone-away"><a href="#MySQL-server-has-gone-away" class="headerlink" title="MySQL server has gone away"></a>MySQL server has gone away</h3>问题再现：mysql导入大文件报错<br>出现原因：Mysql配置项max_allowed_packet过小<br>问题解析：max_allowed_packet项控制mysql服务端接收的包的大小<br>问题解决：<br>查看max_allowed_packet<br><code>show global variables like &#39;max_allowed_packet&#39;;</code><br><img src="img.png" alt="max_allowed_packet默认值.png"><br>将默认值修改为150M<br><code>set global max_allowed_packet=157286400;</code><br>注意：修改旨在当前设置中生效，重启mysql后恢复默认值，永久生效可以通过my.cnf中添加<code>max_allowed_packet=150M</code>即可<h2 id="mysql解析过程"><a href="#mysql解析过程" class="headerlink" title="mysql解析过程"></a>mysql解析过程</h2></li>
-</ul>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>随笔-运维(PHP||JAVA)</title>
-    <url>/2021/10/18/%E9%9A%8F%E7%AC%94-%E8%BF%90%E7%BB%B4-2/</url>
-    <content><![CDATA[<h2 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h2><h3 id="Primary-script-unknown"><a href="#Primary-script-unknown" class="headerlink" title="Primary script unknown"></a>Primary script unknown</h3><p>问题再现：配置完PHP-nginx环境之后File not found,查阅日志后有Primary script unknown问题<br>问题原因：php-fpm找不到php文件,php-fpm没有权限读取和执行文件<br>问题解决：</p>
-<ul>
-<li>找不到文件导致：nginx配置<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">   root        /var/www/html/sns;</span><br><span class="line">   index  index.html index.htm index.php;</span><br><span class="line">location ~ \.php$ &#123;</span><br><span class="line">	fastcgi_intercept_errors on;</span><br><span class="line">	fastcgi_pass 172.20.0.8:9000; </span><br><span class="line">	fastcgi_index  index.php;</span><br><span class="line">	fastcgi_param  SCRIPT_FILENAME    $document_root$fastcgi_script_name;</span><br><span class="line">	include   fastcgi_params;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-其中，root目录写容器中的目录</li>
-<li>权限导致：<a href="https://www.jb51.net/article/168244.htm">参考</a></li>
-</ul>
-<h2 id="JAVA"><a href="#JAVA" class="headerlink" title="JAVA"></a>JAVA</h2><h3 id="maven打包"><a href="#maven打包" class="headerlink" title="maven打包"></a>maven打包</h3><p>在IDEA右侧找到Maven，找到要发布的项目，展开Lifecycle，找到package，右键Run Maven Build 在项目target文件加下会生产jar包<br>如果有多个配置文件，打包前需要通过spring.profiles.active 指定使用哪个配置文件</p>
+    <title>随笔-Docker</title>
+    <url>/2021/10/20/%E9%9A%8F%E7%AC%94-Docker/</url>
+    <content><![CDATA[<h3 id="docker-build"><a href="#docker-build" class="headerlink" title="docker build"></a>docker build</h3><p>运行docker build的时候需要在新建的文件夹下进行，因为build的同时会将当前目录内容发送到Dockerdaemon<br><code>Sending build context to Docker daemon 40.309 GB</code></p>
+<h3 id="添加用户到docker用户组"><a href="#添加用户到docker用户组" class="headerlink" title="添加用户到docker用户组"></a>添加用户到docker用户组</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 添加用户(默认会在/home/下创建你的文件夹)</span></span><br><span class="line">useradd htr</span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置用户密码</span></span><br><span class="line">passwd htr</span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加docker用户组，一般已存在，不需要执行</span></span><br><span class="line">cat /etc/group</span><br><span class="line">sudo groupadd docker</span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加用户到工作组</span></span><br><span class="line">usermod -a -G docker htr</span><br><span class="line"><span class="meta">#</span><span class="bash"> 测试是否可以使用docker(需要重新登陆用户)</span></span><br><span class="line">docker version</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>随笔</category>
@@ -752,8 +793,8 @@ docker images              # 查看安装镜像</li>
       </tags>
   </entry>
   <entry>
-    <title>php-fpm简介</title>
-    <url>/2021/10/18/php-fpm%E7%AE%80%E4%BB%8B/</url>
+    <title>随笔-习惯</title>
+    <url>/2021/10/20/%E9%9A%8F%E7%AC%94-%E4%B9%A0%E6%83%AF/</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
@@ -777,25 +818,21 @@ docker images              # 查看安装镜像</li>
       </tags>
   </entry>
   <entry>
-    <title>encrypt</title>
-    <url>/2021/09/09/encrypt/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="e1a81976191c8e6eb021fbc9e7ad666f044f32a369f256494c040c60b3d42fc3">bd25ed9264b080267271e137e33d0ce18f3dbb41a8a4203af98a09ddcdccf6d3</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+    <title>随笔-运维(PHP||JAVA)</title>
+    <url>/2021/10/18/%E9%9A%8F%E7%AC%94-%E8%BF%90%E7%BB%B4-2/</url>
+    <content><![CDATA[<h2 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h2><h3 id="Primary-script-unknown"><a href="#Primary-script-unknown" class="headerlink" title="Primary script unknown"></a>Primary script unknown</h3><p>问题再现：配置完PHP-nginx环境之后File not found,查阅日志后有Primary script unknown问题<br>问题原因：php-fpm找不到php文件,php-fpm没有权限读取和执行文件<br>问题解决：</p>
+<ul>
+<li>找不到文件导致：nginx配置<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">   root        /var/www/html/sns;</span><br><span class="line">   index  index.html index.htm index.php;</span><br><span class="line">location ~ \.php$ &#123;</span><br><span class="line">	fastcgi_intercept_errors on;</span><br><span class="line">	fastcgi_pass 172.20.0.8:9000; </span><br><span class="line">	fastcgi_index  index.php;</span><br><span class="line">	fastcgi_param  SCRIPT_FILENAME    $document_root$fastcgi_script_name;</span><br><span class="line">	include   fastcgi_params;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+其中，root目录写容器中的目录</li>
+<li>权限导致：<a href="https://www.jb51.net/article/168244.htm">参考</a></li>
+</ul>
+<h2 id="JAVA"><a href="#JAVA" class="headerlink" title="JAVA"></a>JAVA</h2><h3 id="maven打包"><a href="#maven打包" class="headerlink" title="maven打包"></a>maven打包</h3><p>在IDEA右侧找到Maven，找到要发布的项目，展开Lifecycle，找到package，右键Run Maven Build 在项目target文件加下会生产jar包<br>如果有多个配置文件，打包前需要通过spring.profiles.active 指定使用哪个配置文件</p>
+]]></content>
       <categories>
-        <category>本站搭建</category>
+        <category>随笔</category>
       </categories>
       <tags>
-        <tag>encrypt</tag>
+        <tag>运维</tag>
       </tags>
   </entry>
   <entry>

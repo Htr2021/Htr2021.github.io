@@ -6,7 +6,7 @@
   <link href="https://htr2021.github.io/atom.xml" rel="self"/>
   
   <link href="https://htr2021.github.io/"/>
-  <updated>2021-10-18T02:53:59.558Z</updated>
+  <updated>2021-10-20T03:56:28.433Z</updated>
   <id>https://htr2021.github.io/</id>
   
   <author>
@@ -15,6 +15,44 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>随笔-Docker</title>
+    <link href="https://htr2021.github.io/2021/10/20/%E9%9A%8F%E7%AC%94-Docker/"/>
+    <id>https://htr2021.github.io/2021/10/20/%E9%9A%8F%E7%AC%94-Docker/</id>
+    <published>2021-10-20T02:47:05.000Z</published>
+    <updated>2021-10-20T03:56:28.433Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;docker-build&quot;&gt;&lt;a href=&quot;#docker-build&quot; class=&quot;headerlink&quot; title=&quot;docker build&quot;&gt;&lt;/a&gt;docker build&lt;/h3&gt;&lt;p&gt;运行docker</summary>
+        
+      
+    
+    
+    
+    <category term="随笔" scheme="https://htr2021.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+    <category term="运维" scheme="https://htr2021.github.io/tags/%E8%BF%90%E7%BB%B4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>随笔-习惯</title>
+    <link href="https://htr2021.github.io/2021/10/20/%E9%9A%8F%E7%AC%94-%E4%B9%A0%E6%83%AF/"/>
+    <id>https://htr2021.github.io/2021/10/20/%E9%9A%8F%E7%AC%94-%E4%B9%A0%E6%83%AF/</id>
+    <published>2021-10-20T02:44:16.000Z</published>
+    <updated>2021-10-20T02:44:16.314Z</updated>
+    
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>随笔-常识</title>
@@ -105,11 +143,11 @@
     <category term="MyCat" scheme="https://htr2021.github.io/categories/%E6%8A%80%E6%9C%AF/MyCat/"/>
     
     
+    <category term="MyCat" scheme="https://htr2021.github.io/tags/MyCat/"/>
+    
     <category term="数据库" scheme="https://htr2021.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
     <category term="mysql" scheme="https://htr2021.github.io/tags/mysql/"/>
-    
-    <category term="MyCat" scheme="https://htr2021.github.io/tags/MyCat/"/>
     
   </entry>
   
@@ -118,7 +156,7 @@
     <link href="https://htr2021.github.io/2021/09/30/%E9%9A%8F%E7%AC%94-%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     <id>https://htr2021.github.io/2021/09/30/%E9%9A%8F%E7%AC%94-%E6%95%B0%E6%8D%AE%E5%BA%93/</id>
     <published>2021-09-30T01:35:55.000Z</published>
-    <updated>2021-10-18T03:16:43.671Z</updated>
+    <updated>2021-10-18T09:05:15.269Z</updated>
     
     
       
@@ -141,7 +179,7 @@
     <link href="https://htr2021.github.io/2021/09/26/mybatis-1/"/>
     <id>https://htr2021.github.io/2021/09/26/mybatis-1/</id>
     <published>2021-09-26T02:03:38.000Z</published>
-    <updated>2021-10-18T03:23:49.645Z</updated>
+    <updated>2021-10-18T08:52:44.422Z</updated>
     
     
       
@@ -166,7 +204,7 @@
     <link href="https://htr2021.github.io/2021/09/26/%E9%9A%8F%E7%AC%94-%E8%BF%90%E7%BB%B4/"/>
     <id>https://htr2021.github.io/2021/09/26/%E9%9A%8F%E7%AC%94-%E8%BF%90%E7%BB%B4/</id>
     <published>2021-09-26T01:16:29.000Z</published>
-    <updated>2021-10-18T03:16:43.658Z</updated>
+    <updated>2021-10-20T03:56:17.331Z</updated>
     
     
       
@@ -209,11 +247,11 @@
     <category term="MyCat" scheme="https://htr2021.github.io/categories/%E6%8A%80%E6%9C%AF/MyCat/"/>
     
     
-    <category term="mycat" scheme="https://htr2021.github.io/tags/mycat/"/>
-    
     <category term="数据库" scheme="https://htr2021.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
     <category term="mysql" scheme="https://htr2021.github.io/tags/mysql/"/>
+    
+    <category term="mycat" scheme="https://htr2021.github.io/tags/mycat/"/>
     
   </entry>
   
@@ -254,11 +292,11 @@
     <category term="MyCat" scheme="https://htr2021.github.io/categories/%E6%8A%80%E6%9C%AF/MyCat/"/>
     
     
+    <category term="MyCat" scheme="https://htr2021.github.io/tags/MyCat/"/>
+    
     <category term="数据库" scheme="https://htr2021.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
     <category term="mysql" scheme="https://htr2021.github.io/tags/mysql/"/>
-    
-    <category term="MyCat" scheme="https://htr2021.github.io/tags/MyCat/"/>
     
   </entry>
   
@@ -389,11 +427,11 @@
     
     <category term="docker" scheme="https://htr2021.github.io/tags/docker/"/>
     
+    <category term="运维" scheme="https://htr2021.github.io/tags/%E8%BF%90%E7%BB%B4/"/>
+    
     <category term="docker build" scheme="https://htr2021.github.io/tags/docker-build/"/>
     
     <category term="dockerfile" scheme="https://htr2021.github.io/tags/dockerfile/"/>
-    
-    <category term="运维" scheme="https://htr2021.github.io/tags/%E8%BF%90%E7%BB%B4/"/>
     
   </entry>
   
@@ -453,9 +491,9 @@
     
     <category term="docker" scheme="https://htr2021.github.io/tags/docker/"/>
     
-    <category term="运维" scheme="https://htr2021.github.io/tags/%E8%BF%90%E7%BB%B4/"/>
-    
     <category term="docker-compose" scheme="https://htr2021.github.io/tags/docker-compose/"/>
+    
+    <category term="运维" scheme="https://htr2021.github.io/tags/%E8%BF%90%E7%BB%B4/"/>
     
     <category term="ftp" scheme="https://htr2021.github.io/tags/ftp/"/>
     
@@ -489,74 +527,6 @@
     <category term="docker" scheme="https://htr2021.github.io/tags/docker/"/>
     
     <category term="运维" scheme="https://htr2021.github.io/tags/%E8%BF%90%E7%BB%B4/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>docker-compose.yml配置文件</title>
-    <link href="https://htr2021.github.io/2021/09/06/docker-compose-yml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/"/>
-    <id>https://htr2021.github.io/2021/09/06/docker-compose-yml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/</id>
-    <published>2021-09-06T06:59:14.000Z</published>
-    <updated>2021-10-18T03:21:03.949Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;常用的docker-compose-命令&quot;&gt;&lt;a href=&quot;#常用的docker-compose-命令&quot; class=&quot;headerlink&quot; title=&quot;常用的docker-compose 命令&quot;&gt;&lt;/a&gt;常用的docker-compose</summary>
-        
-      
-    
-    
-    
-    <category term="技术" scheme="https://htr2021.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    <category term="docker" scheme="https://htr2021.github.io/categories/%E6%8A%80%E6%9C%AF/docker/"/>
-    
-    
-    <category term="docker" scheme="https://htr2021.github.io/tags/docker/"/>
-    
-    <category term="运维" scheme="https://htr2021.github.io/tags/%E8%BF%90%E7%BB%B4/"/>
-    
-    <category term="docker-compose" scheme="https://htr2021.github.io/tags/docker-compose/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>docker || docker-compose-安装</title>
-    <link href="https://htr2021.github.io/2021/09/03/windows%E5%AE%89%E8%A3%85Hyper-V+ubuntu/"/>
-    <id>https://htr2021.github.io/2021/09/03/windows%E5%AE%89%E8%A3%85Hyper-V+ubuntu/</id>
-    <published>2021-09-03T02:48:04.000Z</published>
-    <updated>2021-10-18T03:41:06.818Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;Windows10家庭版安装ubuntu&quot;&gt;&lt;a href=&quot;#Windows10家庭版安装ubuntu&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="技术" scheme="https://htr2021.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    <category term="docker" scheme="https://htr2021.github.io/categories/%E6%8A%80%E6%9C%AF/docker/"/>
-    
-    
-    <category term="docker" scheme="https://htr2021.github.io/tags/docker/"/>
-    
-    <category term="运维" scheme="https://htr2021.github.io/tags/%E8%BF%90%E7%BB%B4/"/>
-    
-    <category term="docker-compose" scheme="https://htr2021.github.io/tags/docker-compose/"/>
-    
-    <category term="虚拟机" scheme="https://htr2021.github.io/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
-    
-    <category term="Hyper-V" scheme="https://htr2021.github.io/tags/Hyper-V/"/>
-    
-    <category term="linux" scheme="https://htr2021.github.io/tags/linux/"/>
     
   </entry>
   

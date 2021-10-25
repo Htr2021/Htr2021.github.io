@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">134</span>
+            <span class="post-count">145</span>
         </span>
     </span>
 
@@ -113,7 +113,7 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h3 id="docker-build"><a href="#docker-build" class="headerlink" title="docker build"></a>docker build</h3><p>运行docker build的时候需要在新建的文件夹下进行，因为build的同时会将当前目录内容发送到Dockerdaemon<br><code>Sending build context to Docker daemon 40.309 GB</code></p>
+  <h3 id="docker-build"><a href="#docker-build" class="headerlink" title="docker build"></a>docker build</h3><p>运行docker build的时候需要在新建的文件夹下进行，因为build的同时会将当前目录内容发送到Dockerdaemon<br><code>Sending build context to Docker daemon 40.309 GB</code><br>会造成时间和流量的损失</p>
 <h3 id="添加用户到docker用户组"><a href="#添加用户到docker用户组" class="headerlink" title="添加用户到docker用户组"></a>添加用户到docker用户组</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 添加用户(默认会在/home/下创建你的文件夹)</span></span><br><span class="line">useradd htr</span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置用户密码</span></span><br><span class="line">passwd htr</span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加docker用户组，一般已存在，不需要执行</span></span><br><span class="line">cat /etc/group</span><br><span class="line">sudo groupadd docker</span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加用户到工作组</span></span><br><span class="line">usermod -a -G docker htr</span><br><span class="line"><span class="meta">#</span><span class="bash"> 测试是否可以使用docker(需要重新登陆用户)</span></span><br><span class="line">docker version</span><br></pre></td></tr></table></figure>
  
       <!-- reward -->

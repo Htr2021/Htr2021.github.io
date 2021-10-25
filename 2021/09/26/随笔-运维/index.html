@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">387</span>
+            <span class="post-count">455</span>
         </span>
     </span>
 
@@ -122,11 +122,18 @@
 <h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><h3 id="防火墙操作"><a href="#防火墙操作" class="headerlink" title="防火墙操作"></a>防火墙操作</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">systemctl status firewalld.service   #查看状态</span><br><span class="line">systemctl stop firewalld.service     #停止</span><br><span class="line">systemctl disable firewalld.service  #禁止</span><br><span class="line">systemctl restart firewalld.service  #重启</span><br><span class="line">systemctl start firewalld.service    #启动</span><br></pre></td></tr></table></figure>
 <h3 id="查看端口使用"><a href="#查看端口使用" class="headerlink" title="查看端口使用"></a>查看端口使用</h3><ol>
 <li><code>netstat  -anp  |grep   端口号</code> </li>
-<li><code>netstat   -nultp</code> 查看当前已使用的端口<h3 id="添加用户到docker用户组"><a href="#添加用户到docker用户组" class="headerlink" title="添加用户到docker用户组"></a>添加用户到docker用户组</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 添加用户(默认会在/home/下创建你的文件夹)</span></span><br><span class="line">useradd htr</span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置用户密码</span></span><br><span class="line">passwd htr</span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加docker用户组，一般已存在，不需要执行</span></span><br><span class="line">cat /etc/group</span><br><span class="line">sudo groupadd docker</span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加用户到工作组</span></span><br><span class="line">usermod -a -G docker htr</span><br><span class="line"><span class="meta">#</span><span class="bash"> 测试是否可以使用docker(需要重新登陆用户)</span></span><br><span class="line">docker version</span><br></pre></td></tr></table></figure>
-<h3 id="bin-bash-M-坏的解释器-没有那个文件或目录"><a href="#bin-bash-M-坏的解释器-没有那个文件或目录" class="headerlink" title="/bin/bash^M: 坏的解释器: 没有那个文件或目录"></a>/bin/bash^M: 坏的解释器: 没有那个文件或目录</h3>这跟系统有关。脚本文件在windows下编辑过，windows下每一行的结尾是\n\r，而在linux下文件的结尾是\n，那么你在windows下编辑过的文件在linux下打开看的时候每一行的结尾就会多出来一个字符\r,<br>用cat -A filename时你可以看到这个\r字符被显示为^M</li>
+<li><code>netstat   -nultp</code> 查看当前已使用的端口</li>
 </ol>
-<p>使用<code>sed -i &#39;s/\r$//&#39; filename</code>删掉就可以</p>
+<h3 id="添加用户到docker用户组"><a href="#添加用户到docker用户组" class="headerlink" title="添加用户到docker用户组"></a>添加用户到docker用户组</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 添加用户(默认会在/home/下创建你的文件夹)</span></span><br><span class="line">useradd htr</span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置用户密码</span></span><br><span class="line">passwd htr</span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加docker用户组，一般已存在，不需要执行</span></span><br><span class="line">cat /etc/group</span><br><span class="line">sudo groupadd docker</span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加用户到工作组</span></span><br><span class="line">usermod -a -G docker htr</span><br><span class="line"><span class="meta">#</span><span class="bash"> 测试是否可以使用docker(需要重新登陆用户)</span></span><br><span class="line">docker version</span><br></pre></td></tr></table></figure>
 <h3 id="Linux-ls-l-文件颜色和意义"><a href="#Linux-ls-l-文件颜色和意义" class="headerlink" title="Linux ls -l 文件颜色和意义"></a>Linux ls -l 文件颜色和意义</h3><p>白色：表示普通文件<br>蓝色：表示目录<br>绿色：表示可执行文件<br>红色：表示压缩文件<br>浅蓝色：链接文件<br>红色闪烁：表示链接的文件有问题<br>黄色：表示设备文件<br>灰色：表示其他文件</p>
+<h3 id="bin-bash-M-坏的解释器-没有那个文件或目录"><a href="#bin-bash-M-坏的解释器-没有那个文件或目录" class="headerlink" title="/bin/bash^M: 坏的解释器: 没有那个文件或目录"></a>/bin/bash^M: 坏的解释器: 没有那个文件或目录</h3><p>脚本文件在windows下编辑过，windows下每一行的结尾是\n\r，而在linux下文件的结尾是\n，那么你在windows下编辑过的文件在linux下打开看的时候每一行的结尾就会多出来一个字符\r,<br>用cat -A filename时你可以看到这个\r字符被显示为^M<br>使用<code>sed -i &#39;s/\r$//&#39; filename</code>删掉就可以</p>
+<h3 id="Linux操作好习惯"><a href="#Linux操作好习惯" class="headerlink" title="Linux操作好习惯"></a>Linux操作好习惯</h3><ol>
+<li>避免用root用户登陆</li>
+<li>命名文件只使用字母，数字，连接符(-)和下划线(_)</li>
+<li>对目录操作使用绝对路径</li>
+<li>不用的shell及时关掉，避免在错误的服务器上进行操作</li>
+<li>执行脚本时看好变量</li>
+</ol>
  
       <!-- reward -->
       

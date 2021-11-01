@@ -106,9 +106,13 @@
 <li><strong>fanout</strong><br>和RoutingKey,BindingKey无关，消息发送到与交换机绑定的所有队列中</li>
 <li><strong>direct</strong><br>消息发送到和RoutingKey和BindingKey完全匹配的队列中</li>
 <li><strong>topic</strong><br>在前者的基础上做了类似正则表达式的拓展，用规则匹配取代了完全匹配</li>
-<li><strong>headers</strong><br>和RoutingKey,BindingKey无关，根据发送的消息内容中的 headers 属性进行匹配，性能较差，不实用</li>
+<li><strong>headers</strong><br>和RoutingKey,BindingKey无关，根据发送的消息内容中的 headers 属性进行匹配，性能较差，不实用<h4 id="队列类型"><a href="#队列类型" class="headerlink" title="队列类型"></a>队列类型</h4>RabbitMQ 常用的队列类型有classic 和quorum<br><a href="https://www.rabbitmq.com/quorum-queues.html">对比参考</a></li>
 </ol>
-<h3 id="RabbitMQ-运转流程"><a href="#RabbitMQ-运转流程" class="headerlink" title="RabbitMQ 运转流程"></a>RabbitMQ 运转流程</h3><p><strong>生产者发送消息的时候：</strong></p>
+<ul>
+<li><strong>classic</strong><br> 一般的队列</li>
+<li><strong>quorum</strong><br> 增加了容错性和数据安全性，适用于消息丢失对系统产生重大影响的场景<h3 id="RabbitMQ-运转流程"><a href="#RabbitMQ-运转流程" class="headerlink" title="RabbitMQ 运转流程"></a>RabbitMQ 运转流程</h3></li>
+<li><em>生产者发送消息的时候：</em>*</li>
+</ul>
 <ol>
 <li>生产者连接到 RabbitMQ Broker，建立一个连接（Connection），开启一个信道（Channel）</li>
 <li>生产者声明一个交换器，并设置相关属性，比如交换机类型、是否持久化等（详细内</li>
@@ -138,27 +142,6 @@
       </categories>
       <tags>
         <tag>RabbitMQ</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>docker-compose.yml配置文件</title>
-    <url>/2021/09/06/docker-compose-yml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/</url>
-    <content><![CDATA[<h2 id="常用的docker-compose-命令"><a href="#常用的docker-compose-命令" class="headerlink" title="常用的docker-compose 命令"></a>常用的docker-compose 命令</h2><h3 id="部署compose应用"><a href="#部署compose应用" class="headerlink" title="部署compose应用"></a>部署compose应用</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose up </span><br></pre></td></tr></table></figure>
-<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><p>-f + compose文件名<br>-d 后台运行</p>
-<h3 id="停止docker-compose相关的容器"><a href="#停止docker-compose相关的容器" class="headerlink" title="停止docker-compose相关的容器"></a>停止docker-compose相关的容器</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose stop </span><br><span class="line"># 容器不会被删除，停止的容器可以通过docker-compose restart 重新启动</span><br></pre></td></tr></table></figure>
-<h3 id="删除停止的compose应用"><a href="#删除停止的compose应用" class="headerlink" title="删除停止的compose应用"></a>删除停止的compose应用</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose rm </span><br><span class="line"># 删除容器和网络，不会删除文件映射和各个容器</span><br></pre></td></tr></table></figure>
-<h3 id="重启停止的compose应用"><a href="#重启停止的compose应用" class="headerlink" title="重启停止的compose应用"></a>重启停止的compose应用</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose restart </span><br><span class="line"># 如果用户在停止该应用后对其进行了变更，那么变更的内容不会反映在重启后的应用中，这时需要重新部署应用使变更生效。</span><br></pre></td></tr></table></figure>
-<h3 id="列出compose应用中的各个容器"><a href="#列出compose应用中的各个容器" class="headerlink" title="列出compose应用中的各个容器"></a>列出compose应用中的各个容器</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose ps</span><br><span class="line"># 输出内容包括当前状态，容器运行的命令和网络端口</span><br></pre></td></tr></table></figure>
-<h3 id="停止并删除运行的compose应用"><a href="#停止并删除运行的compose应用" class="headerlink" title="停止并删除运行的compose应用"></a>停止并删除运行的compose应用</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compse down</span><br><span class="line"># 会删除容器和网络，但不会删除文件映射和镜像</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>技术</category>
-        <category>docker</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-        <tag>docker-compose</tag>
-        <tag>运维</tag>
       </tags>
   </entry>
   <entry>
@@ -196,9 +179,30 @@
       </categories>
       <tags>
         <tag>docker</tag>
-        <tag>运维</tag>
         <tag>docker build</tag>
         <tag>dockerfile</tag>
+        <tag>运维</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>docker-compose.yml配置文件</title>
+    <url>/2021/09/06/docker-compose-yml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[<h2 id="常用的docker-compose-命令"><a href="#常用的docker-compose-命令" class="headerlink" title="常用的docker-compose 命令"></a>常用的docker-compose 命令</h2><h3 id="部署compose应用"><a href="#部署compose应用" class="headerlink" title="部署compose应用"></a>部署compose应用</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose up </span><br></pre></td></tr></table></figure>
+<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><p>-f + compose文件名<br>-d 后台运行</p>
+<h3 id="停止docker-compose相关的容器"><a href="#停止docker-compose相关的容器" class="headerlink" title="停止docker-compose相关的容器"></a>停止docker-compose相关的容器</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose stop </span><br><span class="line"># 容器不会被删除，停止的容器可以通过docker-compose restart 重新启动</span><br></pre></td></tr></table></figure>
+<h3 id="删除停止的compose应用"><a href="#删除停止的compose应用" class="headerlink" title="删除停止的compose应用"></a>删除停止的compose应用</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose rm </span><br><span class="line"># 删除容器和网络，不会删除文件映射和各个容器</span><br></pre></td></tr></table></figure>
+<h3 id="重启停止的compose应用"><a href="#重启停止的compose应用" class="headerlink" title="重启停止的compose应用"></a>重启停止的compose应用</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose restart </span><br><span class="line"># 如果用户在停止该应用后对其进行了变更，那么变更的内容不会反映在重启后的应用中，这时需要重新部署应用使变更生效。</span><br></pre></td></tr></table></figure>
+<h3 id="列出compose应用中的各个容器"><a href="#列出compose应用中的各个容器" class="headerlink" title="列出compose应用中的各个容器"></a>列出compose应用中的各个容器</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose ps</span><br><span class="line"># 输出内容包括当前状态，容器运行的命令和网络端口</span><br></pre></td></tr></table></figure>
+<h3 id="停止并删除运行的compose应用"><a href="#停止并删除运行的compose应用" class="headerlink" title="停止并删除运行的compose应用"></a>停止并删除运行的compose应用</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compse down</span><br><span class="line"># 会删除容器和网络，但不会删除文件映射和镜像</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>技术</category>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>运维</tag>
+        <tag>docker-compose</tag>
       </tags>
   </entry>
   <entry>
@@ -350,8 +354,8 @@
       </categories>
       <tags>
         <tag>docker</tag>
-        <tag>docker-compose</tag>
         <tag>运维</tag>
+        <tag>docker-compose</tag>
         <tag>ftp</tag>
         <tag>vsftpd</tag>
       </tags>
@@ -587,6 +591,11 @@
       </tags>
   </entry>
   <entry>
+    <title>指令仓库</title>
+    <url>/2021/09/23/%E6%8C%87%E4%BB%A4%E4%BB%93%E5%BA%93/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>docker || docker-compose-安装</title>
     <url>/2021/09/03/windows%E5%AE%89%E8%A3%85Hyper-V+ubuntu/</url>
     <content><![CDATA[<h2 id="Windows10家庭版安装ubuntu"><a href="#Windows10家庭版安装ubuntu" class="headerlink" title="Windows10家庭版安装ubuntu"></a>Windows10家庭版安装ubuntu</h2><h3 id="安装Hyper-V"><a href="#安装Hyper-V" class="headerlink" title="安装Hyper-V"></a>安装Hyper-V</h3><p><a href="https://blog.csdn.net/yuyuking/article/details/103890195">参考博文</a><br>把下面代码保存为.bat文件，用管理员运行，重启之后，就可以在win+S 中搜索到Hyper-V</p>
@@ -642,8 +651,8 @@ docker images              # 查看安装镜像</li>
       </categories>
       <tags>
         <tag>docker</tag>
-        <tag>docker-compose</tag>
         <tag>运维</tag>
+        <tag>docker-compose</tag>
         <tag>虚拟机</tag>
         <tag>Hyper-V</tag>
         <tag>linux</tag>
@@ -672,16 +681,11 @@ docker images              # 查看安装镜像</li>
       </tags>
   </entry>
   <entry>
-    <title>指令仓库</title>
-    <url>/2021/09/23/%E6%8C%87%E4%BB%A4%E4%BB%93%E5%BA%93/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
     <title>随笔-数据库</title>
     <url>/2021/09/30/%E9%9A%8F%E7%AC%94-%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
-    <content><![CDATA[<h2 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h2><h3 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysqldump -h 114.116.223.109 -P 3306 -u root -pcyf123456 nethos_med --default-character-set=utf8 -R --disable-keys &gt; C:\nethos_med.sql</span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<h2 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h2><h3 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysqldump -h xxx.xxx.xxx.xxx -P 3306 -u root -p nethos_med --default-character-set=utf8 -R --disable-keys &gt; </span><br><span class="line">C:\nethos_med.sql</span><br></pre></td></tr></table></figure>
 <p>-R 导出存储过程以及自定义函数<br><a href="https://www.cnblogs.com/qq78292959/p/3637135.html">更多参数说明</a></p>
-<h3 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql -h 192.168.1.43 -P3306 -uroot -pcyf@7923 nethos_core  --default-character-set=utf8  &lt; /home/nethos_core.sql</span><br></pre></td></tr></table></figure>
+<h3 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql -h xxx.xxx.xxx.xxx -P3306 -uroot -p nethos_core  --default-character-set=utf8  &lt; /home/nethos_core.sql</span><br></pre></td></tr></table></figure>
 <p>-f 遇到错误后继续</p>
 <h3 id="添加order-by-null"><a href="#添加order-by-null" class="headerlink" title="添加order by null"></a>添加order by null</h3><p>作用: 在使用group by的时候会默认排序,order by null 会取消排序</p>
 <h3 id="sql-将字段复制到另一个字段"><a href="#sql-将字段复制到另一个字段" class="headerlink" title="sql 将字段复制到另一个字段"></a>sql 将字段复制到另一个字段</h3><p><code>update table  set  test2  =  test1</code></p>
@@ -805,6 +809,24 @@ docker images              # 查看安装镜像</li>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
+    <title>随笔-运维(PHP||JAVA)</title>
+    <url>/2021/10/18/%E9%9A%8F%E7%AC%94-%E8%BF%90%E7%BB%B4-2/</url>
+    <content><![CDATA[<h2 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h2><h3 id="Primary-script-unknown"><a href="#Primary-script-unknown" class="headerlink" title="Primary script unknown"></a>Primary script unknown</h3><p>问题再现：配置完PHP-nginx环境之后File not found,查阅日志后有Primary script unknown问题<br>问题原因：php-fpm找不到php文件,php-fpm没有权限读取和执行文件<br>问题解决：</p>
+<ul>
+<li>找不到文件导致：nginx配置<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">   root        /var/www/html/sns;</span><br><span class="line">   index  index.html index.htm index.php;</span><br><span class="line">location ~ \.php$ &#123;</span><br><span class="line">	fastcgi_intercept_errors on;</span><br><span class="line">	fastcgi_pass 172.20.0.8:9000; </span><br><span class="line">	fastcgi_index  index.php;</span><br><span class="line">	fastcgi_param  SCRIPT_FILENAME    $document_root$fastcgi_script_name;</span><br><span class="line">	include   fastcgi_params;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+其中，root目录写容器中的目录</li>
+<li>权限导致：<a href="https://www.jb51.net/article/168244.htm">参考</a></li>
+</ul>
+<h2 id="JAVA"><a href="#JAVA" class="headerlink" title="JAVA"></a>JAVA</h2><h3 id="maven打包"><a href="#maven打包" class="headerlink" title="maven打包"></a>maven打包</h3><p>在IDEA右侧找到Maven，找到要发布的项目，展开Lifecycle，找到package，右键Run Maven Build 在项目target文件加下会生产jar包<br>如果有多个配置文件，打包前需要通过spring.profiles.active 指定使用哪个配置文件</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>运维</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>随笔-常识</title>
     <url>/2021/10/18/%E9%9A%8F%E7%AC%94-%E5%B8%B8%E8%AF%86/</url>
     <content><![CDATA[<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="word文件对比"><a href="#word文件对比" class="headerlink" title="word文件对比"></a>word文件对比</h3><p><a href="https://www.scootersoftware.com/download.php">Beyond Compare</a><br>支持常用的word和pdf文件的对比，会帮你高亮标出版本差异。<br>需要自己保留文件的版本，然后手动上传进行对比，正版收费，但是网上可以down到破解版<br><a href="https://www.cnblogs.com/xifengxixia/p/11051718.html">破解方法</a><br>方法1：</p>
@@ -822,24 +844,6 @@ docker images              # 查看安装镜像</li>
       <tags>
         <tag>数据库</tag>
         <tag>word</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>随笔-运维(PHP||JAVA)</title>
-    <url>/2021/10/18/%E9%9A%8F%E7%AC%94-%E8%BF%90%E7%BB%B4-2/</url>
-    <content><![CDATA[<h2 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h2><h3 id="Primary-script-unknown"><a href="#Primary-script-unknown" class="headerlink" title="Primary script unknown"></a>Primary script unknown</h3><p>问题再现：配置完PHP-nginx环境之后File not found,查阅日志后有Primary script unknown问题<br>问题原因：php-fpm找不到php文件,php-fpm没有权限读取和执行文件<br>问题解决：</p>
-<ul>
-<li>找不到文件导致：nginx配置<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">   root        /var/www/html/sns;</span><br><span class="line">   index  index.html index.htm index.php;</span><br><span class="line">location ~ \.php$ &#123;</span><br><span class="line">	fastcgi_intercept_errors on;</span><br><span class="line">	fastcgi_pass 172.20.0.8:9000; </span><br><span class="line">	fastcgi_index  index.php;</span><br><span class="line">	fastcgi_param  SCRIPT_FILENAME    $document_root$fastcgi_script_name;</span><br><span class="line">	include   fastcgi_params;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-其中，root目录写容器中的目录</li>
-<li>权限导致：<a href="https://www.jb51.net/article/168244.htm">参考</a></li>
-</ul>
-<h2 id="JAVA"><a href="#JAVA" class="headerlink" title="JAVA"></a>JAVA</h2><h3 id="maven打包"><a href="#maven打包" class="headerlink" title="maven打包"></a>maven打包</h3><p>在IDEA右侧找到Maven，找到要发布的项目，展开Lifecycle，找到package，右键Run Maven Build 在项目target文件加下会生产jar包<br>如果有多个配置文件，打包前需要通过spring.profiles.active 指定使用哪个配置文件</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>运维</tag>
       </tags>
   </entry>
   <entry>

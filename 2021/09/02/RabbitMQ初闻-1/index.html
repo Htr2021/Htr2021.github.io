@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">1.2k</span>
+            <span class="post-count">1.3k</span>
         </span>
     </span>
 
@@ -167,9 +167,13 @@
 <li><strong>fanout</strong><br>和RoutingKey,BindingKey无关，消息发送到与交换机绑定的所有队列中</li>
 <li><strong>direct</strong><br>消息发送到和RoutingKey和BindingKey完全匹配的队列中</li>
 <li><strong>topic</strong><br>在前者的基础上做了类似正则表达式的拓展，用规则匹配取代了完全匹配</li>
-<li><strong>headers</strong><br>和RoutingKey,BindingKey无关，根据发送的消息内容中的 headers 属性进行匹配，性能较差，不实用</li>
+<li><strong>headers</strong><br>和RoutingKey,BindingKey无关，根据发送的消息内容中的 headers 属性进行匹配，性能较差，不实用<h4 id="队列类型"><a href="#队列类型" class="headerlink" title="队列类型"></a>队列类型</h4>RabbitMQ 常用的队列类型有classic 和quorum<br><a target="_blank" rel="noopener" href="https://www.rabbitmq.com/quorum-queues.html">对比参考</a></li>
 </ol>
-<h3 id="RabbitMQ-运转流程"><a href="#RabbitMQ-运转流程" class="headerlink" title="RabbitMQ 运转流程"></a>RabbitMQ 运转流程</h3><p><strong>生产者发送消息的时候：</strong></p>
+<ul>
+<li><strong>classic</strong><br> 一般的队列</li>
+<li><strong>quorum</strong><br> 增加了容错性和数据安全性，适用于消息丢失对系统产生重大影响的场景<h3 id="RabbitMQ-运转流程"><a href="#RabbitMQ-运转流程" class="headerlink" title="RabbitMQ 运转流程"></a>RabbitMQ 运转流程</h3></li>
+<li><em>生产者发送消息的时候：</em>*</li>
+</ul>
 <ol>
 <li>生产者连接到 RabbitMQ Broker，建立一个连接（Connection），开启一个信道（Channel）</li>
 <li>生产者声明一个交换器，并设置相关属性，比如交换机类型、是否持久化等（详细内</li>

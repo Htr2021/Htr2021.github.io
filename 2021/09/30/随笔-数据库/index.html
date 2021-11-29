@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>随笔-数据库 |  时光荏苒</title>
+      <title>随笔-mysql |  时光荏苒</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -69,7 +69,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  随笔-数据库
+  随笔-mysql
 </h1>
  
 
@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">1.3k</span>
+            <span class="post-count">1.5k</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">4 分钟</span>
+            <span class="post-count">6 分钟</span>
         </span>
     </span>
 </div>
@@ -117,6 +117,21 @@
 <p>-R 导出存储过程以及自定义函数<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/qq78292959/p/3637135.html">更多参数说明</a></p>
 <h3 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -h xxx.xxx.xxx.xxx -P3306 -uroot -p nethos_core  --default-character-set=utf8  &lt; /home/nethos_core.sql</span><br></pre></td></tr></table></figure>
 <p>-f 遇到错误后继续</p>
+<h3 id="查看存储过程和函数"><a href="#查看存储过程和函数" class="headerlink" title="查看存储过程和函数"></a>查看存储过程和函数</h3><p>查询数据库中的存储过程和函数</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select `name` from mysql.proc where db = &#x27;xx&#x27; and `type` = &#x27;PROCEDURE&#x27;   //存储过程</span><br><span class="line">select `name` from mysql.proc where db = &#x27;xx&#x27; and `type` = &#x27;FUNCTION&#x27;   //函数</span><br><span class="line"></span><br><span class="line">show procedure status; //存储过程</span><br><span class="line">show function status;     //函数</span><br></pre></td></tr></table></figure>
+<p>查看视图和触发器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT * from information_schema.VIEWS   //视图</span><br><span class="line">SELECT * from information_schema.TABLES   //表</span><br><span class="line"></span><br><span class="line">SHOW TRIGGERS [FROM db_name] [LIKE expr]</span><br><span class="line">SELECT * FROM triggers T WHERE trigger_name=&quot;mytrigger&quot; \G</span><br></pre></td></tr></table></figure>
+<h3 id="mysql复制表结构和内容到另外一张表"><a href="#mysql复制表结构和内容到另外一张表" class="headerlink" title="mysql复制表结构和内容到另外一张表"></a>mysql复制表结构和内容到另外一张表</h3><p><strong>复制表结构和数据</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">create table 新表</span><br><span class="line">select * from 旧表  </span><br></pre></td></tr></table></figure>
+<p><strong>只复制表结构</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">create table 新表</span><br><span class="line">select * from 旧表 where 1=2</span><br></pre></td></tr></table></figure>
+<p><strong>只复制表结构</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create table 新表 like 旧表</span><br></pre></td></tr></table></figure>
+<p><strong>复制旧表的数据到新表（假设两个表结构一样）</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">insert into 新表</span><br><span class="line">select * from 旧表  </span><br></pre></td></tr></table></figure>
+<p><strong>复制旧表的数据到新表（假设两个表结构不一样）</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">insert into 新表(字段1,字段2,…….)</span><br><span class="line">select 字段1,字段2,…… from 旧表</span><br></pre></td></tr></table></figure>
+<h3 id="查询字段有那些值"><a href="#查询字段有那些值" class="headerlink" title="查询字段有那些值"></a>查询字段有那些值</h3><p><code>select distinct first_name from table_user;</code></p>
 <h3 id="添加order-by-null"><a href="#添加order-by-null" class="headerlink" title="添加order by null"></a>添加order by null</h3><p>作用: 在使用group by的时候会默认排序,order by null 会取消排序</p>
 <h3 id="sql-将字段复制到另一个字段"><a href="#sql-将字段复制到另一个字段" class="headerlink" title="sql 将字段复制到另一个字段"></a>sql 将字段复制到另一个字段</h3><p><code>update table  set  test2  =  test1</code></p>
 <h2 id="数据库报错"><a href="#数据库报错" class="headerlink" title="数据库报错"></a>数据库报错</h2><h3 id="mysql-1055"><a href="#mysql-1055" class="headerlink" title="mysql 1055"></a>mysql 1055</h3><p>mysql版本导致默认配置修改,ONLY_FULL_GROUP_BY：对于GROUP BY聚合操作，若select中的列没有在group by中出现，那么这句SQL是不合法的。<br>修改mysql配置(windows安装路径,Linux/etc/mysql)<br><code>sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION</code><br>sql_mode常用值</p>
@@ -226,6 +241,8 @@
 </div>
 
 <div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li></ul>
+
     </footer>
   </div>
 

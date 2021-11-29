@@ -145,9 +145,31 @@
       </tags>
   </entry>
   <entry>
+    <title>docker-compose.yml配置文件</title>
+    <url>/2021/09/06/docker-compose-yml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[<h2 id="常用的docker-compose-命令"><a href="#常用的docker-compose-命令" class="headerlink" title="常用的docker-compose 命令"></a>常用的docker-compose 命令</h2><h3 id="部署compose应用"><a href="#部署compose应用" class="headerlink" title="部署compose应用"></a>部署compose应用</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose up </span><br></pre></td></tr></table></figure>
+<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><p>-f + compose文件名<br>-d 后台运行</p>
+<h3 id="停止docker-compose相关的容器"><a href="#停止docker-compose相关的容器" class="headerlink" title="停止docker-compose相关的容器"></a>停止docker-compose相关的容器</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose stop </span><br><span class="line"># 容器不会被删除，停止的容器可以通过docker-compose restart 重新启动</span><br></pre></td></tr></table></figure>
+<h3 id="删除停止的compose应用"><a href="#删除停止的compose应用" class="headerlink" title="删除停止的compose应用"></a>删除停止的compose应用</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose rm </span><br><span class="line"># 删除容器和网络，不会删除文件映射和各个容器</span><br></pre></td></tr></table></figure>
+<h3 id="重启停止的compose应用"><a href="#重启停止的compose应用" class="headerlink" title="重启停止的compose应用"></a>重启停止的compose应用</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose restart </span><br><span class="line"># 如果用户在停止该应用后对其进行了变更，那么变更的内容不会反映在重启后的应用中，这时需要重新部署应用使变更生效。</span><br></pre></td></tr></table></figure>
+<h3 id="列出compose应用中的各个容器"><a href="#列出compose应用中的各个容器" class="headerlink" title="列出compose应用中的各个容器"></a>列出compose应用中的各个容器</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose ps</span><br><span class="line"># 输出内容包括当前状态，容器运行的命令和网络端口</span><br></pre></td></tr></table></figure>
+<h3 id="停止并删除运行的compose应用"><a href="#停止并删除运行的compose应用" class="headerlink" title="停止并删除运行的compose应用"></a>停止并删除运行的compose应用</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compse down</span><br><span class="line"># 会删除容器和网络，但不会删除文件映射和镜像</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>技术</category>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>docker-compose</tag>
+        <tag>运维</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>dockerfile</title>
     <url>/2021/09/08/dockerfile/</url>
-    <content><![CDATA[<h2 id="docker-build介绍"><a href="#docker-build介绍" class="headerlink" title="docker build介绍"></a>docker build介绍</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>docker build [OPTIONS]  PATH | URL | -</p>
+    <content><![CDATA[<h2 id="docker-build介绍"><a href="#docker-build介绍" class="headerlink" title="docker build介绍"></a>docker build介绍</h2><h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p><code>docker build -f Dockerfile -t my/php:5.6-fpm-alpine .</code></p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>docker build [OPTIONS]  PATH | URL | -</p>
 <h3 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h3><ul>
 <li>–build-arg=[] :设置镜像创建时的变量；</li>
 <li>–cpu-shares :设置 cpu 使用权重；</li>
@@ -170,39 +192,18 @@
 <li>–ulimit :Ulimit配置。</li>
 <li>–squash :将 Dockerfile 中所有的操作压缩为一层。</li>
 <li><strong>–tag</strong>, -t: 镜像的名字及标签，通常 name:tag 或者 name 格式；可以在一次构建中为一个镜像设置多个标签。</li>
-<li><strong>–network</strong>: 默认 default。在构建期间设置RUN指令的网络模式<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><code>docker build -f Dockerfile -t my/php:5.6-fpm-alpine .</code><h2 id="dockerfile-语法"><a href="#dockerfile-语法" class="headerlink" title="dockerfile 语法"></a>dockerfile 语法</h2></li>
+<li><strong>–network</strong>: 默认 default。在构建期间设置RUN指令的网络模式</li>
 </ul>
-]]></content>
+<h2 id="dockerfile-语法"><a href="#dockerfile-语法" class="headerlink" title="dockerfile 语法"></a>dockerfile 语法</h2>]]></content>
       <categories>
         <category>技术</category>
         <category>docker</category>
       </categories>
       <tags>
         <tag>docker</tag>
+        <tag>运维</tag>
         <tag>docker build</tag>
         <tag>dockerfile</tag>
-        <tag>运维</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>docker-compose.yml配置文件</title>
-    <url>/2021/09/06/docker-compose-yml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/</url>
-    <content><![CDATA[<h2 id="常用的docker-compose-命令"><a href="#常用的docker-compose-命令" class="headerlink" title="常用的docker-compose 命令"></a>常用的docker-compose 命令</h2><h3 id="部署compose应用"><a href="#部署compose应用" class="headerlink" title="部署compose应用"></a>部署compose应用</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose up </span><br></pre></td></tr></table></figure>
-<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><p>-f + compose文件名<br>-d 后台运行</p>
-<h3 id="停止docker-compose相关的容器"><a href="#停止docker-compose相关的容器" class="headerlink" title="停止docker-compose相关的容器"></a>停止docker-compose相关的容器</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose stop </span><br><span class="line"># 容器不会被删除，停止的容器可以通过docker-compose restart 重新启动</span><br></pre></td></tr></table></figure>
-<h3 id="删除停止的compose应用"><a href="#删除停止的compose应用" class="headerlink" title="删除停止的compose应用"></a>删除停止的compose应用</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose rm </span><br><span class="line"># 删除容器和网络，不会删除文件映射和各个容器</span><br></pre></td></tr></table></figure>
-<h3 id="重启停止的compose应用"><a href="#重启停止的compose应用" class="headerlink" title="重启停止的compose应用"></a>重启停止的compose应用</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose restart </span><br><span class="line"># 如果用户在停止该应用后对其进行了变更，那么变更的内容不会反映在重启后的应用中，这时需要重新部署应用使变更生效。</span><br></pre></td></tr></table></figure>
-<h3 id="列出compose应用中的各个容器"><a href="#列出compose应用中的各个容器" class="headerlink" title="列出compose应用中的各个容器"></a>列出compose应用中的各个容器</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose ps</span><br><span class="line"># 输出内容包括当前状态，容器运行的命令和网络端口</span><br></pre></td></tr></table></figure>
-<h3 id="停止并删除运行的compose应用"><a href="#停止并删除运行的compose应用" class="headerlink" title="停止并删除运行的compose应用"></a>停止并删除运行的compose应用</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compse down</span><br><span class="line"># 会删除容器和网络，但不会删除文件映射和镜像</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>技术</category>
-        <category>docker</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-        <tag>运维</tag>
-        <tag>docker-compose</tag>
       </tags>
   </entry>
   <entry>
@@ -265,6 +266,8 @@
 <li>删除镜像和容器<br><code>rm -rf /var/lib/docker</code></li>
 <li>卸载旧版本，因为可能存在清除不干净的时候<br><code>yum remove docker docker-common docker-selinux docker-engine</code></li>
 </ul>
+<h2 id="docker磁盘相关"><a href="#docker磁盘相关" class="headerlink" title="docker磁盘相关"></a>docker磁盘相关</h2><h3 id="docker-overlay目录名寻找容器"><a href="#docker-overlay目录名寻找容器" class="headerlink" title="docker overlay目录名寻找容器"></a>docker overlay目录名寻找容器</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">du -sc * | sort -rn #查看谁磁盘占用大</span><br><span class="line"><span class="meta">#</span><span class="bash"> 再通过目录名查找容器名：</span></span><br><span class="line">docker ps -q | xargs docker inspect --format &#x27;&#123;&#123;.State.Pid&#125;&#125;, &#123;&#123;.Id&#125;&#125;, &#123;&#123;.Name&#125;&#125;, &#123;&#123;.GraphDriver.Data.WorkDir&#125;&#125;&#x27; | grep &quot;bbed8c4cd32f640601c976229c610a5d3ef0ddc5be274acda3699f425dff884a&quot;</span><br><span class="line">[感兴趣可以看看这里](https://blog.csdn.net/styshoo/article/details/60715942)</span><br></pre></td></tr></table></figure>
+<h3 id="查看容器占用磁盘大小"><a href="#查看容器占用磁盘大小" class="headerlink" title="查看容器占用磁盘大小"></a>查看容器占用磁盘大小</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker system df # 查看镜像，容器，卷大小</span><br><span class="line">docker system df -v # 查看每个镜像，容器，卷大小</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>技术</category>
@@ -354,8 +357,8 @@
       </categories>
       <tags>
         <tag>docker</tag>
-        <tag>运维</tag>
         <tag>docker-compose</tag>
+        <tag>运维</tag>
         <tag>ftp</tag>
         <tag>vsftpd</tag>
       </tags>
@@ -403,8 +406,8 @@
     <content><![CDATA[<p>原文:<a href="https://www.yuque.com/ccazhw/tuacvk/vttsnv">https://www.yuque.com/ccazhw/tuacvk/vttsnv</a></p>
 <h2 id="基础知识介绍"><a href="#基础知识介绍" class="headerlink" title="基础知识介绍"></a>基础知识介绍</h2><h3 id="需求由来"><a href="#需求由来" class="headerlink" title="需求由来"></a>需求由来</h3><h4 id="OLTP和OLAP"><a href="#OLTP和OLAP" class="headerlink" title="OLTP和OLAP"></a>OLTP和OLAP</h4><p>谈到数据库，必然会引起这两种处理类型</p>
 <ol>
-<li>联机事务处理 (OLTP)<br>将原始数据传送到数据中心计算，业务处理，在很短的时间给出处理结果</li>
-<li>联机分析处理 (OLAP)<br>多维的方式对数据分析，同数据挖掘工具，统计分析工具使用<table>
+<li><strong>联机事务处理</strong> (OLTP)<br>将原始数据传送到数据中心计算，业务处理，在很短的时间给出处理结果</li>
+<li><strong>联机分析处理</strong> (OLAP)<br>多维的方式对数据分析，同数据挖掘工具，统计分析工具使用<table>
 <thead>
 <tr>
 <th></th>
@@ -425,11 +428,11 @@
 <tr>
 <td>数据处理</td>
 <td></td>
-<td>数据量大</td>
+<td><strong>数据量大</strong></td>
 </tr>
 <tr>
 <td>实时性</td>
-<td>实时性高</td>
+<td><strong>实时性高</strong></td>
 <td></td>
 </tr>
 <tr>
@@ -443,13 +446,16 @@
 <td>高</td>
 </tr>
 </tbody></table>
-<h4 id="关系型数据库和NoSQL数据库"><a href="#关系型数据库和NoSQL数据库" class="headerlink" title="关系型数据库和NoSQL数据库"></a>关系型数据库和NoSQL数据库</h4></li>
+</li>
 </ol>
-<ul>
-<li>关系型数据库<br>建立在关系模型上的数据库，主流有oracle、DB2、MS SQL Server和mysql</li>
-<li>NoSQL数据库(Not only SQL)<br>主要分为临时性键值存储（memcached、Redis）、永久性键值存储（ROMA、Redis）、面向文档的数据库（MongoDB、CouchDB）、面向列的数据库（Cassandra、HBase），每种NoSQL都有其特有的使用场景及优点。</li>
+<h4 id="关系型数据库和NoSQL数据库"><a href="#关系型数据库和NoSQL数据库" class="headerlink" title="关系型数据库和NoSQL数据库"></a>关系型数据库和NoSQL数据库</h4><ul>
+<li><p><strong>关系型数据库</strong><br>建立在关系模型上的数据库，主流有oracle、DB2、MS SQL Server和mysql</p>
+</li>
+<li><p><strong>NoSQL数据库</strong>(Not only SQL)<br>主要分为临时性键值存储（memcached、Redis）、永久性键值存储（ROMA、Redis）、面向文档的数据库（MongoDB、CouchDB）、面向列的数据库（Cassandra、HBase），每种NoSQL都有其特有的使用场景及优点。</p>
+</li>
+<li><p>主要是由于随着互联网发展，数据量越来越大，对性能要求越来越高，传统数据库存在着先天性的缺陷，即<strong>单机（单库）性能瓶颈，并且扩展困难</strong>。这样既有单机单库瓶颈，却又扩展困难，自然无法满足日益增长的海量数据存储及其性能要求，所以才会出现了各种不同的NoSQL产品，NoSQL根本性的优势在于在云计算时代，简单、易于大规模分布式扩展，并且读写性能非常高。</p>
+</li>
 </ul>
-<p>主要是由于随着互联网发展，数据量越来越大，对性能要求越来越高，传统数据库存在着先天性的缺陷，即单机（单库）性能瓶颈，并且扩展困难。这样既有单机单库瓶颈，却又扩展困难，自然无法满足日益增长的海量数据存储及其性能要求，所以才会出现了各种不同的NoSQL产品，NoSQL根本性的优势在于在云计算时代，简单、易于大规模分布式扩展，并且读写性能非常高。</p>
 <table>
 <thead>
 <tr>
@@ -476,7 +482,7 @@
 </tbody></table>
 <p>目前NoSQL只能作为传统数据库的补充而不能将其替代，为了解决传统数据库不支持大规模自动扩展，需要使用第三方软件进行数据切分</p>
 <h3 id="数据库切分概述"><a href="#数据库切分概述" class="headerlink" title="数据库切分概述"></a>数据库切分概述</h3><h4 id="数据切分"><a href="#数据切分" class="headerlink" title="数据切分"></a>数据切分</h4><p>将同一数据库中的数据放到多个数据库服务上，以此来降低服务器负载</p>
-<h5 id="垂直切分"><a href="#垂直切分" class="headerlink" title="垂直切分"></a>垂直切分</h5><p>将不同的库或表切分到不同的服务中<br>优点：</p>
+<h5 id="垂直切分"><a href="#垂直切分" class="headerlink" title="垂直切分"></a>垂直切分</h5><p><strong>将不同的库或表切分到不同的服务中</strong><br>优点：</p>
 <ul>
 <li>业务简单</li>
 <li>系统整合拓展容易</li>
@@ -486,8 +492,9 @@
 <ul>
 <li>跨表join需要接口实现，提高了系统的复杂度</li>
 <li>存在单库(单表)性能瓶颈</li>
-<li>事务处理复杂<h5 id="水平切分"><a href="#水平切分" class="headerlink" title="水平切分"></a>水平切分</h5>将同一表中的不同数据切分到不同服务中<br><img src="%E9%9A%8F%E7%AC%94-%E6%95%B0%E6%8D%AE%E5%BA%93/img.png" alt="水平切分"><br>常见拆分规则：</li>
+<li>事务处理复杂</li>
 </ul>
+<h5 id="水平切分"><a href="#水平切分" class="headerlink" title="水平切分"></a>水平切分</h5><p><strong>将同一表中的不同数据切分到不同服务中</strong><br><img src="img.png" alt="水平切分"><br>常见拆分规则：</p>
 <ol>
 <li>按ID求模</li>
 <li>按时间求模</li>
@@ -505,8 +512,9 @@
 <li>拆分规则不好抽象</li>
 <li>事务一致性难以解决</li>
 <li>数据拓展时维护量大</li>
-<li>跨库join时性能较差<h5 id="共同缺点"><a href="#共同缺点" class="headerlink" title="共同缺点"></a>共同缺点</h5>在引入多服务后，<strong>数据一致性，跨节点join，分页，多数据源管理</strong>成为了主要的问题<br>针对数据源管理，目前有两种思路：</li>
+<li>跨库join时性能较差</li>
 </ul>
+<h5 id="共同缺点"><a href="#共同缺点" class="headerlink" title="共同缺点"></a>共同缺点</h5><p>在引入多服务后，<strong>数据一致性，跨节点join，分页，多数据源管理</strong>成为了主要的问题<br>针对数据源管理，目前有两种思路：</p>
 <ol>
 <li>客户端模式(垂直切分)：<br>每个应用程序配置属于自己的数据源</li>
 <li>中间代理层(水平切分)：<br>使用MyCat等中间代理层</li>
@@ -520,10 +528,15 @@
 <h3 id="常用技术"><a href="#常用技术" class="headerlink" title="常用技术"></a>常用技术</h3><h4 id="主从复制，读写分离"><a href="#主从复制，读写分离" class="headerlink" title="主从复制，读写分离"></a>主从复制，读写分离</h4><p>使用两个以上相同的数据库，一个主，一个从，主数据库操作时，从数据库相应操作<br>主数据库进行写操作，从数据库执行查询操作<br>优点：</p>
 <ul>
 <li>主数据库出问题时，从数据库起到备用的效果</li>
-<li>写操作和读操作在两个服务上，避免写影响读的效率<h4 id="哨兵模式"><a href="#哨兵模式" class="headerlink" title="哨兵模式"></a>哨兵模式</h4>是一种容灾方案<br>哨兵：特殊模式下的redis服务器，存储本身的信息，主服务器，从服务器的信息<br>用一个或多个哨兵来监视写服务器，如果写服务器挂了，找到合适的从服务器来成为主服务器</li>
+<li>写操作和读操作在两个服务上，避免写影响读的效率</li>
 </ul>
-<h2 id="MyCat简介"><a href="#MyCat简介" class="headerlink" title="MyCat简介"></a>MyCat简介</h2><p><strong>是什么：</strong>开源的分布式数据库系统，面对前端他是一个数据库代理，面对后端调用mysql原生(Native)协议与多个mysql服务器通信<br><strong>干什么：</strong>分表分库，将大表水平分割成N个小表，存储到不同数据库服务中<br>到今天(2021/9/24)MyCat后端支持MySQL、SQL Server、Oracle、DB2、PostgreSQL等主流数据库，也支持MongoDB这种新型NoSQL方式的存储<br>对DBA(不是很理解)：MyCat就是MySQL Server，而MyCat后面连接的MySQL Server，就好象是MySQL的存储引擎,如InnoDB，MyISAM等，因此，MyCat本身并不存储数据，数据是在后端的MySQL上存储的，因此数据可靠性以及事务等都是MySQL保证的，简单的说，MyCat就是MySQL最佳伴侣，它在一定程度上让MySQL拥有了能跟Oracle PK的能力<br>对软件工程师：MyCat就是一个近似等于MySQL的数据库服务器，你可以用连接MySQL的方式去连接MyCat（除了端口不同，默认的MyCat端口是8066而非MySQL的3306，因此需要在连接字符串上增加端口信息），大多数情况下，可以用你熟悉的对象映射框架使用MyCat，但建议对于分片表，尽量使用基础的SQL语句，因为这样能达到最佳性能，特别是几千万甚至几百亿条记录的情况下。<br>对架构师：MyCat是一个强大的数据库中间件，不仅仅可以用作读写分离、以及分表分库、容灾备份，而且可以用于多租户应用开发、云平台基础设施、让你的架构具备很强的适应性和灵活性，借助于即将发布的MyCat智能优化模块，系统的数据访问瓶颈和热点一目了然，根据这些统计分析数据，你可以自动或手工调整后端存储，将不同的表映射到不同存储引擎上，而整个应用的代码一行也不用改变。</p>
-<h3 id="MyCat原理"><a href="#MyCat原理" class="headerlink" title="MyCat原理"></a>MyCat原理</h3><p>拦截了用户发送过来的SQL语句，首先对SQL语句做了一些特定的分析：如分片分析、路由分析、读写分离分析、缓存分析等，然后将此SQL发往后端的真实数据库，并将返回的结果做适当的处理，最终再返回给用户。<br><img src="image008.png" alt="MyCat原理"><br>当Mycat收到一个SQL时，会先解析这个SQL，查找涉及到的表，然后看此表的定义，如果有分片规则，则获取到SQL里分片字段的值，并匹配分片函数，得到该SQL对应的分片列表，然后将SQL发往这些分片去执行，最后收集和处理所有分片返回的结果数据，并输出到客户端。以select * from Orders where prov=?语句为例，查到prov=wuhan，按照分片函数，wuhan返回dn1，于是SQL就发给了MySQL1，去取DB1上的查询结果，并返回给用户。<br>如果上述SQL改为select * from Orders where prov in (‘wuhan’,‘beijing’)，那么，SQL就会发给MySQL1与MySQL2去执行，然后结果集合并后输出给用户。但通常业务中我们的SQL会有Order By 以及Limit翻页语法，此时就涉及到结果集在Mycat端的二次处理，这部分的代码也比较复杂，而最复杂的则属两个表的Join问题，为此，Mycat提出了创新性的ER分片、全局表、HBT（Human Brain Tech)人工智能的Catlet、以及结合Storm/Spark引擎等十八般武艺的解决办法，从而成为目前业界最强大的方案，这就是开源的力量！</p>
+<h4 id="哨兵模式"><a href="#哨兵模式" class="headerlink" title="哨兵模式"></a>哨兵模式</h4><p>是一种容灾方案<br>哨兵：特殊模式下的redis服务器，存储本身的信息，主服务器，从服务器的信息<br>用一个或多个哨兵来监视写服务器，如果写服务器挂了，找到合适的从服务器来成为主服务器</p>
+<h2 id="MyCat简介"><a href="#MyCat简介" class="headerlink" title="MyCat简介"></a>MyCat简介</h2><p><strong>是什么：</strong>开源的分布式数据库系统，面对前端他是一个数据库代理，面对后端调用mysql原生(Native)协议与多个mysql服务器通信<br><strong>干什么：</strong>分表分库，将大表水平分割成N个小表，存储到不同数据库服务中</p>
+<p>到今天(2021/9/24)MyCat后端支持MySQL、SQL Server、Oracle、DB2、PostgreSQL等主流数据库，也支持MongoDB这种新型NoSQL方式的存储</p>
+<p><strong>对DBA：</strong>MyCat就是MySQL Server，而MyCat后面连接的MySQL Server，就好象是MySQL的存储引擎,如InnoDB，MyISAM等，因此，MyCat本身并不存储数据，数据是在后端的MySQL上存储的，因此数据可靠性以及事务等都是MySQL保证的，简单的说，MyCat就是MySQL最佳伴侣，它在一定程度上让MySQL拥有了能跟Oracle PK的能力</p>
+<p><strong>对软件工程师：</strong>MyCat就是一个近似等于MySQL的数据库服务器，你可以用连接MySQL的方式去连接MyCat（除了端口不同，默认的MyCat端口是8066而非MySQL的3306，因此需要在连接字符串上增加端口信息），大多数情况下，可以用你熟悉的对象映射框架使用MyCat，但建议对于分片表，尽量使用基础的SQL语句，因为这样能达到最佳性能，特别是几千万甚至几百亿条记录的情况下。</p>
+<p><strong>对架构师：</strong>MyCat是一个强大的数据库中间件，不仅仅可以用作读写分离、以及分表分库、容灾备份，而且可以用于多租户应用开发、云平台基础设施、让你的架构具备很强的适应性和灵活性，借助于即将发布的MyCat智能优化模块，系统的数据访问瓶颈和热点一目了然，根据这些统计分析数据，你可以自动或手工调整后端存储，将不同的表映射到不同存储引擎上，而整个应用的代码一行也不用改变。</p>
+<h3 id="MyCat原理"><a href="#MyCat原理" class="headerlink" title="MyCat原理"></a>MyCat原理</h3><p>拦截用户发送过来的SQL语句，首先对SQL语句做了一些特定的分析：如<strong>分片分析、路由分析、读写分离分析、缓存分析等，然后将此SQL发往后端的真实数据库，并将返回的结果做适当的处理，最终再返回给用户</strong>。<br><img src="image008.png" alt="MyCat原理"><br>当Mycat收到一个SQL时，会<strong>先解析这个SQL，查找涉及到的表，然后看此表的定义，如果有分片规则，则获取到SQL里分片字段的值，并匹配分片函数，得到该SQL对应的分片列表，然后将SQL发往这些分片去执行，最后收集和处理所有分片返回的结果数据，并输出到客户端</strong>。以select * from Orders where prov=?语句为例，查到prov=wuhan，按照分片函数，wuhan返回dn1，于是SQL就发给了MySQL1，去取DB1上的查询结果，并返回给用户。<br>如果上述SQL改为select * from Orders where prov in (‘wuhan’,‘beijing’)，那么，SQL就会发给MySQL1与MySQL2去执行，然后结果集合并后输出给用户。但通常业务中我们的SQL会有Order By 以及Limit翻页语法，此时就涉及到结果集在Mycat端的二次处理，这部分的代码也比较复杂，而最复杂的则属两个表的Join问题，为此，Mycat提出了创新性的ER分片、全局表、HBT（Human Brain Tech)人工智能的Catlet、以及结合Storm/Spark引擎等十八般武艺的解决办法，从而成为目前业界最强大的方案，这就是开源的力量！</p>
 <h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><p>Mycat发展到现在，适用的场景已经很丰富，而且不断有新用户给出新的创新性的方案，以下是几个典型的应用场景：</p>
 <ul>
 <li>单纯的读写分离，此时配置最为简单，支持读写分离，主从切换；</li>
@@ -533,6 +546,15 @@
 <li>替代Hbase，分析大数据；</li>
 <li>作为海量数据实时查询的一种简单有效方案，比如100亿条频繁查询的记录需要在3秒内查询出来结果，除了基于主键的查询，还可能存在范围查询或其他属性查询，此时Mycat可能是最简单有效的选择。</li>
 </ul>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><ol>
+<li>对数据的处理一般分为两种 数据量大和实时性高</li>
+<li>nosql无法取代关系型数据库</li>
+<li>数据库切分有两种 <blockquote>
+<p>垂直切分：将数据库和表放到不同的服务<br>水平切分：将一个表中的数据放到不同节点上</p>
+</blockquote>
+</li>
+<li></li>
+</ol>
 ]]></content>
       <categories>
         <category>技术</category>
@@ -547,8 +569,13 @@
   <entry>
     <title>mycat入门-目录</title>
     <url>/2021/09/24/mycat%E5%85%A5%E9%97%A8-2/</url>
-    <content><![CDATA[<h2 id="MyCat目录结构"><a href="#MyCat目录结构" class="headerlink" title="MyCat目录结构"></a>MyCat目录结构</h2><p><img src="image004.png"><br>目录解释如下：<br><strong>bin 程序目录</strong>，存放了window版本和linux版本，除了提供封装成服务的版本之外，也提供了nowrap的shell脚本命令，方便大家选择和修改，进入到bin目录：<br>Linux下运行：./mycat console,首先要chmod +x *<br>注：mycat支持的命令{ console | start | stop | restart | status | dump }<br><strong>conf目录下存放配置文件</strong>，server.xml是Mycat服务器参数调整和用户授权的配置文件，schema.xml是逻辑库定义和表以及分片定义的配置文件，rule.xml是分片规则的配置文件，分片规则的具体一些参数信息单独存放为文件，也在这个目录下，配置文件修改，需要重启Mycat或者通过9066端口reload.<br><strong>lib目录下主要存放mycat依赖的一些jar文件.</strong><br><strong>日志存放在logs/mycat.log中</strong>，每天一个文件，日志的配置是在conf/log4j.xml中，根据自己的需要，可以调整输出级别为debug，debug级别下，会输出更多的信息，方便排查问题.<br>注意：Linux下部署安装MySQL，默认不忽略表名大小写，需要手动到/etc/my.cnf 下配置 lower_case_table_names=1 使Linux环境下MySQL忽略表名大小写，否则使用MyCAT的时候会提示找不到表的错误！</p>
-<h2 id="schema-xml"><a href="#schema-xml" class="headerlink" title="schema.xml"></a>schema.xml</h2>]]></content>
+    <content><![CDATA[<h2 id="MyCat目录结构"><a href="#MyCat目录结构" class="headerlink" title="MyCat目录结构"></a>MyCat目录结构</h2><p><img src="image004.png"><br>目录解释如下：</p>
+<p><strong>bin 程序目录</strong>，存放了window版本和linux版本，除了提供封装成服务的版本之外，也提供了nowrap的shell脚本命令，方便选择和修改，进入到bin目录：<br>Linux下运行：./mycat console,首先要chmod +x *<br>注：mycat支持的命令{ console | start | stop | restart | status | dump }</p>
+<p><strong>conf目录下存放配置文件</strong>，server.xml是Mycat服务器参数调整和用户授权的配置文件，schema.xml是逻辑库定义和表以及分片定义的配置文件，rule.xml是分片规则的配置文件，分片规则的具体一些参数信息单独存放为文件，也在这个目录下，配置文件修改，需要重启Mycat或者通过9066端口reload.</p>
+<p><strong>lib目录下主要存放mycat依赖的一些jar文件.</strong></p>
+<p><strong>日志存放在logs/mycat.log中</strong>，每天一个文件，日志的配置是在conf/log4j.xml中，根据自己的需要，可以调整输出级别为debug，debug级别下，会输出更多的信息，方便排查问题.<br>注意：Linux下部署安装MySQL，默认不忽略表名大小写，需要手动到/etc/my.cnf 下配置 lower_case_table_names=1 使Linux环境下MySQL忽略表名大小写，否则使用MyCAT的时候会提示找不到表的错误！</p>
+<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p><a href="http://www.mycat.org.cn/document/mycat-definitive-guide.pdf">配置文件参数参考</a></p>
+]]></content>
       <categories>
         <category>技术</category>
         <category>MyCat</category>
@@ -589,11 +616,6 @@
         <tag>WebSocket</tag>
         <tag>计算机网络</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>指令仓库</title>
-    <url>/2021/09/23/%E6%8C%87%E4%BB%A4%E4%BB%93%E5%BA%93/</url>
-    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>docker || docker-compose-安装</title>
@@ -651,8 +673,8 @@ docker images              # 查看安装镜像</li>
       </categories>
       <tags>
         <tag>docker</tag>
-        <tag>运维</tag>
         <tag>docker-compose</tag>
+        <tag>运维</tag>
         <tag>虚拟机</tag>
         <tag>Hyper-V</tag>
         <tag>linux</tag>
@@ -681,12 +703,32 @@ docker images              # 查看安装镜像</li>
       </tags>
   </entry>
   <entry>
-    <title>随笔-数据库</title>
+    <title>指令仓库</title>
+    <url>/2021/09/23/%E6%8C%87%E4%BB%A4%E4%BB%93%E5%BA%93/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>随笔-mysql</title>
     <url>/2021/09/30/%E9%9A%8F%E7%AC%94-%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
     <content><![CDATA[<h2 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h2><h3 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysqldump -h xxx.xxx.xxx.xxx -P 3306 -u root -p nethos_med --default-character-set=utf8 -R --disable-keys &gt; </span><br><span class="line">C:\nethos_med.sql</span><br></pre></td></tr></table></figure>
 <p>-R 导出存储过程以及自定义函数<br><a href="https://www.cnblogs.com/qq78292959/p/3637135.html">更多参数说明</a></p>
 <h3 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql -h xxx.xxx.xxx.xxx -P3306 -uroot -p nethos_core  --default-character-set=utf8  &lt; /home/nethos_core.sql</span><br></pre></td></tr></table></figure>
 <p>-f 遇到错误后继续</p>
+<h3 id="查看存储过程和函数"><a href="#查看存储过程和函数" class="headerlink" title="查看存储过程和函数"></a>查看存储过程和函数</h3><p>查询数据库中的存储过程和函数</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">select `name` from mysql.proc where db = &#x27;xx&#x27; and `type` = &#x27;PROCEDURE&#x27;   //存储过程</span><br><span class="line">select `name` from mysql.proc where db = &#x27;xx&#x27; and `type` = &#x27;FUNCTION&#x27;   //函数</span><br><span class="line"></span><br><span class="line">show procedure status; //存储过程</span><br><span class="line">show function status;     //函数</span><br></pre></td></tr></table></figure>
+<p>查看视图和触发器</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">SELECT * from information_schema.VIEWS   //视图</span><br><span class="line">SELECT * from information_schema.TABLES   //表</span><br><span class="line"></span><br><span class="line">SHOW TRIGGERS [FROM db_name] [LIKE expr]</span><br><span class="line">SELECT * FROM triggers T WHERE trigger_name=&quot;mytrigger&quot; \G</span><br></pre></td></tr></table></figure>
+<h3 id="mysql复制表结构和内容到另外一张表"><a href="#mysql复制表结构和内容到另外一张表" class="headerlink" title="mysql复制表结构和内容到另外一张表"></a>mysql复制表结构和内容到另外一张表</h3><p><strong>复制表结构和数据</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">create table 新表</span><br><span class="line">select * from 旧表  </span><br></pre></td></tr></table></figure>
+<p><strong>只复制表结构</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">create table 新表</span><br><span class="line">select * from 旧表 where 1=2</span><br></pre></td></tr></table></figure>
+<p><strong>只复制表结构</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">create table 新表 like 旧表</span><br></pre></td></tr></table></figure>
+<p><strong>复制旧表的数据到新表（假设两个表结构一样）</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">insert into 新表</span><br><span class="line">select * from 旧表  </span><br></pre></td></tr></table></figure>
+<p><strong>复制旧表的数据到新表（假设两个表结构不一样）</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">insert into 新表(字段1,字段2,…….)</span><br><span class="line">select 字段1,字段2,…… from 旧表</span><br></pre></td></tr></table></figure>
+<h3 id="查询字段有那些值"><a href="#查询字段有那些值" class="headerlink" title="查询字段有那些值"></a>查询字段有那些值</h3><p><code>select distinct first_name from table_user;</code></p>
 <h3 id="添加order-by-null"><a href="#添加order-by-null" class="headerlink" title="添加order by null"></a>添加order by null</h3><p>作用: 在使用group by的时候会默认排序,order by null 会取消排序</p>
 <h3 id="sql-将字段复制到另一个字段"><a href="#sql-将字段复制到另一个字段" class="headerlink" title="sql 将字段复制到另一个字段"></a>sql 将字段复制到另一个字段</h3><p><code>update table  set  test2  =  test1</code></p>
 <h2 id="数据库报错"><a href="#数据库报错" class="headerlink" title="数据库报错"></a>数据库报错</h2><h3 id="mysql-1055"><a href="#mysql-1055" class="headerlink" title="mysql 1055"></a>mysql 1055</h3><p>mysql版本导致默认配置修改,ONLY_FULL_GROUP_BY：对于GROUP BY聚合操作，若select中的列没有在group by中出现，那么这句SQL是不合法的。<br>修改mysql配置(windows安装路径,Linux/etc/mysql)<br><code>sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION</code><br>sql_mode常用值</p>
@@ -725,6 +767,9 @@ docker images              # 查看安装镜像</li>
       <categories>
         <category>随笔</category>
       </categories>
+      <tags>
+        <tag>mysql</tag>
+      </tags>
   </entry>
   <entry>
     <title>随笔-运维(Windows||Linux)</title>
@@ -735,12 +780,21 @@ docker images              # 查看安装镜像</li>
 <li>任务管理器 pid查找进程</li>
 </ol>
 <h3 id="查看域名对应ip"><a href="#查看域名对应ip" class="headerlink" title="查看域名对应ip"></a>查看域名对应ip</h3><p><code>ping</code></p>
-<h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><h3 id="防火墙操作"><a href="#防火墙操作" class="headerlink" title="防火墙操作"></a>防火墙操作</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">systemctl status firewalld.service   #查看状态</span><br><span class="line">systemctl stop firewalld.service     #停止</span><br><span class="line">systemctl disable firewalld.service  #禁止</span><br><span class="line">systemctl restart firewalld.service  #重启</span><br><span class="line">systemctl start firewalld.service    #启动</span><br></pre></td></tr></table></figure>
+<h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><h3 id="目录作用"><a href="#目录作用" class="headerlink" title="目录作用"></a>目录作用</h3><p><a href="https://www.cnblogs.com/amboyna/archive/2008/02/16/1070474.html">参考博文</a></p>
+<h3 id="定时删除缓存的脚本"><a href="#定时删除缓存的脚本" class="headerlink" title="定时删除缓存的脚本"></a>定时删除缓存的脚本</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">dir=/data/docker/pubback2_cywx/nginx/html/sns/Application/Runtime #需要清空的目录名称</span><br><span class="line">files=`ls $&#123;dir&#125;`</span><br><span class="line">for file in $files</span><br><span class="line">do</span><br><span class="line">if [ -e $&#123;dir&#125;/$&#123;file&#125; ];then</span><br><span class="line">rm -rf $&#123;dir&#125;/$&#123;file&#125;</span><br><span class="line">fi</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">chmod 755 /etc/init.d/delete.sh #给脚本755权限</span><br><span class="line">crontab –e #添加定时任务</span><br><span class="line">0 3 * * * /etc/init.d/delete.sh</span><br></pre></td></tr></table></figure>
+<p>分 时 日 月 周 命令<br>第1列<em>号表示分钟1-59 每分钟用</em>或者 <em>/1表示<br>第2列</em>号表示小时0-23小时（0表示0点）<br>第3列<em>号表示日期1-31日<br>第4列</em>号表示月份1-12月<br>第5列*号表示每周，0-6（0表示星期天）<br>第6列是要运行的命令</p>
+<p>例如每周3的晚上23:30运行该脚本，可以这样写：<br>30 23 * * 3 /etc/init.d/delete.sh</p>
+<h3 id="磁盘满了清理"><a href="#磁盘满了清理" class="headerlink" title="磁盘满了清理"></a>磁盘满了清理</h3><p><a href="https://blog.csdn.net/gnail_oug/article/details/70217446">df指令参数参考</a></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看磁盘信息 -h转化单位</span></span><br><span class="line">df -lh</span><br><span class="line"><span class="meta">#</span><span class="bash"> 定位最大文件</span></span><br><span class="line">du -h --max-depth=1 # 查看当前目录下一级子文件和子目录占用的磁盘容量</span><br><span class="line">du -sc * | sort -rn # 排序</span><br><span class="line">du -sb /usr/share/nginx/html/sns/Application/Runtime/* | sort -rn</span><br></pre></td></tr></table></figure>
+<h3 id="防火墙操作"><a href="#防火墙操作" class="headerlink" title="防火墙操作"></a>防火墙操作</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">systemctl status firewalld.service   #查看状态</span><br><span class="line">systemctl stop firewalld.service     #停止</span><br><span class="line">systemctl disable firewalld.service  #禁止</span><br><span class="line">systemctl restart firewalld.service  #重启</span><br><span class="line">systemctl start firewalld.service    #启动</span><br></pre></td></tr></table></figure>
 <h3 id="查看端口使用"><a href="#查看端口使用" class="headerlink" title="查看端口使用"></a>查看端口使用</h3><ol>
 <li><code>netstat  -anp  |grep   端口号</code> </li>
 <li><code>netstat   -nultp</code> 查看当前已使用的端口</li>
 </ol>
 <h3 id="添加用户到docker用户组"><a href="#添加用户到docker用户组" class="headerlink" title="添加用户到docker用户组"></a>添加用户到docker用户组</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 添加用户(默认会在/home/下创建你的文件夹)</span></span><br><span class="line">useradd htr</span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置用户密码</span></span><br><span class="line">passwd htr</span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加docker用户组，一般已存在，不需要执行</span></span><br><span class="line">cat /etc/group</span><br><span class="line">sudo groupadd docker</span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加用户到工作组</span></span><br><span class="line">usermod -a -G docker htr</span><br><span class="line"><span class="meta">#</span><span class="bash"> 测试是否可以使用docker(需要重新登陆用户)</span></span><br><span class="line">docker version</span><br></pre></td></tr></table></figure>
+<h3 id="显示当前路径"><a href="#显示当前路径" class="headerlink" title="显示当前路径"></a>显示当前路径</h3><p><code>pwd</code></p>
+<h3 id="显示当前用户"><a href="#显示当前用户" class="headerlink" title="显示当前用户"></a>显示当前用户</h3><p><code>w</code></p>
 <h3 id="Linux-ls-l-文件颜色和意义"><a href="#Linux-ls-l-文件颜色和意义" class="headerlink" title="Linux ls -l 文件颜色和意义"></a>Linux ls -l 文件颜色和意义</h3><p>白色：表示普通文件<br>蓝色：表示目录<br>绿色：表示可执行文件<br>红色：表示压缩文件<br>浅蓝色：链接文件<br>红色闪烁：表示链接的文件有问题<br>黄色：表示设备文件<br>灰色：表示其他文件</p>
 <h3 id="bin-bash-M-坏的解释器-没有那个文件或目录"><a href="#bin-bash-M-坏的解释器-没有那个文件或目录" class="headerlink" title="/bin/bash^M: 坏的解释器: 没有那个文件或目录"></a>/bin/bash^M: 坏的解释器: 没有那个文件或目录</h3><p>脚本文件在windows下编辑过，windows下每一行的结尾是\n\r，而在linux下文件的结尾是\n，那么你在windows下编辑过的文件在linux下打开看的时候每一行的结尾就会多出来一个字符\r,<br>用cat -A filename时你可以看到这个\r字符被显示为^M<br>使用<code>sed -i &#39;s/\r$//&#39; filename</code>删掉就可以</p>
 <h3 id="Linux操作好习惯"><a href="#Linux操作好习惯" class="headerlink" title="Linux操作好习惯"></a>Linux操作好习惯</h3><ol>
@@ -771,6 +825,7 @@ docker images              # 查看安装镜像</li>
 <li>server.xml 关键节点介绍<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- mycat的账号 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">user</span> <span class="attr">name</span>=<span class="string">&quot;root&quot;</span> <span class="attr">defaultAccount</span>=<span class="string">&quot;true&quot;</span>&gt;</span> </span><br><span class="line">  <span class="comment">&lt;!-- 密码 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span>&gt;</span>alpha.mycat<span class="tag">&lt;/<span class="name">property</span>&gt;</span>  </span><br><span class="line">  <span class="comment">&lt;!-- 该账号可以访问的逻辑库,对应schema.xml文件的schema节点的name--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;schemas&quot;</span>&gt;</span>adnc_usr,adnc_maint,adnc_cus<span class="tag">&lt;/<span class="name">property</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">user</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
 <li>schema.xml 关键节点介绍<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot;?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mycat</span>:schema <span class="meta-keyword">SYSTEM</span> <span class="meta-string">&quot;schema.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mycat:schema</span> <span class="attr">xmlns:mycat</span>=<span class="string">&quot;http://io.mycat/&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 配置3个逻辑库--&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">schema</span> <span class="attr">name</span>=<span class="string">&quot;adnc_usr&quot;</span> <span class="attr">checkSQLschema</span>=<span class="string">&quot;true&quot;</span> <span class="attr">sqlMaxLimit</span>=<span class="string">&quot;100&quot;</span> <span class="attr">dataNode</span>=<span class="string">&quot;dn_usr&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">schema</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">schema</span> <span class="attr">name</span>=<span class="string">&quot;adnc_maint&quot;</span> <span class="attr">checkSQLschema</span>=<span class="string">&quot;true&quot;</span> <span class="attr">sqlMaxLimit</span>=<span class="string">&quot;100&quot;</span> <span class="attr">dataNode</span>=<span class="string">&quot;dn_maint&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">schema</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">schema</span> <span class="attr">name</span>=<span class="string">&quot;adnc_cus&quot;</span> <span class="attr">checkSQLschema</span>=<span class="string">&quot;true&quot;</span> <span class="attr">sqlMaxLimit</span>=<span class="string">&quot;100&quot;</span> <span class="attr">dataNode</span>=<span class="string">&quot;dn_cus&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">schema</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 逻辑库对应的真实数据库--&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">dataNode</span> <span class="attr">name</span>=<span class="string">&quot;dn_usr&quot;</span> <span class="attr">dataHost</span>=<span class="string">&quot;dh_adnc&quot;</span> <span class="attr">database</span>=<span class="string">&quot;adnc_usr&quot;</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">dataNode</span> <span class="attr">name</span>=<span class="string">&quot;dn_maint&quot;</span> <span class="attr">dataHost</span>=<span class="string">&quot;dh_adnc&quot;</span> <span class="attr">database</span>=<span class="string">&quot;adnc_maint&quot;</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">dataNode</span> <span class="attr">name</span>=<span class="string">&quot;dn_cus&quot;</span> <span class="attr">dataHost</span>=<span class="string">&quot;dh_adnc&quot;</span> <span class="attr">database</span>=<span class="string">&quot;adnc_cus&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--真实数据库所在的服务器地址，这里配置了1主2从。主服务器(hostM1)宕机会自动切换到(hostS1) --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">dataHost</span> <span class="attr">name</span>=<span class="string">&quot;dh_adnc&quot;</span> <span class="attr">maxCon</span>=<span class="string">&quot;1000&quot;</span> <span class="attr">minCon</span>=<span class="string">&quot;10&quot;</span> <span class="attr">balance</span>=<span class="string">&quot;1&quot;</span> <span class="attr">writeType</span>=<span class="string">&quot;0&quot;</span> <span class="attr">dbType</span>=<span class="string">&quot;mysql&quot;</span> <span class="attr">dbDriver</span>=<span class="string">&quot;native&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">heartbeat</span>&gt;</span>select user()<span class="tag">&lt;/<span class="name">heartbeat</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">writeHost</span> <span class="attr">host</span>=<span class="string">&quot;hostM1&quot;</span> <span class="attr">url</span>=<span class="string">&quot;172.20.0.11:3306&quot;</span> <span class="attr">user</span>=<span class="string">&quot;root&quot;</span> <span class="attr">password</span>=<span class="string">&quot;alpha.abc&quot;</span> &gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">readHost</span> <span class="attr">host</span>=<span class="string">&quot;hostS2&quot;</span> <span class="attr">url</span>=<span class="string">&quot;172.20.0.13:3306&quot;</span> <span class="attr">user</span>=<span class="string">&quot;root&quot;</span> <span class="attr">password</span>=<span class="string">&quot;alpha.abc&quot;</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">writeHost</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">writeHost</span> <span class="attr">host</span>=<span class="string">&quot;hostS1&quot;</span> <span class="attr">url</span>=<span class="string">&quot;172.20.0.12:3306&quot;</span> <span class="attr">user</span>=<span class="string">&quot;root&quot;</span> <span class="attr">password</span>=<span class="string">&quot;alpha.abc&quot;</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">dataHost</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">mycat:schema</span>&gt;</span></span><br></pre></td></tr></table></figure>
 详情配置可参考 <a href="http://www.mycat.org.cn/document/mycat-definitive-guide.pdf">mycat权威指南</a><h2 id="下载dockerfile"><a href="#下载dockerfile" class="headerlink" title="下载dockerfile"></a>下载dockerfile</h2>MyCat官方没有提供docker镜像<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">下载dockerfile文件到当前目录</span></span><br><span class="line">wget https://raw.githubusercontent.com/AlphaYu/Adnc/master/doc/mycat/Dockerfile</span><br><span class="line"><span class="meta">#</span><span class="bash">如果下载失败，请手动下载并上传到/root/data/mycat目录，文件地址如下</span></span><br><span class="line"><span class="meta">#</span><span class="bash">https://github.com/AlphaYu/Adnc/blob/master/doc/mycat/Dockerfile</span></span><br></pre></td></tr></table></figure>
+或者粘贴<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">FROM openjdk:8-jdk-stretch</span><br><span class="line"></span><br><span class="line">ADD http://dl.mycat.org.cn/1.6.5/Mycat-server-1.6.5-release-20180122220033-linux.tar.gz /usr/local</span><br><span class="line">RUN cd /usr/local &amp;&amp; tar -zxvf Mycat-server-1.6.5-release-20180122220033-linux.tar.gz &amp;&amp; ls -lna</span><br><span class="line"></span><br><span class="line">ENV MYCAT_HOME=/usr/local/mycat</span><br><span class="line">WORKDIR /usr/local/mycat</span><br><span class="line"></span><br><span class="line">ENV TZ Asia/Shanghai</span><br><span class="line"></span><br><span class="line">EXPOSE 8066 9066</span><br><span class="line"></span><br><span class="line">CMD [&quot;/usr/local/mycat/bin/mycat&quot;, &quot;console&quot;,&quot;&amp;&quot;]</span><br></pre></td></tr></table></figure>
 <h2 id="创建mycat镜像和容器"><a href="#创建mycat镜像和容器" class="headerlink" title="创建mycat镜像和容器"></a>创建mycat镜像和容器</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">创建镜像文件</span></span><br><span class="line">docker build -t mycat:1.6.7.6 .</span><br><span class="line"><span class="meta">#</span><span class="bash">运行容器并挂载配置文件目录与日志目录</span></span><br><span class="line"><span class="meta">#</span><span class="bash">-v /root/data/mycat/conf:/usr/<span class="built_in">local</span>/mycat/conf 挂载配置文件目录</span></span><br><span class="line"><span class="meta">#</span><span class="bash">-v /root/data/mycat/logs:/usr/<span class="built_in">local</span>/mycat/logs 挂载日志目录</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> --network=adnc_net --ip 172.20.0.16  adnc_net是自建的bridge网络，如果使用docker默认网络，不需要这段</span></span><br><span class="line">docker run --privileged=true -p 8066:8066 -p 9066:9066 --name mycat -v /root/data/mycat/conf:/usr/local/mycat/conf -v /root/data/mycat/logs:/usr/local/mycat/logs --network=adnc_net --ip 172.20.0.16 -d mycat:1.6.7.6</span><br></pre></td></tr></table></figure>
 <h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 进入mariadb/mysql容器</span></span><br><span class="line">docker exec -it mariadb01 /bin/bash</span><br><span class="line"><span class="meta">#</span><span class="bash"> 登录mycat,172.20.0.16 是指mycat容器的Ip地址，如果容器没有指定固定Ip，你的可能不一样，请注意。</span></span><br><span class="line">mysql -uroot -palpha.mycat -P8066 -h172.20.0.16</span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示所有数据库</span></span><br><span class="line">show databases;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 多次执行下面的sql,观察hostname的变化。</span></span><br><span class="line">select @@hostname;</span><br></pre></td></tr></table></figure></li>
 </ul>
@@ -809,6 +864,27 @@ docker images              # 查看安装镜像</li>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
+    <title>随笔-常识</title>
+    <url>/2021/10/18/%E9%9A%8F%E7%AC%94-%E5%B8%B8%E8%AF%86/</url>
+    <content><![CDATA[<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="word文件对比"><a href="#word文件对比" class="headerlink" title="word文件对比"></a>word文件对比</h3><p><a href="https://www.scootersoftware.com/download.php">Beyond Compare</a><br>支持常用的word和pdf文件的对比，会帮你高亮标出版本差异。<br>需要自己保留文件的版本，然后手动上传进行对比，正版收费，但是网上可以down到破解版<br><a href="https://www.cnblogs.com/xifengxixia/p/11051718.html">破解方法</a><br>方法1：</p>
+<blockquote>
+<p>安装目录下找到 BCUnrar.dll 重命名</p>
+</blockquote>
+<p>方法2：</p>
+<blockquote>
+<p>win+R regedit<br>删除 HKEY_CURRENT_USER\Software\Scooter Software\Beyond Compare 4\CacheId</p>
+</blockquote>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><h3 id="耦合度"><a href="#耦合度" class="headerlink" title="耦合度"></a>耦合度</h3><p>耦合度就是某模块（类）与其它模块（类）之间的关联、感知和依赖的程度，是衡量代码独立性的一个指标，也是软件工程设计及编码质量评价的一个标准。<br><a href="https://zhuanlan.zhihu.com/p/112580655">传送门</a></p>
+<h3 id="端口转发和端口映射"><a href="#端口转发和端口映射" class="headerlink" title="端口转发和端口映射"></a>端口转发和端口映射</h3>]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+        <tag>word</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>随笔-运维(PHP||JAVA)</title>
     <url>/2021/10/18/%E9%9A%8F%E7%AC%94-%E8%BF%90%E7%BB%B4-2/</url>
     <content><![CDATA[<h2 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h2><h3 id="Primary-script-unknown"><a href="#Primary-script-unknown" class="headerlink" title="Primary script unknown"></a>Primary script unknown</h3><p>问题再现：配置完PHP-nginx环境之后File not found,查阅日志后有Primary script unknown问题<br>问题原因：php-fpm找不到php文件,php-fpm没有权限读取和执行文件<br>问题解决：</p>
@@ -827,23 +903,217 @@ docker images              # 查看安装镜像</li>
       </tags>
   </entry>
   <entry>
-    <title>随笔-常识</title>
-    <url>/2021/10/18/%E9%9A%8F%E7%AC%94-%E5%B8%B8%E8%AF%86/</url>
-    <content><![CDATA[<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="word文件对比"><a href="#word文件对比" class="headerlink" title="word文件对比"></a>word文件对比</h3><p><a href="https://www.scootersoftware.com/download.php">Beyond Compare</a><br>支持常用的word和pdf文件的对比，会帮你高亮标出版本差异。<br>需要自己保留文件的版本，然后手动上传进行对比，正版收费，但是网上可以down到破解版<br><a href="https://www.cnblogs.com/xifengxixia/p/11051718.html">破解方法</a><br>方法1：</p>
-<blockquote>
-<p>安装目录下找到 BCUnrar.dll 重命名</p>
-</blockquote>
-<p>方法2：</p>
-<blockquote>
-<p>win+R regedit<br>删除 HKEY_CURRENT_USER\Software\Scooter Software\Beyond Compare 4\CacheId</p>
-</blockquote>
-<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><h3 id="端口转发和端口映射"><a href="#端口转发和端口映射" class="headerlink" title="端口转发和端口映射"></a>端口转发和端口映射</h3>]]></content>
+    <title>Mybatis逆向工程</title>
+    <url>/2021/11/18/Mybatis%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/</url>
+    <content><![CDATA[<h3 id="创建Maven工程"><a href="#创建Maven工程" class="headerlink" title="创建Maven工程"></a>创建Maven工程</h3><h3 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&lt;!-- mybatis --&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;2.1.0&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- jdbc驱动 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;5.1.18&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- mybatis逆向工程 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;mybatis-generator-core&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.3.5&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="引入逆向工程的配置文件generatorConfig-xml并配置"><a href="#引入逆向工程的配置文件generatorConfig-xml并配置" class="headerlink" title="引入逆向工程的配置文件generatorConfig.xml并配置"></a>引入逆向工程的配置文件generatorConfig.xml并配置</h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">generatorConfiguration</span></span></span><br><span class="line"><span class="meta">        <span class="meta-keyword">PUBLIC</span> <span class="meta-string">&quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">&quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">generatorConfiguration</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--mysql 连接数据库jar 这里选择自己本地位置;</span></span><br><span class="line"><span class="comment">    如果不知道maven本地仓库地址，可以使用EveryThing工具全局搜索mysql-connector-java，找到jar包位置；</span></span><br><span class="line"><span class="comment">    也可以手动下载一个jar放在指定位置，进行引用。</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">context</span> <span class="attr">id</span>=<span class="string">&quot;testTables&quot;</span> <span class="attr">targetRuntime</span>=<span class="string">&quot;MyBatis3&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">commentGenerator</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 是否去除自动生成的注释,true：是,false:否 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;suppressAllComments&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">commentGenerator</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--数据库连接的信息：驱动类、连接地址、用户名、密码 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">jdbcConnection</span> <span class="attr">driverClass</span>=<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span></span></span><br><span class="line"><span class="tag">                        <span class="attr">connectionURL</span>=<span class="string">&quot;jdbc:mysql://localhost:3306/medtrk_weather&quot;</span></span></span><br><span class="line"><span class="tag">                        <span class="attr">userId</span>=<span class="string">&quot;root&quot;</span></span></span><br><span class="line"><span class="tag">                        <span class="attr">password</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">jdbcConnection</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和</span></span><br><span class="line"><span class="comment">           NUMERIC 类型解析为java.math.BigDecimal --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">javaTypeResolver</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;forceBigDecimals&quot;</span> <span class="attr">value</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">javaTypeResolver</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- 指定javaBean生成的位置</span></span><br><span class="line"><span class="comment">            targetPackage：生成的类要放的包，真实的包受enableSubPackages属性控制；</span></span><br><span class="line"><span class="comment">            targetProject：目标项目，指定一个存在的目录下，生成的内容会放到指定目录中，如果目录不存在，MBG不会自动建目录</span></span><br><span class="line"><span class="comment">         --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">javaModelGenerator</span> <span class="attr">targetPackage</span>=<span class="string">&quot;domain&quot;</span></span></span><br><span class="line"><span class="tag">                            <span class="attr">targetProject</span>=<span class="string">&quot;autogenerator\src\main\java&quot;</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false；如果多个数据库改为true分目录 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;enableSubPackages&quot;</span> <span class="attr">value</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 设置是否在getter方法中，对String类型字段调用trim()方法 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;trimStrings&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">javaModelGenerator</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--  指定mapper映射文件生成的位置</span></span><br><span class="line"><span class="comment">           targetPackage、targetProject同javaModelGenerator中作用一样--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">sqlMapGenerator</span> <span class="attr">targetPackage</span>=<span class="string">&quot;mapping&quot;</span> <span class="attr">targetProject</span>=<span class="string">&quot;autogenerator\src\main\resources&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;enableSubPackages&quot;</span> <span class="attr">value</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">sqlMapGenerator</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- 指定mapper接口生成的位置</span></span><br><span class="line"><span class="comment">         targetPackage、targetProject同javaModelGenerator中作用一样</span></span><br><span class="line"><span class="comment">         --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">javaClientGenerator</span> <span class="attr">type</span>=<span class="string">&quot;XMLMAPPER&quot;</span></span></span><br><span class="line"><span class="tag">                             <span class="attr">targetPackage</span>=<span class="string">&quot;mapper&quot;</span></span></span><br><span class="line"><span class="tag">                             <span class="attr">targetProject</span>=<span class="string">&quot;autogenerator\src\main\java&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;enableSubPackages&quot;</span> <span class="attr">value</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">javaClientGenerator</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- 指定数据库表</span></span><br><span class="line"><span class="comment">        domainObjectName：生成的domain类的名字,当表名和domain类的名字有差异时一定要设置，如果不设置，直接使用表名作为domain类的名字；</span></span><br><span class="line"><span class="comment">        可以设置为somepck.domainName，那么会自动把domainName类再放到somepck包里面；</span></span><br><span class="line"><span class="comment">        --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">table</span> <span class="attr">tableName</span>=<span class="string">&quot;weather_location&quot;</span> <span class="attr">domainObjectName</span>=<span class="string">&quot;Location&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">context</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">generatorConfiguration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="引入逆向工程的启动类并配置"><a href="#引入逆向工程的启动类并配置" class="headerlink" title="引入逆向工程的启动类并配置"></a>引入逆向工程的启动类并配置</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GeneratorSqlmap</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">generator</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"></span><br><span class="line">        List&lt;String&gt; warnings = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">        <span class="keyword">boolean</span> overwrite = <span class="keyword">true</span>;</span><br><span class="line">        <span class="comment">//指定 逆向工程配置文件</span></span><br><span class="line">        File configFile = <span class="keyword">new</span> File(<span class="string">&quot;C:\\HTR\\code_svn\\MedTrack\\autogenerator\\src\\main\\resources\\generatorConfig.xml&quot;</span>);</span><br><span class="line">        ConfigurationParser cp = <span class="keyword">new</span> ConfigurationParser(warnings);</span><br><span class="line">        Configuration config = cp.parseConfiguration(configFile);</span><br><span class="line">        DefaultShellCallback callback = <span class="keyword">new</span> DefaultShellCallback(<span class="keyword">true</span>);</span><br><span class="line">        MyBatisGenerator myBatisGenerator = <span class="keyword">new</span> MyBatisGenerator(config,</span><br><span class="line">                callback, warnings);</span><br><span class="line">        myBatisGenerator.generate(<span class="keyword">null</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        mybatis 逆向生成启动</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            GeneratorSqlmap generatorSqlmap = <span class="keyword">new</span> GeneratorSqlmap();</span><br><span class="line">            generatorSqlmap.generator();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>技术</category>
+        <category>mybatis</category>
+      </categories>
+      <tags>
+        <tag>mybatis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>随笔-Java代码规范</title>
+    <url>/2021/11/18/Java%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/</url>
+    <content><![CDATA[]]></content>
       <categories>
         <category>随笔</category>
       </categories>
       <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Spring创建多项目</title>
+    <url>/2021/11/18/Sping%E5%88%9B%E5%BB%BA%E5%A4%9A%E9%A1%B9%E7%9B%AE/</url>
+    <content><![CDATA[<h2 id="搭建SpringBoot-Maven多模块项目"><a href="#搭建SpringBoot-Maven多模块项目" class="headerlink" title="搭建SpringBoot+Maven多模块项目"></a>搭建SpringBoot+Maven多模块项目</h2><p><a href="https://guozh.net/springboot-maven-multi-module/">传送门</a></p>
+<h3 id="创建父项目"><a href="#创建父项目" class="headerlink" title="创建父项目"></a>创建父项目</h3><p>父项目是一个特殊的Spring项目，只需要pom.xml不需要初始化其它文件，所以可以修改type<br><img src="img1.jpg" alt="父项目"><br>添加如下代码，如果显示jar，改为pom<br><code>&lt;packaging&gt;pom&lt;/packaging&gt;</code></p>
+<h3 id="创建子项目"><a href="#创建子项目" class="headerlink" title="创建子项目"></a>创建子项目</h3><p>正常创建子项目</p>
+<h3 id="修改父项目pom-xml"><a href="#修改父项目pom-xml" class="headerlink" title="修改父项目pom.xml"></a>修改父项目pom.xml</h3><p>添加以下代码</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&lt;modules&gt;</span><br><span class="line">    &lt;module&gt;子项目-core&lt;/module&gt;</span><br><span class="line">    &lt;module&gt;子项目-web&lt;/module&gt;</span><br><span class="line">    &lt;module&gt;子项目-admin&lt;/module&gt;</span><br><span class="line">&lt;/modules&gt;</span><br></pre></td></tr></table></figure>
+<p>使用modules，可以在父工程一键打包，Maven 会分享我们的子模块和项目，按照子模块之间依赖关系，自动打包，我们就不用关心顺序。</p>
+<h3 id="在子项目中依赖父项目"><a href="#在子项目中依赖父项目" class="headerlink" title="在子项目中依赖父项目"></a>在子项目中依赖父项目</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&lt;parent&gt;</span><br><span class="line">	&lt;groupId&gt;com.父项目&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;juhe&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;</span><br><span class="line">&lt;/parent&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="dependencyManagement-和-dependencies"><a href="#dependencyManagement-和-dependencies" class="headerlink" title="dependencyManagement 和 dependencies"></a>dependencyManagement 和 dependencies</h3><p>子工程会将父项目的所有依赖继承<br>dependencyManagement的作用是声明依赖，<em><strong>只声明不依赖</strong></em></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&lt;dependencyManagement&gt;</span><br><span class="line">    &lt;dependencies&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.1.4&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">    &lt;/dependencies&gt;</span><br><span class="line">&lt;/dependencyManagement&gt;</span><br></pre></td></tr></table></figure>
+<p>此时父工程并没有依赖这个jar，需要在子项目填写</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
+<p>规范了版本号</p>
+]]></content>
+      <categories>
+        <category>技术</category>
+        <category>Spring</category>
+      </categories>
+      <tags>
+        <tag>Spring</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>RabbitMQ进阶-参数</title>
+    <url>/2021/11/08/RabbitMQ%E8%BF%9B%E9%98%B6/</url>
+    <content><![CDATA[<h2 id="mandatory参数"><a href="#mandatory参数" class="headerlink" title="mandatory参数"></a>mandatory参数</h2><p>当 mandatory 参数设为 true 时，交换器无法根据自身的类型和路由键找到一个符合条件的队列，那么 RabbitMQ 会调用 Basic.Return 命令将消息返回给生产者。当 mandatory 参数设置为 false 时，出现上述情形，则消息直接被丢弃。<br>生产者可以通过channel.addReturnListener添加ReturnListener监听器获取到信息有没有被正确的路由到合适的队列</p>
+<h2 id="immediate参数"><a href="#immediate参数" class="headerlink" title="immediate参数"></a>immediate参数</h2><p>当 immediate 参数设为 true 时，如果交换器在将消息路由到队列时发现队列上并不存在任何消费者，那么这条消息将不会存入队列中。当与路由键匹配的所有队列都没有消费者时，该消息会通过 Basic.Return 返回至生产者。<br>RabbitMQ 3.0 版本开始去掉了对 immediate 参数的支持</p>
+<p>mandatory参数确保消息进入合适的队列，immediate参数确保进入队列的消息被消费</p>
+<h2 id="备份交换器"><a href="#备份交换器" class="headerlink" title="备份交换器"></a>备份交换器</h2><p>英文名 Alternate Exchange，简称 AE，可以将未被路由的消息存储在 RabbitMQ 中，再在需要的时候去处理这些消息。</p>
+<ul>
+<li>如果设置的备份交换器不存在，客户端和 RabbitMQ 服务端都不会有异常出现，此时消息会丢失。</li>
+<li>如果备份交换器没有绑定任何队列，客户端和 RabbitMQ 服务端都不会有异常出现，此时消息会丢失。</li>
+<li>如果备份交换器没有任何匹配的队列，客户端和 RabbitMQ 服务端都不会有异常出现，此时消息会丢失。</li>
+<li>如果备份交换器和 mandatory 参数一起使用，那么 mandatory 参数无效。</li>
+</ul>
+<h2 id="过期时间-TTL"><a href="#过期时间-TTL" class="headerlink" title="过期时间(TTL)"></a>过期时间(TTL)</h2><p>Time to Live </p>
+<h3 id="消息的过期时间"><a href="#消息的过期时间" class="headerlink" title="消息的过期时间"></a>消息的过期时间</h3><h4 id="通过队列属性设置"><a href="#通过队列属性设置" class="headerlink" title="通过队列属性设置"></a>通过队列属性设置</h4><p>队列中所有消息都有相同的过期时间<br>channel.queueDeclare 方法中加入x-message-ttl 参数实现的，这个参数的单位是毫秒</p>
+<h4 id="通过消息设置"><a href="#通过消息设置" class="headerlink" title="通过消息设置"></a>通过消息设置</h4><p>对消息本身单独设置过期时间<br>channel.basicPublish 方法中加入 expiration的属性参数，单位为毫秒</p>
+<p>如果两种方法一起使用，则消息的 TTL 以两者之间较小的那个数值为准<br>如果将 TTL 设置为 0，则表示除非此时可以直接将消息投递到消费者，否则该消息会被立即丢弃</p>
+<h3 id="队列的过期时间"><a href="#队列的过期时间" class="headerlink" title="队列的过期时间"></a>队列的过期时间</h3><p>通过 channel.queueDeclare 方法中的 x-expires 参数可以设置队列被自动删除前处于未使用状态的时间<br>未使用的意思是队列上没有任何的消费者，队列也没有被重新声明，并且在过期时间段内也未调用过 Basic.Get 命令。<br>RabbitMQ 会确保在过期时间到达后将队列删除，但是不保障删除的动作有多及时。在RabbitMQ 重启后，持久化的队列的过期时间会被重新计算。</p>
+<h3 id="死信队列"><a href="#死信队列" class="headerlink" title="死信队列"></a>死信队列</h3><p>DLX，全称为 Dead-Letter-Exchange，可以称之为死信交换器，也有人称之为死信邮箱。当消息在一个队列中变成死信（dead message）之后，它能被重新被发送到另一个交换器中，这个交换器就是 DLX，绑定 DLX 的队列就称之为死信队列。<br>死信:</p>
+<ul>
+<li>消息过期</li>
+<li>消息被拒绝</li>
+<li>队列到达最大长度</li>
+</ul>
+<h3 id="延迟队列"><a href="#延迟队列" class="headerlink" title="延迟队列"></a>延迟队列</h3><p>等待一定时间后消费者消费消息<br>实现手法：消费者消费死信队列中的消息</p>
+<h3 id="优先级队列"><a href="#优先级队列" class="headerlink" title="优先级队列"></a>优先级队列</h3><p>优先级高的队列具有较高的优先级，优先级高的消息具有消息优先被消费的权力<br>针对消费者消费速度有限的情况</p>
+<h3 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h3><h4 id="交换机持久化"><a href="#交换机持久化" class="headerlink" title="交换机持久化"></a>交换机持久化</h4><p>RabbitMQ服务重启后，没有设置为持久化的交换机元数据会丢失，消息不会丢失</p>
+<h4 id="队列持久化"><a href="#队列持久化" class="headerlink" title="队列持久化"></a>队列持久化</h4><p>RabbitMQ服务重启后，没有设置为持久化的队列和消息会丢失</p>
+<h4 id="消息持久化"><a href="#消息持久化" class="headerlink" title="消息持久化"></a>消息持久化</h4><p>RabbitMQ服务重启后，没有设置为持久化的消息会丢失</p>
+<p>消息和队列需要同时设置持久化才能生效<br>操作持久化主要用于因为服务器异常崩溃导致的消息丢失</p>
+<h2 id="生产者确认"><a href="#生产者确认" class="headerlink" title="生产者确认"></a>生产者确认</h2><p>问题：消息的生产者将消息发送出去之后，消息到底有没有正确地到达服务器呢？</p>
+]]></content>
+      <categories>
+        <category>技术</category>
+        <category>RabbitMQ</category>
+      </categories>
+      <tags>
+        <tag>RabbitMQ</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mycat入门-管理端口</title>
+    <url>/2021/11/01/mycat%E5%85%A5%E9%97%A8-4/</url>
+    <content><![CDATA[<h2 id="Reload-命令"><a href="#Reload-命令" class="headerlink" title="Reload 命令"></a>Reload 命令</h2><p><code>reload @@config;</code>该命令用于更新 schema.xml 配置文件，例如更新 schema.xml 文件后在命令窗口输入该命令，不用重启即可进行配置文件的更新<br><code>reload @@config_all;</code>该命令用于更新所有配置文件，不用重启即可进行配置文件的更新</p>
+<h2 id="Show-命令"><a href="#Show-命令" class="headerlink" title="Show 命令"></a>Show 命令</h2><p><code>show @@datanode;</code>该命令用于查询显示 Mycat 数据节点列表，通过 <code>show @@datanode where schema = ?</code> 的方式查询指定逻辑库（区分大小写）的数据节点<br><code>show @@version;</code>查看版本<br><code>show @@connection;</code>查看连接信息<br><code>show @@backend;</code>查看后端连接状况<br><code>show @@cache;</code>查看mycat缓存<br><code>show @@datasource;</code>看数据状态，配置的读写服务器，如果配置了主从，或者多主可以切换</p>
+]]></content>
+      <categories>
+        <category>技术</category>
+        <category>MyCat</category>
+      </categories>
+      <tags>
+        <tag>MyCat</tag>
         <tag>数据库</tag>
-        <tag>word</tag>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mycat进阶</title>
+    <url>/2021/11/10/mycat%E8%BF%9B%E9%98%B6-1/</url>
+    <content><![CDATA[<h2 id="读写分离"><a href="#读写分离" class="headerlink" title="读写分离"></a>读写分离</h2><p><strong>前提：</strong> 正常情况下，Insert SQL需要几十毫秒的写入时间，而某些Select SQL需要几秒到几分钟才能有结果</p>
+<p>在没有读写分离的系统上，很多复杂的SQL会很快的消耗CPU资源，系统陷入瘫痪<br>对于MYSQL而言，标准的读写分离是主从模式，一个写节点Master后面跟随多个读节点，读节点取决于系统压力，一般是1-3个</p>
+<h3 id="主从复制原理"><a href="#主从复制原理" class="headerlink" title="主从复制原理"></a>主从复制原理</h3><ol>
+<li>在主库上记录二进制日志(将主库更新的事件记录)，在通知存储引擎在主库上执行更新</li>
+<li>备库将主库的二进制日志复制(没有可以复制的会陷入睡眠，等待主库发送信号量唤醒)，记录到中继日志</li>
+<li>备库读取中继日志并执行</li>
+</ol>
+<h2 id="高可用"><a href="#高可用" class="headerlink" title="高可用"></a>高可用</h2><h3 id="MySQL高可用方案"><a href="#MySQL高可用方案" class="headerlink" title="MySQL高可用方案"></a>MySQL高可用方案</h3><ol>
+<li>MySQL Cluster</li>
+<li>HeartBeat</li>
+<li>Lvs+Keepalived</li>
+<li>MariaDB Galera</li>
+</ol>
+<h3 id="MyCat高可用方案"><a href="#MyCat高可用方案" class="headerlink" title="MyCat高可用方案"></a>MyCat高可用方案</h3><p>建议采用标准的MySQL主从复制的高可用配置交付给MyCat完成MySQL的主从自动切换<br>HAproxy+Mycat 集群+MySQL 主从 如果还担心HAproxy 的稳定性和单点问题，则可以用 keepalived 的VIP的浮动功能</p>
+<h2 id="事务支持"><a href="#事务支持" class="headerlink" title="事务支持"></a>事务支持</h2><p>看不懂啊</p>
+<h2 id="MyCat拦截"><a href="#MyCat拦截" class="headerlink" title="MyCat拦截"></a>MyCat拦截</h2><p>用户可以写一个java类，将传入MyCat的SQL进行改写，然后交给MyCat执行，可以：</p>
+<ul>
+<li>捕获和记录某些特殊SQL</li>
+<li>改变查询条件的顺序性能优化</li>
+<li>某些Select SQL走读写分离</li>
+</ul>
+<h2 id="MyCat注解"><a href="#MyCat注解" class="headerlink" title="MyCat注解"></a>MyCat注解</h2><p>注解用来确定执行的分片<br>注解支持的’!’不被 mysql 单库兼容，<br>注解支持的’#’不被 mybatis 兼容<br>新增加 mycat 字符前缀标志 Hintsql:”/** mycat: */“<br>具体看文档</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">/*#mycat:db_type=master*/ select * from travelrecord</span><br><span class="line">/*!mycat:db_type=slave*/ select * from travelrecord</span><br><span class="line">/**mycat:db_type=master*/ select * from travelrecord</span><br></pre></td></tr></table></figure>
+<p><a href="http://www.mycat.org.cn/document/mycat-definitive-guide.pdf">在线PDF</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+        <category>MyCat</category>
+      </categories>
+      <tags>
+        <tag>MyCat</tag>
+        <tag>数据库</tag>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>随笔-Excel</title>
+    <url>/2021/11/03/%E9%9A%8F%E7%AC%94-Excel/</url>
+    <content><![CDATA[<p>调研返回价格文档使用Excel展示更直观<br><a href="https://zhuanlan.zhihu.com/p/356471052#:~:text=Excel%E5%B8%B8%E7%94%A8%E7%94%B5%E5%AD%90%E8%A1%A8%E6%A0%BC%E5%85%AC%E5%BC%8F%E5%A4%A7%E5%85%A8%20%E4%B8%80%E3%80%81Excel%E5%9F%BA%E6%9C%AC%E5%85%AC%E5%BC%8F%201%E3%80%81%E6%9F%A5%E6%89%BE%E9%87%8D%E5%A4%8D%E5%86%85%E5%AE%B9%E5%85%AC%E5%BC%8F%EF%BC%9A%3DIF%20%28COUNTIF%20%28A%3AA%2CA2%29%3E1%2C%22%E9%87%8D%E5%A4%8D%22%2C%22%22%29%E3%80%82.%202%E3%80%81%E7%94%A8%E5%87%BA%E7%94%9F%E5%B9%B4%E6%9C%88%E6%9D%A5%E8%AE%A1%E7%AE%97%E5%B9%B4%E9%BE%84%E5%85%AC%E5%BC%8F%EF%BC%9A%3DTRUNC%20%28,%28DAYS360%20%28H6%2C%22200%E2%80%A6.%20Excel%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BD%A0%E7%94%A8%E8%BF%87cell%E5%87%BD%E6%95%B0%E5%90%97%EF%BC%9F.%20excel%E4%B8%AD%E7%9A%84%E7%A5%9E%E7%A7%98%E9%AB%98%E6%89%8B.%20CELL%E5%87%BD%E6%95%B0%E6%98%AFexcel%E4%B8%AD%E4%B8%80%E4%B8%AA%E7%A5%9E%E7%A7%98%E7%9A%84%E5%87%BD%E6%95%B0%EF%BC%8C%E5%AE%83%E5%B9%B6%E4%B8%8D%E5%83%8FSUM%E5%87%BD%E6%95%B0%E3%80%81VLOOKUP%E5%87%BD%E6%95%B0%E7%AD%89%E9%82%A3%E4%B9%88%E5%B8%B8%E7%94%A8%EF%BC%8C%E4%BD%86%E5%AE%83%E7%9A%84%E5%8A%9F%E8%83%BD%E5%8D%B4%E9%9D%9E%E5%B8%B8%E5%BC%BA%E5%A4%A7%EF%BC%8C%E8%80%8C%E4%B8%94%E5%AE%9E%E7%94%A8%E3%80%82.%20CELL%E5%87%BD%E6%95%B0%EF%BC%9A%E8%BF%94%E5%9B%9E%E5%BC%95%E7%94%A8%E4%B8%AD%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8D%95%E5%85%83%E6%A0%BC%E7%9A%84%E6%A0%BC%E5%BC%8F%E3%80%81%E4%BD%8D%E7%BD%AE%E6%88%96%E5%86%85%E5%AE%B9%E7%9A%84%E6%9C%89%E5%85%B3%E4%BF%A1%E6%81%AF%E3%80%82.%20CELL%EF%BC%88%E2%80%A6.">常用Excel公式</a></p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>Excel</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>随笔-数据字典</title>
+    <url>/2021/11/08/%E9%9A%8F%E7%AC%94-%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8/</url>
+    <content><![CDATA[<h2 id="RabbitMQ"><a href="#RabbitMQ" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h2><h3 id="死信"><a href="#死信" class="headerlink" title="死信"></a>死信</h3><p>死信:</p>
+<ul>
+<li>消息过期</li>
+<li>消息被拒绝</li>
+<li>队列到达最大长度<br><del>消息在队列中的生存时间超过指定的过期时间(TTL)时，被称为死信</del><br>消费者无法收到的消息</li>
+</ul>
+<h3 id="死信队列"><a href="#死信队列" class="headerlink" title="死信队列"></a>死信队列</h3><p>DLX，全称为 Dead-Letter-Exchange，可以称之为死信交换器，也有人称之为死信邮箱。当消息在一个队列中变成死信（dead message）之后，它能被重新被发送到另一个交换器中，这个交换器就是 DLX，绑定 DLX 的队列就称之为死信队列。<br>正常的交换器，通过指定属性实现队列中死信的转发，转发后的队列就是死信队列</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>运维</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mycat入门-入门级别的查缺补漏</title>
+    <url>/2021/11/08/mycat%E5%85%A5%E9%97%A8-5/</url>
+    <content><![CDATA[<h3 id="全局序列号"><a href="#全局序列号" class="headerlink" title="全局序列号"></a>全局序列号</h3><p>数据切分后，原有的关系数据库中的主键约束在分布式条件下将无法使用，因此需要引入外部机制保证数据唯一性标识，这种保证全局性的数据唯一标识的机制就是全局序列号（sequence）。<br>全局序列号有 本地文件，数据库，本地时间戳，zk等方式</p>
+<h3 id="多租户"><a href="#多租户" class="headerlink" title="多租户"></a>多租户</h3><p>相同的软件提供给不同的用户，数据隔离可以有效的提升访问速度，隔离手段有三种</p>
+<h4 id="独立数据库服务"><a href="#独立数据库服务" class="headerlink" title="独立数据库服务"></a>独立数据库服务</h4><p>一个租户一个数据库服务</p>
+<h4 id="独立数据库"><a href="#独立数据库" class="headerlink" title="独立数据库"></a>独立数据库</h4><p>多个租户一个数据库服务，在服务中分库</p>
+<h4 id="共享数据库，共享数据架构"><a href="#共享数据库，共享数据架构" class="headerlink" title="共享数据库，共享数据架构"></a>共享数据库，共享数据架构</h4><p>使用分表，通过指定分表规则区分租户</p>
+<h4 id="mycat多租户实现"><a href="#mycat多租户实现" class="headerlink" title="mycat多租户实现"></a>mycat多租户实现</h4><p>web修改</p>
+<ul>
+<li>登陆时记录租户id</li>
+<li>修改jdbc实现，在sql中添加sql注释指定数据库。例如：/*!mycat : schema = test_01 */ sql</li>
+</ul>
+<p>使用mycat拦截sql并发送到相应数据库</p>
+<h3 id="分片join"><a href="#分片join" class="headerlink" title="分片join"></a>分片join</h3><ul>
+<li><p>避免使用 left join 和right join，使用inner join</p>
+</li>
+<li><p>在使用 Left join 或 Right join 时，ON 会优先执行，where 条件在最后执行，所以在使用过程中，条件尽可能的在 ON 语句中判断，减少 where 的执行</p>
+</li>
+<li><p>少用子查询，而用 join。</p>
+</li>
+</ul>
+<p><strong>mycat实现join有四种</strong></p>
+<ol>
+<li><strong>全局表</strong><br>全局表是数据冗余的，在每个节点上都有</li>
+<li><strong>ER join</strong><br>将join数据的放到同一个节点上<br>分片在 dn1,dn2 上，orders 依赖父表进行分片，两个表的关联关系为 orders.customer_id=customer.id。于是数据分片和存储的示意图如下：<br><img src="img.png" alt="img.png"></li>
+<li>Share join<br>只支持两个表的join，拆分成单表的sql执行，再把数据汇集</li>
+<li>catlet（人工智能）<br>没看懂</li>
+</ol>
+]]></content>
+      <categories>
+        <category>技术</category>
+        <category>MyCat</category>
+      </categories>
+      <tags>
+        <tag>MyCat</tag>
+        <tag>数据库</tag>
+        <tag>mysql</tag>
       </tags>
   </entry>
   <entry>

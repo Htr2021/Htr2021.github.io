@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">1.3k</span>
+            <span class="post-count">1.4k</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">5 分钟</span>
+            <span class="post-count">6 分钟</span>
         </span>
     </span>
 </div>
@@ -170,6 +170,8 @@
 <li>删除镜像和容器<br><code>rm -rf /var/lib/docker</code></li>
 <li>卸载旧版本，因为可能存在清除不干净的时候<br><code>yum remove docker docker-common docker-selinux docker-engine</code></li>
 </ul>
+<h2 id="docker磁盘相关"><a href="#docker磁盘相关" class="headerlink" title="docker磁盘相关"></a>docker磁盘相关</h2><h3 id="docker-overlay目录名寻找容器"><a href="#docker-overlay目录名寻找容器" class="headerlink" title="docker overlay目录名寻找容器"></a>docker overlay目录名寻找容器</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">du -sc * | sort -rn #查看谁磁盘占用大</span><br><span class="line"><span class="meta">#</span><span class="bash"> 再通过目录名查找容器名：</span></span><br><span class="line">docker ps -q | xargs docker inspect --format &#x27;&#123;&#123;.State.Pid&#125;&#125;, &#123;&#123;.Id&#125;&#125;, &#123;&#123;.Name&#125;&#125;, &#123;&#123;.GraphDriver.Data.WorkDir&#125;&#125;&#x27; | grep &quot;bbed8c4cd32f640601c976229c610a5d3ef0ddc5be274acda3699f425dff884a&quot;</span><br><span class="line">[感兴趣可以看看这里](https://blog.csdn.net/styshoo/article/details/60715942)</span><br></pre></td></tr></table></figure>
+<h3 id="查看容器占用磁盘大小"><a href="#查看容器占用磁盘大小" class="headerlink" title="查看容器占用磁盘大小"></a>查看容器占用磁盘大小</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker system df # 查看镜像，容器，卷大小</span><br><span class="line">docker system df -v # 查看每个镜像，容器，卷大小</span><br></pre></td></tr></table></figure>
  
       <!-- reward -->
       

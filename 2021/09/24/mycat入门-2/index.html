@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">334</span>
+            <span class="post-count">342</span>
         </span>
     </span>
 
@@ -113,8 +113,13 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="MyCat目录结构"><a href="#MyCat目录结构" class="headerlink" title="MyCat目录结构"></a>MyCat目录结构</h2><p><img src="image004.png"><br>目录解释如下：<br><strong>bin 程序目录</strong>，存放了window版本和linux版本，除了提供封装成服务的版本之外，也提供了nowrap的shell脚本命令，方便大家选择和修改，进入到bin目录：<br>Linux下运行：./mycat console,首先要chmod +x *<br>注：mycat支持的命令{ console | start | stop | restart | status | dump }<br><strong>conf目录下存放配置文件</strong>，server.xml是Mycat服务器参数调整和用户授权的配置文件，schema.xml是逻辑库定义和表以及分片定义的配置文件，rule.xml是分片规则的配置文件，分片规则的具体一些参数信息单独存放为文件，也在这个目录下，配置文件修改，需要重启Mycat或者通过9066端口reload.<br><strong>lib目录下主要存放mycat依赖的一些jar文件.</strong><br><strong>日志存放在logs/mycat.log中</strong>，每天一个文件，日志的配置是在conf/log4j.xml中，根据自己的需要，可以调整输出级别为debug，debug级别下，会输出更多的信息，方便排查问题.<br>注意：Linux下部署安装MySQL，默认不忽略表名大小写，需要手动到/etc/my.cnf 下配置 lower_case_table_names=1 使Linux环境下MySQL忽略表名大小写，否则使用MyCAT的时候会提示找不到表的错误！</p>
-<h2 id="schema-xml"><a href="#schema-xml" class="headerlink" title="schema.xml"></a>schema.xml</h2> 
+  <h2 id="MyCat目录结构"><a href="#MyCat目录结构" class="headerlink" title="MyCat目录结构"></a>MyCat目录结构</h2><p><img src="image004.png"><br>目录解释如下：</p>
+<p><strong>bin 程序目录</strong>，存放了window版本和linux版本，除了提供封装成服务的版本之外，也提供了nowrap的shell脚本命令，方便选择和修改，进入到bin目录：<br>Linux下运行：./mycat console,首先要chmod +x *<br>注：mycat支持的命令{ console | start | stop | restart | status | dump }</p>
+<p><strong>conf目录下存放配置文件</strong>，server.xml是Mycat服务器参数调整和用户授权的配置文件，schema.xml是逻辑库定义和表以及分片定义的配置文件，rule.xml是分片规则的配置文件，分片规则的具体一些参数信息单独存放为文件，也在这个目录下，配置文件修改，需要重启Mycat或者通过9066端口reload.</p>
+<p><strong>lib目录下主要存放mycat依赖的一些jar文件.</strong></p>
+<p><strong>日志存放在logs/mycat.log中</strong>，每天一个文件，日志的配置是在conf/log4j.xml中，根据自己的需要，可以调整输出级别为debug，debug级别下，会输出更多的信息，方便排查问题.<br>注意：Linux下部署安装MySQL，默认不忽略表名大小写，需要手动到/etc/my.cnf 下配置 lower_case_table_names=1 使Linux环境下MySQL忽略表名大小写，否则使用MyCAT的时候会提示找不到表的错误！</p>
+<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p><a target="_blank" rel="noopener" href="http://www.mycat.org.cn/document/mycat-definitive-guide.pdf">配置文件参数参考</a></p>
+ 
       <!-- reward -->
       
       <div id="reword-out">

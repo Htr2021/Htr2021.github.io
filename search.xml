@@ -279,54 +279,6 @@
       </tags>
   </entry>
   <entry>
-    <title>docker网络模式</title>
-    <url>/2021/09/08/docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%BC%8F/</url>
-    <content><![CDATA[<h2 id="docker四种网络模式"><a href="#docker四种网络模式" class="headerlink" title="docker四种网络模式"></a>docker四种网络模式</h2><table>
-<thead>
-<tr>
-<th>Docker网络模式</th>
-<th>配置</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>bridge</td>
-<td>–net=bridge</td>
-<td>默认</td>
-</tr>
-<tr>
-<td>host</td>
-<td>–net=host</td>
-<td>容器和宿主机共享Network namespace</td>
-</tr>
-<tr>
-<td>container</td>
-<td>net=container:NAME_or_ID</td>
-<td>容器和另外一个容器共享Network namespace。 kubernetes中的pod就是多个容器共享一个Network namespace。</td>
-</tr>
-<tr>
-<td>none</td>
-<td>–net=none</td>
-<td>容器有独立的Network namespace，但并没有对其进行任何网络设置，如分配veth pair 和网桥连接，配置IP等</td>
-</tr>
-</tbody></table>
-<h3 id="bridge模式"><a href="#bridge模式" class="headerlink" title="bridge模式"></a>bridge模式</h3><p>Docker进程启动时，会在主机上创建一个docker0的虚拟网桥，然后再把主机上启动的docker容器链接到虚拟网桥上，从docker0子网分配一个ip给容器使用，并设置docker0的ip为容器默认网关<br>bridge模式如下图所示：<br><img src="13618762-f1643a51d313a889.png" alt="bridge模式"></p>
-<h3 id="host模式"><a href="#host模式" class="headerlink" title="host模式"></a>host模式</h3><p>容器和数组及使用一个Network namespace 容器不会虚拟出自己的网卡和ip，而是使用宿主机的IP和端口，容器的文件系统，进程还是和外部隔离的<br>优点：网络性能比较好 缺点：用过的端口不能复用，网络隔离性不好<br>host模式如下图所示：<br><img src="13618762-a892da42b8ff9342.webp" alt="host模式"></p>
-<h3 id="container模式"><a href="#container模式" class="headerlink" title="container模式"></a>container模式</h3><p>新创建的容器和指定的容器共用一个namespace，而不是和宿主机共享，两个容器只是网络共享，文件系统，进程还是隔离的<br>container模式如下图所示：<br><img src="13618762-790a69a562a5b358.webp" alt="container模式"></p>
-<h3 id="none模式"><a href="#none模式" class="headerlink" title="none模式"></a>none模式</h3><p>不为容器进行任何网络设置，封闭的网络能很好的保证容器的安全<br><img src="13618762-3fd41778faebcef5.webp" alt="none模式"></p>
-<h2 id="docker-network-create"><a href="#docker-network-create" class="headerlink" title="docker network create"></a>docker network create</h2><p>–subnet=192.168.200.0/24命令指定该网络模式网段范围，其中24代表该网段前24位相同，后8位不同，即该网段范围为：192.168.200.1~192.168.200.254，若该命令改为–subnet=192.168.200.0.16，即该网段范围为：192.168.0.1-192.168.255.254，这个范围就变的很大了。<br><a href="https://blog.csdn.net/zhizhuodewo6/article/details/87706638">参考博文</a><br><a href="https://www.jianshu.com/p/22a7032bb7bd">参考博文：https://www.jianshu.com/p/22a7032bb7bd</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-        <category>docker</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-        <tag>运维</tag>
-        <tag>network</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>docker部署vsftpd</title>
     <url>/2021/09/08/docker%E9%83%A8%E7%BD%B2vsftpd/</url>
     <content><![CDATA[<h2 id="docker-compose-部署vsftpd"><a href="#docker-compose-部署vsftpd" class="headerlink" title="docker-compose 部署vsftpd"></a>docker-compose 部署vsftpd</h2><p>这里使用<a href="https://hub.docker.com/r/fauria/vsftpd">fauria/vsftpd</a></p>
@@ -618,54 +570,42 @@
       </tags>
   </entry>
   <entry>
-    <title>docker || docker-compose-安装</title>
-    <url>/2021/09/03/windows%E5%AE%89%E8%A3%85Hyper-V+ubuntu/</url>
-    <content><![CDATA[<h2 id="Windows10家庭版安装ubuntu"><a href="#Windows10家庭版安装ubuntu" class="headerlink" title="Windows10家庭版安装ubuntu"></a>Windows10家庭版安装ubuntu</h2><h3 id="安装Hyper-V"><a href="#安装Hyper-V" class="headerlink" title="安装Hyper-V"></a>安装Hyper-V</h3><p><a href="https://blog.csdn.net/yuyuking/article/details/103890195">参考博文</a><br>把下面代码保存为.bat文件，用管理员运行，重启之后，就可以在win+S 中搜索到Hyper-V</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pushd &quot;%~dp0&quot;</span><br><span class="line"></span><br><span class="line">dir /b %SystemRoot%\servicing\Packages\*Hyper-V*.mum &gt;hyper-v.txt</span><br><span class="line"></span><br><span class="line">for /f %%i in (&#x27;findstr /i . hyper-v.txt 2^&gt;nul&#x27;) do dism /online /norestart /add-package:&quot;%SystemRoot%\servicing\Packages\%%i&quot;</span><br><span class="line"></span><br><span class="line">del hyper-v.txt</span><br><span class="line"></span><br><span class="line">Dism /online /enable-feature /featurename:Microsoft-Hyper-V-All /LimitAccess /ALL</span><br></pre></td></tr></table></figure>
-
-<h3 id="安装Ubuntu"><a href="#安装Ubuntu" class="headerlink" title="安装Ubuntu"></a>安装Ubuntu</h3><p><a href="https://zhuanlan.zhihu.com/p/128640396">参考博文</a><br>基本就是按照操作一步一步点下来。<br>MSDN好像没有ubuntu的镜像了，可以点击<a href="http://mirrors.163.com/ubuntu-releases">网易开源镜像站</a>下载<br>启动之后，会遇到这样的问题，</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Hyper-V™</span><br><span class="line">Uirtual Machine Boot Su_ary</span><br><span class="line"></span><br><span class="line">1.SCSI Disk (0,0)No UEFI-compatible file system uas found.</span><br><span class="line"></span><br><span class="line">2.Network Adapter (OO155DO6E40O) DHCP failed.</span><br><span class="line"></span><br><span class="line">3.SCSI DUD (0,1)No UEFI-compatible file system uas found.</span><br><span class="line"></span><br><span class="line">No operating system was loaded. Press a Key to retry the boot sequence...</span><br><span class="line">Note： Configuration changes nay require the virtual Machine to be reset.</span><br></pre></td></tr></table></figure>
-
-<p>把虚拟机启动时启用安全启动的勾去掉。<a href="https://tieba.baidu.com/p/5587795237?red_tag=0742118433">解决方法</a></p>
-<h2 id="linux安装docker"><a href="#linux安装docker" class="headerlink" title="linux安装docker"></a>linux安装docker</h2><h3 id="在线安装"><a href="#在线安装" class="headerlink" title="在线安装"></a>在线安装</h3><p>安装方法<a href="https://www.cnblogs.com/kingsonfu/p/11576797.html">参考博文</a><br>使用的yum源安装</p>
-<ol>
-<li>查看是否已安装docker<br><code>yum list installed | grep docker</code></li>
-<li>安装docker<br><code>yum -y install docker</code></li>
-<li>启动docker<br><code>systemctl start docker</code></li>
-<li>查看docker状态<br><code> systemctl status docker</code><br>如果出现下面代表安装成功<br><img src="%E9%9A%8F%E7%AC%94-%E6%95%B0%E6%8D%AE%E5%BA%93/img.png" alt="安装成功"></li>
-<li>可以将docker设置为开机自启动<br><code>systemctl enable docker;</code><h3 id="离线安装"><a href="#离线安装" class="headerlink" title="离线安装"></a>离线安装</h3></li>
-<li>下载docker压缩包<br><a href="https://download.docker.com/linux/static/stable/x86_64/">下载地址</a><br>笔者下载的是docker-18.06.3-ce.tgz</li>
-<li>运行脚本<br><code>./install_docker.sh docker-18.06.3-ce.tgz</code><br>脚本代码如下：<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line">usage()&#123;</span><br><span class="line">  echo &quot;使用方法: $0 FILE_NAME_DOCKER_CE_TAR_GZ&quot;</span><br><span class="line">  echo &quot;             $0 docker-18.06.3-ce.tgz&quot;</span><br><span class="line">  echo &quot;Get docker-ce binary from: https://download.docker.com/linux/static/stable/x86_64/&quot;</span><br><span class="line">  echo &quot;eg: wget https://download.docker.com/linux/static/stable/x86_64/docker-18.06.3-ce.tgz&quot;</span><br><span class="line">  echo &quot;&quot;</span><br><span class="line">&#125;</span><br><span class="line">SYSTEMDDIR=/usr/lib/systemd/system</span><br><span class="line">SERVICEFILE=docker.service</span><br><span class="line">DOCKERDIR=/usr/bin</span><br><span class="line">DOCKERBIN=docker</span><br><span class="line">SERVICENAME=docker</span><br><span class="line"></span><br><span class="line">if [ $# -ne 1 ]; then</span><br><span class="line">  usage</span><br><span class="line">  exit 1</span><br><span class="line">else</span><br><span class="line">  FILETARGZ=&quot;$1&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [ ! -f $&#123;FILETARGZ&#125; ]; then</span><br><span class="line">  echo &quot;Docker binary tgz files does not exist, please check it&quot;</span><br><span class="line">  echo &quot;Get docker-ce binary from: https://download.docker.com/linux/static/stable/x86_64/&quot;</span><br><span class="line">  echo &quot;eg: wget https://download.docker.com/linux/static/stable/x86_64/docker-18.06.3-ce.tgz&quot;</span><br><span class="line">  exit 1</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">echo &quot;##unzip : tar xvpf $&#123;FILETARGZ&#125;&quot;</span><br><span class="line">tar xvpf $&#123;FILETARGZ&#125;</span><br><span class="line">echo</span><br><span class="line"></span><br><span class="line">echo &quot;##binary : $&#123;DOCKERBIN&#125; copy to $&#123;DOCKERDIR&#125;&quot;</span><br><span class="line">cp -p $&#123;DOCKERBIN&#125;/* $&#123;DOCKERDIR&#125; &gt;/dev/null 2&gt;&amp;1</span><br><span class="line">which $&#123;DOCKERBIN&#125;</span><br><span class="line"></span><br><span class="line">echo &quot;##systemd service: $&#123;SERVICEFILE&#125;&quot;</span><br><span class="line">echo &quot;##docker.service: create docker systemd file&quot;</span><br><span class="line">cat &gt;$&#123;SYSTEMDDIR&#125;/$&#123;SERVICEFILE&#125; &lt;&lt;EOF</span><br><span class="line">[Unit]</span><br><span class="line">Description=Docker Application Container Engine</span><br><span class="line">Documentation=http://docs.docker.com</span><br><span class="line">After=network.target docker.socket</span><br><span class="line">[Service]</span><br><span class="line">Type=notify</span><br><span class="line">EnvironmentFile=-/run/flannel/docker</span><br><span class="line">WorkingDirectory=/usr/local/bin</span><br><span class="line">ExecStart=/usr/bin/dockerd \</span><br><span class="line">                -H tcp://0.0.0.0:4243 \</span><br><span class="line">                -H unix:///var/run/docker.sock \</span><br><span class="line">                --selinux-enabled=false \</span><br><span class="line">                --log-opt max-size=1g</span><br><span class="line">ExecReload=/bin/kill -s HUP $MAINPID</span><br><span class="line"><span class="meta">#</span><span class="bash"> Having non-zero Limit*s causes performance problems due to accounting overhead</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">in</span> the kernel. We recommend using cgroups to <span class="keyword">do</span> container-local accounting.</span></span><br><span class="line">LimitNOFILE=infinity</span><br><span class="line">LimitNPROC=infinity</span><br><span class="line">LimitCORE=infinity</span><br><span class="line"><span class="meta">#</span><span class="bash"> Uncomment TasksMax <span class="keyword">if</span> your systemd version supports it.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Only systemd 226 and above support this version.</span></span><br><span class="line"><span class="meta">#</span><span class="bash">TasksMax=infinity</span></span><br><span class="line">TimeoutStartSec=0</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">set</span> delegate yes so that systemd does not reset the cgroups of docker containers</span></span><br><span class="line">Delegate=yes</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">kill</span> only the docker process, not all processes <span class="keyword">in</span> the cgroup</span></span><br><span class="line">KillMode=process</span><br><span class="line">Restart=on-failure</span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">echo &quot;&quot;</span><br><span class="line"></span><br><span class="line">systemctl daemon-reload</span><br><span class="line">echo &quot;##Service status: $&#123;SERVICENAME&#125;&quot;</span><br><span class="line">systemctl status $&#123;SERVICENAME&#125;</span><br><span class="line">echo &quot;##Service restart: $&#123;SERVICENAME&#125;&quot;</span><br><span class="line">systemctl restart $&#123;SERVICENAME&#125;</span><br><span class="line">echo &quot;##Service status: $&#123;SERVICENAME&#125;&quot;</span><br><span class="line">systemctl status $&#123;SERVICENAME&#125;</span><br><span class="line"></span><br><span class="line">echo &quot;##Service enabled: $&#123;SERVICENAME&#125;&quot;</span><br><span class="line">systemctl enable $&#123;SERVICENAME&#125;</span><br><span class="line">cat &gt;/etc/docker/daemon.json &lt;&lt;EOF</span><br><span class="line">&#123;</span><br><span class="line">  &quot;registry-mirrors&quot;: [&quot;http://hub-mirror.c.163.com&quot;]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">swapoff -a</span><br><span class="line">iptables -P FORWARD ACCEPT</span><br><span class="line">sysctl --system</span><br><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl restart docker.service</span><br><span class="line"></span><br><span class="line">echo &quot;## docker version&quot;</span><br><span class="line">docker version</span><br></pre></td></tr></table></figure>
-如果有坏的解释器报错 则<code>sed -i &#39;s/\r$//&#39;  install_docker.sh</code><br>如果有权限问题可 可<code>chmod 777 /data/install_docker.sh</code><h2 id="docker换源"><a href="#docker换源" class="headerlink" title="docker换源"></a>docker换源</h2><a href="https://www.cnblogs.com/wpwen/p/12652665.html">docker换源</a><br>换源的方法是编辑/etc/docker/daemon.json（如果不存在则创建）:<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;registry-mirrors&quot;</span>:[</span><br><span class="line">         <span class="string">&quot;http://docker.mirrors.ustc.edu.cn&quot;</span>,</span><br><span class="line">         <span class="string">&quot;http://hub-mirror.c.163.com&quot;</span>,</span><br><span class="line">         <span class="string">&quot;http://registry.docker-cn.com&quot;</span></span><br><span class="line">    ] ,</span><br><span class="line">    <span class="attr">&quot;insecure-registries&quot;</span>:[</span><br><span class="line">       <span class="string">&quot;docker.mirrors.ustc.edu.cn&quot;</span>,</span><br><span class="line">         <span class="string">&quot;registry.docker-cn.com&quot;</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>建议使用<a href="https://docs.docker.com/engine/install/centos/">官网安装</a></p>
-</blockquote>
-<h2 id="docker-安装php-nginx-mysql"><a href="#docker-安装php-nginx-mysql" class="headerlink" title="docker 安装php+nginx+mysql"></a>docker 安装php+nginx+mysql</h2><h3 id="获取镜像image"><a href="#获取镜像image" class="headerlink" title="获取镜像image"></a>获取镜像image</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker pull mysql:5.7      # 拉取 mysql 5.7</span><br><span class="line">docker nginx               # 拉取 nginx </span><br><span class="line">docker pull php:5.6-fpm    # 拉取 php </span><br></pre></td></tr></table></figure>
-docker images              # 查看安装镜像</li>
-</ol>
-<h3 id="普通运行"><a href="#普通运行" class="headerlink" title="普通运行"></a>普通运行</h3><p><code>docker run -p 对外暴露的端口:容器内的端口 --name 容器名 -e 配置信息=内容 -v 主机目录:容器目录 -d 镜像名</code><br>使用 <code>docker ps</code> || <code>docker ps -a</code> 查看运行||全部容器</p>
-<h3 id="docker-compose运行"><a href="#docker-compose运行" class="headerlink" title="docker-compose运行"></a>docker-compose运行</h3><p>文件模板如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">version: &#x27;2.0&#x27;</span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  nginx:</span><br><span class="line">    restart: always</span><br><span class="line">    image: nginx:1.11.6-alpine</span><br><span class="line">    ports:</span><br><span class="line">      - 8080:80</span><br><span class="line">      - 80:80</span><br><span class="line">      - 443:443</span><br><span class="line">    volumes:</span><br><span class="line">      - ./conf.d:/etc/nginx/conf.d</span><br><span class="line">      - ./log:/var/log/nginx</span><br><span class="line">      - ./www:/var/www</span><br><span class="line">      - /etc/letsencrypt:/etc/letsencrypt</span><br></pre></td></tr></table></figure>
-<p><strong>参数说明：</strong><br><strong>version</strong>：版本号</p>
-<p><strong>service</strong>：就是要定义的docker容器</p>
-<p><strong>nginx</strong>:容器的名称</p>
-<p><strong>restart</strong>：设置为always，表明此容器应该在停止的情况下总是重启，比如，服务器启动时，这个容器就跟着启动，不用手动启动，服务器启动之后，进入到docker-compose.yml文件路径下，执行docker-compose ps可以看到，该容器正在运行。</p>
-<p><strong>image</strong>：这个是需要依赖的容器，也就是nginx软件，可以到docker官方镜像上找到最新版的镜像。</p>
-<p><strong>ports</strong>：端口映射。比如： - 8080:80，表示容器内运行着的端口是80，把端口暴露给8080端口，从外面访问的是8080端口，就能自动映射到80端口上。</p>
-<p><strong>volumes</strong>:文件映射。表示数据、配置文件等存放的位置。（- . 这个表示docker-compose.yml当前目录位置开始创建这个文件</p>
-<h3 id="可能的问题"><a href="#可能的问题" class="headerlink" title="可能的问题"></a>可能的问题</h3><p>如果你的容器运行正常，但是无法访问到MySQL，一般有以下几个可能的原因：</p>
-<ul>
-<li>防火墙拦截<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 开放端口：</span><br><span class="line">$ systemctl status firewalld</span><br><span class="line">$ firewall-cmd  --zone=public --add-port=3306/tcp -permanent</span><br><span class="line">$ firewall-cmd  --reload</span><br><span class="line"># 关闭防火墙：</span><br><span class="line">$ sudo systemctl stop firewalld</span><br></pre></td></tr></table></figure></li>
-<li>需要在docker本地客户端设置远程访问账号<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ sudo docker exec -it mysql bash</span><br><span class="line">$ mysql -uroot -p123456</span><br><span class="line">mysql&gt; grant all privileges on *.* to root@&#x27;%&#x27; identified by &quot;password&quot;;</span><br></pre></td></tr></table></figure>
-原理：<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># mysql使用mysql数据库中的user表来管理权限，修改user表就可以修改权限（只有root账号可以修改）</span><br><span class="line"></span><br><span class="line">mysql&gt; use mysql;</span><br><span class="line">Database changed</span><br><span class="line"></span><br><span class="line">mysql&gt; select host,user,password from user;</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">| host                    | user      | password                                                                 |</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">| localhost              | root     | *A731AEBFB621E354CD41BAF207D884A609E81F5E      |</span><br><span class="line">| 192.168.1.1            | root     | *A731AEBFB621E354CD41BAF207D884A609E81F5E      |</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">2 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; grant all privileges  on *.* to root@&#x27;%&#x27; identified by &quot;password&quot;;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; flush privileges;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select host,user,password from user;</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">| host                    | user      | password                                                                 |</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">| localhost              | root      | *A731AEBFB621E354CD41BAF207D884A609E81F5E     |</span><br><span class="line">| 192.168.1.1            | root      | *A731AEBFB621E354CD41BAF207D884A609E81F5E     |</span><br><span class="line">| %                       | root      | *A731AEBFB621E354CD41BAF207D884A609E81F5E     |</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">3 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
-<h2 id="安装docker-compose"><a href="#安装docker-compose" class="headerlink" title="安装docker-compose"></a>安装docker-compose</h2><h3 id="在线安装-1"><a href="#在线安装-1" class="headerlink" title="在线安装"></a>在线安装</h3><del>第一步下载：</del><br><del><code>curl -L https://get.daocloud.io/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` &gt;  /usr/local/bin/docker-compose</code></del><br><del>第二步赋权：</del><br><del><code>chmod a+x /usr/local/bin/docker-compose</code></del><br><del>第三步查看版本：</del><br><del><code>docker-compose --version</code></del><blockquote>
-<p>上面的方法在部署之后，使用docker-compose部署会出现端口占用的错误，且物理机，虚拟机端口并没有被占用<br>在一段时间的问题定位之后，发现是安装的docker-compose有问题，所以建议使官网安装<a href="https://docs.docker.com/compose/install/">安装地址</a><br>步骤和上方基本相同，第一步下载的地址发生了改变</p>
-</blockquote>
-</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose</span><br><span class="line">sudo chmod +x /usr/local/bin/docker-compose</span><br><span class="line">docker-compose --version</span><br></pre></td></tr></table></figure>
-<h3 id="离线安装-1"><a href="#离线安装-1" class="headerlink" title="离线安装"></a>离线安装</h3><p>操作同上</p>
-<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>安装netstat<br><code>yum -y install net-tools </code><br><a href="https://hub.docker.com/">docker-hub地址</a><br><a href="https://docs.docker.com/">docker-文档地址</a></p>
+    <title>docker网络模式</title>
+    <url>/2021/09/08/docker%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[<h2 id="docker四种网络模式"><a href="#docker四种网络模式" class="headerlink" title="docker四种网络模式"></a>docker四种网络模式</h2><table>
+<thead>
+<tr>
+<th>Docker网络模式</th>
+<th>配置</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>bridge</td>
+<td>–net=bridge</td>
+<td>默认</td>
+</tr>
+<tr>
+<td>host</td>
+<td>–net=host</td>
+<td>容器和宿主机共享Network namespace</td>
+</tr>
+<tr>
+<td>container</td>
+<td>net=container:NAME_or_ID</td>
+<td>容器和另外一个容器共享Network namespace。 kubernetes中的pod就是多个容器共享一个Network namespace。</td>
+</tr>
+<tr>
+<td>none</td>
+<td>–net=none</td>
+<td>容器有独立的Network namespace，但并没有对其进行任何网络设置，如分配veth pair 和网桥连接，配置IP等</td>
+</tr>
+</tbody></table>
+<h3 id="bridge模式"><a href="#bridge模式" class="headerlink" title="bridge模式"></a>bridge模式</h3><p>Docker进程启动时，会在主机上创建一个docker0的虚拟网桥，然后再把主机上启动的docker容器链接到虚拟网桥上，从docker0子网分配一个ip给容器使用，并设置docker0的ip为容器默认网关<br>bridge模式如下图所示：<br><img src="13618762-f1643a51d313a889.png" alt="bridge模式"></p>
+<h3 id="host模式"><a href="#host模式" class="headerlink" title="host模式"></a>host模式</h3><p>容器和数组及使用一个Network namespace 容器不会虚拟出自己的网卡和ip，而是使用宿主机的IP和端口，容器的文件系统，进程还是和外部隔离的<br>优点：网络性能比较好 缺点：用过的端口不能复用，网络隔离性不好<br>host模式如下图所示：<br><img src="13618762-a892da42b8ff9342.webp" alt="host模式"></p>
+<h3 id="container模式"><a href="#container模式" class="headerlink" title="container模式"></a>container模式</h3><p>新创建的容器和指定的容器共用一个namespace，而不是和宿主机共享，两个容器只是网络共享，文件系统，进程还是隔离的<br>container模式如下图所示：<br><img src="13618762-790a69a562a5b358.webp" alt="container模式"></p>
+<h3 id="none模式"><a href="#none模式" class="headerlink" title="none模式"></a>none模式</h3><p>不为容器进行任何网络设置，封闭的网络能很好的保证容器的安全<br><img src="13618762-3fd41778faebcef5.webp" alt="none模式"></p>
+<h2 id="docker-network-create"><a href="#docker-network-create" class="headerlink" title="docker network create"></a>docker network create</h2><p>–subnet=192.168.200.0/24命令指定该网络模式网段范围，其中24代表该网段前24位相同，后8位不同，即该网段范围为：192.168.200.1~192.168.200.254，若该命令改为–subnet=192.168.200.0.16，即该网段范围为：192.168.0.1-192.168.255.254，这个范围就变的很大了。<br><a href="https://blog.csdn.net/zhizhuodewo6/article/details/87706638">参考博文</a><br><a href="https://www.jianshu.com/p/22a7032bb7bd">参考博文：https://www.jianshu.com/p/22a7032bb7bd</a></p>
 ]]></content>
       <categories>
         <category>技术</category>
@@ -673,11 +613,8 @@ docker images              # 查看安装镜像</li>
       </categories>
       <tags>
         <tag>docker</tag>
-        <tag>docker-compose</tag>
         <tag>运维</tag>
-        <tag>虚拟机</tag>
-        <tag>Hyper-V</tag>
-        <tag>linux</tag>
+        <tag>network</tag>
       </tags>
   </entry>
   <entry>
@@ -773,7 +710,7 @@ docker images              # 查看安装镜像</li>
   </entry>
   <entry>
     <title>随笔-运维(Windows||Linux)</title>
-    <url>/2021/09/26/%E9%9A%8F%E7%AC%94-%E8%BF%90%E7%BB%B4/</url>
+    <url>/2021/09/26/%E9%9A%8F%E7%AC%94_windows_linux/</url>
     <content><![CDATA[<h2 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h2><h3 id="windows查看端口占用"><a href="#windows查看端口占用" class="headerlink" title="windows查看端口占用"></a>windows查看端口占用</h3><ol>
 <li>cmd</li>
 <li>netstat -ano | findstr 端口号 记下pid</li>
@@ -781,6 +718,9 @@ docker images              # 查看安装镜像</li>
 </ol>
 <h3 id="查看域名对应ip"><a href="#查看域名对应ip" class="headerlink" title="查看域名对应ip"></a>查看域名对应ip</h3><p><code>ping</code></p>
 <h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><h3 id="目录作用"><a href="#目录作用" class="headerlink" title="目录作用"></a>目录作用</h3><p><a href="https://www.cnblogs.com/amboyna/archive/2008/02/16/1070474.html">参考博文</a></p>
+<h3 id="ls-只列出部分目录或是文件"><a href="#ls-只列出部分目录或是文件" class="headerlink" title="ls 只列出部分目录或是文件"></a>ls 只列出部分目录或是文件</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">1.只列出前N个目录:  ls | head -n</span><br><span class="line">2.只列出image1,image2目录 :  ls -d image[1-2] 或 ls -d image1 iamge2</span><br><span class="line">3. 列出所有image开头的目录; ls -d image*</span><br></pre></td></tr></table></figure>
+<h3 id="修改文件权限等"><a href="#修改文件权限等" class="headerlink" title="修改文件权限等"></a>修改文件权限等</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">chown -R 账号名称  文件/目录                                         # 修改文件所有者</span><br><span class="line">chmod 755 /etc/init.d/delete.sh                                   # 修改权限</span><br><span class="line">chgrp  组群  文件名/目录                                             # 修改文件所属组群</span><br></pre></td></tr></table></figure>
+
 <h3 id="定时删除缓存的脚本"><a href="#定时删除缓存的脚本" class="headerlink" title="定时删除缓存的脚本"></a>定时删除缓存的脚本</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">dir=/data/docker/pubback2_cywx/nginx/html/sns/Application/Runtime #需要清空的目录名称</span><br><span class="line">files=`ls $&#123;dir&#125;`</span><br><span class="line">for file in $files</span><br><span class="line">do</span><br><span class="line">if [ -e $&#123;dir&#125;/$&#123;file&#125; ];then</span><br><span class="line">rm -rf $&#123;dir&#125;/$&#123;file&#125;</span><br><span class="line">fi</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">chmod 755 /etc/init.d/delete.sh #给脚本755权限</span><br><span class="line">crontab –e #添加定时任务</span><br><span class="line">0 3 * * * /etc/init.d/delete.sh</span><br></pre></td></tr></table></figure>
 <p>分 时 日 月 周 命令<br>第1列<em>号表示分钟1-59 每分钟用</em>或者 <em>/1表示<br>第2列</em>号表示小时0-23小时（0表示0点）<br>第3列<em>号表示日期1-31日<br>第4列</em>号表示月份1-12月<br>第5列*号表示每周，0-6（0表示星期天）<br>第6列是要运行的命令</p>
@@ -797,7 +737,7 @@ docker images              # 查看安装镜像</li>
 <h3 id="显示当前用户"><a href="#显示当前用户" class="headerlink" title="显示当前用户"></a>显示当前用户</h3><p><code>w</code></p>
 <h3 id="Linux-ls-l-文件颜色和意义"><a href="#Linux-ls-l-文件颜色和意义" class="headerlink" title="Linux ls -l 文件颜色和意义"></a>Linux ls -l 文件颜色和意义</h3><p>白色：表示普通文件<br>蓝色：表示目录<br>绿色：表示可执行文件<br>红色：表示压缩文件<br>浅蓝色：链接文件<br>红色闪烁：表示链接的文件有问题<br>黄色：表示设备文件<br>灰色：表示其他文件</p>
 <h3 id="bin-bash-M-坏的解释器-没有那个文件或目录"><a href="#bin-bash-M-坏的解释器-没有那个文件或目录" class="headerlink" title="/bin/bash^M: 坏的解释器: 没有那个文件或目录"></a>/bin/bash^M: 坏的解释器: 没有那个文件或目录</h3><p>脚本文件在windows下编辑过，windows下每一行的结尾是\n\r，而在linux下文件的结尾是\n，那么你在windows下编辑过的文件在linux下打开看的时候每一行的结尾就会多出来一个字符\r,<br>用cat -A filename时你可以看到这个\r字符被显示为^M<br>使用<code>sed -i &#39;s/\r$//&#39; filename</code>删掉就可以</p>
-<h3 id="Linux操作好习惯"><a href="#Linux操作好习惯" class="headerlink" title="Linux操作好习惯"></a>Linux操作好习惯</h3><ol>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h3 id="Linux操作好习惯"><a href="#Linux操作好习惯" class="headerlink" title="Linux操作好习惯"></a>Linux操作好习惯</h3><ol>
 <li>避免用root用户登陆</li>
 <li>命名文件只使用字母，数字，连接符(-)和下划线(_)</li>
 <li>对目录操作使用绝对路径</li>
@@ -886,13 +826,14 @@ docker images              # 查看安装镜像</li>
   </entry>
   <entry>
     <title>随笔-运维(PHP||JAVA)</title>
-    <url>/2021/10/18/%E9%9A%8F%E7%AC%94-%E8%BF%90%E7%BB%B4-2/</url>
+    <url>/2021/10/18/%E9%9A%8F%E7%AC%94_php_java/</url>
     <content><![CDATA[<h2 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h2><h3 id="Primary-script-unknown"><a href="#Primary-script-unknown" class="headerlink" title="Primary script unknown"></a>Primary script unknown</h3><p>问题再现：配置完PHP-nginx环境之后File not found,查阅日志后有Primary script unknown问题<br>问题原因：php-fpm找不到php文件,php-fpm没有权限读取和执行文件<br>问题解决：</p>
 <ul>
 <li>找不到文件导致：nginx配置<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">   root        /var/www/html/sns;</span><br><span class="line">   index  index.html index.htm index.php;</span><br><span class="line">location ~ \.php$ &#123;</span><br><span class="line">	fastcgi_intercept_errors on;</span><br><span class="line">	fastcgi_pass 172.20.0.8:9000; </span><br><span class="line">	fastcgi_index  index.php;</span><br><span class="line">	fastcgi_param  SCRIPT_FILENAME    $document_root$fastcgi_script_name;</span><br><span class="line">	include   fastcgi_params;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 其中，root目录写容器中的目录</li>
-<li>权限导致：<a href="https://www.jb51.net/article/168244.htm">参考</a></li>
+<li>权限导致：<a href="https://www.jb51.net/article/168244.htm">参考</a><h3 id="PHP的内存限制-Allowed-memory-size-of-134217728-bytes-exhausted"><a href="#PHP的内存限制-Allowed-memory-size-of-134217728-bytes-exhausted" class="headerlink" title="PHP的内存限制 Allowed memory size of 134217728 bytes exhausted"></a>PHP的内存限制 Allowed memory size of 134217728 bytes exhausted</h3>解释是可用内存已耗尽，这关系到PHP的memory_limit的设置问题。<br>1、修改php.ini<br>memory_limit = 128<br>这种方法需要重启服务器，很显然，此方法对虚拟机有限制。</li>
 </ul>
+<p>2、通过ini_set函数修改配置选项值<br>ini_set (‘memory_limit’, ‘128M’)<br>ini_set (‘memory_limit’, ‘128M’)</p>
 <h2 id="JAVA"><a href="#JAVA" class="headerlink" title="JAVA"></a>JAVA</h2><h3 id="maven打包"><a href="#maven打包" class="headerlink" title="maven打包"></a>maven打包</h3><p>在IDEA右侧找到Maven，找到要发布的项目，展开Lifecycle，找到package，右键Run Maven Build 在项目target文件加下会生产jar包<br>如果有多个配置文件，打包前需要通过spring.profiles.active 指定使用哪个配置文件</p>
 ]]></content>
       <categories>
@@ -900,6 +841,17 @@ docker images              # 查看安装镜像</li>
       </categories>
       <tags>
         <tag>运维</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>随笔-Java代码规范</title>
+    <url>/2021/11/18/Java%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -915,41 +867,6 @@ docker images              # 查看安装镜像</li>
       </categories>
       <tags>
         <tag>mybatis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>随笔-Java代码规范</title>
-    <url>/2021/11/18/Java%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Spring创建多项目</title>
-    <url>/2021/11/18/Sping%E5%88%9B%E5%BB%BA%E5%A4%9A%E9%A1%B9%E7%9B%AE/</url>
-    <content><![CDATA[<h2 id="搭建SpringBoot-Maven多模块项目"><a href="#搭建SpringBoot-Maven多模块项目" class="headerlink" title="搭建SpringBoot+Maven多模块项目"></a>搭建SpringBoot+Maven多模块项目</h2><p><a href="https://guozh.net/springboot-maven-multi-module/">传送门</a></p>
-<h3 id="创建父项目"><a href="#创建父项目" class="headerlink" title="创建父项目"></a>创建父项目</h3><p>父项目是一个特殊的Spring项目，只需要pom.xml不需要初始化其它文件，所以可以修改type<br><img src="img1.jpg" alt="父项目"><br>添加如下代码，如果显示jar，改为pom<br><code>&lt;packaging&gt;pom&lt;/packaging&gt;</code></p>
-<h3 id="创建子项目"><a href="#创建子项目" class="headerlink" title="创建子项目"></a>创建子项目</h3><p>正常创建子项目</p>
-<h3 id="修改父项目pom-xml"><a href="#修改父项目pom-xml" class="headerlink" title="修改父项目pom.xml"></a>修改父项目pom.xml</h3><p>添加以下代码</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&lt;modules&gt;</span><br><span class="line">    &lt;module&gt;子项目-core&lt;/module&gt;</span><br><span class="line">    &lt;module&gt;子项目-web&lt;/module&gt;</span><br><span class="line">    &lt;module&gt;子项目-admin&lt;/module&gt;</span><br><span class="line">&lt;/modules&gt;</span><br></pre></td></tr></table></figure>
-<p>使用modules，可以在父工程一键打包，Maven 会分享我们的子模块和项目，按照子模块之间依赖关系，自动打包，我们就不用关心顺序。</p>
-<h3 id="在子项目中依赖父项目"><a href="#在子项目中依赖父项目" class="headerlink" title="在子项目中依赖父项目"></a>在子项目中依赖父项目</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&lt;parent&gt;</span><br><span class="line">	&lt;groupId&gt;com.父项目&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;juhe&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;</span><br><span class="line">&lt;/parent&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="dependencyManagement-和-dependencies"><a href="#dependencyManagement-和-dependencies" class="headerlink" title="dependencyManagement 和 dependencies"></a>dependencyManagement 和 dependencies</h3><p>子工程会将父项目的所有依赖继承<br>dependencyManagement的作用是声明依赖，<em><strong>只声明不依赖</strong></em></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&lt;dependencyManagement&gt;</span><br><span class="line">    &lt;dependencies&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.1.4&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">    &lt;/dependencies&gt;</span><br><span class="line">&lt;/dependencyManagement&gt;</span><br></pre></td></tr></table></figure>
-<p>此时父工程并没有依赖这个jar，需要在子项目填写</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
-<p>规范了版本号</p>
-]]></content>
-      <categories>
-        <category>技术</category>
-        <category>Spring</category>
-      </categories>
-      <tags>
-        <tag>Spring</tag>
       </tags>
   </entry>
   <entry>
@@ -993,10 +910,90 @@ docker images              # 查看安装镜像</li>
       </tags>
   </entry>
   <entry>
+    <title>Spring创建多项目</title>
+    <url>/2021/11/18/Sping%E5%88%9B%E5%BB%BA%E5%A4%9A%E9%A1%B9%E7%9B%AE/</url>
+    <content><![CDATA[<h2 id="搭建SpringBoot-Maven多模块项目"><a href="#搭建SpringBoot-Maven多模块项目" class="headerlink" title="搭建SpringBoot+Maven多模块项目"></a>搭建SpringBoot+Maven多模块项目</h2><p><a href="https://guozh.net/springboot-maven-multi-module/">传送门</a></p>
+<h3 id="创建父项目"><a href="#创建父项目" class="headerlink" title="创建父项目"></a>创建父项目</h3><p>父项目是一个特殊的Spring项目，只需要pom.xml不需要初始化其它文件，所以可以修改type<br><img src="img.jpg" alt="父项目"><br>添加如下代码，如果显示jar，改为pom<br><code>&lt;packaging&gt;pom&lt;/packaging&gt;</code></p>
+<h3 id="创建子项目"><a href="#创建子项目" class="headerlink" title="创建子项目"></a>创建子项目</h3><p>正常创建子项目</p>
+<h3 id="修改父项目pom-xml"><a href="#修改父项目pom-xml" class="headerlink" title="修改父项目pom.xml"></a>修改父项目pom.xml</h3><p>添加以下代码</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&lt;modules&gt;</span><br><span class="line">    &lt;module&gt;子项目-core&lt;/module&gt;</span><br><span class="line">    &lt;module&gt;子项目-web&lt;/module&gt;</span><br><span class="line">    &lt;module&gt;子项目-admin&lt;/module&gt;</span><br><span class="line">&lt;/modules&gt;</span><br></pre></td></tr></table></figure>
+<p>使用modules，可以在父工程一键打包，Maven 会分享我们的子模块和项目，按照子模块之间依赖关系，自动打包，我们就不用关心顺序。</p>
+<h3 id="在子项目中依赖父项目"><a href="#在子项目中依赖父项目" class="headerlink" title="在子项目中依赖父项目"></a>在子项目中依赖父项目</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&lt;parent&gt;</span><br><span class="line">	&lt;groupId&gt;com.父项目&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;juhe&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;</span><br><span class="line">&lt;/parent&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="dependencyManagement-和-dependencies"><a href="#dependencyManagement-和-dependencies" class="headerlink" title="dependencyManagement 和 dependencies"></a>dependencyManagement 和 dependencies</h3><p>子工程会将父项目的所有依赖继承<br>dependencyManagement的作用是声明依赖，<em><strong>只声明不依赖</strong></em></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&lt;dependencyManagement&gt;</span><br><span class="line">    &lt;dependencies&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.1.4&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">    &lt;/dependencies&gt;</span><br><span class="line">&lt;/dependencyManagement&gt;</span><br></pre></td></tr></table></figure>
+<p>此时父工程并没有依赖这个jar，需要在子项目填写</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
+<p>规范了版本号</p>
+]]></content>
+      <categories>
+        <category>技术</category>
+        <category>Spring</category>
+      </categories>
+      <tags>
+        <tag>Spring</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Spring参数校验</title>
+    <url>/2021/11/30/Spring%E5%8F%82%E6%95%B0%E6%A0%A1%E9%AA%8C/</url>
+    <content><![CDATA[<p><a href="https://blog.csdn.net/u010349272/article/details/107520021">原文地址</a></p>
+<h3 id="首先在controller声明对数据进行校验"><a href="#首先在controller声明对数据进行校验" class="headerlink" title="首先在controller声明对数据进行校验"></a>首先在controller声明对数据进行校验</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(value=&quot;/url.json&quot;,method= &#123;RequestMethod.POST&#125;)</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="meta">@Transactional</span></span><br><span class="line"><span class="keyword">public</span> Result&lt;?&gt; xxmethod( <span class="meta">@RequestBody</span> <span class="meta">@Validated</span>  XoPO xoPo)     </span><br><span class="line">    <span class="keyword">throws</span> ParseException, UnsupportedEncodingException &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="在bean上声明需要校验的字段"><a href="#在bean上声明需要校验的字段" class="headerlink" title="在bean上声明需要校验的字段"></a>在bean上声明需要校验的字段</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">XoPO</span></span>&#123;</span><br><span class="line">    <span class="meta">@validated</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;OrderPerson&gt; personList;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@NotNull</span></span><br><span class="line">    <span class="meta">@Size(max=32,message=&quot;code is null&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String code;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@NotBlank</span></span><br><span class="line">    <span class="meta">@Size(max=32,message=&quot;product is null&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String product;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="常用的校验类型"><a href="#常用的校验类型" class="headerlink" title="常用的校验类型"></a>常用的校验类型</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@AssertFalse</span> 校验<span class="keyword">false</span></span><br><span class="line"><span class="meta">@AssertTrue</span> 校验<span class="keyword">true</span></span><br><span class="line"><span class="meta">@DecimalMax(value=,inclusive=)</span> 小于等于value，inclusive=<span class="keyword">true</span>,是小于等于</span><br><span class="line"><span class="meta">@DecimalMin(value=,inclusive=)</span> 与上类似</span><br><span class="line"><span class="meta">@Max(value=)</span> 小于等于value</span><br><span class="line"><span class="meta">@Min(value=)</span> 大于等于value</span><br><span class="line"><span class="meta">@NotNull</span>  检查Null</span><br><span class="line"><span class="meta">@Past</span>  检查日期</span><br><span class="line"><span class="meta">@Pattern(regex=,flag=)</span>  正则</span><br><span class="line"><span class="meta">@Size(min=, max=)</span>  字符串，集合，map限制大小</span><br><span class="line"><span class="meta">@Validate</span> 对po实体类进行校验</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>技术</category>
+        <category>Spring</category>
+      </categories>
+      <tags>
+        <tag>Spring</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>mycat入门-管理端口</title>
     <url>/2021/11/01/mycat%E5%85%A5%E9%97%A8-4/</url>
     <content><![CDATA[<h2 id="Reload-命令"><a href="#Reload-命令" class="headerlink" title="Reload 命令"></a>Reload 命令</h2><p><code>reload @@config;</code>该命令用于更新 schema.xml 配置文件，例如更新 schema.xml 文件后在命令窗口输入该命令，不用重启即可进行配置文件的更新<br><code>reload @@config_all;</code>该命令用于更新所有配置文件，不用重启即可进行配置文件的更新</p>
 <h2 id="Show-命令"><a href="#Show-命令" class="headerlink" title="Show 命令"></a>Show 命令</h2><p><code>show @@datanode;</code>该命令用于查询显示 Mycat 数据节点列表，通过 <code>show @@datanode where schema = ?</code> 的方式查询指定逻辑库（区分大小写）的数据节点<br><code>show @@version;</code>查看版本<br><code>show @@connection;</code>查看连接信息<br><code>show @@backend;</code>查看后端连接状况<br><code>show @@cache;</code>查看mycat缓存<br><code>show @@datasource;</code>看数据状态，配置的读写服务器，如果配置了主从，或者多主可以切换</p>
+]]></content>
+      <categories>
+        <category>技术</category>
+        <category>MyCat</category>
+      </categories>
+      <tags>
+        <tag>MyCat</tag>
+        <tag>数据库</tag>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mycat入门-入门级别的查缺补漏</title>
+    <url>/2021/11/08/mycat%E5%85%A5%E9%97%A8-5/</url>
+    <content><![CDATA[<h3 id="全局序列号"><a href="#全局序列号" class="headerlink" title="全局序列号"></a>全局序列号</h3><p>数据切分后，原有的关系数据库中的主键约束在分布式条件下将无法使用，因此需要引入外部机制保证数据唯一性标识，这种保证全局性的数据唯一标识的机制就是全局序列号（sequence）。<br>全局序列号有 本地文件，数据库，本地时间戳，zk等方式</p>
+<h3 id="多租户"><a href="#多租户" class="headerlink" title="多租户"></a>多租户</h3><p>相同的软件提供给不同的用户，数据隔离可以有效的提升访问速度，隔离手段有三种</p>
+<h4 id="独立数据库服务"><a href="#独立数据库服务" class="headerlink" title="独立数据库服务"></a>独立数据库服务</h4><p>一个租户一个数据库服务</p>
+<h4 id="独立数据库"><a href="#独立数据库" class="headerlink" title="独立数据库"></a>独立数据库</h4><p>多个租户一个数据库服务，在服务中分库</p>
+<h4 id="共享数据库，共享数据架构"><a href="#共享数据库，共享数据架构" class="headerlink" title="共享数据库，共享数据架构"></a>共享数据库，共享数据架构</h4><p>使用分表，通过指定分表规则区分租户</p>
+<h4 id="mycat多租户实现"><a href="#mycat多租户实现" class="headerlink" title="mycat多租户实现"></a>mycat多租户实现</h4><p>web修改</p>
+<ul>
+<li>登陆时记录租户id</li>
+<li>修改jdbc实现，在sql中添加sql注释指定数据库。例如：/*!mycat : schema = test_01 */ sql</li>
+</ul>
+<p>使用mycat拦截sql并发送到相应数据库</p>
+<h3 id="分片join"><a href="#分片join" class="headerlink" title="分片join"></a>分片join</h3><ul>
+<li><p>避免使用 left join 和right join，使用inner join</p>
+</li>
+<li><p>在使用 Left join 或 Right join 时，ON 会优先执行，where 条件在最后执行，所以在使用过程中，条件尽可能的在 ON 语句中判断，减少 where 的执行</p>
+</li>
+<li><p>少用子查询，而用 join。</p>
+</li>
+</ul>
+<p><strong>mycat实现join有四种</strong></p>
+<ol>
+<li><strong>全局表</strong><br>全局表是数据冗余的，在每个节点上都有</li>
+<li><strong>ER join</strong><br>将join数据的放到同一个节点上<br>分片在 dn1,dn2 上，orders 依赖父表进行分片，两个表的关联关系为 orders.customer_id=customer.id。于是数据分片和存储的示意图如下：<br><img src="img.png" alt="img.png"></li>
+<li>Share join<br>只支持两个表的join，拆分成单表的sql执行，再把数据汇集</li>
+<li>catlet（人工智能）<br>没看懂</li>
+</ol>
 ]]></content>
       <categories>
         <category>技术</category>
@@ -1077,43 +1074,66 @@ docker images              # 查看安装镜像</li>
       </tags>
   </entry>
   <entry>
-    <title>mycat入门-入门级别的查缺补漏</title>
-    <url>/2021/11/08/mycat%E5%85%A5%E9%97%A8-5/</url>
-    <content><![CDATA[<h3 id="全局序列号"><a href="#全局序列号" class="headerlink" title="全局序列号"></a>全局序列号</h3><p>数据切分后，原有的关系数据库中的主键约束在分布式条件下将无法使用，因此需要引入外部机制保证数据唯一性标识，这种保证全局性的数据唯一标识的机制就是全局序列号（sequence）。<br>全局序列号有 本地文件，数据库，本地时间戳，zk等方式</p>
-<h3 id="多租户"><a href="#多租户" class="headerlink" title="多租户"></a>多租户</h3><p>相同的软件提供给不同的用户，数据隔离可以有效的提升访问速度，隔离手段有三种</p>
-<h4 id="独立数据库服务"><a href="#独立数据库服务" class="headerlink" title="独立数据库服务"></a>独立数据库服务</h4><p>一个租户一个数据库服务</p>
-<h4 id="独立数据库"><a href="#独立数据库" class="headerlink" title="独立数据库"></a>独立数据库</h4><p>多个租户一个数据库服务，在服务中分库</p>
-<h4 id="共享数据库，共享数据架构"><a href="#共享数据库，共享数据架构" class="headerlink" title="共享数据库，共享数据架构"></a>共享数据库，共享数据架构</h4><p>使用分表，通过指定分表规则区分租户</p>
-<h4 id="mycat多租户实现"><a href="#mycat多租户实现" class="headerlink" title="mycat多租户实现"></a>mycat多租户实现</h4><p>web修改</p>
-<ul>
-<li>登陆时记录租户id</li>
-<li>修改jdbc实现，在sql中添加sql注释指定数据库。例如：/*!mycat : schema = test_01 */ sql</li>
-</ul>
-<p>使用mycat拦截sql并发送到相应数据库</p>
-<h3 id="分片join"><a href="#分片join" class="headerlink" title="分片join"></a>分片join</h3><ul>
-<li><p>避免使用 left join 和right join，使用inner join</p>
-</li>
-<li><p>在使用 Left join 或 Right join 时，ON 会优先执行，where 条件在最后执行，所以在使用过程中，条件尽可能的在 ON 语句中判断，减少 where 的执行</p>
-</li>
-<li><p>少用子查询，而用 join。</p>
-</li>
-</ul>
-<p><strong>mycat实现join有四种</strong></p>
+    <title>docker || docker-compose-安装</title>
+    <url>/2021/09/03/windows%E5%AE%89%E8%A3%85Hyper-V+ubuntu/</url>
+    <content><![CDATA[<h2 id="Windows10家庭版安装ubuntu"><a href="#Windows10家庭版安装ubuntu" class="headerlink" title="Windows10家庭版安装ubuntu"></a>Windows10家庭版安装ubuntu</h2><h3 id="安装Hyper-V"><a href="#安装Hyper-V" class="headerlink" title="安装Hyper-V"></a>安装Hyper-V</h3><p><a href="https://blog.csdn.net/yuyuking/article/details/103890195">参考博文</a><br>把下面代码保存为.bat文件，用管理员运行，重启之后，就可以在win+S 中搜索到Hyper-V</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pushd &quot;%~dp0&quot;</span><br><span class="line"></span><br><span class="line">dir /b %SystemRoot%\servicing\Packages\*Hyper-V*.mum &gt;hyper-v.txt</span><br><span class="line"></span><br><span class="line">for /f %%i in (&#x27;findstr /i . hyper-v.txt 2^&gt;nul&#x27;) do dism /online /norestart /add-package:&quot;%SystemRoot%\servicing\Packages\%%i&quot;</span><br><span class="line"></span><br><span class="line">del hyper-v.txt</span><br><span class="line"></span><br><span class="line">Dism /online /enable-feature /featurename:Microsoft-Hyper-V-All /LimitAccess /ALL</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装Ubuntu"><a href="#安装Ubuntu" class="headerlink" title="安装Ubuntu"></a>安装Ubuntu</h3><p><a href="https://zhuanlan.zhihu.com/p/128640396">参考博文</a><br>基本就是按照操作一步一步点下来。<br>MSDN好像没有ubuntu的镜像了，可以点击<a href="http://mirrors.163.com/ubuntu-releases">网易开源镜像站</a>下载<br>启动之后，会遇到这样的问题，</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Hyper-V™</span><br><span class="line">Uirtual Machine Boot Su_ary</span><br><span class="line"></span><br><span class="line">1.SCSI Disk (0,0)No UEFI-compatible file system uas found.</span><br><span class="line"></span><br><span class="line">2.Network Adapter (OO155DO6E40O) DHCP failed.</span><br><span class="line"></span><br><span class="line">3.SCSI DUD (0,1)No UEFI-compatible file system uas found.</span><br><span class="line"></span><br><span class="line">No operating system was loaded. Press a Key to retry the boot sequence...</span><br><span class="line">Note： Configuration changes nay require the virtual Machine to be reset.</span><br></pre></td></tr></table></figure>
+
+<p>把虚拟机启动时启用安全启动的勾去掉。<a href="https://tieba.baidu.com/p/5587795237?red_tag=0742118433">解决方法</a></p>
+<h2 id="linux安装docker"><a href="#linux安装docker" class="headerlink" title="linux安装docker"></a>linux安装docker</h2><h3 id="在线安装"><a href="#在线安装" class="headerlink" title="在线安装"></a>在线安装</h3><p>安装方法<a href="https://www.cnblogs.com/kingsonfu/p/11576797.html">参考博文</a><br>使用的yum源安装</p>
 <ol>
-<li><strong>全局表</strong><br>全局表是数据冗余的，在每个节点上都有</li>
-<li><strong>ER join</strong><br>将join数据的放到同一个节点上<br>分片在 dn1,dn2 上，orders 依赖父表进行分片，两个表的关联关系为 orders.customer_id=customer.id。于是数据分片和存储的示意图如下：<br><img src="img.png" alt="img.png"></li>
-<li>Share join<br>只支持两个表的join，拆分成单表的sql执行，再把数据汇集</li>
-<li>catlet（人工智能）<br>没看懂</li>
+<li>查看是否已安装docker<br><code>yum list installed | grep docker</code></li>
+<li>安装docker<br><code>yum -y install docker</code></li>
+<li>启动docker<br><code>systemctl start docker</code></li>
+<li>查看docker状态<br><code> systemctl status docker</code><br>如果出现下面代表安装成功<br><img src="%E9%9A%8F%E7%AC%94-%E6%95%B0%E6%8D%AE%E5%BA%93/img.png" alt="安装成功"></li>
+<li>可以将docker设置为开机自启动<br><code>systemctl enable docker;</code><h3 id="离线安装"><a href="#离线安装" class="headerlink" title="离线安装"></a>离线安装</h3></li>
+<li>下载docker压缩包<br><a href="https://download.docker.com/linux/static/stable/x86_64/">下载地址</a><br>笔者下载的是docker-18.06.3-ce.tgz</li>
+<li>运行脚本<br><code>./install_docker.sh docker-18.06.3-ce.tgz</code><br>脚本代码如下：<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line">usage()&#123;</span><br><span class="line">  echo &quot;使用方法: $0 FILE_NAME_DOCKER_CE_TAR_GZ&quot;</span><br><span class="line">  echo &quot;             $0 docker-18.06.3-ce.tgz&quot;</span><br><span class="line">  echo &quot;Get docker-ce binary from: https://download.docker.com/linux/static/stable/x86_64/&quot;</span><br><span class="line">  echo &quot;eg: wget https://download.docker.com/linux/static/stable/x86_64/docker-18.06.3-ce.tgz&quot;</span><br><span class="line">  echo &quot;&quot;</span><br><span class="line">&#125;</span><br><span class="line">SYSTEMDDIR=/usr/lib/systemd/system</span><br><span class="line">SERVICEFILE=docker.service</span><br><span class="line">DOCKERDIR=/usr/bin</span><br><span class="line">DOCKERBIN=docker</span><br><span class="line">SERVICENAME=docker</span><br><span class="line"></span><br><span class="line">if [ $# -ne 1 ]; then</span><br><span class="line">  usage</span><br><span class="line">  exit 1</span><br><span class="line">else</span><br><span class="line">  FILETARGZ=&quot;$1&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [ ! -f $&#123;FILETARGZ&#125; ]; then</span><br><span class="line">  echo &quot;Docker binary tgz files does not exist, please check it&quot;</span><br><span class="line">  echo &quot;Get docker-ce binary from: https://download.docker.com/linux/static/stable/x86_64/&quot;</span><br><span class="line">  echo &quot;eg: wget https://download.docker.com/linux/static/stable/x86_64/docker-18.06.3-ce.tgz&quot;</span><br><span class="line">  exit 1</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">echo &quot;##unzip : tar xvpf $&#123;FILETARGZ&#125;&quot;</span><br><span class="line">tar xvpf $&#123;FILETARGZ&#125;</span><br><span class="line">echo</span><br><span class="line"></span><br><span class="line">echo &quot;##binary : $&#123;DOCKERBIN&#125; copy to $&#123;DOCKERDIR&#125;&quot;</span><br><span class="line">cp -p $&#123;DOCKERBIN&#125;/* $&#123;DOCKERDIR&#125; &gt;/dev/null 2&gt;&amp;1</span><br><span class="line">which $&#123;DOCKERBIN&#125;</span><br><span class="line"></span><br><span class="line">echo &quot;##systemd service: $&#123;SERVICEFILE&#125;&quot;</span><br><span class="line">echo &quot;##docker.service: create docker systemd file&quot;</span><br><span class="line">cat &gt;$&#123;SYSTEMDDIR&#125;/$&#123;SERVICEFILE&#125; &lt;&lt;EOF</span><br><span class="line">[Unit]</span><br><span class="line">Description=Docker Application Container Engine</span><br><span class="line">Documentation=http://docs.docker.com</span><br><span class="line">After=network.target docker.socket</span><br><span class="line">[Service]</span><br><span class="line">Type=notify</span><br><span class="line">EnvironmentFile=-/run/flannel/docker</span><br><span class="line">WorkingDirectory=/usr/local/bin</span><br><span class="line">ExecStart=/usr/bin/dockerd \</span><br><span class="line">                -H tcp://0.0.0.0:4243 \</span><br><span class="line">                -H unix:///var/run/docker.sock \</span><br><span class="line">                --selinux-enabled=false \</span><br><span class="line">                --log-opt max-size=1g</span><br><span class="line">ExecReload=/bin/kill -s HUP $MAINPID</span><br><span class="line"><span class="meta">#</span><span class="bash"> Having non-zero Limit*s causes performance problems due to accounting overhead</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">in</span> the kernel. We recommend using cgroups to <span class="keyword">do</span> container-local accounting.</span></span><br><span class="line">LimitNOFILE=infinity</span><br><span class="line">LimitNPROC=infinity</span><br><span class="line">LimitCORE=infinity</span><br><span class="line"><span class="meta">#</span><span class="bash"> Uncomment TasksMax <span class="keyword">if</span> your systemd version supports it.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Only systemd 226 and above support this version.</span></span><br><span class="line"><span class="meta">#</span><span class="bash">TasksMax=infinity</span></span><br><span class="line">TimeoutStartSec=0</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">set</span> delegate yes so that systemd does not reset the cgroups of docker containers</span></span><br><span class="line">Delegate=yes</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">kill</span> only the docker process, not all processes <span class="keyword">in</span> the cgroup</span></span><br><span class="line">KillMode=process</span><br><span class="line">Restart=on-failure</span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">echo &quot;&quot;</span><br><span class="line"></span><br><span class="line">systemctl daemon-reload</span><br><span class="line">echo &quot;##Service status: $&#123;SERVICENAME&#125;&quot;</span><br><span class="line">systemctl status $&#123;SERVICENAME&#125;</span><br><span class="line">echo &quot;##Service restart: $&#123;SERVICENAME&#125;&quot;</span><br><span class="line">systemctl restart $&#123;SERVICENAME&#125;</span><br><span class="line">echo &quot;##Service status: $&#123;SERVICENAME&#125;&quot;</span><br><span class="line">systemctl status $&#123;SERVICENAME&#125;</span><br><span class="line"></span><br><span class="line">echo &quot;##Service enabled: $&#123;SERVICENAME&#125;&quot;</span><br><span class="line">systemctl enable $&#123;SERVICENAME&#125;</span><br><span class="line">cat &gt;/etc/docker/daemon.json &lt;&lt;EOF</span><br><span class="line">&#123;</span><br><span class="line">  &quot;registry-mirrors&quot;: [&quot;http://hub-mirror.c.163.com&quot;]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">swapoff -a</span><br><span class="line">iptables -P FORWARD ACCEPT</span><br><span class="line">sysctl --system</span><br><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl restart docker.service</span><br><span class="line"></span><br><span class="line">echo &quot;## docker version&quot;</span><br><span class="line">docker version</span><br></pre></td></tr></table></figure>
+如果有坏的解释器报错 则<code>sed -i &#39;s/\r$//&#39;  install_docker.sh</code><br>如果有权限问题可 可<code>chmod 777 /data/install_docker.sh</code><h2 id="docker换源"><a href="#docker换源" class="headerlink" title="docker换源"></a>docker换源</h2><a href="https://www.cnblogs.com/wpwen/p/12652665.html">docker换源</a><br>换源的方法是编辑/etc/docker/daemon.json（如果不存在则创建）:<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;registry-mirrors&quot;</span>:[</span><br><span class="line">         <span class="string">&quot;http://docker.mirrors.ustc.edu.cn&quot;</span>,</span><br><span class="line">         <span class="string">&quot;http://hub-mirror.c.163.com&quot;</span>,</span><br><span class="line">         <span class="string">&quot;http://registry.docker-cn.com&quot;</span></span><br><span class="line">    ] ,</span><br><span class="line">    <span class="attr">&quot;insecure-registries&quot;</span>:[</span><br><span class="line">       <span class="string">&quot;docker.mirrors.ustc.edu.cn&quot;</span>,</span><br><span class="line">         <span class="string">&quot;registry.docker-cn.com&quot;</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>建议使用<a href="https://docs.docker.com/engine/install/centos/">官网安装</a></p>
+</blockquote>
+<h2 id="docker-安装php-nginx-mysql"><a href="#docker-安装php-nginx-mysql" class="headerlink" title="docker 安装php+nginx+mysql"></a>docker 安装php+nginx+mysql</h2><h3 id="获取镜像image"><a href="#获取镜像image" class="headerlink" title="获取镜像image"></a>获取镜像image</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker pull mysql:5.7      # 拉取 mysql 5.7</span><br><span class="line">docker nginx               # 拉取 nginx </span><br><span class="line">docker pull php:5.6-fpm    # 拉取 php </span><br></pre></td></tr></table></figure>
+docker images              # 查看安装镜像</li>
 </ol>
+<h3 id="普通运行"><a href="#普通运行" class="headerlink" title="普通运行"></a>普通运行</h3><p><code>docker run -p 对外暴露的端口:容器内的端口 --name 容器名 -e 配置信息=内容 -v 主机目录:容器目录 -d 镜像名</code><br>使用 <code>docker ps</code> || <code>docker ps -a</code> 查看运行||全部容器</p>
+<h3 id="docker-compose运行"><a href="#docker-compose运行" class="headerlink" title="docker-compose运行"></a>docker-compose运行</h3><p>文件模板如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">version: &#x27;2.0&#x27;</span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  nginx:</span><br><span class="line">    restart: always</span><br><span class="line">    image: nginx:1.11.6-alpine</span><br><span class="line">    ports:</span><br><span class="line">      - 8080:80</span><br><span class="line">      - 80:80</span><br><span class="line">      - 443:443</span><br><span class="line">    volumes:</span><br><span class="line">      - ./conf.d:/etc/nginx/conf.d</span><br><span class="line">      - ./log:/var/log/nginx</span><br><span class="line">      - ./www:/var/www</span><br><span class="line">      - /etc/letsencrypt:/etc/letsencrypt</span><br></pre></td></tr></table></figure>
+<p><strong>参数说明：</strong><br><strong>version</strong>：版本号</p>
+<p><strong>service</strong>：就是要定义的docker容器</p>
+<p><strong>nginx</strong>:容器的名称</p>
+<p><strong>restart</strong>：设置为always，表明此容器应该在停止的情况下总是重启，比如，服务器启动时，这个容器就跟着启动，不用手动启动，服务器启动之后，进入到docker-compose.yml文件路径下，执行docker-compose ps可以看到，该容器正在运行。</p>
+<p><strong>image</strong>：这个是需要依赖的容器，也就是nginx软件，可以到docker官方镜像上找到最新版的镜像。</p>
+<p><strong>ports</strong>：端口映射。比如： - 8080:80，表示容器内运行着的端口是80，把端口暴露给8080端口，从外面访问的是8080端口，就能自动映射到80端口上。</p>
+<p><strong>volumes</strong>:文件映射。表示数据、配置文件等存放的位置。（- . 这个表示docker-compose.yml当前目录位置开始创建这个文件</p>
+<h3 id="可能的问题"><a href="#可能的问题" class="headerlink" title="可能的问题"></a>可能的问题</h3><p>如果你的容器运行正常，但是无法访问到MySQL，一般有以下几个可能的原因：</p>
+<ul>
+<li>防火墙拦截<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 开放端口：</span><br><span class="line">$ systemctl status firewalld</span><br><span class="line">$ firewall-cmd  --zone=public --add-port=3306/tcp -permanent</span><br><span class="line">$ firewall-cmd  --reload</span><br><span class="line"># 关闭防火墙：</span><br><span class="line">$ sudo systemctl stop firewalld</span><br></pre></td></tr></table></figure></li>
+<li>需要在docker本地客户端设置远程访问账号<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ sudo docker exec -it mysql bash</span><br><span class="line">$ mysql -uroot -p123456</span><br><span class="line">mysql&gt; grant all privileges on *.* to root@&#x27;%&#x27; identified by &quot;password&quot;;</span><br></pre></td></tr></table></figure>
+原理：<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># mysql使用mysql数据库中的user表来管理权限，修改user表就可以修改权限（只有root账号可以修改）</span><br><span class="line"></span><br><span class="line">mysql&gt; use mysql;</span><br><span class="line">Database changed</span><br><span class="line"></span><br><span class="line">mysql&gt; select host,user,password from user;</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">| host                    | user      | password                                                                 |</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">| localhost              | root     | *A731AEBFB621E354CD41BAF207D884A609E81F5E      |</span><br><span class="line">| 192.168.1.1            | root     | *A731AEBFB621E354CD41BAF207D884A609E81F5E      |</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">2 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; grant all privileges  on *.* to root@&#x27;%&#x27; identified by &quot;password&quot;;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; flush privileges;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select host,user,password from user;</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">| host                    | user      | password                                                                 |</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">| localhost              | root      | *A731AEBFB621E354CD41BAF207D884A609E81F5E     |</span><br><span class="line">| 192.168.1.1            | root      | *A731AEBFB621E354CD41BAF207D884A609E81F5E     |</span><br><span class="line">| %                       | root      | *A731AEBFB621E354CD41BAF207D884A609E81F5E     |</span><br><span class="line">+--------------+------+-------------------------------------------+</span><br><span class="line">3 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<h2 id="安装docker-compose"><a href="#安装docker-compose" class="headerlink" title="安装docker-compose"></a>安装docker-compose</h2><h3 id="在线安装-1"><a href="#在线安装-1" class="headerlink" title="在线安装"></a>在线安装</h3><del>第一步下载：</del><br><del><code>curl -L https://get.daocloud.io/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` &gt;  /usr/local/bin/docker-compose</code></del><br><del>第二步赋权：</del><br><del><code>chmod a+x /usr/local/bin/docker-compose</code></del><br><del>第三步查看版本：</del><br><del><code>docker-compose --version</code></del><blockquote>
+<p>上面的方法在部署之后，使用docker-compose部署会出现端口占用的错误，且物理机，虚拟机端口并没有被占用<br>在一段时间的问题定位之后，发现是安装的docker-compose有问题，所以建议使官网安装<a href="https://docs.docker.com/compose/install/">安装地址</a><br>步骤和上方基本相同，第一步下载的地址发生了改变</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose</span><br><span class="line">sudo chmod +x /usr/local/bin/docker-compose</span><br><span class="line">docker-compose --version</span><br></pre></td></tr></table></figure>
+<h3 id="离线安装-1"><a href="#离线安装-1" class="headerlink" title="离线安装"></a>离线安装</h3><p>操作同上</p>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>安装netstat<br><code>yum -y install net-tools </code><br><a href="https://hub.docker.com/">docker-hub地址</a><br><a href="https://docs.docker.com/">docker-文档地址</a></p>
 ]]></content>
       <categories>
         <category>技术</category>
-        <category>MyCat</category>
+        <category>docker</category>
       </categories>
       <tags>
-        <tag>MyCat</tag>
-        <tag>数据库</tag>
-        <tag>mysql</tag>
+        <tag>docker</tag>
+        <tag>docker-compose</tag>
+        <tag>运维</tag>
+        <tag>虚拟机</tag>
+        <tag>Hyper-V</tag>
+        <tag>linux</tag>
       </tags>
   </entry>
   <entry>
@@ -1193,6 +1213,20 @@ docker images              # 查看安装镜像</li>
       </categories>
       <tags>
         <tag>RabbitMQ</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>xxlJob</title>
+    <url>/2022/01/24/xxlJob/</url>
+    <content><![CDATA[<p>原文:<a href="https://www.xuxueli.com/xxl-job/">https://www.xuxueli.com/xxl-job/</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+        <category>xxlJob</category>
+      </categories>
+      <tags>
+        <tag>xxlJob</tag>
+        <tag>分部署任务调度</tag>
       </tags>
   </entry>
 </search>

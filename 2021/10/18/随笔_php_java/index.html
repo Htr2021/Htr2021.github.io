@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>随笔-运维(Windows||Linux) |  时光荏苒</title>
+      <title>随笔-运维(PHP||JAVA) |  时光荏苒</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -58,7 +58,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-随笔-运维"
+  id="post-随笔_php_java"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -69,7 +69,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  随笔-运维(Windows||Linux)
+  随笔-运维(PHP||JAVA)
 </h1>
  
 
@@ -77,8 +77,8 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2021/09/26/%E9%9A%8F%E7%AC%94-%E8%BF%90%E7%BB%B4/" class="article-date">
-  <time datetime="2021-09-26T01:16:29.000Z" itemprop="datePublished">2021-09-26</time>
+      <a href="/2021/10/18/%E9%9A%8F%E7%AC%94_php_java/" class="article-date">
+  <time datetime="2021-10-18T02:09:43.000Z" itemprop="datePublished">2021-10-18</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a>
@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">746</span>
+            <span class="post-count">268</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">3 分钟</span>
+            <span class="post-count">1 分钟</span>
         </span>
     </span>
 </div>
@@ -113,44 +113,16 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h2><h3 id="windows查看端口占用"><a href="#windows查看端口占用" class="headerlink" title="windows查看端口占用"></a>windows查看端口占用</h3><ol>
-<li>cmd</li>
-<li>netstat -ano | findstr 端口号 记下pid</li>
-<li>任务管理器 pid查找进程</li>
-</ol>
-<h3 id="查看域名对应ip"><a href="#查看域名对应ip" class="headerlink" title="查看域名对应ip"></a>查看域名对应ip</h3><p><code>ping</code></p>
-<h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><h3 id="目录作用"><a href="#目录作用" class="headerlink" title="目录作用"></a>目录作用</h3><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/amboyna/archive/2008/02/16/1070474.html">参考博文</a></p>
-<h3 id="定时删除缓存的脚本"><a href="#定时删除缓存的脚本" class="headerlink" title="定时删除缓存的脚本"></a>定时删除缓存的脚本</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">dir=/data/docker/pubback2_cywx/nginx/html/sns/Application/Runtime #需要清空的目录名称</span><br><span class="line">files=`ls $&#123;dir&#125;`</span><br><span class="line">for file in $files</span><br><span class="line">do</span><br><span class="line">if [ -e $&#123;dir&#125;/$&#123;file&#125; ];then</span><br><span class="line">rm -rf $&#123;dir&#125;/$&#123;file&#125;</span><br><span class="line">fi</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chmod 755 /etc/init.d/delete.sh #给脚本755权限</span><br><span class="line">crontab –e #添加定时任务</span><br><span class="line">0 3 * * * /etc/init.d/delete.sh</span><br></pre></td></tr></table></figure>
-<p>分 时 日 月 周 命令<br>第1列<em>号表示分钟1-59 每分钟用</em>或者 <em>/1表示<br>第2列</em>号表示小时0-23小时（0表示0点）<br>第3列<em>号表示日期1-31日<br>第4列</em>号表示月份1-12月<br>第5列*号表示每周，0-6（0表示星期天）<br>第6列是要运行的命令</p>
-<p>例如每周3的晚上23:30运行该脚本，可以这样写：<br>30 23 * * 3 /etc/init.d/delete.sh</p>
-<h3 id="磁盘满了清理"><a href="#磁盘满了清理" class="headerlink" title="磁盘满了清理"></a>磁盘满了清理</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/gnail_oug/article/details/70217446">df指令参数参考</a></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看磁盘信息 -h转化单位</span></span><br><span class="line">df -lh</span><br><span class="line"><span class="meta">#</span><span class="bash"> 定位最大文件</span></span><br><span class="line">du -h --max-depth=1 # 查看当前目录下一级子文件和子目录占用的磁盘容量</span><br><span class="line">du -sc * | sort -rn # 排序</span><br><span class="line">du -sb /usr/share/nginx/html/sns/Application/Runtime/* | sort -rn</span><br></pre></td></tr></table></figure>
-<h3 id="防火墙操作"><a href="#防火墙操作" class="headerlink" title="防火墙操作"></a>防火墙操作</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">systemctl status firewalld.service   #查看状态</span><br><span class="line">systemctl stop firewalld.service     #停止</span><br><span class="line">systemctl disable firewalld.service  #禁止</span><br><span class="line">systemctl restart firewalld.service  #重启</span><br><span class="line">systemctl start firewalld.service    #启动</span><br></pre></td></tr></table></figure>
-<h3 id="查看端口使用"><a href="#查看端口使用" class="headerlink" title="查看端口使用"></a>查看端口使用</h3><ol>
-<li><code>netstat  -anp  |grep   端口号</code> </li>
-<li><code>netstat   -nultp</code> 查看当前已使用的端口</li>
-</ol>
-<h3 id="添加用户到docker用户组"><a href="#添加用户到docker用户组" class="headerlink" title="添加用户到docker用户组"></a>添加用户到docker用户组</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 添加用户(默认会在/home/下创建你的文件夹)</span></span><br><span class="line">useradd htr</span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置用户密码</span></span><br><span class="line">passwd htr</span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加docker用户组，一般已存在，不需要执行</span></span><br><span class="line">cat /etc/group</span><br><span class="line">sudo groupadd docker</span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加用户到工作组</span></span><br><span class="line">usermod -a -G docker htr</span><br><span class="line"><span class="meta">#</span><span class="bash"> 测试是否可以使用docker(需要重新登陆用户)</span></span><br><span class="line">docker version</span><br></pre></td></tr></table></figure>
-<h3 id="显示当前路径"><a href="#显示当前路径" class="headerlink" title="显示当前路径"></a>显示当前路径</h3><p><code>pwd</code></p>
-<h3 id="显示当前用户"><a href="#显示当前用户" class="headerlink" title="显示当前用户"></a>显示当前用户</h3><p><code>w</code></p>
-<h3 id="Linux-ls-l-文件颜色和意义"><a href="#Linux-ls-l-文件颜色和意义" class="headerlink" title="Linux ls -l 文件颜色和意义"></a>Linux ls -l 文件颜色和意义</h3><p>白色：表示普通文件<br>蓝色：表示目录<br>绿色：表示可执行文件<br>红色：表示压缩文件<br>浅蓝色：链接文件<br>红色闪烁：表示链接的文件有问题<br>黄色：表示设备文件<br>灰色：表示其他文件</p>
-<h3 id="bin-bash-M-坏的解释器-没有那个文件或目录"><a href="#bin-bash-M-坏的解释器-没有那个文件或目录" class="headerlink" title="/bin/bash^M: 坏的解释器: 没有那个文件或目录"></a>/bin/bash^M: 坏的解释器: 没有那个文件或目录</h3><p>脚本文件在windows下编辑过，windows下每一行的结尾是\n\r，而在linux下文件的结尾是\n，那么你在windows下编辑过的文件在linux下打开看的时候每一行的结尾就会多出来一个字符\r,<br>用cat -A filename时你可以看到这个\r字符被显示为^M<br>使用<code>sed -i &#39;s/\r$//&#39; filename</code>删掉就可以</p>
-<h3 id="Linux操作好习惯"><a href="#Linux操作好习惯" class="headerlink" title="Linux操作好习惯"></a>Linux操作好习惯</h3><ol>
-<li>避免用root用户登陆</li>
-<li>命名文件只使用字母，数字，连接符(-)和下划线(_)</li>
-<li>对目录操作使用绝对路径</li>
-<li>不用的shell及时关掉，避免在错误的服务器上进行操作</li>
-<li>执行脚本时看好变量</li>
-</ol>
+  <h2 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h2><h3 id="Primary-script-unknown"><a href="#Primary-script-unknown" class="headerlink" title="Primary script unknown"></a>Primary script unknown</h3><p>问题再现：配置完PHP-nginx环境之后File not found,查阅日志后有Primary script unknown问题<br>问题原因：php-fpm找不到php文件,php-fpm没有权限读取和执行文件<br>问题解决：</p>
+<ul>
+<li>找不到文件导致：nginx配置<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">   root        /var/www/html/sns;</span><br><span class="line">   index  index.html index.htm index.php;</span><br><span class="line">location ~ \.php$ &#123;</span><br><span class="line">	fastcgi_intercept_errors on;</span><br><span class="line">	fastcgi_pass 172.20.0.8:9000; </span><br><span class="line">	fastcgi_index  index.php;</span><br><span class="line">	fastcgi_param  SCRIPT_FILENAME    $document_root$fastcgi_script_name;</span><br><span class="line">	include   fastcgi_params;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+其中，root目录写容器中的目录</li>
+<li>权限导致：<a target="_blank" rel="noopener" href="https://www.jb51.net/article/168244.htm">参考</a><h3 id="PHP的内存限制-Allowed-memory-size-of-134217728-bytes-exhausted"><a href="#PHP的内存限制-Allowed-memory-size-of-134217728-bytes-exhausted" class="headerlink" title="PHP的内存限制 Allowed memory size of 134217728 bytes exhausted"></a>PHP的内存限制 Allowed memory size of 134217728 bytes exhausted</h3>解释是可用内存已耗尽，这关系到PHP的memory_limit的设置问题。<br>1、修改php.ini<br>memory_limit = 128<br>这种方法需要重启服务器，很显然，此方法对虚拟机有限制。</li>
+</ul>
+<p>2、通过ini_set函数修改配置选项值<br>ini_set (‘memory_limit’, ‘128M’)<br>ini_set (‘memory_limit’, ‘128M’)</p>
+<h2 id="JAVA"><a href="#JAVA" class="headerlink" title="JAVA"></a>JAVA</h2><h3 id="maven打包"><a href="#maven打包" class="headerlink" title="maven打包"></a>maven打包</h3><p>在IDEA右侧找到Maven，找到要发布的项目，展开Lifecycle，找到package，右键Run Maven Build 在项目target文件加下会生产jar包<br>如果有多个配置文件，打包前需要通过spring.profiles.active 指定使用哪个配置文件</p>
  
       <!-- reward -->
-      
-      <div id="reword-out">
-        <div id="reward-btn">
-          打赏
-        </div>
-      </div>
       
     </div>
     
@@ -213,7 +185,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://htr2021.github.io/2021/09/26/%E9%9A%8F%E7%AC%94-%E8%BF%90%E7%BB%B4/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://htr2021.github.io/2021/10/18/%E9%9A%8F%E7%AC%94_php_java/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -226,19 +198,19 @@
    
   <nav class="article-nav">
     
-      <a href="/2021/09/26/mybatis-1/" class="article-nav-link">
+      <a href="/2021/10/18/php-fpm%E7%AE%80%E4%BB%8B/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            mybatis-SQL注入
+            php-fpm简介
           
         </div>
       </a>
     
     
-      <a href="/2021/09/24/mycat%E5%85%A5%E9%97%A8-2/" class="article-nav-link">
+      <a href="/2021/10/18/mycat%E5%85%A5%E9%97%A8-3/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">mycat入门-目录</div>
+        <div class="article-nav-title">mycat入门-安装</div>
       </a>
     
   </nav>
@@ -302,7 +274,7 @@
     <ul>
       <li>
         Copyrights &copy;
-        2021
+        2021-2022
         <i class="ri-heart-fill heart_icon"></i> Htr
       </li>
     </ul>

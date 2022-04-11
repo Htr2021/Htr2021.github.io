@@ -50,6 +50,97 @@
       </tags>
   </entry>
   <entry>
+    <title>mycat入门-安装</title>
+    <url>/2021/10/18/mycat%E5%85%A5%E9%97%A8-3/</url>
+    <content><![CDATA[<p><a href="https://www.yuque.com/ccazhw/gl7qp9/pbegu1">官网-如何安装mycat</a></p>
+<h1 id="docker安装MyCat"><a href="#docker安装MyCat" class="headerlink" title="docker安装MyCat"></a>docker安装MyCat</h1><p>mycat版本1.6.7.x,安装mycat之前需要部署好数据库集群，可参考<a href="https://www.yuque.com/r/goto?url=https://github.com/AlphaYu/Adnc/tree/master/doc/mariadb">mariadb基于GTID主从复制搭建</a></p>
+<h2 id="下载mycat安装包"><a href="#下载mycat安装包" class="headerlink" title="下载mycat安装包"></a>下载mycat安装包</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">新建目录</span></span><br><span class="line">mkdir /root/data/mycat</span><br><span class="line"><span class="meta">#</span><span class="bash">切换目录</span></span><br><span class="line">cd /root/data/mycat</span><br><span class="line"><span class="meta">#</span><span class="bash">下载mycat release1.6.7.6到当前目录</span></span><br><span class="line">wget http://dl.mycat.org.cn/1.6.7.6/20201126013625/Mycat-server-1.6.7.6-release-20201126013625-linux.tar.gz</span><br><span class="line">mv Mycat-server-1.6.7.6-release-20201126013625-linux.tar.gz mycat1.6.7.6.tar.gz</span><br><span class="line"><span class="meta">#</span><span class="bash">解压conf目录到当前目录，因为使用docker直接挂载conf目录会报错，mycat启动时需要依赖conf目录中的文件。</span></span><br><span class="line">tar -zxvf mycat1.6.7.6.tar.gz -C /root/data/ mycat/conf</span><br></pre></td></tr></table></figure>
+<h2 id="编辑配置文件"><a href="#编辑配置文件" class="headerlink" title="编辑配置文件"></a>编辑配置文件</h2><p>调整/root/data/mycat/conf中server.xml 与 schema.xml 两个核心配置文件。</p>
+<ul>
+<li>server.xml<a href="https://www.yuque.com/r/goto?url=https://github.com/AlphaYu/Adnc/blob/master/doc/mycat/server.xml">参考</a></li>
+<li>schema.xml<a href="https://github.com/AlphaYu/Adnc/blob/master/doc/mycat/schema.xml">参考</a></li>
+<li>server.xml 关键节点介绍<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- mycat的账号 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">user</span> <span class="attr">name</span>=<span class="string">&quot;root&quot;</span> <span class="attr">defaultAccount</span>=<span class="string">&quot;true&quot;</span>&gt;</span> </span><br><span class="line">  <span class="comment">&lt;!-- 密码 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span>&gt;</span>alpha.mycat<span class="tag">&lt;/<span class="name">property</span>&gt;</span>  </span><br><span class="line">  <span class="comment">&lt;!-- 该账号可以访问的逻辑库,对应schema.xml文件的schema节点的name--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;schemas&quot;</span>&gt;</span>adnc_usr,adnc_maint,adnc_cus<span class="tag">&lt;/<span class="name">property</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">user</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>schema.xml 关键节点介绍<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot;?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mycat</span>:schema <span class="meta-keyword">SYSTEM</span> <span class="meta-string">&quot;schema.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mycat:schema</span> <span class="attr">xmlns:mycat</span>=<span class="string">&quot;http://io.mycat/&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 配置3个逻辑库--&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">schema</span> <span class="attr">name</span>=<span class="string">&quot;adnc_usr&quot;</span> <span class="attr">checkSQLschema</span>=<span class="string">&quot;true&quot;</span> <span class="attr">sqlMaxLimit</span>=<span class="string">&quot;100&quot;</span> <span class="attr">dataNode</span>=<span class="string">&quot;dn_usr&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">schema</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">schema</span> <span class="attr">name</span>=<span class="string">&quot;adnc_maint&quot;</span> <span class="attr">checkSQLschema</span>=<span class="string">&quot;true&quot;</span> <span class="attr">sqlMaxLimit</span>=<span class="string">&quot;100&quot;</span> <span class="attr">dataNode</span>=<span class="string">&quot;dn_maint&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">schema</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">schema</span> <span class="attr">name</span>=<span class="string">&quot;adnc_cus&quot;</span> <span class="attr">checkSQLschema</span>=<span class="string">&quot;true&quot;</span> <span class="attr">sqlMaxLimit</span>=<span class="string">&quot;100&quot;</span> <span class="attr">dataNode</span>=<span class="string">&quot;dn_cus&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">schema</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 逻辑库对应的真实数据库--&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">dataNode</span> <span class="attr">name</span>=<span class="string">&quot;dn_usr&quot;</span> <span class="attr">dataHost</span>=<span class="string">&quot;dh_adnc&quot;</span> <span class="attr">database</span>=<span class="string">&quot;adnc_usr&quot;</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">dataNode</span> <span class="attr">name</span>=<span class="string">&quot;dn_maint&quot;</span> <span class="attr">dataHost</span>=<span class="string">&quot;dh_adnc&quot;</span> <span class="attr">database</span>=<span class="string">&quot;adnc_maint&quot;</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">dataNode</span> <span class="attr">name</span>=<span class="string">&quot;dn_cus&quot;</span> <span class="attr">dataHost</span>=<span class="string">&quot;dh_adnc&quot;</span> <span class="attr">database</span>=<span class="string">&quot;adnc_cus&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--真实数据库所在的服务器地址，这里配置了1主2从。主服务器(hostM1)宕机会自动切换到(hostS1) --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">dataHost</span> <span class="attr">name</span>=<span class="string">&quot;dh_adnc&quot;</span> <span class="attr">maxCon</span>=<span class="string">&quot;1000&quot;</span> <span class="attr">minCon</span>=<span class="string">&quot;10&quot;</span> <span class="attr">balance</span>=<span class="string">&quot;1&quot;</span> <span class="attr">writeType</span>=<span class="string">&quot;0&quot;</span> <span class="attr">dbType</span>=<span class="string">&quot;mysql&quot;</span> <span class="attr">dbDriver</span>=<span class="string">&quot;native&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">heartbeat</span>&gt;</span>select user()<span class="tag">&lt;/<span class="name">heartbeat</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">writeHost</span> <span class="attr">host</span>=<span class="string">&quot;hostM1&quot;</span> <span class="attr">url</span>=<span class="string">&quot;172.20.0.11:3306&quot;</span> <span class="attr">user</span>=<span class="string">&quot;root&quot;</span> <span class="attr">password</span>=<span class="string">&quot;alpha.abc&quot;</span> &gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">readHost</span> <span class="attr">host</span>=<span class="string">&quot;hostS2&quot;</span> <span class="attr">url</span>=<span class="string">&quot;172.20.0.13:3306&quot;</span> <span class="attr">user</span>=<span class="string">&quot;root&quot;</span> <span class="attr">password</span>=<span class="string">&quot;alpha.abc&quot;</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">writeHost</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">writeHost</span> <span class="attr">host</span>=<span class="string">&quot;hostS1&quot;</span> <span class="attr">url</span>=<span class="string">&quot;172.20.0.12:3306&quot;</span> <span class="attr">user</span>=<span class="string">&quot;root&quot;</span> <span class="attr">password</span>=<span class="string">&quot;alpha.abc&quot;</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">dataHost</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">mycat:schema</span>&gt;</span></span><br></pre></td></tr></table></figure>
+详情配置可参考 <a href="http://www.mycat.org.cn/document/mycat-definitive-guide.pdf">mycat权威指南</a><h2 id="下载dockerfile"><a href="#下载dockerfile" class="headerlink" title="下载dockerfile"></a>下载dockerfile</h2>MyCat官方没有提供docker镜像<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">下载dockerfile文件到当前目录</span></span><br><span class="line">wget https://raw.githubusercontent.com/AlphaYu/Adnc/master/doc/mycat/Dockerfile</span><br><span class="line"><span class="meta">#</span><span class="bash">如果下载失败，请手动下载并上传到/root/data/mycat目录，文件地址如下</span></span><br><span class="line"><span class="meta">#</span><span class="bash">https://github.com/AlphaYu/Adnc/blob/master/doc/mycat/Dockerfile</span></span><br></pre></td></tr></table></figure>
+或者粘贴<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">FROM openjdk:8-jdk-stretch</span><br><span class="line"></span><br><span class="line">ADD http://dl.mycat.org.cn/1.6.5/Mycat-server-1.6.5-release-20180122220033-linux.tar.gz /usr/local</span><br><span class="line">RUN cd /usr/local &amp;&amp; tar -zxvf Mycat-server-1.6.5-release-20180122220033-linux.tar.gz &amp;&amp; ls -lna</span><br><span class="line"></span><br><span class="line">ENV MYCAT_HOME=/usr/local/mycat</span><br><span class="line">WORKDIR /usr/local/mycat</span><br><span class="line"></span><br><span class="line">ENV TZ Asia/Shanghai</span><br><span class="line"></span><br><span class="line">EXPOSE 8066 9066</span><br><span class="line"></span><br><span class="line">CMD [&quot;/usr/local/mycat/bin/mycat&quot;, &quot;console&quot;,&quot;&amp;&quot;]</span><br></pre></td></tr></table></figure>
+<h2 id="创建mycat镜像和容器"><a href="#创建mycat镜像和容器" class="headerlink" title="创建mycat镜像和容器"></a>创建mycat镜像和容器</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">创建镜像文件</span></span><br><span class="line">docker build -t mycat:1.6.7.6 .</span><br><span class="line"><span class="meta">#</span><span class="bash">运行容器并挂载配置文件目录与日志目录</span></span><br><span class="line"><span class="meta">#</span><span class="bash">-v /root/data/mycat/conf:/usr/<span class="built_in">local</span>/mycat/conf 挂载配置文件目录</span></span><br><span class="line"><span class="meta">#</span><span class="bash">-v /root/data/mycat/logs:/usr/<span class="built_in">local</span>/mycat/logs 挂载日志目录</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> --network=adnc_net --ip 172.20.0.16  adnc_net是自建的bridge网络，如果使用docker默认网络，不需要这段</span></span><br><span class="line">docker run --privileged=true -p 8066:8066 -p 9066:9066 --name mycat -v /root/data/mycat/conf:/usr/local/mycat/conf -v /root/data/mycat/logs:/usr/local/mycat/logs --network=adnc_net --ip 172.20.0.16 -d mycat:1.6.7.6</span><br></pre></td></tr></table></figure>
+<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 进入mariadb/mysql容器</span></span><br><span class="line">docker exec -it mariadb01 /bin/bash</span><br><span class="line"><span class="meta">#</span><span class="bash"> 登录mycat,172.20.0.16 是指mycat容器的Ip地址，如果容器没有指定固定Ip，你的可能不一样，请注意。</span></span><br><span class="line">mysql -uroot -palpha.mycat -P8066 -h172.20.0.16</span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示所有数据库</span></span><br><span class="line">show databases;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 多次执行下面的sql,观察hostname的变化。</span></span><br><span class="line">select @@hostname;</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>技术</category>
+        <category>MyCat</category>
+      </categories>
+      <tags>
+        <tag>MyCat</tag>
+        <tag>数据库</tag>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>php-fpm简介</title>
+    <url>/2021/10/18/php-fpm%E7%AE%80%E4%BB%8B/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>随笔-Docker</title>
+    <url>/2021/10/20/%E9%9A%8F%E7%AC%94-Docker/</url>
+    <content><![CDATA[<h3 id="docker-build"><a href="#docker-build" class="headerlink" title="docker build"></a>docker build</h3><p>运行docker build的时候需要在新建的文件夹下进行，因为build的同时会将当前目录内容发送到Dockerdaemon<br><code>Sending build context to Docker daemon 40.309 GB</code><br>会造成时间和流量的损失</p>
+<h3 id="添加用户到docker用户组"><a href="#添加用户到docker用户组" class="headerlink" title="添加用户到docker用户组"></a>添加用户到docker用户组</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 添加用户(默认会在/home/下创建你的文件夹)</span></span><br><span class="line">useradd htr</span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置用户密码</span></span><br><span class="line">passwd htr</span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加docker用户组，一般已存在，不需要执行</span></span><br><span class="line">cat /etc/group</span><br><span class="line">sudo groupadd docker</span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加用户到工作组</span></span><br><span class="line">usermod -a -G docker htr</span><br><span class="line"><span class="meta">#</span><span class="bash"> 测试是否可以使用docker(需要重新登陆用户)</span></span><br><span class="line">docker version</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>运维</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>随笔-习惯</title>
+    <url>/2021/10/20/%E9%9A%8F%E7%AC%94-%E4%B9%A0%E6%83%AF/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>随笔-常识</title>
+    <url>/2021/10/18/%E9%9A%8F%E7%AC%94-%E5%B8%B8%E8%AF%86/</url>
+    <content><![CDATA[<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="word文件对比"><a href="#word文件对比" class="headerlink" title="word文件对比"></a>word文件对比</h3><p><a href="https://www.scootersoftware.com/download.php">Beyond Compare</a><br>支持常用的word和pdf文件的对比，会帮你高亮标出版本差异。<br>需要自己保留文件的版本，然后手动上传进行对比，正版收费，但是网上可以down到破解版<br><a href="https://www.cnblogs.com/xifengxixia/p/11051718.html">破解方法</a><br>方法1：</p>
+<blockquote>
+<p>安装目录下找到 BCUnrar.dll 重命名</p>
+</blockquote>
+<p>方法2：</p>
+<blockquote>
+<p>win+R regedit<br>删除 HKEY_CURRENT_USER\Software\Scooter Software\Beyond Compare 4\CacheId</p>
+</blockquote>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><h3 id="耦合度"><a href="#耦合度" class="headerlink" title="耦合度"></a>耦合度</h3><p>耦合度就是某模块（类）与其它模块（类）之间的关联、感知和依赖的程度，是衡量代码独立性的一个指标，也是软件工程设计及编码质量评价的一个标准。<br><a href="https://zhuanlan.zhihu.com/p/112580655">传送门</a></p>
+<h3 id="端口转发和端口映射"><a href="#端口转发和端口映射" class="headerlink" title="端口转发和端口映射"></a>端口转发和端口映射</h3>]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+        <tag>word</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>随笔-运维(PHP||JAVA)</title>
+    <url>/2021/10/18/%E9%9A%8F%E7%AC%94_php_java/</url>
+    <content><![CDATA[<h2 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h2><h3 id="Primary-script-unknown"><a href="#Primary-script-unknown" class="headerlink" title="Primary script unknown"></a>Primary script unknown</h3><p>问题再现：配置完PHP-nginx环境之后File not found,查阅日志后有Primary script unknown问题<br>问题原因：php-fpm找不到php文件,php-fpm没有权限读取和执行文件<br>问题解决：</p>
+<ul>
+<li>找不到文件导致：nginx配置<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">   root        /var/www/html/sns;</span><br><span class="line">   index  index.html index.htm index.php;</span><br><span class="line">location ~ \.php$ &#123;</span><br><span class="line">	fastcgi_intercept_errors on;</span><br><span class="line">	fastcgi_pass 172.20.0.8:9000; </span><br><span class="line">	fastcgi_index  index.php;</span><br><span class="line">	fastcgi_param  SCRIPT_FILENAME    $document_root$fastcgi_script_name;</span><br><span class="line">	include   fastcgi_params;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+其中，root目录写容器中的目录</li>
+<li>权限导致：<a href="https://www.jb51.net/article/168244.htm">参考</a><h3 id="PHP的内存限制-Allowed-memory-size-of-134217728-bytes-exhausted"><a href="#PHP的内存限制-Allowed-memory-size-of-134217728-bytes-exhausted" class="headerlink" title="PHP的内存限制 Allowed memory size of 134217728 bytes exhausted"></a>PHP的内存限制 Allowed memory size of 134217728 bytes exhausted</h3>解释是可用内存已耗尽，这关系到PHP的memory_limit的设置问题。<br>1、修改php.ini<br>memory_limit = 128<br>这种方法需要重启服务器，很显然，此方法对虚拟机有限制。</li>
+</ul>
+<p>2、通过ini_set函数修改配置选项值<br>ini_set (‘memory_limit’, ‘128M’)<br>ini_set (‘memory_limit’, ‘128M’)</p>
+<h2 id="JAVA"><a href="#JAVA" class="headerlink" title="JAVA"></a>JAVA</h2><h3 id="maven打包"><a href="#maven打包" class="headerlink" title="maven打包"></a>maven打包</h3><p>在IDEA右侧找到Maven，找到要发布的项目，展开Lifecycle，找到package，右键Run Maven Build 在项目target文件加下会生产jar包<br>如果有多个配置文件，打包前需要通过spring.profiles.active 指定使用哪个配置文件</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>运维</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>RabbitMQ初闻-简介</title>
     <url>/2021/09/02/RabbitMQ%E5%88%9D%E9%97%BB-1/</url>
     <content><![CDATA[<h3 id="什么是消息中间件"><a href="#什么是消息中间件" class="headerlink" title="什么是消息中间件"></a>什么是消息中间件</h3><p>分布式系统中的一种消息传递装置</p>
@@ -160,9 +251,9 @@
         <category>docker</category>
       </categories>
       <tags>
+        <tag>运维</tag>
         <tag>docker</tag>
         <tag>docker-compose</tag>
-        <tag>运维</tag>
       </tags>
   </entry>
   <entry>
@@ -200,8 +291,8 @@
         <category>docker</category>
       </categories>
       <tags>
-        <tag>docker</tag>
         <tag>运维</tag>
+        <tag>docker</tag>
         <tag>docker build</tag>
         <tag>dockerfile</tag>
       </tags>
@@ -274,8 +365,8 @@
         <category>docker</category>
       </categories>
       <tags>
-        <tag>docker</tag>
         <tag>运维</tag>
+        <tag>docker</tag>
       </tags>
   </entry>
   <entry>
@@ -321,8 +412,8 @@
         <category>docker</category>
       </categories>
       <tags>
-        <tag>docker</tag>
         <tag>运维</tag>
+        <tag>docker</tag>
         <tag>network</tag>
       </tags>
   </entry>
@@ -356,9 +447,9 @@
         <category>docker</category>
       </categories>
       <tags>
+        <tag>运维</tag>
         <tag>docker</tag>
         <tag>docker-compose</tag>
-        <tag>运维</tag>
         <tag>ftp</tag>
         <tag>vsftpd</tag>
       </tags>
@@ -672,9 +763,9 @@ docker images              # 查看安装镜像</li>
         <category>docker</category>
       </categories>
       <tags>
+        <tag>运维</tag>
         <tag>docker</tag>
         <tag>docker-compose</tag>
-        <tag>运维</tag>
         <tag>虚拟机</tag>
         <tag>Hyper-V</tag>
         <tag>linux</tag>
@@ -807,97 +898,6 @@ docker images              # 查看安装镜像</li>
 <li>不用的shell及时关掉，避免在错误的服务器上进行操作</li>
 <li>执行脚本时看好变量</li>
 </ol>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>运维</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>mycat入门-安装</title>
-    <url>/2021/10/18/mycat%E5%85%A5%E9%97%A8-3/</url>
-    <content><![CDATA[<p><a href="https://www.yuque.com/ccazhw/gl7qp9/pbegu1">官网-如何安装mycat</a></p>
-<h1 id="docker安装MyCat"><a href="#docker安装MyCat" class="headerlink" title="docker安装MyCat"></a>docker安装MyCat</h1><p>mycat版本1.6.7.x,安装mycat之前需要部署好数据库集群，可参考<a href="https://www.yuque.com/r/goto?url=https://github.com/AlphaYu/Adnc/tree/master/doc/mariadb">mariadb基于GTID主从复制搭建</a></p>
-<h2 id="下载mycat安装包"><a href="#下载mycat安装包" class="headerlink" title="下载mycat安装包"></a>下载mycat安装包</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">新建目录</span></span><br><span class="line">mkdir /root/data/mycat</span><br><span class="line"><span class="meta">#</span><span class="bash">切换目录</span></span><br><span class="line">cd /root/data/mycat</span><br><span class="line"><span class="meta">#</span><span class="bash">下载mycat release1.6.7.6到当前目录</span></span><br><span class="line">wget http://dl.mycat.org.cn/1.6.7.6/20201126013625/Mycat-server-1.6.7.6-release-20201126013625-linux.tar.gz</span><br><span class="line">mv Mycat-server-1.6.7.6-release-20201126013625-linux.tar.gz mycat1.6.7.6.tar.gz</span><br><span class="line"><span class="meta">#</span><span class="bash">解压conf目录到当前目录，因为使用docker直接挂载conf目录会报错，mycat启动时需要依赖conf目录中的文件。</span></span><br><span class="line">tar -zxvf mycat1.6.7.6.tar.gz -C /root/data/ mycat/conf</span><br></pre></td></tr></table></figure>
-<h2 id="编辑配置文件"><a href="#编辑配置文件" class="headerlink" title="编辑配置文件"></a>编辑配置文件</h2><p>调整/root/data/mycat/conf中server.xml 与 schema.xml 两个核心配置文件。</p>
-<ul>
-<li>server.xml<a href="https://www.yuque.com/r/goto?url=https://github.com/AlphaYu/Adnc/blob/master/doc/mycat/server.xml">参考</a></li>
-<li>schema.xml<a href="https://github.com/AlphaYu/Adnc/blob/master/doc/mycat/schema.xml">参考</a></li>
-<li>server.xml 关键节点介绍<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- mycat的账号 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">user</span> <span class="attr">name</span>=<span class="string">&quot;root&quot;</span> <span class="attr">defaultAccount</span>=<span class="string">&quot;true&quot;</span>&gt;</span> </span><br><span class="line">  <span class="comment">&lt;!-- 密码 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span>&gt;</span>alpha.mycat<span class="tag">&lt;/<span class="name">property</span>&gt;</span>  </span><br><span class="line">  <span class="comment">&lt;!-- 该账号可以访问的逻辑库,对应schema.xml文件的schema节点的name--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;schemas&quot;</span>&gt;</span>adnc_usr,adnc_maint,adnc_cus<span class="tag">&lt;/<span class="name">property</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">user</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li>schema.xml 关键节点介绍<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot;?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mycat</span>:schema <span class="meta-keyword">SYSTEM</span> <span class="meta-string">&quot;schema.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mycat:schema</span> <span class="attr">xmlns:mycat</span>=<span class="string">&quot;http://io.mycat/&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 配置3个逻辑库--&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">schema</span> <span class="attr">name</span>=<span class="string">&quot;adnc_usr&quot;</span> <span class="attr">checkSQLschema</span>=<span class="string">&quot;true&quot;</span> <span class="attr">sqlMaxLimit</span>=<span class="string">&quot;100&quot;</span> <span class="attr">dataNode</span>=<span class="string">&quot;dn_usr&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">schema</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">schema</span> <span class="attr">name</span>=<span class="string">&quot;adnc_maint&quot;</span> <span class="attr">checkSQLschema</span>=<span class="string">&quot;true&quot;</span> <span class="attr">sqlMaxLimit</span>=<span class="string">&quot;100&quot;</span> <span class="attr">dataNode</span>=<span class="string">&quot;dn_maint&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">schema</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">schema</span> <span class="attr">name</span>=<span class="string">&quot;adnc_cus&quot;</span> <span class="attr">checkSQLschema</span>=<span class="string">&quot;true&quot;</span> <span class="attr">sqlMaxLimit</span>=<span class="string">&quot;100&quot;</span> <span class="attr">dataNode</span>=<span class="string">&quot;dn_cus&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">schema</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 逻辑库对应的真实数据库--&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">dataNode</span> <span class="attr">name</span>=<span class="string">&quot;dn_usr&quot;</span> <span class="attr">dataHost</span>=<span class="string">&quot;dh_adnc&quot;</span> <span class="attr">database</span>=<span class="string">&quot;adnc_usr&quot;</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">dataNode</span> <span class="attr">name</span>=<span class="string">&quot;dn_maint&quot;</span> <span class="attr">dataHost</span>=<span class="string">&quot;dh_adnc&quot;</span> <span class="attr">database</span>=<span class="string">&quot;adnc_maint&quot;</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">dataNode</span> <span class="attr">name</span>=<span class="string">&quot;dn_cus&quot;</span> <span class="attr">dataHost</span>=<span class="string">&quot;dh_adnc&quot;</span> <span class="attr">database</span>=<span class="string">&quot;adnc_cus&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--真实数据库所在的服务器地址，这里配置了1主2从。主服务器(hostM1)宕机会自动切换到(hostS1) --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">dataHost</span> <span class="attr">name</span>=<span class="string">&quot;dh_adnc&quot;</span> <span class="attr">maxCon</span>=<span class="string">&quot;1000&quot;</span> <span class="attr">minCon</span>=<span class="string">&quot;10&quot;</span> <span class="attr">balance</span>=<span class="string">&quot;1&quot;</span> <span class="attr">writeType</span>=<span class="string">&quot;0&quot;</span> <span class="attr">dbType</span>=<span class="string">&quot;mysql&quot;</span> <span class="attr">dbDriver</span>=<span class="string">&quot;native&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">heartbeat</span>&gt;</span>select user()<span class="tag">&lt;/<span class="name">heartbeat</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">writeHost</span> <span class="attr">host</span>=<span class="string">&quot;hostM1&quot;</span> <span class="attr">url</span>=<span class="string">&quot;172.20.0.11:3306&quot;</span> <span class="attr">user</span>=<span class="string">&quot;root&quot;</span> <span class="attr">password</span>=<span class="string">&quot;alpha.abc&quot;</span> &gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">readHost</span> <span class="attr">host</span>=<span class="string">&quot;hostS2&quot;</span> <span class="attr">url</span>=<span class="string">&quot;172.20.0.13:3306&quot;</span> <span class="attr">user</span>=<span class="string">&quot;root&quot;</span> <span class="attr">password</span>=<span class="string">&quot;alpha.abc&quot;</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">writeHost</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">writeHost</span> <span class="attr">host</span>=<span class="string">&quot;hostS1&quot;</span> <span class="attr">url</span>=<span class="string">&quot;172.20.0.12:3306&quot;</span> <span class="attr">user</span>=<span class="string">&quot;root&quot;</span> <span class="attr">password</span>=<span class="string">&quot;alpha.abc&quot;</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">dataHost</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">mycat:schema</span>&gt;</span></span><br></pre></td></tr></table></figure>
-详情配置可参考 <a href="http://www.mycat.org.cn/document/mycat-definitive-guide.pdf">mycat权威指南</a><h2 id="下载dockerfile"><a href="#下载dockerfile" class="headerlink" title="下载dockerfile"></a>下载dockerfile</h2>MyCat官方没有提供docker镜像<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">下载dockerfile文件到当前目录</span></span><br><span class="line">wget https://raw.githubusercontent.com/AlphaYu/Adnc/master/doc/mycat/Dockerfile</span><br><span class="line"><span class="meta">#</span><span class="bash">如果下载失败，请手动下载并上传到/root/data/mycat目录，文件地址如下</span></span><br><span class="line"><span class="meta">#</span><span class="bash">https://github.com/AlphaYu/Adnc/blob/master/doc/mycat/Dockerfile</span></span><br></pre></td></tr></table></figure>
-或者粘贴<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">FROM openjdk:8-jdk-stretch</span><br><span class="line"></span><br><span class="line">ADD http://dl.mycat.org.cn/1.6.5/Mycat-server-1.6.5-release-20180122220033-linux.tar.gz /usr/local</span><br><span class="line">RUN cd /usr/local &amp;&amp; tar -zxvf Mycat-server-1.6.5-release-20180122220033-linux.tar.gz &amp;&amp; ls -lna</span><br><span class="line"></span><br><span class="line">ENV MYCAT_HOME=/usr/local/mycat</span><br><span class="line">WORKDIR /usr/local/mycat</span><br><span class="line"></span><br><span class="line">ENV TZ Asia/Shanghai</span><br><span class="line"></span><br><span class="line">EXPOSE 8066 9066</span><br><span class="line"></span><br><span class="line">CMD [&quot;/usr/local/mycat/bin/mycat&quot;, &quot;console&quot;,&quot;&amp;&quot;]</span><br></pre></td></tr></table></figure>
-<h2 id="创建mycat镜像和容器"><a href="#创建mycat镜像和容器" class="headerlink" title="创建mycat镜像和容器"></a>创建mycat镜像和容器</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">创建镜像文件</span></span><br><span class="line">docker build -t mycat:1.6.7.6 .</span><br><span class="line"><span class="meta">#</span><span class="bash">运行容器并挂载配置文件目录与日志目录</span></span><br><span class="line"><span class="meta">#</span><span class="bash">-v /root/data/mycat/conf:/usr/<span class="built_in">local</span>/mycat/conf 挂载配置文件目录</span></span><br><span class="line"><span class="meta">#</span><span class="bash">-v /root/data/mycat/logs:/usr/<span class="built_in">local</span>/mycat/logs 挂载日志目录</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> --network=adnc_net --ip 172.20.0.16  adnc_net是自建的bridge网络，如果使用docker默认网络，不需要这段</span></span><br><span class="line">docker run --privileged=true -p 8066:8066 -p 9066:9066 --name mycat -v /root/data/mycat/conf:/usr/local/mycat/conf -v /root/data/mycat/logs:/usr/local/mycat/logs --network=adnc_net --ip 172.20.0.16 -d mycat:1.6.7.6</span><br></pre></td></tr></table></figure>
-<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 进入mariadb/mysql容器</span></span><br><span class="line">docker exec -it mariadb01 /bin/bash</span><br><span class="line"><span class="meta">#</span><span class="bash"> 登录mycat,172.20.0.16 是指mycat容器的Ip地址，如果容器没有指定固定Ip，你的可能不一样，请注意。</span></span><br><span class="line">mysql -uroot -palpha.mycat -P8066 -h172.20.0.16</span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示所有数据库</span></span><br><span class="line">show databases;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 多次执行下面的sql,观察hostname的变化。</span></span><br><span class="line">select @@hostname;</span><br></pre></td></tr></table></figure></li>
-</ul>
-]]></content>
-      <categories>
-        <category>技术</category>
-        <category>MyCat</category>
-      </categories>
-      <tags>
-        <tag>MyCat</tag>
-        <tag>数据库</tag>
-        <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>php-fpm简介</title>
-    <url>/2021/10/18/php-fpm%E7%AE%80%E4%BB%8B/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>随笔-Docker</title>
-    <url>/2021/10/20/%E9%9A%8F%E7%AC%94-Docker/</url>
-    <content><![CDATA[<h3 id="docker-build"><a href="#docker-build" class="headerlink" title="docker build"></a>docker build</h3><p>运行docker build的时候需要在新建的文件夹下进行，因为build的同时会将当前目录内容发送到Dockerdaemon<br><code>Sending build context to Docker daemon 40.309 GB</code><br>会造成时间和流量的损失</p>
-<h3 id="添加用户到docker用户组"><a href="#添加用户到docker用户组" class="headerlink" title="添加用户到docker用户组"></a>添加用户到docker用户组</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 添加用户(默认会在/home/下创建你的文件夹)</span></span><br><span class="line">useradd htr</span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置用户密码</span></span><br><span class="line">passwd htr</span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加docker用户组，一般已存在，不需要执行</span></span><br><span class="line">cat /etc/group</span><br><span class="line">sudo groupadd docker</span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加用户到工作组</span></span><br><span class="line">usermod -a -G docker htr</span><br><span class="line"><span class="meta">#</span><span class="bash"> 测试是否可以使用docker(需要重新登陆用户)</span></span><br><span class="line">docker version</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>运维</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>随笔-习惯</title>
-    <url>/2021/10/20/%E9%9A%8F%E7%AC%94-%E4%B9%A0%E6%83%AF/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>随笔-常识</title>
-    <url>/2021/10/18/%E9%9A%8F%E7%AC%94-%E5%B8%B8%E8%AF%86/</url>
-    <content><![CDATA[<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="word文件对比"><a href="#word文件对比" class="headerlink" title="word文件对比"></a>word文件对比</h3><p><a href="https://www.scootersoftware.com/download.php">Beyond Compare</a><br>支持常用的word和pdf文件的对比，会帮你高亮标出版本差异。<br>需要自己保留文件的版本，然后手动上传进行对比，正版收费，但是网上可以down到破解版<br><a href="https://www.cnblogs.com/xifengxixia/p/11051718.html">破解方法</a><br>方法1：</p>
-<blockquote>
-<p>安装目录下找到 BCUnrar.dll 重命名</p>
-</blockquote>
-<p>方法2：</p>
-<blockquote>
-<p>win+R regedit<br>删除 HKEY_CURRENT_USER\Software\Scooter Software\Beyond Compare 4\CacheId</p>
-</blockquote>
-<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><h3 id="耦合度"><a href="#耦合度" class="headerlink" title="耦合度"></a>耦合度</h3><p>耦合度就是某模块（类）与其它模块（类）之间的关联、感知和依赖的程度，是衡量代码独立性的一个指标，也是软件工程设计及编码质量评价的一个标准。<br><a href="https://zhuanlan.zhihu.com/p/112580655">传送门</a></p>
-<h3 id="端口转发和端口映射"><a href="#端口转发和端口映射" class="headerlink" title="端口转发和端口映射"></a>端口转发和端口映射</h3>]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>数据库</tag>
-        <tag>word</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>随笔-运维(PHP||JAVA)</title>
-    <url>/2021/10/18/%E9%9A%8F%E7%AC%94_php_java/</url>
-    <content><![CDATA[<h2 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h2><h3 id="Primary-script-unknown"><a href="#Primary-script-unknown" class="headerlink" title="Primary script unknown"></a>Primary script unknown</h3><p>问题再现：配置完PHP-nginx环境之后File not found,查阅日志后有Primary script unknown问题<br>问题原因：php-fpm找不到php文件,php-fpm没有权限读取和执行文件<br>问题解决：</p>
-<ul>
-<li>找不到文件导致：nginx配置<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">   root        /var/www/html/sns;</span><br><span class="line">   index  index.html index.htm index.php;</span><br><span class="line">location ~ \.php$ &#123;</span><br><span class="line">	fastcgi_intercept_errors on;</span><br><span class="line">	fastcgi_pass 172.20.0.8:9000; </span><br><span class="line">	fastcgi_index  index.php;</span><br><span class="line">	fastcgi_param  SCRIPT_FILENAME    $document_root$fastcgi_script_name;</span><br><span class="line">	include   fastcgi_params;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-其中，root目录写容器中的目录</li>
-<li>权限导致：<a href="https://www.jb51.net/article/168244.htm">参考</a><h3 id="PHP的内存限制-Allowed-memory-size-of-134217728-bytes-exhausted"><a href="#PHP的内存限制-Allowed-memory-size-of-134217728-bytes-exhausted" class="headerlink" title="PHP的内存限制 Allowed memory size of 134217728 bytes exhausted"></a>PHP的内存限制 Allowed memory size of 134217728 bytes exhausted</h3>解释是可用内存已耗尽，这关系到PHP的memory_limit的设置问题。<br>1、修改php.ini<br>memory_limit = 128<br>这种方法需要重启服务器，很显然，此方法对虚拟机有限制。</li>
-</ul>
-<p>2、通过ini_set函数修改配置选项值<br>ini_set (‘memory_limit’, ‘128M’)<br>ini_set (‘memory_limit’, ‘128M’)</p>
-<h2 id="JAVA"><a href="#JAVA" class="headerlink" title="JAVA"></a>JAVA</h2><h3 id="maven打包"><a href="#maven打包" class="headerlink" title="maven打包"></a>maven打包</h3><p>在IDEA右侧找到Maven，找到要发布的项目，展开Lifecycle，找到package，右键Run Maven Build 在项目target文件加下会生产jar包<br>如果有多个配置文件，打包前需要通过spring.profiles.active 指定使用哪个配置文件</p>
 ]]></content>
       <categories>
         <category>随笔</category>
@@ -1137,20 +1137,6 @@ docker images              # 查看安装镜像</li>
       </tags>
   </entry>
   <entry>
-    <title>xxlJob</title>
-    <url>/2022/01/24/xxlJob/</url>
-    <content><![CDATA[<p>原文:<a href="https://www.xuxueli.com/xxl-job/">https://www.xuxueli.com/xxl-job/</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-        <category>xxlJob</category>
-      </categories>
-      <tags>
-        <tag>xxlJob</tag>
-        <tag>分部署任务调度</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>mysql-GROUP_CONCAT函数实现一对多，按一搜索</title>
     <url>/2022/04/11/mysql-GROUP-CONCAT%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0%E4%B8%80%E5%AF%B9%E5%A4%9A%EF%BC%8C%E6%8C%89%E4%B8%80%E6%90%9C%E7%B4%A2/</url>
     <content><![CDATA[<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>背景：在某个界面上，需要显示随访列表，并且这次随访拥有多种用药的依从性<br>需求：我希望用一条sql语句查出我想要的结果<br>难点：一般的join会按一对多中的多为记录条数，但这里希望按一，因为会有分页排序等需求<br>解决方法</p>
@@ -1176,6 +1162,20 @@ docker images              # 查看安装镜像</li>
       </categories>
       <tags>
         <tag>架构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>xxlJob</title>
+    <url>/2022/01/24/xxlJob/</url>
+    <content><![CDATA[<p>原文:<a href="https://www.xuxueli.com/xxl-job/">https://www.xuxueli.com/xxl-job/</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+        <category>xxlJob</category>
+      </categories>
+      <tags>
+        <tag>xxlJob</tag>
+        <tag>分部署任务调度</tag>
       </tags>
   </entry>
   <entry>

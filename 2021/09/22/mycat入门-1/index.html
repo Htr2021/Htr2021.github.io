@@ -204,7 +204,9 @@
 <li>存在单库(单表)性能瓶颈</li>
 <li>事务处理复杂</li>
 </ul>
-<h5 id="水平切分"><a href="#水平切分" class="headerlink" title="水平切分"></a>水平切分</h5><p><strong>将同一表中的不同数据切分到不同服务中</strong><br><img src="img.png" alt="水平切分"><br>常见拆分规则：</p>
+<h5 id="水平切分"><a href="#水平切分" class="headerlink" title="水平切分"></a>水平切分</h5><p><strong>将同一表中的不同数据切分到不同服务中</strong></p>
+<p><img src="/2021/09/22/mycat%E5%85%A5%E9%97%A8-1/img.png" alt="水平切分"></p>
+<p>常见拆分规则：</p>
 <ol>
 <li>按ID求模</li>
 <li>按时间求模</li>
@@ -246,7 +248,7 @@
 <p><strong>对DBA：</strong>MyCat就是MySQL Server，而MyCat后面连接的MySQL Server，就好象是MySQL的存储引擎,如InnoDB，MyISAM等，因此，MyCat本身并不存储数据，数据是在后端的MySQL上存储的，因此数据可靠性以及事务等都是MySQL保证的，简单的说，MyCat就是MySQL最佳伴侣，它在一定程度上让MySQL拥有了能跟Oracle PK的能力</p>
 <p><strong>对软件工程师：</strong>MyCat就是一个近似等于MySQL的数据库服务器，你可以用连接MySQL的方式去连接MyCat（除了端口不同，默认的MyCat端口是8066而非MySQL的3306，因此需要在连接字符串上增加端口信息），大多数情况下，可以用你熟悉的对象映射框架使用MyCat，但建议对于分片表，尽量使用基础的SQL语句，因为这样能达到最佳性能，特别是几千万甚至几百亿条记录的情况下。</p>
 <p><strong>对架构师：</strong>MyCat是一个强大的数据库中间件，不仅仅可以用作读写分离、以及分表分库、容灾备份，而且可以用于多租户应用开发、云平台基础设施、让你的架构具备很强的适应性和灵活性，借助于即将发布的MyCat智能优化模块，系统的数据访问瓶颈和热点一目了然，根据这些统计分析数据，你可以自动或手工调整后端存储，将不同的表映射到不同存储引擎上，而整个应用的代码一行也不用改变。</p>
-<h3 id="MyCat原理"><a href="#MyCat原理" class="headerlink" title="MyCat原理"></a>MyCat原理</h3><p>拦截用户发送过来的SQL语句，首先对SQL语句做了一些特定的分析：如<strong>分片分析、路由分析、读写分离分析、缓存分析等，然后将此SQL发往后端的真实数据库，并将返回的结果做适当的处理，最终再返回给用户</strong>。<br><img src="image008.png" alt="MyCat原理"><br>当Mycat收到一个SQL时，会<strong>先解析这个SQL，查找涉及到的表，然后看此表的定义，如果有分片规则，则获取到SQL里分片字段的值，并匹配分片函数，得到该SQL对应的分片列表，然后将SQL发往这些分片去执行，最后收集和处理所有分片返回的结果数据，并输出到客户端</strong>。以select * from Orders where prov=?语句为例，查到prov=wuhan，按照分片函数，wuhan返回dn1，于是SQL就发给了MySQL1，去取DB1上的查询结果，并返回给用户。<br>如果上述SQL改为select * from Orders where prov in (‘wuhan’,‘beijing’)，那么，SQL就会发给MySQL1与MySQL2去执行，然后结果集合并后输出给用户。但通常业务中我们的SQL会有Order By 以及Limit翻页语法，此时就涉及到结果集在Mycat端的二次处理，这部分的代码也比较复杂，而最复杂的则属两个表的Join问题，为此，Mycat提出了创新性的ER分片、全局表、HBT（Human Brain Tech)人工智能的Catlet、以及结合Storm/Spark引擎等十八般武艺的解决办法，从而成为目前业界最强大的方案，这就是开源的力量！</p>
+<h3 id="MyCat原理"><a href="#MyCat原理" class="headerlink" title="MyCat原理"></a>MyCat原理</h3><p>拦截用户发送过来的SQL语句，首先对SQL语句做了一些特定的分析：如<strong>分片分析、路由分析、读写分离分析、缓存分析等，然后将此SQL发往后端的真实数据库，并将返回的结果做适当的处理，最终再返回给用户</strong>。<br><img src="/2021/09/22/mycat%E5%85%A5%E9%97%A8-1/image008.png" alt="MyCat原理"><br>当Mycat收到一个SQL时，会<strong>先解析这个SQL，查找涉及到的表，然后看此表的定义，如果有分片规则，则获取到SQL里分片字段的值，并匹配分片函数，得到该SQL对应的分片列表，然后将SQL发往这些分片去执行，最后收集和处理所有分片返回的结果数据，并输出到客户端</strong>。以select * from Orders where prov=?语句为例，查到prov=wuhan，按照分片函数，wuhan返回dn1，于是SQL就发给了MySQL1，去取DB1上的查询结果，并返回给用户。<br>如果上述SQL改为select * from Orders where prov in (‘wuhan’,‘beijing’)，那么，SQL就会发给MySQL1与MySQL2去执行，然后结果集合并后输出给用户。但通常业务中我们的SQL会有Order By 以及Limit翻页语法，此时就涉及到结果集在Mycat端的二次处理，这部分的代码也比较复杂，而最复杂的则属两个表的Join问题，为此，Mycat提出了创新性的ER分片、全局表、HBT（Human Brain Tech)人工智能的Catlet、以及结合Storm/Spark引擎等十八般武艺的解决办法，从而成为目前业界最强大的方案，这就是开源的力量！</p>
 <h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><p>Mycat发展到现在，适用的场景已经很丰富，而且不断有新用户给出新的创新性的方案，以下是几个典型的应用场景：</p>
 <ul>
 <li>单纯的读写分离，此时配置最为简单，支持读写分离，主从切换；</li>
@@ -263,7 +265,6 @@
 <p>垂直切分：将数据库和表放到不同的服务<br>水平切分：将一个表中的数据放到不同节点上</p>
 </blockquote>
 </li>
-<li></li>
 </ol>
  
       <!-- reward -->

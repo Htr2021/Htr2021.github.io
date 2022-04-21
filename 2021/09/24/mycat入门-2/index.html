@@ -113,7 +113,7 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="MyCat目录结构"><a href="#MyCat目录结构" class="headerlink" title="MyCat目录结构"></a>MyCat目录结构</h2><p><img src="image004.png"><br>目录解释如下：</p>
+  <h2 id="MyCat目录结构"><a href="#MyCat目录结构" class="headerlink" title="MyCat目录结构"></a>MyCat目录结构</h2><p><img src="/2021/09/24/mycat%E5%85%A5%E9%97%A8-2/image004.png"><br>目录解释如下：</p>
 <p><strong>bin 程序目录</strong>，存放了window版本和linux版本，除了提供封装成服务的版本之外，也提供了nowrap的shell脚本命令，方便选择和修改，进入到bin目录：<br>Linux下运行：./mycat console,首先要chmod +x *<br>注：mycat支持的命令{ console | start | stop | restart | status | dump }</p>
 <p><strong>conf目录下存放配置文件</strong>，server.xml是Mycat服务器参数调整和用户授权的配置文件，schema.xml是逻辑库定义和表以及分片定义的配置文件，rule.xml是分片规则的配置文件，分片规则的具体一些参数信息单独存放为文件，也在这个目录下，配置文件修改，需要重启Mycat或者通过9066端口reload.</p>
 <p><strong>lib目录下主要存放mycat依赖的一些jar文件.</strong></p>

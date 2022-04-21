@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>随笔-架构1 |  时光荏苒</title>
+      <title>随笔-架构 |  时光荏苒</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -69,7 +69,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  随笔-架构1
+  随笔-架构
 </h1>
  
 
@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">384</span>
         </span>
     </span>
 
@@ -105,13 +105,34 @@
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <h2 id="新增需求时的代码构建"><a href="#新增需求时的代码构建" class="headerlink" title="新增需求时的代码构建"></a>新增需求时的代码构建</h2><p><strong>背景：</strong> 在某项目中，在普通患者的基础上，添加了特殊患者<br><strong>需求：</strong> 特殊患者有特殊属性，并且有些字段和普通患者不相同(且随访完全是另一套逻辑)<br><strong>解决方法：</strong></p>
+<ol>
+<li>在之前的患者表中添加字段<ol>
+<li>优点：不用添加文件，代码直接改到原有代码中</li>
+<li>缺点：会导致数据库该表较为稀疏，且稀疏度随患者类型增加而增加;更改原有代码逻辑较为复杂，一定程度上降低了代码的可读性</li>
+</ol>
+</li>
+<li>将原来的患者字段改为逻辑上的”基础字段“，新增特殊患者特殊属性表<ol>
+<li>优点：有效得解决了数据库稀疏的问题，代码编写可以使用继承来减少对原有代码的修改</li>
+<li>缺点：普通患者的部分复杂逻辑有大量可共用的代码，无法继承，重写又大量冗余，还是要改在之前的代码中</li>
+</ol>
+</li>
+</ol>
+<p><strong>代码实现：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在service实现类上修改注解 </span></span><br><span class="line"><span class="meta">@Service(&quot;patientServiceImpl&quot;)</span></span><br><span class="line"><span class="meta">@Service(&quot;patientServiceImpl1&quot;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 在使用的地方修改@Resource注解</span></span><br><span class="line"><span class="meta">@Resource(name = &quot;patientServiceImpl&quot;)</span></span><br><span class="line">IPatientService patientService;</span><br><span class="line">    </span><br><span class="line"><span class="meta">@Resource(name = &quot;patientServiceImpl1&quot;)</span></span><br><span class="line">IPatientService patientService2;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 编写引入实体的方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> IPatientService <span class="title">getIPatientService</span><span class="params">(<span class="keyword">int</span> type)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (type == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// 正常患者</span></span><br><span class="line">        <span class="keyword">return</span> patientService;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (type == <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="comment">// 中日友好医院患者</span></span><br><span class="line">        <span class="keyword">return</span> patientService2;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line">Integer patientType = retrievalObject.getInteger(<span class="string">&quot;type&quot;</span>);</span><br><span class="line">patientType = patientType == <span class="keyword">null</span> ? <span class="number">0</span> : patientType;</span><br><span class="line">Patient patientSave = getIPatientService(patientType).createPatient(retrievalObject);  </span><br></pre></td></tr></table></figure>
+
+
+
+
+ 
       <!-- reward -->
       
     </div>
@@ -187,6 +208,15 @@
 
    
   <nav class="article-nav">
+    
+      <a href="/2022/04/14/%E9%9A%8F%E7%AC%94-%E4%BB%A3%E7%A0%81%E7%BB%86%E8%8A%82/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            随笔-代码细节
+          
+        </div>
+      </a>
     
     
       <a href="/2022/04/11/mysql-GROUP-CONCAT%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0%E4%B8%80%E5%AF%B9%E5%A4%9A%EF%BC%8C%E6%8C%89%E4%B8%80%E6%90%9C%E7%B4%A2/" class="article-nav-link">

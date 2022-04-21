@@ -135,7 +135,7 @@
 <p><strong>mycat实现join有四种</strong></p>
 <ol>
 <li><strong>全局表</strong><br>全局表是数据冗余的，在每个节点上都有</li>
-<li><strong>ER join</strong><br>将join数据的放到同一个节点上<br>分片在 dn1,dn2 上，orders 依赖父表进行分片，两个表的关联关系为 orders.customer_id=customer.id。于是数据分片和存储的示意图如下：<br><img src="img.png" alt="img.png"></li>
+<li><strong>ER join</strong><br>将join数据的放到同一个节点上<br>分片在 dn1,dn2 上，orders 依赖父表进行分片，两个表的关联关系为 orders.customer_id=customer.id。于是数据分片和存储的示意图如下：<br><img src="/2021/11/08/mycat%E5%85%A5%E9%97%A8-5/img.png" alt="img.png"></li>
 <li>Share join<br>只支持两个表的join，拆分成单表的sql执行，再把数据汇集</li>
 <li>catlet（人工智能）<br>没看懂</li>
 </ol>

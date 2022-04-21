@@ -146,7 +146,12 @@
 <li>NO_ENGINE_SUBSTITUTION<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果需要的存储引擎被禁用或未编译，那么抛出错误。不设置此值时，用默认的存储引擎替代，并抛出一个异常</span><br></pre></td></tr></table></figure></li>
 <li>PIPES_AS_CONCAT<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">将&quot;||&quot;视为字符串的连接操作符而非或运算符，这和Oracle数据库是一样的，也和字符串的拼接函数Concat相类似</span><br></pre></td></tr></table></figure></li>
 <li>ANSI_QUOTES<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">启用ANSI_QUOTES后，不能用双引号来引用字符串，因为它被解释为识别符；</span><br><span class="line">ORACLE的sql_mode设置等同：PIPES_AS_CONCAT, ANSI_QUOTES, IGNORE_SPACE, NO_KEY_OPTIONS, NO_TABLE_OPTIONS, NO_FIELD_OPTIONS, NO_AUTO_CREATE_USER.</span><br></pre></td></tr></table></figure>
-<h3 id="MySQL-server-has-gone-away"><a href="#MySQL-server-has-gone-away" class="headerlink" title="MySQL server has gone away"></a>MySQL server has gone away</h3>问题再现：mysql导入大文件报错<br>出现原因：Mysql配置项max_allowed_packet过小<br>问题解析：max_allowed_packet项控制mysql服务端接收的包的大小<br>问题解决：<br>查看max_allowed_packet<br><code>show global variables like &#39;max_allowed_packet&#39;;</code><br><img src="img.png" alt="max_allowed_packet默认值.png"><br>将默认值修改为150M<br><code>set global max_allowed_packet=157286400;</code><br>注意：修改旨在当前设置中生效，重启mysql后恢复默认值，永久生效可以通过my.cnf中添加<code>max_allowed_packet=150M</code>即可<h2 id="mysql解析过程"><a href="#mysql解析过程" class="headerlink" title="mysql解析过程"></a>mysql解析过程</h2><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/354255965">参考1</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/fanguangdexiaoyuer/p/10268570.html">参考2</a><br><a target="_blank" rel="noopener" href="https://www.php.cn/mysql-tutorials-483021.html">参考3</a><blockquote>
+<h3 id="MySQL-server-has-gone-away"><a href="#MySQL-server-has-gone-away" class="headerlink" title="MySQL server has gone away"></a>MySQL server has gone away</h3>问题再现：mysql导入大文件报错<br>出现原因：Mysql配置项max_allowed_packet过小<br>问题解析：max_allowed_packet项控制mysql服务端接收的包的大小<br>问题解决：<br>查看max_allowed_packet<br><code>show global variables like &#39;max_allowed_packet&#39;;</code></li>
+</ul>
+<p><img src="/2021/09/30/%E9%9A%8F%E7%AC%94-%E6%95%B0%E6%8D%AE%E5%BA%93/img.png" alt="max_allowed_packet默认值.png"></p>
+<p>将默认值修改为150M<br><code>set global max_allowed_packet=157286400;</code><br>注意：修改旨在当前设置中生效，重启mysql后恢复默认值，永久生效可以通过my.cnf中添加<code>max_allowed_packet=150M</code>即可</p>
+<h2 id="mysql解析过程"><a href="#mysql解析过程" class="headerlink" title="mysql解析过程"></a>mysql解析过程</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/354255965">参考1</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/fanguangdexiaoyuer/p/10268570.html">参考2</a><br><a target="_blank" rel="noopener" href="https://www.php.cn/mysql-tutorials-483021.html">参考3</a></p>
+<blockquote>
 <p>最宏观的来看，一个系统分为JAVA端和MYSQL端<br>看作<code>JAVA-&gt;MYSQL</code></p>
 <p>但连接数据库的操作往往都是固定的，于是有人封装这些代码，称之为数据库驱动<br>这时<code>JAVA业务-&gt;MYSQL驱动-&gt;MYSQL</code></p>
 <p>在向MYSQL发送请求的时候，如果每次都新建，删除连接，会造成性能的浪费和下降，通常会提供固定数量连接的线程，数据库连接池<br>现在<code>JAVA业务-&gt;数据库连接池-&gt;MYSQL驱动-&gt;MYSQL</code></p>
@@ -159,8 +164,6 @@
 <p>之后MYSQL对传递过来的SQL语句进行解析，和检查<br>词法解析：将完整的SQL语句打散成单词 语法分析：引号有没有闭合 语义分析：表名和字段是否存在<br><code>JAVA业务-&gt;数据库发送池-&gt;MYSQL驱动-&gt;数据库接收池-&gt;查询缓存-&gt;解析器-&gt;</code></p>
 <p>解析过后，会由优化器将解析之后的语法树转化成执行计划，查询优化器找到最好的执行计划，通过存储引擎执行并返回结果<br>使用EXPlain可以看到执行计划的信息<br><code>JAVA业务-&gt;数据库发送池-&gt;MYSQL驱动-&gt;数据库接收池-&gt;查询缓存-&gt;解析器-&gt;查询优化-&gt;存储引擎(执行器)</code></p>
 </blockquote>
-</li>
-</ul>
 <h2 id="MyCat-Limit操作"><a href="#MyCat-Limit操作" class="headerlink" title="MyCat Limit操作"></a>MyCat Limit操作</h2><ul>
 <li>无offset 无order by<br>取决于哪个节点先返回数据(同一个SQL会有不同的结果)</li>
 <li>无offset 有order by<br>对每个节点返回的数据进行最小堆计算，计算所有结果的最小记录返回给应用</li>
